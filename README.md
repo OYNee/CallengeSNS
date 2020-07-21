@@ -18,3 +18,6 @@
 
 - React-native
 
+## UI 참고 자료
+
+https://github.com/anpigon/rn_instagram_clone
