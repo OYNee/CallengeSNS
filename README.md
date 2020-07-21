@@ -2,11 +2,7 @@
 
 ## 작업환경
 
-#### SpringBoot
-
-- Java 1.8
-
-- Gradle
+#### Back-end
 
 - SpringBoot 2.2.8 RELEASE
 
@@ -14,16 +10,11 @@
 
 - Spring Web MVC
 
+- Node.js
+
   
 
-#### Vue
+#### Front-end
 
-- Vue
-- Vuex
-- Vue-Router
-- Axios
-- Vuetify
+- React-native
 
-#### React-native
-
-- 예정
