@@ -12,6 +12,8 @@
 
 - Node.js
 
+- Django
+
   
 
 #### Front-end
