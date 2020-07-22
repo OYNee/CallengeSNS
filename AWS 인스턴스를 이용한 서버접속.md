@@ -9,4 +9,3 @@
 > 서울 1반 8조의 경우 : git bash >>  `ssh -i I3A508T.pem ubuntu@i3a508.p.ssafy.io` 
 
 
-
