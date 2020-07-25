@@ -30,3 +30,22 @@
 
 https://github.com/anpigon/rn_instagram_clone
 
+
+
+
+
+## User Stories
+
+- [ ] Log in
+- [ ] Like / Unlike a challenge
+- [ ] Comment on a challenge
+- [ ] Search by user
+- [ ] Search by location
+- [ ] See user profile
+- [ ] Follow / Unfollow User
+- [ ] See the full challenge
+- [ ] Edit my profile
+- [ ] Create account
+- [ ] Upload a challenge
+- [ ] Edit the challenge(Delete)
+- [ ] See the feed

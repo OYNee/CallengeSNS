@@ -473,9 +473,9 @@ export interface UserWhereInput {
   comments_every?: Maybe<CommentWhereInput>;
   comments_some?: Maybe<CommentWhereInput>;
   comments_none?: Maybe<CommentWhereInput>;
-  room_every?: Maybe<RoomWhereInput>;
-  room_some?: Maybe<RoomWhereInput>;
-  room_none?: Maybe<RoomWhereInput>;
+  rooms_every?: Maybe<RoomWhereInput>;
+  rooms_some?: Maybe<RoomWhereInput>;
+  rooms_none?: Maybe<RoomWhereInput>;
   AND?: Maybe<UserWhereInput[] | UserWhereInput>;
   OR?: Maybe<UserWhereInput[] | UserWhereInput>;
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
@@ -742,7 +742,7 @@ export interface UserCreateWithoutCommentsInput {
   followers?: Maybe<UserCreateManyWithoutFollowingInput>;
   posts?: Maybe<PostCreateManyWithoutUserInput>;
   likes?: Maybe<LikeCreateManyWithoutUserInput>;
-  room?: Maybe<RoomCreateManyWithoutParticipantsInput>;
+  rooms?: Maybe<RoomCreateManyWithoutParticipantsInput>;
 }
 
 export interface UserCreateManyWithoutFollowersInput {
@@ -763,7 +763,7 @@ export interface UserCreateWithoutFollowersInput {
   posts?: Maybe<PostCreateManyWithoutUserInput>;
   likes?: Maybe<LikeCreateManyWithoutUserInput>;
   comments?: Maybe<CommentCreateManyWithoutUserInput>;
-  room?: Maybe<RoomCreateManyWithoutParticipantsInput>;
+  rooms?: Maybe<RoomCreateManyWithoutParticipantsInput>;
 }
 
 export interface PostCreateManyWithoutUserInput {
@@ -816,7 +816,7 @@ export interface UserCreateWithoutLikesInput {
   followers?: Maybe<UserCreateManyWithoutFollowingInput>;
   posts?: Maybe<PostCreateManyWithoutUserInput>;
   comments?: Maybe<CommentCreateManyWithoutUserInput>;
-  room?: Maybe<RoomCreateManyWithoutParticipantsInput>;
+  rooms?: Maybe<RoomCreateManyWithoutParticipantsInput>;
 }
 
 export interface UserCreateManyWithoutFollowingInput {
@@ -837,7 +837,7 @@ export interface UserCreateWithoutFollowingInput {
   posts?: Maybe<PostCreateManyWithoutUserInput>;
   likes?: Maybe<LikeCreateManyWithoutUserInput>;
   comments?: Maybe<CommentCreateManyWithoutUserInput>;
-  room?: Maybe<RoomCreateManyWithoutParticipantsInput>;
+  rooms?: Maybe<RoomCreateManyWithoutParticipantsInput>;
 }
 
 export interface LikeCreateManyWithoutUserInput {
@@ -880,7 +880,7 @@ export interface UserCreateWithoutPostsInput {
   followers?: Maybe<UserCreateManyWithoutFollowingInput>;
   likes?: Maybe<LikeCreateManyWithoutUserInput>;
   comments?: Maybe<CommentCreateManyWithoutUserInput>;
-  room?: Maybe<RoomCreateManyWithoutParticipantsInput>;
+  rooms?: Maybe<RoomCreateManyWithoutParticipantsInput>;
 }
 
 export interface CommentCreateManyWithoutUserInput {
@@ -938,7 +938,7 @@ export interface UserCreateInput {
   posts?: Maybe<PostCreateManyWithoutUserInput>;
   likes?: Maybe<LikeCreateManyWithoutUserInput>;
   comments?: Maybe<CommentCreateManyWithoutUserInput>;
-  room?: Maybe<RoomCreateManyWithoutParticipantsInput>;
+  rooms?: Maybe<RoomCreateManyWithoutParticipantsInput>;
 }
 
 export interface CommentCreateManyInput {
@@ -968,7 +968,7 @@ export interface UserUpdateWithoutCommentsDataInput {
   followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
   posts?: Maybe<PostUpdateManyWithoutUserInput>;
   likes?: Maybe<LikeUpdateManyWithoutUserInput>;
-  room?: Maybe<RoomUpdateManyWithoutParticipantsInput>;
+  rooms?: Maybe<RoomUpdateManyWithoutParticipantsInput>;
 }
 
 export interface UserUpdateManyWithoutFollowersInput {
@@ -1008,7 +1008,7 @@ export interface UserUpdateWithoutFollowersDataInput {
   posts?: Maybe<PostUpdateManyWithoutUserInput>;
   likes?: Maybe<LikeUpdateManyWithoutUserInput>;
   comments?: Maybe<CommentUpdateManyWithoutUserInput>;
-  room?: Maybe<RoomUpdateManyWithoutParticipantsInput>;
+  rooms?: Maybe<RoomUpdateManyWithoutParticipantsInput>;
 }
 
 export interface PostUpdateManyWithoutUserInput {
@@ -1165,7 +1165,7 @@ export interface UserUpdateWithoutLikesDataInput {
   followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
   posts?: Maybe<PostUpdateManyWithoutUserInput>;
   comments?: Maybe<CommentUpdateManyWithoutUserInput>;
-  room?: Maybe<RoomUpdateManyWithoutParticipantsInput>;
+  rooms?: Maybe<RoomUpdateManyWithoutParticipantsInput>;
 }
 
 export interface UserUpdateManyWithoutFollowingInput {
@@ -1205,7 +1205,7 @@ export interface UserUpdateWithoutFollowingDataInput {
   posts?: Maybe<PostUpdateManyWithoutUserInput>;
   likes?: Maybe<LikeUpdateManyWithoutUserInput>;
   comments?: Maybe<CommentUpdateManyWithoutUserInput>;
-  room?: Maybe<RoomUpdateManyWithoutParticipantsInput>;
+  rooms?: Maybe<RoomUpdateManyWithoutParticipantsInput>;
 }
 
 export interface LikeUpdateManyWithoutUserInput {
@@ -1266,7 +1266,7 @@ export interface UserUpdateWithoutPostsDataInput {
   followers?: Maybe<UserUpdateManyWithoutFollowingInput>;
   likes?: Maybe<LikeUpdateManyWithoutUserInput>;
   comments?: Maybe<CommentUpdateManyWithoutUserInput>;
-  room?: Maybe<RoomUpdateManyWithoutParticipantsInput>;
+  rooms?: Maybe<RoomUpdateManyWithoutParticipantsInput>;
 }
 
 export interface CommentUpdateManyWithoutUserInput {
@@ -1430,7 +1430,7 @@ export interface UserUpdateDataInput {
   posts?: Maybe<PostUpdateManyWithoutUserInput>;
   likes?: Maybe<LikeUpdateManyWithoutUserInput>;
   comments?: Maybe<CommentUpdateManyWithoutUserInput>;
-  room?: Maybe<RoomUpdateManyWithoutParticipantsInput>;
+  rooms?: Maybe<RoomUpdateManyWithoutParticipantsInput>;
 }
 
 export interface UserUpsertNestedInput {
@@ -1860,15 +1860,15 @@ export interface RoomCreateOneWithoutMessagesInput {
 
 export interface RoomCreateWithoutMessagesInput {
   id?: Maybe<ID_Input>;
-  participants?: Maybe<UserCreateManyWithoutRoomInput>;
+  participants?: Maybe<UserCreateManyWithoutRoomsInput>;
 }
 
-export interface UserCreateManyWithoutRoomInput {
-  create?: Maybe<UserCreateWithoutRoomInput[] | UserCreateWithoutRoomInput>;
+export interface UserCreateManyWithoutRoomsInput {
+  create?: Maybe<UserCreateWithoutRoomsInput[] | UserCreateWithoutRoomsInput>;
   connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
 }
 
-export interface UserCreateWithoutRoomInput {
+export interface UserCreateWithoutRoomsInput {
   id?: Maybe<ID_Input>;
   username: String;
   email: String;
@@ -1897,22 +1897,22 @@ export interface RoomUpdateOneRequiredWithoutMessagesInput {
 }
 
 export interface RoomUpdateWithoutMessagesDataInput {
-  participants?: Maybe<UserUpdateManyWithoutRoomInput>;
+  participants?: Maybe<UserUpdateManyWithoutRoomsInput>;
 }
 
-export interface UserUpdateManyWithoutRoomInput {
-  create?: Maybe<UserCreateWithoutRoomInput[] | UserCreateWithoutRoomInput>;
+export interface UserUpdateManyWithoutRoomsInput {
+  create?: Maybe<UserCreateWithoutRoomsInput[] | UserCreateWithoutRoomsInput>;
   delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
   connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
   set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
   disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
   update?: Maybe<
-    | UserUpdateWithWhereUniqueWithoutRoomInput[]
-    | UserUpdateWithWhereUniqueWithoutRoomInput
+    | UserUpdateWithWhereUniqueWithoutRoomsInput[]
+    | UserUpdateWithWhereUniqueWithoutRoomsInput
   >;
   upsert?: Maybe<
-    | UserUpsertWithWhereUniqueWithoutRoomInput[]
-    | UserUpsertWithWhereUniqueWithoutRoomInput
+    | UserUpsertWithWhereUniqueWithoutRoomsInput[]
+    | UserUpsertWithWhereUniqueWithoutRoomsInput
   >;
   deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
   updateMany?: Maybe<
@@ -1920,12 +1920,12 @@ export interface UserUpdateManyWithoutRoomInput {
   >;
 }
 
-export interface UserUpdateWithWhereUniqueWithoutRoomInput {
+export interface UserUpdateWithWhereUniqueWithoutRoomsInput {
   where: UserWhereUniqueInput;
-  data: UserUpdateWithoutRoomDataInput;
+  data: UserUpdateWithoutRoomsDataInput;
 }
 
-export interface UserUpdateWithoutRoomDataInput {
+export interface UserUpdateWithoutRoomsDataInput {
   username?: Maybe<String>;
   email?: Maybe<String>;
   firstName?: Maybe<String>;
@@ -1938,10 +1938,10 @@ export interface UserUpdateWithoutRoomDataInput {
   comments?: Maybe<CommentUpdateManyWithoutUserInput>;
 }
 
-export interface UserUpsertWithWhereUniqueWithoutRoomInput {
+export interface UserUpsertWithWhereUniqueWithoutRoomsInput {
   where: UserWhereUniqueInput;
-  update: UserUpdateWithoutRoomDataInput;
-  create: UserCreateWithoutRoomInput;
+  update: UserUpdateWithoutRoomsDataInput;
+  create: UserCreateWithoutRoomsInput;
 }
 
 export interface RoomUpsertWithoutMessagesInput {
@@ -1979,12 +1979,12 @@ export interface PostUpdateManyMutationInput {
 
 export interface RoomCreateInput {
   id?: Maybe<ID_Input>;
-  participants?: Maybe<UserCreateManyWithoutRoomInput>;
+  participants?: Maybe<UserCreateManyWithoutRoomsInput>;
   messages?: Maybe<MessageCreateManyWithoutRoomInput>;
 }
 
 export interface RoomUpdateInput {
-  participants?: Maybe<UserUpdateManyWithoutRoomInput>;
+  participants?: Maybe<UserUpdateManyWithoutRoomsInput>;
   messages?: Maybe<MessageUpdateManyWithoutRoomInput>;
 }
 
@@ -1999,7 +1999,7 @@ export interface UserUpdateInput {
   posts?: Maybe<PostUpdateManyWithoutUserInput>;
   likes?: Maybe<LikeUpdateManyWithoutUserInput>;
   comments?: Maybe<CommentUpdateManyWithoutUserInput>;
-  room?: Maybe<RoomUpdateManyWithoutParticipantsInput>;
+  rooms?: Maybe<RoomUpdateManyWithoutParticipantsInput>;
 }
 
 export interface UserUpdateManyMutationInput {
@@ -2179,7 +2179,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
     first?: Int;
     last?: Int;
   }) => T;
-  room: <T = FragmentableArray<Room>>(args?: {
+  rooms: <T = FragmentableArray<Room>>(args?: {
     where?: RoomWhereInput;
     orderBy?: RoomOrderByInput;
     skip?: Int;
@@ -2244,7 +2244,7 @@ export interface UserSubscription
     first?: Int;
     last?: Int;
   }) => T;
-  room: <T = Promise<AsyncIterator<RoomSubscription>>>(args?: {
+  rooms: <T = Promise<AsyncIterator<RoomSubscription>>>(args?: {
     where?: RoomWhereInput;
     orderBy?: RoomOrderByInput;
     skip?: Int;
@@ -2309,7 +2309,7 @@ export interface UserNullablePromise
     first?: Int;
     last?: Int;
   }) => T;
-  room: <T = FragmentableArray<Room>>(args?: {
+  rooms: <T = FragmentableArray<Room>>(args?: {
     where?: RoomWhereInput;
     orderBy?: RoomOrderByInput;
     skip?: Int;

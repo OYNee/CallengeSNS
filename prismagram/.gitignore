@@ -34,3 +34,7 @@ yarn-error.log
 # Lock files
 package-lock.json
 yarn.lock
+
+# next.js build output
+.next
+generated

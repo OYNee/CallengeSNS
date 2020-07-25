@@ -1208,7 +1208,7 @@ type RoomConnection {
 
 input RoomCreateInput {
   id: ID
-  participants: UserCreateManyWithoutRoomInput
+  participants: UserCreateManyWithoutRoomsInput
   messages: MessageCreateManyWithoutRoomInput
 }
 
@@ -1224,7 +1224,7 @@ input RoomCreateOneWithoutMessagesInput {
 
 input RoomCreateWithoutMessagesInput {
   id: ID
-  participants: UserCreateManyWithoutRoomInput
+  participants: UserCreateManyWithoutRoomsInput
 }
 
 input RoomCreateWithoutParticipantsInput {
@@ -1285,7 +1285,7 @@ input RoomSubscriptionWhereInput {
 }
 
 input RoomUpdateInput {
-  participants: UserUpdateManyWithoutRoomInput
+  participants: UserUpdateManyWithoutRoomsInput
   messages: MessageUpdateManyWithoutRoomInput
 }
 
@@ -1308,7 +1308,7 @@ input RoomUpdateOneRequiredWithoutMessagesInput {
 }
 
 input RoomUpdateWithoutMessagesDataInput {
-  participants: UserUpdateManyWithoutRoomInput
+  participants: UserUpdateManyWithoutRoomsInput
 }
 
 input RoomUpdateWithoutParticipantsDataInput {
@@ -1383,7 +1383,7 @@ type User {
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
   likes(where: LikeWhereInput, orderBy: LikeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Like!]
   comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
-  room(where: RoomWhereInput, orderBy: RoomOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Room!]
+  rooms(where: RoomWhereInput, orderBy: RoomOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Room!]
 }
 
 type UserConnection {
@@ -1404,7 +1404,7 @@ input UserCreateInput {
   posts: PostCreateManyWithoutUserInput
   likes: LikeCreateManyWithoutUserInput
   comments: CommentCreateManyWithoutUserInput
-  room: RoomCreateManyWithoutParticipantsInput
+  rooms: RoomCreateManyWithoutParticipantsInput
 }
 
 input UserCreateManyWithoutFollowersInput {
@@ -1417,8 +1417,8 @@ input UserCreateManyWithoutFollowingInput {
   connect: [UserWhereUniqueInput!]
 }
 
-input UserCreateManyWithoutRoomInput {
-  create: [UserCreateWithoutRoomInput!]
+input UserCreateManyWithoutRoomsInput {
+  create: [UserCreateWithoutRoomsInput!]
   connect: [UserWhereUniqueInput!]
 }
 
@@ -1453,7 +1453,7 @@ input UserCreateWithoutCommentsInput {
   followers: UserCreateManyWithoutFollowingInput
   posts: PostCreateManyWithoutUserInput
   likes: LikeCreateManyWithoutUserInput
-  room: RoomCreateManyWithoutParticipantsInput
+  rooms: RoomCreateManyWithoutParticipantsInput
 }
 
 input UserCreateWithoutFollowersInput {
@@ -1467,7 +1467,7 @@ input UserCreateWithoutFollowersInput {
   posts: PostCreateManyWithoutUserInput
   likes: LikeCreateManyWithoutUserInput
   comments: CommentCreateManyWithoutUserInput
-  room: RoomCreateManyWithoutParticipantsInput
+  rooms: RoomCreateManyWithoutParticipantsInput
 }
 
 input UserCreateWithoutFollowingInput {
@@ -1481,7 +1481,7 @@ input UserCreateWithoutFollowingInput {
   posts: PostCreateManyWithoutUserInput
   likes: LikeCreateManyWithoutUserInput
   comments: CommentCreateManyWithoutUserInput
-  room: RoomCreateManyWithoutParticipantsInput
+  rooms: RoomCreateManyWithoutParticipantsInput
 }
 
 input UserCreateWithoutLikesInput {
@@ -1495,7 +1495,7 @@ input UserCreateWithoutLikesInput {
   followers: UserCreateManyWithoutFollowingInput
   posts: PostCreateManyWithoutUserInput
   comments: CommentCreateManyWithoutUserInput
-  room: RoomCreateManyWithoutParticipantsInput
+  rooms: RoomCreateManyWithoutParticipantsInput
 }
 
 input UserCreateWithoutPostsInput {
@@ -1509,10 +1509,10 @@ input UserCreateWithoutPostsInput {
   followers: UserCreateManyWithoutFollowingInput
   likes: LikeCreateManyWithoutUserInput
   comments: CommentCreateManyWithoutUserInput
-  room: RoomCreateManyWithoutParticipantsInput
+  rooms: RoomCreateManyWithoutParticipantsInput
 }
 
-input UserCreateWithoutRoomInput {
+input UserCreateWithoutRoomsInput {
   id: ID
   username: String!
   email: String!
@@ -1674,7 +1674,7 @@ input UserUpdateDataInput {
   posts: PostUpdateManyWithoutUserInput
   likes: LikeUpdateManyWithoutUserInput
   comments: CommentUpdateManyWithoutUserInput
-  room: RoomUpdateManyWithoutParticipantsInput
+  rooms: RoomUpdateManyWithoutParticipantsInput
 }
 
 input UserUpdateInput {
@@ -1688,7 +1688,7 @@ input UserUpdateInput {
   posts: PostUpdateManyWithoutUserInput
   likes: LikeUpdateManyWithoutUserInput
   comments: CommentUpdateManyWithoutUserInput
-  room: RoomUpdateManyWithoutParticipantsInput
+  rooms: RoomUpdateManyWithoutParticipantsInput
 }
 
 input UserUpdateManyDataInput {
@@ -1731,14 +1731,14 @@ input UserUpdateManyWithoutFollowingInput {
   updateMany: [UserUpdateManyWithWhereNestedInput!]
 }
 
-input UserUpdateManyWithoutRoomInput {
-  create: [UserCreateWithoutRoomInput!]
+input UserUpdateManyWithoutRoomsInput {
+  create: [UserCreateWithoutRoomsInput!]
   delete: [UserWhereUniqueInput!]
   connect: [UserWhereUniqueInput!]
   set: [UserWhereUniqueInput!]
   disconnect: [UserWhereUniqueInput!]
-  update: [UserUpdateWithWhereUniqueWithoutRoomInput!]
-  upsert: [UserUpsertWithWhereUniqueWithoutRoomInput!]
+  update: [UserUpdateWithWhereUniqueWithoutRoomsInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutRoomsInput!]
   deleteMany: [UserScalarWhereInput!]
   updateMany: [UserUpdateManyWithWhereNestedInput!]
 }
@@ -1786,7 +1786,7 @@ input UserUpdateWithoutCommentsDataInput {
   followers: UserUpdateManyWithoutFollowingInput
   posts: PostUpdateManyWithoutUserInput
   likes: LikeUpdateManyWithoutUserInput
-  room: RoomUpdateManyWithoutParticipantsInput
+  rooms: RoomUpdateManyWithoutParticipantsInput
 }
 
 input UserUpdateWithoutFollowersDataInput {
@@ -1799,7 +1799,7 @@ input UserUpdateWithoutFollowersDataInput {
   posts: PostUpdateManyWithoutUserInput
   likes: LikeUpdateManyWithoutUserInput
   comments: CommentUpdateManyWithoutUserInput
-  room: RoomUpdateManyWithoutParticipantsInput
+  rooms: RoomUpdateManyWithoutParticipantsInput
 }
 
 input UserUpdateWithoutFollowingDataInput {
@@ -1812,7 +1812,7 @@ input UserUpdateWithoutFollowingDataInput {
   posts: PostUpdateManyWithoutUserInput
   likes: LikeUpdateManyWithoutUserInput
   comments: CommentUpdateManyWithoutUserInput
-  room: RoomUpdateManyWithoutParticipantsInput
+  rooms: RoomUpdateManyWithoutParticipantsInput
 }
 
 input UserUpdateWithoutLikesDataInput {
@@ -1825,7 +1825,7 @@ input UserUpdateWithoutLikesDataInput {
   followers: UserUpdateManyWithoutFollowingInput
   posts: PostUpdateManyWithoutUserInput
   comments: CommentUpdateManyWithoutUserInput
-  room: RoomUpdateManyWithoutParticipantsInput
+  rooms: RoomUpdateManyWithoutParticipantsInput
 }
 
 input UserUpdateWithoutPostsDataInput {
@@ -1838,10 +1838,10 @@ input UserUpdateWithoutPostsDataInput {
   followers: UserUpdateManyWithoutFollowingInput
   likes: LikeUpdateManyWithoutUserInput
   comments: CommentUpdateManyWithoutUserInput
-  room: RoomUpdateManyWithoutParticipantsInput
+  rooms: RoomUpdateManyWithoutParticipantsInput
 }
 
-input UserUpdateWithoutRoomDataInput {
+input UserUpdateWithoutRoomsDataInput {
   username: String
   email: String
   firstName: String
@@ -1864,9 +1864,9 @@ input UserUpdateWithWhereUniqueWithoutFollowingInput {
   data: UserUpdateWithoutFollowingDataInput!
 }
 
-input UserUpdateWithWhereUniqueWithoutRoomInput {
+input UserUpdateWithWhereUniqueWithoutRoomsInput {
   where: UserWhereUniqueInput!
-  data: UserUpdateWithoutRoomDataInput!
+  data: UserUpdateWithoutRoomsDataInput!
 }
 
 input UserUpsertNestedInput {
@@ -1901,10 +1901,10 @@ input UserUpsertWithWhereUniqueWithoutFollowingInput {
   create: UserCreateWithoutFollowingInput!
 }
 
-input UserUpsertWithWhereUniqueWithoutRoomInput {
+input UserUpsertWithWhereUniqueWithoutRoomsInput {
   where: UserWhereUniqueInput!
-  update: UserUpdateWithoutRoomDataInput!
-  create: UserCreateWithoutRoomInput!
+  update: UserUpdateWithoutRoomsDataInput!
+  create: UserCreateWithoutRoomsInput!
 }
 
 input UserWhereInput {
@@ -2007,9 +2007,9 @@ input UserWhereInput {
   comments_every: CommentWhereInput
   comments_some: CommentWhereInput
   comments_none: CommentWhereInput
-  room_every: RoomWhereInput
-  room_some: RoomWhereInput
-  room_none: RoomWhereInput
+  rooms_every: RoomWhereInput
+  rooms_some: RoomWhereInput
+  rooms_none: RoomWhereInput
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
