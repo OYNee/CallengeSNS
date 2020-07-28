@@ -41,8 +41,9 @@ https://github.com/anpigon/rn_instagram_clone
 - [x] Comment on a challenge
 - [x] Search by user
 - [x] Search by location
-- [ ] See user profile
-- [ ] Follow / Unfollow User
+- [x] Follow / Unfollow User
+- [x] See user profile
+- [ ] See my profile
 - [ ] See the full challenge
 - [ ] Edit my profile
 - [ ] Create account

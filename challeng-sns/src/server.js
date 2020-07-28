@@ -5,6 +5,7 @@ import logger from "morgan"
 import schema from "./schema"
 import "./passport";
 import { authenticateJwt } from "./passport";
+import { isAuthenticated } from "./middlewares";
 
 // import { sendSecretMail } from "./utils";
 
@@ -15,7 +16,7 @@ console.log(PORT)
 
 const server = new GraphQLServer({
     schema,
-    context: ({ request }) => ({ request })
+    context: ({ request }) => ({ request, isAuthenticated })
   });
 
 server.express.use(logger("dev"));
