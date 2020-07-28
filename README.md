@@ -4,7 +4,7 @@
 
 > commit 규칙 
 
-- `commitID  - 내용` : 여기서 `commitID`는 지라생성 후 뒤에 있는 number
+- `commitID  - #comment 내용` : 여기서 `commitID`는 지라생성 후 뒤에 있는 number
 
   ex) `git commit -m 'S03P12A508-11 - 커밋규칙설정 '`
 
@@ -43,7 +43,7 @@ https://github.com/anpigon/rn_instagram_clone
 - [x] Search by location
 - [x] Follow / Unfollow User
 - [x] See user profile
-- [ ] See my profile
+- [x] See my profile
 - [ ] See the full challenge
 - [ ] Edit my profile
 - [ ] Create account
