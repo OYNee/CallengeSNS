@@ -4,9 +4,9 @@
 
 > commit 규칙 
 
-- `이름 - 내용 - commitID` : 여기서 `commitID`는 지라생성 후 뒤에 있는 number
+- `commitID  - 내용` : 여기서 `commitID`는 지라생성 후 뒤에 있는 number
 
-  ex) `git commit -m '승헌 - 커밋규칙설정 - S03P12A508-11'`
+  ex) `git commit -m 'S03P12A508-11 - 커밋규칙설정 '`
 
 #### Back-end
 
