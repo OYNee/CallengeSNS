@@ -26,7 +26,7 @@ export default {
     itsMe: (parent, _, { request }) => {
       const { user } = request;
       const { id: parentId } = parent;
-      return user.id === parentId; 
+      return user.id === parentId; //
     }
   }
 };
