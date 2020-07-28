@@ -5,3 +5,19 @@ react 16.13.1
 # 실행
 
 yarn add global react-scripts
+
+# Search
+- [ ] src/Routes/Search.js
+- [ ] src/Routes/Search/SearchContainer.js
+- [ ] src/Routes/Search/SearchPresenter.js
+- [ ] src/Routes/Search/SearchQueries.js
+- [ ] src/Routes/Search/index.js
+- [ ] src/Components/Loader.js
+- [ ] src/Components/UserCard.js 
+- [ ] src/Components/Avatar.js
+- [ ] src/Components/Button.js
+- [x] datamodel.prisma
+- [ ] src/Components/FollowButton/FollowButtonContainer.js 
+- [ ] src/Components/FollowButton/FollowButtonPresenter.js
+- [ ] src/Components/FollowButton/FollowButtonQueries.js
+- [ ] src/Components/FollowButton/index.js
