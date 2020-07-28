@@ -21,11 +21,11 @@ const ListItem = styled.li`
 `;
 
 const Link = styled.a`
-  color: ${props => props.theme.darkBlueColor};
+  color: ${(props) => props.theme.darkBlueColor};
 `;
 
 const Copyright = styled.span`
-  color: ${props => props.theme.darkGreyColor};
+  color: ${(props) => props.theme.darkGreyColor};
 `;
 
 export default () => (
@@ -65,6 +65,6 @@ export default () => (
         <Link href="#">language</Link>
       </ListItem>
     </List>
-    <Copyright>Instaclone {new Date().getFullYear()} &copy;</Copyright>
+    <Copyright>Challenge {new Date().getFullYear()} &copy;</Copyright>
   </Footer>
 );
