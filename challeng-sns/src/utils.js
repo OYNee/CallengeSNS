@@ -1,10 +1,7 @@
-import dotenv from "dotenv";
-import path from "path";
-import nodemailer from "nodemailer";
+
 //import sgTransport  from "nodemailer-sendgrid-transport";
 import mgTransport from "nodemailer-mailgun-transport"
-import  sendgrid  from "@sendgrid/mail";
-dotenv.config({ path: path.resolve(__dirname, ".env") });
+import jwt from "jsonwebtoken";
 
 import { adjectives, nouns } from "./words";
 
@@ -36,3 +33,5 @@ const sendMail = email => {
     };
     return sendMail(email);
   };
+
+  export const generateToken = id => jwt.sign({ id }, process.env.JWT_SECRET);

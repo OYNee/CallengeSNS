@@ -34,13 +34,13 @@ https://github.com/anpigon/rn_instagram_clone
 
 
 
-## User Stories
+## User Stories(Backend)
 
-- [ ] Log in
-- [ ] Like / Unlike a challenge
-- [ ] Comment on a challenge
-- [ ] Search by user
-- [ ] Search by location
+- [x] Log in
+- [x] Like / Unlike a challenge
+- [x] Comment on a challenge
+- [x] Search by user
+- [x] Search by location
 - [ ] See user profile
 - [ ] Follow / Unfollow User
 - [ ] See the full challenge
