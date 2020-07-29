@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import useInput from "../../Hooks/useInput";
 import PostPresenter from "./PostPresenter";
 import { useMutation } from "react-apollo-hooks";
@@ -15,7 +15,7 @@ const PostContainer = ({
     isLiked, 
     comments, 
     createdAt }) => {
-        const [isLikedS, setLiked] = useState(isLiked)
+        const [isLikedS, setIsLiked] = useState(isLiked)
         const [likeCountS, setLikeCount] = useState(likeCount);
         const [currentItem, setCurrentItem] = useState(0);
         const [selfComments, setSelfComments] = useState([]);
@@ -83,31 +83,31 @@ const PostContainer = ({
     />;
 };
 
-PostContainer.PropTypes = {
-id: PropTypes.string.isRequired, 
-user: PropTypes.shape({
-    id:PropTypes.string.isRequired,
-    avatar:PropTypes.string,
-    username:PropTypes.string.isRequired
+PostContainer.propTypes = {
+id: propTypes.string.isRequired, 
+user: propTypes.shape({
+    id:propTypes.string.isRequired,
+    avatar:propTypes.string,
+    username:propTypes.string.isRequired
 }).isRequired, 
-files: PropTypes.arrayOf(PropTypes.shape({
-    id:PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired
+files: propTypes.arrayOf(propTypes.shape({
+    id:propTypes.string.isRequired,
+    url: propTypes.string.isRequired
 })
 ).isRequired, 
-likeCount: PropTypes.number.isRequired, 
-isLiked: PropTypes.bool.isRequired, 
-comments: PropTypes.arrayOf(
-    PropTypes.shape({
-    id:PropTypes.string.isRequired,
-    text:PropTypes.string.isRequired,
-    user:PropTypes.shape({
-        id:PropTypes.string,
-        username:PropTypes.string.isRequired
+likeCount: propTypes.number.isRequired, 
+isLiked: propTypes.bool.isRequired, 
+comments: propTypes.arrayOf(
+    propTypes.shape({
+    id:propTypes.string.isRequired,
+    text:propTypes.string.isRequired,
+    user:propTypes.shape({
+        id:propTypes.string,
+        username:propTypes.string.isRequired
     }).isRequired
 })
 ).isRequired, 
-createdAt: PropTypes.string.isRequired
+createdAt: propTypes.string.isRequired
 };
 
 export default PostContainer;
