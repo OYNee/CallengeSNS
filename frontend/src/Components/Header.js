@@ -97,12 +97,12 @@ export default withRouter(({ history }) => {
           <HeaderLink to="/notifications">
             <HeartEmpty />
           </HeaderLink>
-          {!data.me ? (
+          {!data ? (
             <HeaderLink to="/#">
               <User />
             </HeaderLink>
           ) : (
-            <HeaderLink to={data.me.username}>
+            <HeaderLink to={data.username}>
               <User />
             </HeaderLink>
           )}
