@@ -8,14 +8,8 @@ import SquarePost from "../../Components/SquarePost";
 
 const Wrapper = styled.div`
   height: 50vh;
-  text-align: center;
 `;
 
-const SearchPresenter = ({ searchTerm, loading }) => (
-  <Wrapper>
-    {searchTerm === undefined && <FatText text={"Search for something"} />}
-  </Wrapper>
-);
 const Section = styled.div`
   margin-bottom: 50px;
   display: grid;
@@ -24,6 +18,7 @@ const Section = styled.div`
   grid-template-rows: 160px;
   grid-auto-rows: 160px;
 `;
+
 const PostSection = styled(Section)`
   grid-template-columns: repeat(4, 200px);
   grid-template-rows: 200px;
@@ -68,13 +63,14 @@ const SearchPresenter = ({ searchTerm, loading, data }) => {
           ) : (
             data.searchPost.map(post => (
               <SquarePost
+                key={post.id}
                 likeCount={post.likeCount}
                 commentCount={post.commentCount}
                 file={post.files[0]}
               />
             ))
           )}
-         </PostSection>
+        </PostSection>
       </Wrapper>
     );
   }
@@ -84,4 +80,5 @@ SearchPresenter.propTypes = {
   searchTerm: PropTypes.string,
   loading: PropTypes.bool
 };
+
 export default SearchPresenter;

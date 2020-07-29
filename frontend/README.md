@@ -21,9 +21,9 @@ yarn add global react-scripts
 - [ ] src/Components/FollowButton/FollowButtonPresenter.js
 - [ ] src/Components/FollowButton/FollowButtonQueries.js
 - [ ] src/Components/FollowButton/index.js
-- [] src/Components/SquarePost.js
+- [ ] src/Components/SquarePost.js
 - [x] src/Components/models.graphql 4
-- [x] src/Components/Icons.js 4
+- [ ] src/Components/Icons.js 
 
 # profile
 - [x] src/Components/Post/PostPresenter.js

@@ -43,10 +43,14 @@ https://github.com/anpigon/rn_instagram_clone
 - [x] Search by location
 - [x] Follow / Unfollow User
 - [x] See user profile
-- [ ] See my profile
-- [ ] See the full challenge
-- [ ] Edit my profile
+- [x] See my profile
+- [x] See the full challenge
+- [x] Edit my profile
 - [ ] Create account
-- [ ] Upload a challenge
-- [ ] Edit the challenge(Delete)
+- [x] Upload a challenge
+- [x] Edit the challenge(Delete)
 - [ ] See the feed
+- [ ] See Direct Message Rooms
+- [ ] See One DM Rooms
+- [ ] Send DM
+- [ ] Receive Message(RealTime)
