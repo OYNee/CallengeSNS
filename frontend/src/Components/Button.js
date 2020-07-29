@@ -20,9 +20,4 @@ const Button = ({ text, onClick }) => (
 Button.propTypes = {
   text: PropTypes.string.isRequired,
 };
-<<<<<<< HEAD
 export default Button;
-=======
-
-export default Button;
->>>>>>> feature/styles
