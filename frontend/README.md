@@ -16,8 +16,14 @@ yarn add global react-scripts
 - [ ] src/Components/UserCard.js 
 - [ ] src/Components/Avatar.js
 - [ ] src/Components/Button.js
-- [x] datamodel.prisma
+- [x] datamodel.prisma 2
 - [ ] src/Components/FollowButton/FollowButtonContainer.js 
 - [ ] src/Components/FollowButton/FollowButtonPresenter.js
 - [ ] src/Components/FollowButton/FollowButtonQueries.js
 - [ ] src/Components/FollowButton/index.js
+- [] src/Components/SquarePost.js
+- [x] src/Components/models.graphql 4
+- [x] src/Components/Icons.js 4
+
+# profile
+- [x] src/Components/Post/PostPresenter.js
