@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@apollo/react-hooks": "^4.0.0",
     "global": "^4.4.0",
     "react-scripts": "^3.4.1"
   }

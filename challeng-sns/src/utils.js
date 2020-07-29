@@ -2,6 +2,7 @@
 //import sgTransport  from "nodemailer-sendgrid-transport";
 import mgTransport from "nodemailer-mailgun-transport"
 import jwt from "jsonwebtoken";
+import nodemailer from "nodemailer";
 
 import { adjectives, nouns } from "./words";
 
@@ -24,7 +25,10 @@ const sendMail = email => {
 
 
  // const mg = mailgun({apiKey: process.env.API_KEY, domain: process.env.DOMAIN});
+
   export const sendSecretMail = (address, secret) => {
+    console.log(secret);
+    console.log(address)
     const email = {
       from: "admin@challengram.com",
       to: address,

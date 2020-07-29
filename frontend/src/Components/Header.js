@@ -5,7 +5,7 @@ import { gql } from "apollo-boost";
 import Input from "./Input";
 import useInput from "../Hooks/useInput";
 import { Compass, HeartEmpty, User, Logo } from "./Icons";
-import { useQuery } from "react-apollo-hooks";
+import { useQuery } from "@apollo/client";
 
 const Header = styled.header`
   width: 100%;
@@ -14,7 +14,7 @@ const Header = styled.header`
   top: 0;
   left: 0;
   background-color: white;
-  border-bottom: ${(props) => props.theme.boxBorder};
+  border-bottom: ${props => props.theme.boxBorder};
   border-radius: 0px;
   display: flex;
   justify-content: center;
@@ -24,7 +24,7 @@ const Header = styled.header`
 
 const HeaderWrapper = styled.div`
   width: 100%;
-  max-width: ${(props) => props.theme.maxWidth};
+  max-width: ${props => props.theme.maxWidth};
   display: flex;
   justify-content: center;
 `;
@@ -43,7 +43,7 @@ const HeaderColumn = styled.div`
 `;
 
 const SearchInput = styled(Input)`
-  background-color: ${(props) => props.theme.bgColor};
+  background-color: ${props => props.theme.bgColor};
   padding: 5px;
   font-size: 14px;
   border-radius: 3px;
@@ -61,9 +61,7 @@ const HeaderLink = styled(Link)`
     margin-right: 30px;
   }
 `;
-
-const ME = gql`
-  {
+const ME = gql`  {
     me {
       username
     }
@@ -73,7 +71,8 @@ const ME = gql`
 export default withRouter(({ history }) => {
   const search = useInput("");
   const { data } = useQuery(ME);
-  const onSearchSubmit = (e) => {
+  
+  const onSearchSubmit = e => {
     e.preventDefault();
     history.push(`/search?term=${search.value}`);
   };
@@ -97,7 +96,7 @@ export default withRouter(({ history }) => {
           <HeaderLink to="/notifications">
             <HeartEmpty />
           </HeaderLink>
-          {!data.me ? (
+          {!data ? (
             <HeaderLink to="/#">
               <User />
             </HeaderLink>
