@@ -1,5 +1,4 @@
 
-//import sgTransport  from "nodemailer-sendgrid-transport";
 import mgTransport from "nodemailer-mailgun-transport"
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
@@ -11,7 +10,6 @@ export const generateSecret = () => {
   return `${adjectives[randomNumber]} ${nouns[randomNumber]}`;
 };
 console.log( process.env.API_KEY, process.env.DOMAIN)
-//sendgrid.setApiKey(process.env.SENDGRID_API_KEY)
 const sendMail = email => {
     const options = {
       auth: {
@@ -20,6 +18,7 @@ const sendMail = email => {
       }
     };
     const client = nodemailer.createTransport(mgTransport(options));
+    // console.log(client)
     return client.sendMail(email);
   };
 
@@ -27,8 +26,8 @@ const sendMail = email => {
  // const mg = mailgun({apiKey: process.env.API_KEY, domain: process.env.DOMAIN});
 
   export const sendSecretMail = (address, secret) => {
-    console.log(secret);
     console.log(address)
+    console.log("email:")
     const email = {
       from: "admin@challengram.com",
       to: address,

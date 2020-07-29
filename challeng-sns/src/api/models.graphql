@@ -1,5 +1,6 @@
 type User {
   id: ID!
+  avatar: String
   username: String!
   email: String!
   firstName: String
@@ -13,6 +14,7 @@ type User {
   followers: [User!]!
   followersCount: Int!
   posts: [Post!]!
+  postsCount: Int!
   likes: [Like!]!
   comments: [Comment!]!
   rooms: [Room!]!
@@ -31,6 +33,7 @@ type Post {
   comments: [Comment!]!
   isLiked: Boolean!
   likeCount: Int!
+  commentCount: Int!
   createdAt: String
   updatedAt: String
 }
@@ -77,4 +80,3 @@ type Message {
   createdAt: String
   updatedAt: String
 }
-
