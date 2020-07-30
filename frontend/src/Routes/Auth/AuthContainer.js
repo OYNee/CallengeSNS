@@ -18,6 +18,11 @@ export default () => {
   const passwdCheck = useInput("");
   const secret = useInput("");
   const email = useInput("");
+
+  const logIn = useMutation(LOG_IN, {
+    variables: { email: email.value, passwd: passwd.value },
+  });
+
   const requestSecretMutation = useMutation(LOG_IN, {
     variables: { email: email.value },
   });
@@ -40,23 +45,23 @@ export default () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (action === "logIn") {
-      if (email.value !== "") {
+      if (email.value !== "" && passwd.value !== "") {
         try {
           const {
-            data: { requestSecret },
-          } = await requestSecretMutation();
-          if (!requestSecret) {
-            toast.error("You dont have an account yet, create one");
-            setTimeout(() => setAction("signUp"), 3000);
+            data: { login: token },
+          } = await logIn();
+          if (token !== "" && token !== undefined) {
+            localLogInMutation({ variables: { token } });
           } else {
-            toast.success("Check your inbox for your login secret");
-            setAction("confirm");
+            throw Error();
           }
         } catch {
-          toast.error("Can't request secret, try again");
+          toast.error("Cant LogIn, try again");
         }
-      } else {
+      } else if (email.value === "") {
         toast.error("Email is required");
+      } else if (passwd.value === "") {
+        toast.error("password is required");
       }
     } else if (action === "signUp") {
       if (
