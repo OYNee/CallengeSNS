@@ -19,13 +19,13 @@ const QUERY = gql`
 
 const Wrapper = styled.div`
   margin: 0 auto;
-  max-width: ${props => props.theme.maxWidth};
+  max-width: ${(props) => props.theme.maxWidth};
   width: 100%;
 `;
 
 export default () => {
   const {
-    data: { isLoggedIn }
+    data: { isLoggedIn },
   } = useQuery(QUERY);
 
   return (

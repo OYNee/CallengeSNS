@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 `;
 
 const Box = styled.div`
-  ${props => props.theme.whiteBox}
+  ${(props) => props.theme.whiteBox}
   border-radius:0px;
   width: 100%;
   max-width: 350px;
@@ -25,7 +25,7 @@ const StateChanger = styled(Box)`
 `;
 
 const Link = styled.span`
-  color: ${props => props.theme.blueColor};
+  color: ${(props) => props.theme.livingCoral};
   cursor: pointer;
 `;
 
@@ -55,14 +55,14 @@ export default ({
   email,
   setAction,
   onSubmit,
-  secret
+  secret,
 }) => (
   <Wrapper>
     <Form>
       {action === "logIn" && (
         <>
           <Helmet>
-            <title>Log In | Prismagram</title>
+            <title>Log In | ChallengeSNS</title>
           </Helmet>
           <form onSubmit={onSubmit}>
             <Input placeholder={"Email"} {...email} type="email" />
@@ -73,7 +73,7 @@ export default ({
       {action === "signUp" && (
         <>
           <Helmet>
-            <title>Sign Up | Prismagram</title>
+            <title>Sign Up | ChallengeSNS</title>
           </Helmet>
           <form onSubmit={onSubmit}>
             <Input placeholder={"First name"} {...firstName} />
@@ -87,7 +87,7 @@ export default ({
       {action === "confirm" && (
         <>
           <Helmet>
-            <title>Confirm Secret | Prismagram</title>
+            <title>Confirm Secret | ChallengeSNS</title>
           </Helmet>
           <form onSubmit={onSubmit}>
             <Input placeholder="Paste your secret" required {...secret} />
