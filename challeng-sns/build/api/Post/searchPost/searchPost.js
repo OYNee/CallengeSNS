@@ -25,11 +25,9 @@ var _default = {
                   where: {
                     OR: [{
                       location_starts_with: args.term
-                    }, //지역으로 찾기
-                    {
+                    }, {
                       caption_starts_with: args.term
-                    } //설명으로 찾기
-                    ]
+                    }]
                   }
                 }));
 

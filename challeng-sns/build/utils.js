@@ -31,15 +31,16 @@ var sendMail = function sendMail(email) {
     }
   };
 
-  var client = _nodemailer["default"].createTransport((0, _nodemailerMailgunTransport["default"])(options));
+  var client = _nodemailer["default"].createTransport((0, _nodemailerMailgunTransport["default"])(options)); // console.log(client)
 
-  console.log(client);
+
   return client.sendMail(email);
 }; // const mg = mailgun({apiKey: process.env.API_KEY, domain: process.env.DOMAIN});
 
 
 var sendSecretMail = function sendSecretMail(address, secret) {
   console.log(address);
+  console.log("email:");
   var email = {
     from: "admin@challengram.com",
     to: address,

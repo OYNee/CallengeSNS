@@ -17,7 +17,7 @@ var _default = {
   Mutation: {
     sendMessage: function () {
       var _sendMessage = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, args, _ref) {
-        var request, isAuthenticated, user, roomId, message, toId, room, getTo;
+        var request, isAuthenticated, user, roomId, message, toId, room, participants, getTo;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -73,7 +73,14 @@ var _default = {
                 throw Error("Room not found");
 
               case 16:
-                getTo = room.participants.filter(function (participant) {
+                _context.next = 18;
+                return _prismaClient.prisma.room({
+                  id: room.id
+                }).participants();
+
+              case 18:
+                participants = _context.sent;
+                getTo = participants.filter(function (participant) {
                   return participant.id !== user.id;
                 })[0];
                 return _context.abrupt("return", _prismaClient.prisma.createMessage({
@@ -95,7 +102,7 @@ var _default = {
                   }
                 }));
 
-              case 18:
+              case 21:
               case "end":
                 return _context.stop();
             }

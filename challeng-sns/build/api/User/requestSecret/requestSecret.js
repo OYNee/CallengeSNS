@@ -18,22 +18,20 @@ var _prismaClient = require("../../../../generated/prisma-client");
 var _default = {
   Mutation: {
     requestSecret: function () {
-      var _requestSecret = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, args, _ref) {
-        var request, email, loginSecret;
+      var _requestSecret = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, args) {
+        var email, loginSecret;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                request = _ref.request;
                 email = args.email;
-                console.log(email);
                 loginSecret = (0, _utils.generateSecret)();
-                _context.prev = 4;
-                _context.next = 7;
+                _context.prev = 2;
+                _context.next = 5;
                 return (0, _utils.sendSecretMail)(email, loginSecret);
 
-              case 7:
-                _context.next = 9;
+              case 5:
+                _context.next = 7;
                 return _prismaClient.prisma.updateUser({
                   data: {
                     loginSecret: loginSecret
@@ -43,23 +41,24 @@ var _default = {
                   }
                 });
 
-              case 9:
+              case 7:
                 return _context.abrupt("return", true);
 
-              case 12:
-                _context.prev = 12;
-                _context.t0 = _context["catch"](4);
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](2);
+                console.log(_context.t0);
                 return _context.abrupt("return", false);
 
-              case 15:
+              case 14:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[4, 12]]);
+        }, _callee, null, [[2, 10]]);
       }));
 
-      function requestSecret(_x, _x2, _x3) {
+      function requestSecret(_x, _x2) {
         return _requestSecret.apply(this, arguments);
       }
 

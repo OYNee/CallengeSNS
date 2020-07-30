@@ -13,12 +13,11 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _prismaClient = require("../../../../generated/prisma-client");
 
-//파일 업로드를 위해서 로그인이 필수이므로 isAuthenticated를 통해 로그인을 확인
 var _default = {
   Mutation: {
     upload: function () {
       var _upload = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(_, args, _ref) {
-        var request, isAuthenticated, user, caption, files, post;
+        var request, isAuthenticated, user, caption, files, location, post;
         return _regenerator["default"].wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -26,10 +25,11 @@ var _default = {
                 request = _ref.request, isAuthenticated = _ref.isAuthenticated;
                 isAuthenticated(request);
                 user = request.user;
-                caption = args.caption, files = args.files;
+                caption = args.caption, files = args.files, location = args.location;
                 _context2.next = 6;
                 return _prismaClient.prisma.createPost({
                   caption: caption,
+                  location: location,
                   user: {
                     connect: {
                       id: user.id

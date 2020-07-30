@@ -24,7 +24,8 @@ var _default = {
           }]
         }).node();
       },
-      resolve: function resolve(payload) {
+      resolve: function resolve(payload, args, context) {
+        console.log(args, context);
         return payload;
       }
     }

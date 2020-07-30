@@ -57,6 +57,15 @@ var _default = {
           }
         }
       }).aggregate().count();
+    },
+    commentCount: function commentCount(parent) {
+      return _prismaClient.prisma.commentsConnection({
+        where: {
+          post: {
+            id: parent.id
+          }
+        }
+      }).aggregate().count();
     }
   }
 };

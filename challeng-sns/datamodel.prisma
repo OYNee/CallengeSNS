@@ -5,7 +5,7 @@ type User {
       value: "https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png"
     )
   username: String! @unique
-  userid: String! 
+  userid: String!  
   passwd: String!
   email: String! @unique
   firstName: String @default(value: "")

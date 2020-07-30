@@ -6,8 +6,6 @@ require("./env");
 
 var _graphqlYoga = require("graphql-yoga");
 
-var _prismaClient = require("../generated/prisma-client");
-
 var _morgan = _interopRequireDefault(require("morgan"));
 
 var _schema = _interopRequireDefault(require("./schema"));
@@ -16,10 +14,8 @@ var _passport = require("./passport");
 
 var _middlewares = require("./middlewares");
 
-// import { sendSecretMail } from "./utils";
-// sendSecretMail("leegj93@gmail.com", 123)
-var PORT = process.env.PORT || 4040;
-console.log(PORT);
+//import { uploadMiddleware, uploadController } from "./upload";
+var PORT = process.env.PORT || 4000;
 var server = new _graphqlYoga.GraphQLServer({
   schema: _schema["default"],
   context: function context(_ref) {
@@ -31,7 +27,8 @@ var server = new _graphqlYoga.GraphQLServer({
   }
 });
 server.express.use((0, _morgan["default"])("dev"));
-server.express.use(_passport.authenticateJwt);
+server.express.use(_passport.authenticateJwt); //server.express.post("/api/upload", uploadMiddleware, uploadController);
+
 server.start({
   port: PORT
 }, function () {

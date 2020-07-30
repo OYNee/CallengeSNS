@@ -51,8 +51,18 @@ var _default = {
         id: id
       }).rooms();
     },
-    followingCount: function followingCount(_ref7) {
+    postsCount: function postsCount(_ref7) {
       var id = _ref7.id;
+      return _prismaClient.prisma.postsConnection({
+        where: {
+          user: {
+            id: id
+          }
+        }
+      }).aggregate().count();
+    },
+    followingCount: function followingCount(_ref8) {
+      var id = _ref8.id;
       return _prismaClient.prisma.usersConnection({
         where: {
           followers_some: {
@@ -61,8 +71,8 @@ var _default = {
         }
       }).aggregate().count();
     },
-    followersCount: function followersCount(_ref8) {
-      var id = _ref8.id;
+    followersCount: function followersCount(_ref9) {
+      var id = _ref9.id;
       return _prismaClient.prisma.usersConnection({
         where: {
           following_none: {
@@ -75,13 +85,13 @@ var _default = {
       return "".concat(parent.firstName, " ").concat(parent.lastName);
     },
     isFollowing: function () {
-      var _isFollowing = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(parent, _, _ref9) {
+      var _isFollowing = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(parent, _, _ref10) {
         var request, user, parentId;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                request = _ref9.request;
+                request = _ref10.request;
                 user = request.user;
                 parentId = parent.id;
                 _context.prev = 3;
@@ -114,8 +124,8 @@ var _default = {
 
       return isFollowing;
     }(),
-    isSelf: function isSelf(parent, _, _ref10) {
-      var request = _ref10.request;
+    isSelf: function isSelf(parent, _, _ref11) {
+      var request = _ref11.request;
       var user = request.user;
       var parentId = parent.id;
       return user.id === parentId;

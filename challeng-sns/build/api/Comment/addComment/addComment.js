@@ -19,7 +19,7 @@ var _default = {
   Mutation: {
     addComment: function () {
       var _addComment = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, args, _ref) {
-        var request, text, postId, user, comment;
+        var request, text, postId, user;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -28,8 +28,7 @@ var _default = {
                 (0, _middlewares.isAuthenticated)(request);
                 text = args.text, postId = args.postId;
                 user = request.user;
-                _context.next = 6;
-                return _prismaClient.prisma.createComment({
+                return _context.abrupt("return", _prismaClient.prisma.createComment({
                   user: {
                     connect: {
                       id: user.id
@@ -41,13 +40,9 @@ var _default = {
                     }
                   },
                   text: text
-                });
+                }));
 
-              case 6:
-                comment = _context.sent;
-                return _context.abrupt("return", comment);
-
-              case 8:
+              case 5:
               case "end":
                 return _context.stop();
             }

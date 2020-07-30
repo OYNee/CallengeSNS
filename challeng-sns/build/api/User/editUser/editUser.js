@@ -17,7 +17,8 @@ var _default = {
           email = args.email,
           firstName = args.firstName,
           lastName = args.lastName,
-          bio = args.bio;
+          bio = args.bio,
+          avatar = args.avatar;
       var user = request.user;
       return _prismaClient.prisma.updateUser({
         where: {
@@ -28,7 +29,8 @@ var _default = {
           email: email,
           firstName: firstName,
           lastName: lastName,
-          bio: bio
+          bio: bio,
+          avatar: avatar
         }
       });
     }

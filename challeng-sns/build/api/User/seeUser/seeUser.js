@@ -17,14 +17,14 @@ var _default = {
   Query: {
     seeUser: function () {
       var _seeUser = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, args) {
-        var id;
+        var username;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                id = args.id;
+                username = args.username;
                 return _context.abrupt("return", _prismaClient.prisma.user({
-                  id: id
+                  username: username
                 }));
 
               case 2:

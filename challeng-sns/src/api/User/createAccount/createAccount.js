@@ -6,15 +6,13 @@ export default {
       const { username, email, userid, passwd,  bio = "" } = args;
       const exists = await prisma.$exists.user({
         OR: [
-          {
-            username
-          },
+         
           { email },
           {userid}
         ]
       });
       if (exists) {
-        throw Error("This username / email is already taken");
+        throw Error("This userid / email is already taken");
       }
       const hashedPassword = await bcrypt.hash(passwd, 5);
       console.log(hashedPassword)
