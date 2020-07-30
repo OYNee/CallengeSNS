@@ -3,6 +3,8 @@ type User {
   avatar: String
   username: String!
   email: String!
+  userid: String!
+  passwd: String!
   firstName: String
   lastName: String
   fullName: String
