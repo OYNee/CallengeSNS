@@ -67,6 +67,7 @@ export default ({
           </Helmet>
           <form onSubmit={onSubmit}>
             <Input placeholder={"Email"} {...email} type="email" />
+            <Input placeholder={"Password"} {...passwd} type="password" />
             <Button text={"Log in"} />
           </form>
         </>
