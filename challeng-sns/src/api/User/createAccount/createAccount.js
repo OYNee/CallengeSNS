@@ -1,5 +1,5 @@
 import { prisma } from "../../../../generated/prisma-client";
-
+import bcrypt from "bcryptjs"
 export default {
   Mutation: {
     createAccount: async (_, args) => {
@@ -16,10 +16,12 @@ export default {
       if (exists) {
         throw Error("This username / email is already taken");
       }
+      const hashedPassword = await bcrypt.hash(passwd, 5);
+      console.log(hashedPassword)
       await prisma.createUser({
         username,
         userid,
-        passwd,
+        passwd: hashedPassword,
         email,
         bio
       });
