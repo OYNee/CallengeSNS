@@ -48,13 +48,13 @@ export default () => {
   return (
     <Wrapper>
       <Helmet>
-        <title>Feed | Prismagram</title>
+        <title>Feed | ChallengeSNS</title>
       </Helmet>
       {loading && <Loader />}
       {!loading &&
         data &&
         data.seeFeed &&
-        data.seeFeed.map(post => (
+        data.seeFeed.map((post) => (
           <Post
             key={post.id}
             id={post.id}

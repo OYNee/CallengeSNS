@@ -80,13 +80,13 @@ export default ({ loading, data, logOut }) => {
         followingCount,
         followersCount,
         postsCount,
-        posts
-      }
+        posts,
+      },
     } = data;
     return (
       <Wrapper>
         <Helmet>
-          <title>{username} | Prismagram</title>
+          <title>{username} | ChallengeSNS</title>
         </Helmet>
         <Header>
           <HeaderColumn>
@@ -118,7 +118,7 @@ export default ({ loading, data, logOut }) => {
         </Header>
         <Posts>
           {posts &&
-            posts.map(post => (
+            posts.map((post) => (
               <SquarePost
                 key={post.id}
                 likeCount={post.likeCount}
