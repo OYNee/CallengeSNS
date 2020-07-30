@@ -49,10 +49,11 @@ const Form = styled(Box)`
 
 export default ({
   action,
-  username,
-  firstName,
-  lastName,
+  userid,
   email,
+  passwd,
+  passwdCheck,
+  username,
   setAction,
   onSubmit,
   secret,
@@ -76,9 +77,15 @@ export default ({
             <title>Sign Up | ChallengeSNS</title>
           </Helmet>
           <form onSubmit={onSubmit}>
-            <Input placeholder={"First name"} {...firstName} />
-            <Input placeholder={"Last name"} {...lastName} />
+            <Input placeholder={"ID"} {...userid} />
             <Input placeholder={"Email"} {...email} type="email" />
+            <Input placeholder={"Password"} {...passwd} type="Password" />
+            <label htmlFor="confirmPasswordInput"></label>
+            <Input
+              placeholder={"passwdCheck"}
+              {...passwdCheck}
+              type="Password"
+            />
             <Input placeholder={"Username"} {...username} />
             <Button text={"Sign up"} />
           </form>
