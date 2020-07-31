@@ -3,6 +3,13 @@ import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import Input from "../../Components/Input";
 import Button from "../../Components/Button";
+import LogoImage from "../../Styles/Images/tempLogo.png";
+
+const LogoBox = styled.img`
+  width: 100%;
+  height: 250px;
+  margin-bottom: 30px;
+`;
 
 const Wrapper = styled.div`
   min-height: 80vh;
@@ -60,6 +67,7 @@ export default ({
 }) => (
   <Wrapper>
     <Form>
+      <LogoBox src={LogoImage}></LogoBox>
       {action === "logIn" && (
         <>
           <Helmet>
@@ -92,13 +100,29 @@ export default ({
           </form>
         </>
       )}
+      {action === "findPasswd" && (
+        <>
+          <Helmet>
+            <title>Find Password | ChallengeSNS</title>
+          </Helmet>
+          <form onSubmit={onSubmit}>
+            <Input placeholder={"Email"} {...email} type="email" />
+            <Button text={"Find"} />
+          </form>
+        </>
+      )}
       {action === "confirm" && (
         <>
           <Helmet>
             <title>Confirm Secret | ChallengeSNS</title>
           </Helmet>
           <form onSubmit={onSubmit}>
-            <Input placeholder="Paste your secret" required {...secret} />
+            <Input
+              placeholder="your new password"
+              required
+              {...passwd}
+              type="Password"
+            />
             <Button text={"Confirm"} />
           </form>
         </>
@@ -111,6 +135,10 @@ export default ({
           <>
             Don't have an account?{" "}
             <Link onClick={() => setAction("signUp")}>Sign up</Link>
+            <br />
+            <br />
+            Did you forget your password?{" "}
+            <Link onClick={() => setAction("findPasswd")}>Find password</Link>
           </>
         ) : (
           <>
