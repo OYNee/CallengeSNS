@@ -4,6 +4,7 @@ import useInput from "../../Hooks/useInput";
 import { useMutation } from "react-apollo-hooks";
 import {
   LOG_IN,
+  FIND_PASSWD,
   CREATE_ACCOUNT,
   CONFIRM_SECRET,
   LOCAL_LOG_IN,
@@ -23,9 +24,14 @@ export default () => {
     variables: { email: email.value, passwd: passwd.value },
   });
 
-  const requestSecretMutation = useMutation(LOG_IN, {
+  const findPasswd = useMutation(FIND_PASSWD, {
     variables: { email: email.value },
   });
+
+  // const requestSecretMutation = useMutation(LOG_IN, {
+  //   variables: { email: email.value },
+  // });
+
   const createAccountMutation = useMutation(CREATE_ACCOUNT, {
     variables: {
       userid: userid.value,
@@ -74,6 +80,7 @@ export default () => {
           const {
             data: { createAccount },
           } = await createAccountMutation();
+          console.log(createAccount);
           if (!createAccount) {
             toast.error("Can't create account");
           } else {
@@ -85,6 +92,23 @@ export default () => {
         }
       } else {
         toast.error("All field are required");
+      }
+    } else if (action === "findPasswd") {
+      if (email.value !== "") {
+        try {
+          const {
+            data: { findPasswd },
+          } = await findPasswd();
+          if (!findPasswd) {
+            toast.error("You dont have an account yet, create one");
+            setTimeout(() => setAction("signUp"), 3000);
+          } else {
+            toast.success("Check your inbox for changing your password");
+            setAction("confirm");
+          }
+        } catch {
+          toast.error("Can't request secret, try again");
+        }
       }
     } else if (action === "confirm") {
       if (secret.value !== "") {
