@@ -22,8 +22,8 @@ export const CREATE_ACCOUNT = gql`
   }
 `;
 export const FIND_PASSWD = gql`
-  mutation requestSecret($email: String!) {
-    requestSecret(email: $email)
+  mutation changePasswd($email: String!) {
+    changePasswd(email: $email)
   }
 `;
 export const CONFIRM_SECRET = gql`
