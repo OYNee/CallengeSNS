@@ -24,7 +24,7 @@ export default () => {
     variables: { email: email.value, passwd: passwd.value },
   });
 
-  const findPasswd = useMutation(FIND_PASSWD, {
+  const findPasswdMutation = useMutation(FIND_PASSWD, {
     variables: { email: email.value },
   });
 
@@ -97,14 +97,13 @@ export default () => {
       if (email.value !== "") {
         try {
           const {
-            data: { findPasswd },
-          } = await findPasswd();
-          if (!findPasswd) {
-            toast.error("You dont have an account yet, create one");
-            setTimeout(() => setAction("signUp"), 3000);
+            data: { changePasswd },
+          } = await findPasswdMutation();
+          if (!changePasswd) {
+            toast.error("This account does not exist, try again");
           } else {
             toast.success("Check your inbox for changing your password");
-            setAction("confirm");
+            setTimeout(() => setAction("logIn"), 3000);
           }
         } catch {
           toast.error("Can't request secret, try again");
