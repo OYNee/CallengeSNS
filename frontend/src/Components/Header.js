@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
 import Input from "./Input";
 import useInput from "../Hooks/useInput";
-import { Compass, HeartEmpty, User, Logo } from "./Icons";
+import { Compass, HeartEmpty, User, Logo, Home } from "./Icons";
 import { useQuery } from "react-apollo-hooks";
 import { ME } from "../SharedQueries";
 
@@ -14,7 +14,7 @@ const Header = styled.header`
   top: 0;
   left: 0;
   background-color: white;
-  border-bottom: ${props => props.theme.boxBorder};
+  border-bottom: ${(props) => props.theme.boxBorder};
   border-radius: 0px;
   display: flex;
   justify-content: center;
@@ -25,7 +25,7 @@ const Header = styled.header`
 
 const HeaderWrapper = styled.div`
   width: 100%;
-  max-width: ${props => props.theme.maxWidth};
+  max-width: ${(props) => props.theme.maxWidth};
   display: flex;
   justify-content: center;
 `;
@@ -44,7 +44,7 @@ const HeaderColumn = styled.div`
 `;
 
 const SearchInput = styled(Input)`
-  background-color: ${props => props.theme.bgColor};
+  background-color: ${(props) => props.theme.bgColor};
   padding: 5px;
   font-size: 14px;
   border-radius: 3px;
@@ -66,7 +66,7 @@ const HeaderLink = styled(Link)`
 export default withRouter(({ history }) => {
   const search = useInput("");
   const { data } = useQuery(ME);
-  const onSearchSubmit = e => {
+  const onSearchSubmit = (e) => {
     e.preventDefault();
     history.push(`/search?term=${search.value}`);
   };
@@ -74,7 +74,7 @@ export default withRouter(({ history }) => {
     <Header>
       <HeaderWrapper>
         <HeaderColumn>
-          <Link to="/">
+          <Link to="/explore">
             <Logo />
           </Link>
         </HeaderColumn>
@@ -88,8 +88,8 @@ export default withRouter(({ history }) => {
           </form>
         </HeaderColumn>
         <HeaderColumn>
-          <HeaderLink to="/explore">
-            <Compass />
+          <HeaderLink to="/">
+            <Home />
           </HeaderLink>
           <HeaderLink to="/notifications">
             <HeartEmpty />
