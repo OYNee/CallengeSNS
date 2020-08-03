@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
-import Input from "./Input";
-import useInput from "../Hooks/useInput";
 import { Compass, HeartEmpty, User, Logo, Home } from "./Icons";
 import { useQuery } from "react-apollo-hooks";
 import { ME } from "../SharedQueries";
@@ -43,20 +41,6 @@ const HeaderColumn = styled.div`
   }
 `;
 
-const SearchInput = styled(Input)`
-  background-color: ${(props) => props.theme.bgColor};
-  padding: 5px;
-  font-size: 14px;
-  border-radius: 3px;
-  height: auto;
-  text-align: center;
-  width: 70%;
-  &::placeholder {
-    opacity: 0.8;
-    font-weight: 200;
-  }
-`;
-
 const HeaderLink = styled(Link)`
   &:not(:last-child) {
     margin-right: 30px;
@@ -64,12 +48,7 @@ const HeaderLink = styled(Link)`
 `;
 
 export default withRouter(({ history }) => {
-  const search = useInput("");
   const { data } = useQuery(ME);
-  const onSearchSubmit = (e) => {
-    e.preventDefault();
-    history.push(`/search?term=${search.value}`);
-  };
   return (
     <Header>
       <HeaderWrapper>
@@ -79,17 +58,16 @@ export default withRouter(({ history }) => {
           </Link>
         </HeaderColumn>
         <HeaderColumn>
-          <form onSubmit={onSearchSubmit}>
-            <SearchInput
-              value={search.value}
-              onChange={search.onChange}
-              placeholder="Search"
-            />
-          </form>
+        <Link to="/explore">
+            <Logo />
+          </Link>
         </HeaderColumn>
         <HeaderColumn>
           <HeaderLink to="/">
             <Home />
+          </HeaderLink>
+          <HeaderLink to="/search">
+            <HeartEmpty />
           </HeaderLink>
           <HeaderLink to="/notifications">
             <HeartEmpty />

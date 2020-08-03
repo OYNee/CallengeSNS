@@ -1,15 +1,28 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import FatText from "../../Components/FatText";
 import Loader from "../../Components/Loader";
 import UserCard from "../../Components/UserCard";
 import SquarePost from "../../Components/SquarePost";
-
+import Input from "../../Components/Input";
+import useInput from "../../Hooks/useInput";
+import { withRouter } from "react-router-dom";
 const Wrapper = styled.div`
   height: 50vh;
 `;
-
+const SearchInput = styled(Input)`
+  background-color: ${(props) => props.theme.bgColor};
+  padding: 5px;
+  font-size: 14px;
+  border-radius: 3px;
+  height: auto;
+  text-align: center;
+  width: 70%;
+  &::placeholder {
+    opacity: 0.8;
+    font-weight: 200;
+  }
+`;
 const Section = styled.div`
   margin-bottom: 50px;
   display: grid;
@@ -25,11 +38,25 @@ const PostSection = styled(Section)`
   grid-auto-rows: 200px;
 `;
 
-const SearchPresenter = ({ searchTerm, loading, data }) => {
+export default withRouter(({ searchTerm, loading, data, history }) => {
+  const search = useInput("");
+  const onSearchSubmit = (e) => {
+    e.preventDefault();
+    console.log(`${search.value}`);
+    history.push(`/search?term=${search.value}`);
+  };
+  
   if (searchTerm === undefined) {
     return (
+      
       <Wrapper>
-        <FatText text="Search for something" />
+        <form onSubmit={onSearchSubmit}>
+      <SearchInput
+        value={search.value}
+        onChange={search.onChange}
+        placeholder="Search..."
+      />
+      </form>
       </Wrapper>
     );
   } else if (loading === true) {
@@ -41,6 +68,13 @@ const SearchPresenter = ({ searchTerm, loading, data }) => {
   } else if (data && data.searchUser && data.searchPost) {
     return (
       <Wrapper>
+        <form onSubmit={onSearchSubmit}>
+          <SearchInput
+            value={search.value}
+            onChange={search.onChange}
+            placeholder="Search..."
+          />
+        </form>
         <Section>
           {data.searchUser.length === 0 ? (
             <FatText text="No Users Found" />
@@ -62,6 +96,7 @@ const SearchPresenter = ({ searchTerm, loading, data }) => {
             <FatText text="No Posts Found" />
           ) : (
             data.searchPost.map(post => (
+              console.log(`${post.id}`),
               <SquarePost
                 key={post.id}
                 likeCount={post.likeCount}
@@ -74,11 +109,5 @@ const SearchPresenter = ({ searchTerm, loading, data }) => {
       </Wrapper>
     );
   }
-};
+});
 
-SearchPresenter.propTypes = {
-  searchTerm: PropTypes.string,
-  loading: PropTypes.bool
-};
-
-export default SearchPresenter;
