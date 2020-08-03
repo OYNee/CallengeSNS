@@ -1,0 +1,67 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+model User {
+  id: Int! @id @default(autoincrement())
+  username: String! @unique
+  email: String! @unique
+  firstName: String @default(value: "")
+  lastName: String
+  bio: String
+  following: [User!]! @relation(name: "FollowRelation")
+  followers: [User!]! @relation(name: "FollowRelation")
+  posts: [Post!]!
+  likes: [Like!]!
+  comments: [Comment!]!
+  rooms: [Room!]!
+  loginSecret: String
+}
+model Post{
+  id: Int! @id @default(autoincrement())
+  files: [File!]!
+  location: String
+  caption: String!
+  user: User!
+  likes: [Like!]!
+  comments: [Comment!]!
+ 
+}
+
+model Like{
+  id: Int! @id @default(autoincrement())
+  user: User!
+  post: Post!
+}
+
+model Comment{
+  id: Int! @id @default(autoincrement())
+  text: String!
+  user: User!
+}
+
+model File{
+  id: Int! @id @default(autoincrement())
+  url: String!
+  post: Post!
+}
+
+model Room{
+  id:Int! @id @default(autoincrement())
+  participants:[User!]!
+  messages: [Message!]!
+}
+
+model Message{
+    id: Int! @id @default(autoincrement())
+    text: String!
+    from: User! @relation(name: "From")
+    to: User! @relation(name: "To")
+    room: Room!
+}
