@@ -39,31 +39,7 @@ export default () => (
         <Link href="#">support</Link>
       </ListItem>
       <ListItem>
-        <Link href="#">press</Link>
-      </ListItem>
-      <ListItem>
-        <Link href="#">api</Link>
-      </ListItem>
-      <ListItem>
-        <Link href="#">jobs</Link>
-      </ListItem>
-      <ListItem>
-        <Link href="#">privacy</Link>
-      </ListItem>
-      <ListItem>
-        <Link href="#">terms</Link>
-      </ListItem>
-      <ListItem>
         <Link href="#">directory</Link>
-      </ListItem>
-      <ListItem>
-        <Link href="#">profiles</Link>
-      </ListItem>
-      <ListItem>
-        <Link href="#">hashtags</Link>
-      </ListItem>
-      <ListItem>
-        <Link href="#">language</Link>
       </ListItem>
     </List>
     <Copyright>Challenge SNS {new Date().getFullYear()} &copy;</Copyright>
