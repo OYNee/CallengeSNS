@@ -40,9 +40,11 @@ const PostSection = styled(Section)`
 
 export default withRouter(({ searchTerm, loading, data, history }) => {
   const search = useInput("");
+  var userPage = 1;
   const onSearchSubmit = (e) => {
     e.preventDefault();
     console.log(`${search.value}`);
+    userPage = 1;
     history.push(`/search?term=${search.value}`);
   };
   

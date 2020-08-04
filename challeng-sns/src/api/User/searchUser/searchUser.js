@@ -6,11 +6,10 @@ export default {
       prisma.users({
         where: {
           OR: [
-            { username_contains: args.term },
-            { firstName_contains: args.term },
-            { lastName_contains: args.term }
+            { username_contains: args.term }
           ]
-        }
+        },
+        first: args.limit
       })
   }
 };
