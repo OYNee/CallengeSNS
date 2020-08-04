@@ -1,76 +1,35 @@
 type User {
   id: ID!
-  avatar: String
-  username: String!
-  email: String!
   userid: String!
   passwd: String!
-  firstName: String
-  lastName: String
-  fullName: String
-  isFollowing: Boolean!
-  isSelf: Boolean!
+  email: String!
+  username: String!
+  avatar: String
   bio: String
   following: [User!]!
-  followingCount: Int!
   followers: [User!]!
-  followersCount: Int!
   posts: [Post!]!
-  postsCount: Int!
   likes: [Like!]!
   comments: [Comment!]!
   rooms: [Room!]!
-  loginSecret: String!
-  createdAt: String
-  updatedAt: String
+  loginSecret: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
-
-type Post {
-  id: ID!
-  location: String
-  caption: String!
-  user: User!
-  files: [File!]!
-  likes: [Like!]!
-  comments: [Comment!]!
-  isLiked: Boolean!
-  likeCount: Int!
-  commentCount: Int!
-  createdAt: String
-  updatedAt: String
-}
-
-type Like {
-  id: ID!
-  user: User!
-  post: Post!
-  createdAt: String
-  updatedAt: String
-}
-
-type Comment {
-  id: ID!
-  text: String!
-  user: User!
-  post: Post!
-  createdAt: String
-  updatedAt: String
-}
-
 type File {
   id: ID!
   url: String!
-  post: Post!
-  createdAt: String
-  updatedAt: String
+  post: Post
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type Room {
   id: ID!
   participants: [User!]!
   messages: [Message!]!
-  createdAt: String
-  updatedAt: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type Message {
@@ -79,6 +38,81 @@ type Message {
   from: User!
   to: User!
   room: Room!
-  createdAt: String
-  updatedAt: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+type Post {
+  id: ID! @id
+  post_caption: String!
+  user: User!
+  likes: [Like!]!
+  rel_challenger: [User!]!
+  pre_challenger: [User!]!
+  next_challenger: [User!]!
+  tag_challenger: [User!]!
+  hashtags: [Hashtag!]!
+  scope: Boolean!
+  comments: [Comment!]!
+  Category: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Like {
+  id: ID!
+  account: User
+  post: Post
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Comment {
+  id: ID!
+  text: String!
+  account: User
+  post: Post
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Video {
+  video_id: ID!
+  video_url: String!
+  post: Post
+  createdAt: DateTime!
+}
+
+type Image {
+  image_id: ID!
+  image_url: String!
+  post: Post
+  createdAt: DateTime!
+}
+
+type Audio {
+  audio_id: ID!
+  audio_url: String!
+  audio_img_url: String!
+  post: Post
+  createdAt: DateTime!
+}
+
+type Text {
+  text_id: ID!
+  text_img_url: String!
+  content: String!
+  post: Post
+  relay: Boolean!
+  createdAt: DateTime!
+}
+
+type Category {
+  cat_id: ID!
+  cat_name: String!
+}
+
+type Hashtag {
+  tag_id: ID!
+  tag_name: String!
+  post: [Post!]!
 }
