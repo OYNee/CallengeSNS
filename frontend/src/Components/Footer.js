@@ -9,15 +9,13 @@ import { Link } from "react-router-dom";
 const Footer = styled.footer`
   display: none;
   @media only screen and (max-width:${(props) => props.theme.sm}) {
-    display: flex;
+    display: block;
+    width:100%;
     justify-content: space-between;
     align-items: center;
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 12px;
     padding: 10px 0px;
-    position: sticky;
-    bottom: 0;
+    position: fixed;
+    bottom: 0px;
     background-color: #FAFAFA;
     border-top: solid 1px rgba(2,2,2,0.3);
   };

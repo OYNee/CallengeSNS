@@ -5,7 +5,7 @@ import { HeartEmpty, User, Logo, Home, TextLogo, } from "./Icons";
 import { useQuery } from "react-apollo-hooks";
 import { ME } from "../SharedQueries";
 
-const Header = styled.header`
+const Wrapper = styled.div`
   width: 100%;
   border: 0;
   position: fixed;
@@ -17,28 +17,17 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 25px 0px;
   z-index: 2;
+`;
+
+
+const Header = styled.header`
   @media only screen and (max-width:${(props) => props.theme.sm}) {
     display: none;
   };
 `;
 
 const MobileHeader = styled.header`
-  width: 100%;
-  height:80px;
-  border: 0;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: white;
-  border-bottom: ${(props) => props.theme.boxBorder};
-  border-radius: 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 25px 0px;
-  z-index: 2;
   @media only screen and (min-width:${(props) => props.theme.sm}) {
     display: none;
   };
@@ -73,8 +62,7 @@ const HeaderLink = styled(Link)`
 export default withRouter(() => {
   const { data } = useQuery(ME);
   return (
-    <div>
-
+    <Wrapper>
       <Header>
         <HeaderWrapper>
           <HeaderColumn>
@@ -110,6 +98,6 @@ export default withRouter(() => {
         </HeaderWrapper>
       </Header>
       <MobileHeader><TextLogo /></MobileHeader>
-    </div>
+    </Wrapper>
   );
 });

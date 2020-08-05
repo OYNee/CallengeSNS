@@ -12,6 +12,8 @@ const LogoBox = styled.img`
 `;
 
 const Wrapper = styled.div`
+  margin-top: -60PX;
+  margin-bottom: 20px;
   min-height: 80vh;
   display: flex;
   align-items: center;
