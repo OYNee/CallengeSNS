@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 export default () =>{
   return (
     <Wrapper>
-      Explore
+      "Notifications"
     </Wrapper>
   )
 };

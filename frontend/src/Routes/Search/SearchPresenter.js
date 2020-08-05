@@ -7,8 +7,12 @@ import SquarePost from "../../Components/SquarePost";
 import Input from "../../Components/Input";
 import useInput from "../../Hooks/useInput";
 import { withRouter } from "react-router-dom";
+
 const Wrapper = styled.div`
   height: 50vh;
+  @media only screen and (max-width:${(props) => props.theme.sm}) {
+    min-height: 100vh;
+  };
 `;
 const SearchInput = styled(Input)`
   background-color: ${(props) => props.theme.bgColor};
@@ -18,6 +22,8 @@ const SearchInput = styled(Input)`
   height: auto;
   text-align: center;
   width: 70%;
+  margin: 10px auto;
+  display: block;
   &::placeholder {
     opacity: 0.8;
     font-weight: 200;

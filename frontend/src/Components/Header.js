@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
-import { Compass, HeartEmpty, User, Logo, Home } from "./Icons";
+import { HeartEmpty, User, Logo, Home, TextLogo, } from "./Icons";
 import { useQuery } from "react-apollo-hooks";
 import { ME } from "../SharedQueries";
 
@@ -19,6 +19,29 @@ const Header = styled.header`
   align-items: center;
   padding: 25px 0px;
   z-index: 2;
+  @media only screen and (max-width:${(props) => props.theme.sm}) {
+    display: none;
+  };
+`;
+
+const MobileHeader = styled.header`
+  width: 100%;
+  height:80px;
+  border: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: white;
+  border-bottom: ${(props) => props.theme.boxBorder};
+  border-radius: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px 0px;
+  z-index: 2;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    display: none;
+  };
 `;
 
 const HeaderWrapper = styled.div`
@@ -47,42 +70,46 @@ const HeaderLink = styled(Link)`
   }
 `;
 
-export default withRouter(({ history }) => {
+export default withRouter(() => {
   const { data } = useQuery(ME);
   return (
-    <Header>
-      <HeaderWrapper>
-        <HeaderColumn>
+    <div>
+
+      <Header>
+        <HeaderWrapper>
+          <HeaderColumn>
+            <Link to="/explore">
+              <Logo />
+            </Link>
+          </HeaderColumn>
+          <HeaderColumn>
           <Link to="/explore">
-            <Logo />
-          </Link>
-        </HeaderColumn>
-        <HeaderColumn>
-        <Link to="/explore">
-            <Logo />
-          </Link>
-        </HeaderColumn>
-        <HeaderColumn>
-          <HeaderLink to="/">
-            <Home />
-          </HeaderLink>
-          <HeaderLink to="/search">
-            <HeartEmpty />
-          </HeaderLink>
-          <HeaderLink to="/notifications">
-            <HeartEmpty />
-          </HeaderLink>
-          {!data.me ? (
-            <HeaderLink to="/#">
-              <User />
+              <Logo />
+            </Link>
+          </HeaderColumn>
+          <HeaderColumn>
+            <HeaderLink to="/">
+              <Home />
             </HeaderLink>
-          ) : (
-            <HeaderLink to={data.me.username}>
-              <User />
+            <HeaderLink to="/search">
+              <HeartEmpty />
             </HeaderLink>
-          )}
-        </HeaderColumn>
-      </HeaderWrapper>
-    </Header>
+            <HeaderLink to="/notifications">
+              <HeartEmpty />
+            </HeaderLink>
+            {!data.me ? (
+              <HeaderLink to="/#">
+                <User />
+              </HeaderLink>
+            ) : (
+              <HeaderLink to={data.me.username}>
+                <User />
+              </HeaderLink>
+            )}
+          </HeaderColumn>
+        </HeaderWrapper>
+      </Header>
+      <MobileHeader><TextLogo /></MobileHeader>
+    </div>
   );
 });
