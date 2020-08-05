@@ -6,12 +6,18 @@ import Feed from "../Routes/Feed";
 import Explore from "../Routes/Explore";
 import Search from "../Routes/Search";
 import Profile from "../Routes/Profile";
+import ChangePasswd from "../Routes/ChangePasswd";
+import SetScope from "../Routes/SetScope";
+import SetCategory from "../Routes/SetCategory";
 
 const LoggedInRoutes = () => (
   <Switch>
     <Route exact path="/" component={Feed} />
     <Route path="/explore" component={Explore} />
     <Route path="/search" component={Search} />
+    <Route path="/set/passwd" component={ChangePasswd} />
+    <Route path="/set/scope" component={SetScope} />
+    <Route path="/set/category" component={SetCategory} />
     <Route path="/:username" component={Profile} />
     <Redirect from="*" to="/" />
   </Switch>
@@ -28,7 +34,7 @@ const AppRouter = ({ isLoggedIn }) =>
   isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />;
 
 AppRouter.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
 };
 
 export default AppRouter;
