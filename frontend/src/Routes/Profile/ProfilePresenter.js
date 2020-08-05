@@ -7,6 +7,7 @@ import FatText from "../../Components/FatText";
 import FollowButton from "../../Components/FollowButton";
 import SquarePost from "../../Components/SquarePost";
 import Button from "../../Components/Button";
+import DropdownMenu from "../../Components/DropdownExampleDropdown";
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -100,6 +101,9 @@ export default ({ loading, data, logOut }) => {
               ) : (
                 <FollowButton isFollowing={isFollowing} id={id} />
               )}
+              <HeaderColumn>
+                <DropdownMenu />
+              </HeaderColumn>
             </UsernameRow>
             <Counts>
               <Count>
