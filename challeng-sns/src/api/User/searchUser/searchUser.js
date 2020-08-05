@@ -9,7 +9,8 @@ export default {
             { username_contains: args.term }
           ]
         },
-        first: args.limit
+        first: args.limit,
+        skip: args.cur
       })
   }
 };

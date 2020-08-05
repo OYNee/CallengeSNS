@@ -10,7 +10,8 @@ export default {
             { caption_starts_with: args.term }
           ]
         },
-        first: args.limit
+        first: args.limit,
+        skip: args.cur
       })
   }
 };
