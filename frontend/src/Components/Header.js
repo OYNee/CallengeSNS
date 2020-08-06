@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
-import { Compass, HeartEmpty, User, Logo, Home } from "./Icons";
+import { Search, HeartEmpty, User, Logo, Home } from "./Icons";
 import { useQuery } from "react-apollo-hooks";
 import { ME } from "../SharedQueries";
 
@@ -58,7 +58,7 @@ export default withRouter(({ history }) => {
           </Link>
         </HeaderColumn>
         <HeaderColumn>
-        <Link to="/explore">
+          <Link to="/explore">
             <Logo />
           </Link>
         </HeaderColumn>
@@ -67,7 +67,7 @@ export default withRouter(({ history }) => {
             <Home />
           </HeaderLink>
           <HeaderLink to="/search">
-            <HeartEmpty />
+            <Search />
           </HeaderLink>
           <HeaderLink to="/notifications">
             <HeartEmpty />
