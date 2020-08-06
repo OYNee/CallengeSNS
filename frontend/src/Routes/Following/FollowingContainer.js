@@ -6,6 +6,7 @@ import { FOLLOW } from "./FollowingQueries";
 
 export default withRouter(({ location: { following } }) => {
   const id= "ckdh4qxg7k1nt0a50gvgeyp5h";
+  console.log(`${following}`);
   var limit = 8;
   var cur =0;
   const { data, loading, fetchMore } = useQuery(FOLLOW, {
