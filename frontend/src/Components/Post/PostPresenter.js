@@ -109,7 +109,7 @@ const Caption = styled.div`
 `;
 
 export default ({
-  user: { username, avatar },
+  user: { username, avatar, relChallenger },
   location,
   files,
   isLiked,
@@ -121,7 +121,8 @@ export default ({
   onKeyPress,
   comments,
   selfComments,
-  caption
+  caption,
+  
 }) => (
   <Post>
     <Header>
@@ -150,6 +151,7 @@ export default ({
       </Buttons>
       <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
       <Caption>
+        {relChallenger}
         <FatText text={username} /> {caption}
       </Caption>
       {comments && (

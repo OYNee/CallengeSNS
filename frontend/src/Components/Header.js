@@ -53,7 +53,7 @@ export default withRouter(({ history }) => {
     <Header>
       <HeaderWrapper>
         <HeaderColumn>
-          <Link to="/explore">
+          <Link to="/upload">
             <Logo />
           </Link>
         </HeaderColumn>
