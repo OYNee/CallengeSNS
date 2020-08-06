@@ -9,15 +9,17 @@ import Profile from "../Routes/Profile";
 import ChangePasswd from "../Routes/ChangePasswd";
 import SetScope from "../Routes/SetScope";
 import SetCategory from "../Routes/SetCategory";
+import DeleteAccount from "../Routes/DeleteAccount";
 
 const LoggedInRoutes = () => (
   <Switch>
     <Route exact path="/" component={Feed} />
     <Route path="/explore" component={Explore} />
     <Route path="/search" component={Search} />
-    <Route path="/set/passwd" component={ChangePasswd} />
-    <Route path="/set/scope" component={SetScope} />
-    <Route path="/set/category" component={SetCategory} />
+    <Route path="/setpasswd" component={ChangePasswd} />
+    <Route path="/setscope" component={SetScope} />
+    <Route path="/setcategory" component={SetCategory} />
+    <Route path="/deleteacc" component={DeleteAccount} />
     <Route path="/:username" component={Profile} />
     <Redirect from="*" to="/" />
   </Switch>

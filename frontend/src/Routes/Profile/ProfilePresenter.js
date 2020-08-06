@@ -97,7 +97,7 @@ export default ({ loading, data, logOut }) => {
             <UsernameRow>
               <Username>{username}</Username>{" "}
               {isSelf ? (
-                <Button onClick={logOut} text="Log Out" />
+                <Button onClick={logOut} text="프로필 수정" />
               ) : (
                 <FollowButton isFollowing={isFollowing} id={id} />
               )}
