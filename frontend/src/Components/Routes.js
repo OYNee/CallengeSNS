@@ -7,6 +7,8 @@ import Explore from "../Routes/Explore";
 import Search from "../Routes/Search";
 import SearchUser from "../Routes/SearchUser";
 import Profile from "../Routes/Profile";
+import Following from "../Routes/Following";
+import Follower from "../Routes/Follower";
 import Notification from "../Routes/Notification"
 
 const LoggedInRoutes = () => (
@@ -14,6 +16,8 @@ const LoggedInRoutes = () => (
     <Route exact path="/" component={Feed} />
     <Route path="/explore" component={Explore} />
     <Route path="/search" component={Search} />
+    <Route path="/following" component={Following} />
+    <Route path="/follower" component={Follower} />
     <Route path="/search-user" component={SearchUser} />
     <Route path="/notifications" component={Notification} />
     <Route path="/:username" component={Profile} />

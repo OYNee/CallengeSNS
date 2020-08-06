@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import useInput from "../../Hooks/useInput";
 import PostPresenter from "./PostPresenter";
-import { useMutation } from "react-apollo-hooks";
-import { TOGGLE_LIKE, ADD_COMMENT } from "./PostQueries";
+import { useMutation, useQuery } from "react-apollo-hooks";
+import { TOGGLE_LIKE, ADD_COMMENT,FIND_USER } from "./PostQueries";
 import { toast } from "react-toastify";
 
 const PostContainer = ({
@@ -15,15 +15,18 @@ const PostContainer = ({
   comments,
   createdAt,
   caption,
-  location
+  location,
+
+
 }) => {
   const [isLikedS, setIsLiked] = useState(isLiked);
   const [likeCountS, setLikeCount] = useState(likeCount);
   const [currentItem, setCurrentItem] = useState(0);
   const [selfComments, setSelfComments] = useState([]);
+  // const relChallenger = useQuery(FIND_USER, {variables: {user:user}})
   const comment = useInput("");
   const toggleLikeMutation = useMutation(TOGGLE_LIKE, {
-    variables: { postId: id }
+    variables: { id: user.id }
   });
   const addCommentMutation = useMutation(ADD_COMMENT, {
     variables: { postId: id, text: comment.value }
@@ -84,6 +87,10 @@ const PostContainer = ({
       toggleLike={toggleLike}
       onKeyPress={onKeyPress}
       selfComments={selfComments}
+      // relChallenger={relChallenger}
+      // preChallenger={preChallenger}
+      // nextChallenger={nextChallenger}
+      // tagChallenger={tagChallenger}
     />
   );
 };

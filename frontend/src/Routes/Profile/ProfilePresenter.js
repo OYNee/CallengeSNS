@@ -8,6 +8,7 @@ import FollowButton from "../../Components/FollowButton";
 import SquarePost from "../../Components/SquarePost";
 import Button from "../../Components/Button";
 import DropdownMenu from "../../Components/DropdownExampleDropdown";
+import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -60,6 +61,10 @@ const Posts = styled.div`
   grid-template-rows: 200px;
   grid-auto-rows: 200px;
 `;
+const ELink = styled(Link)`
+  color: inherit;
+  margin-bottom: 10px;
+`;
 
 export default ({ loading, data, logOut }) => {
   if (loading === true) {
@@ -110,10 +115,14 @@ export default ({ loading, data, logOut }) => {
                 <FatText text={String(postsCount)} /> posts
               </Count>
               <Count>
+              <ELink to={`/follower?${id}`}>
                 <FatText text={String(followersCount)} /> followers
+                </ELink>
               </Count>
               <Count>
+                <ELink to={`/following?${id}`}>
                 <FatText text={String(followingCount)} /> following
+                </ELink>
               </Count>
             </Counts>
             <FullName text={fullName} />

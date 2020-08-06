@@ -49,6 +49,7 @@ const ELink = styled(Link)`
 `;
 export default withRouter(({ searchTerm, loading, data, history}) => {
   const search = useInput("");
+  if(searchTerm) search.value=searchTerm;
   const onSearchSubmit = (e) => {
     e.preventDefault();
     history.push(`/search?term=${search.value}`);
@@ -95,9 +96,9 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
           {data.searchUser.length === 0 ? (
             <FatText text="No Users Found" />
           ) : (
-            data.searchUser.map(user => (
+            data.searchUser.map((user,idx) => (
               <UserCard
-                key={user.id}
+                key={idx}
                 username={user.username}
                 isFollowing={user.isFollowing}
                 url={user.avatar}
@@ -120,10 +121,9 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
           {data.searchPost.length === 0 ? (
             <FatText text="No Posts Found" />
           ) : (
-            data.searchPost.map(post => (
-              console.log(`${post.id}`),
+            data.searchPost.map((post,idx) => (
               <SquarePost
-                key={post.id}
+                key={idx}
                 likeCount={post.likeCount}
                 commentCount={post.commentCount}
                 file={post.files[0]}
