@@ -20,10 +20,10 @@ export default {
         .count(),
     followersCount: ({ id }) =>
       prisma
-        .usersConnection({ where: { following_none: { id } } })
+        .usersConnection({ where: { following_some: { id } } })
         .aggregate()
         .count(),
-    fullName: parent => `${parent.firstName} ${parent.lastName}`,
+    fullName: (parent) => `${parent.firstName} ${parent.lastName}`,
     isFollowing: async (parent, _, { request }) => {
       const { user } = request;
       const { id: parentId } = parent;
@@ -31,14 +31,14 @@ export default {
         return prisma.$exists.user({
           AND: [
             {
-              id: user.id
+              id: user.id,
             },
             {
               following_some: {
-                id: parentId
-              }
-            }
-          ]
+                id: parentId,
+              },
+            },
+          ],
         });
       } catch {
         return false;
@@ -48,6 +48,6 @@ export default {
       const { user } = request;
       const { id: parentId } = parent;
       return user.id === parentId;
-    }
-  }
+    },
+  },
 };
