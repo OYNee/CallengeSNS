@@ -7,6 +7,7 @@ import Input from "../../Components/Input";
 import useInput from "../../Hooks/useInput";
 import { withRouter,Link } from "react-router-dom";
 import InfiniteScroll from 'react-infinite-scroll-component';
+
 const Wrapper = styled.div`
   height: 50vh;
 `;
@@ -38,6 +39,7 @@ const ELink = styled(Link)`
 `;
 export default withRouter(({ searchTerm, loading, data, history, fetchMore }) => {
   const search = useInput("");
+  var hasMore1 = true;
   const onSearchSubmit = (e) => {
     e.preventDefault();
     history.push(`/search?term=${search.value}`);
@@ -52,8 +54,14 @@ export default withRouter(({ searchTerm, loading, data, history, fetchMore }) =>
         term: search.value
       },
       updateQuery: (prev, { fetchMoreResult }) => {
-        console.log(`${data.searchUser.length}`);
-        if (!fetchMoreResult) return prev;
+        if(fetchMoreResult.searchUser.length<8)
+        {
+          console.log(`${hasMore1}`);
+          hasMore1 = false;
+          console.log(`${hasMore1}`);
+        }
+        if (!fetchMoreResult){ 
+          return prev;}
         return Object.assign({}, prev, {
           searchUser: [...prev.searchUser, ...fetchMoreResult.searchUser]
         });
@@ -79,7 +87,7 @@ export default withRouter(({ searchTerm, loading, data, history, fetchMore }) =>
         <Loader />
       </Wrapper>
     );
-  } else if (data && data.searchUser && data.searchPost ) {
+  } else if (data && data.searchUser) {
     return (
       <Wrapper>
         <form onSubmit={onSearchSubmit}>
@@ -103,14 +111,14 @@ export default withRouter(({ searchTerm, loading, data, history, fetchMore }) =>
             <InfiniteScroll
             dataLength={data.searchUser.length}
             next={onLoadMore}
-            hasMore={data.searchUser.length%8 === 0?true:false}
+            hasMore={hasMore1? true:false}
             loader={<Wrapper>
               <Loader />
             </Wrapper>}
           >{
-            data.searchUser.map(user => (
+            data.searchUser.map((user,idx) => (
               <UserCard
-                key={user.id}
+                key={idx}
                 username={user.username}
                 isFollowing={user.isFollowing}
                 url={user.avatar}
