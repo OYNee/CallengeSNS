@@ -8,11 +8,14 @@ import { Link } from "react-router-dom";
 const DropdownMenu = () => (
   <Dropdown>
     <Dropdown.Menu>
-      <Dropdown.Item text="비밀번호 변경" as={Link} to="/setpasswd" />
+      {/* <Dropdown.Item text="비밀번호 변경" as={Link} to="/setpasswd" />
       <Dropdown.Item text="공개 범위" as={Link} to="/setscope" />
-      <Dropdown.Item text="관심 설정" as={Link} to="/setcategory" />
-      <Dropdown.Item as={ModalExampleSize} />
-      <Dropdown.Item text="로그아웃" />
+      <Dropdown.Item text="관심 설정" as={Link} to="/setcategory" /> */}
+      <Dropdown.Item text="비밀번호 변경" />
+      <Dropdown.Item text="공개 범위" />
+      <Dropdown.Item text="관심 설정" />
+      <Dropdown.Item as={DelAccModal} />
+      <Dropdown.Item as={LogoutModal} />
     </Dropdown.Menu>
   </Dropdown>
 );
@@ -28,7 +31,7 @@ function exampleReducer(state, action) {
   }
 }
 
-const ModalExampleSize = () => {
+const DelAccModal = () => {
   const [state, dispatch] = React.useReducer(exampleReducer, {
     open: false,
     size: undefined,
@@ -62,5 +65,43 @@ const ModalExampleSize = () => {
     </>
   );
 };
+
+const LogoutModal = () => {
+  const [state, dispatch] = React.useReducer(exampleReducer, {
+    open: false,
+    size: undefined,
+  });
+  const { open, size } = state;
+
+  return (
+    <>
+      <Dropdown.Item onClick={() => dispatch({ type: "open", size: "tiny" })}>
+        로그아웃
+      </Dropdown.Item>
+
+      <Modal
+        size={size}
+        open={open}
+        onClose={() => dispatch({ type: "close" })}
+      >
+        <Modal.Header>로그아웃하시겠어요?</Modal.Header>
+
+        <Modal.Actions>
+          <Button negative onClick={() => dispatch({ type: "close" })}>
+            No
+          </Button>
+          <Button positive onClick={() => logout()}>
+            Yes
+          </Button>
+        </Modal.Actions>
+      </Modal>
+    </>
+  );
+};
+function logout() {
+  localStorage.removeItem("token");
+  window.location.reload();
+  return null;
+}
 
 export default DropdownMenu;
