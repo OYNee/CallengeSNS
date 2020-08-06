@@ -23,6 +23,10 @@ type User {
   loginSecret: String!
   createdAt: String
   updatedAt: String
+  relChallenger: [User!]
+  preChallenger: [User!]
+  nextChallenger: [User!]
+  tagChallenger: [User!]
 }
 
 type Post {
@@ -32,12 +36,23 @@ type Post {
   user: User!
   files: [File!]!
   likes: [Like!]!
+  relChallenger: [User!]
+  preChallenger: [User!]
+  nextChallenger: [User!]
+  tagChallenger: [User!]
+  hashtags: [Hashtag!] 
+  scope: Boolean!
   comments: [Comment!]!
+  category: String!
   isLiked: Boolean!
   likeCount: Int!
   commentCount: Int!
   createdAt: String
   updatedAt: String
+  video: [Video!] 
+  image: [Image!] 
+  audio: [Audio!] 
+  text: [Text!] 
 }
 
 type Like {
@@ -82,3 +97,49 @@ type Message {
   createdAt: String
   updatedAt: String
 }
+type Video{
+  video_id: ID! 
+  video_url: String!
+  createdAt: String
+  post: Post 
+  files: [File!]!
+}
+
+type Image{
+  image_id: ID!
+  image_url: String!
+  files: [File!]!
+  post: Post 
+  createdAt: String
+}
+
+type Audio{
+  audio_id: ID! 
+  audio_url: String!
+  audio_img_url: String! 
+  audioFile: File! 
+  post: Post 
+  createdAt: String
+  }
+
+type Text{
+  text_id: ID! 
+  text_img_url: String! 
+  content: String!
+  imageFile: File! 
+  post: Post 
+  relay: Boolean!
+  createdAt: String
+}
+
+type Category {
+  cat_id: ID!
+  cat_name: String!
+}
+
+type Hashtag{
+  tag_id: ID! 
+  tag_name: String!
+  post: [Post!]! 
+
+} 

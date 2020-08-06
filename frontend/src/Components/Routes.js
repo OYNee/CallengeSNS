@@ -9,6 +9,7 @@ import SearchUser from "../Routes/SearchUser";
 import Profile from "../Routes/Profile";
 import Following from "../Routes/Following";
 import Follower from "../Routes/Follower";
+import Notification from "../Routes/Notification"
 
 const LoggedInRoutes = () => (
   <Switch>
@@ -18,6 +19,7 @@ const LoggedInRoutes = () => (
     <Route path="/following" component={Following} />
     <Route path="/follower" component={Follower} />
     <Route path="/search-user" component={SearchUser} />
+    <Route path="/notifications" component={Notification} />
     <Route path="/:username" component={Profile} />
     <Redirect from="*" to="/" />
   </Switch>
