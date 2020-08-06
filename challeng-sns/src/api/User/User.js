@@ -8,6 +8,11 @@ export default {
     likes: ({ id }) => prisma.user({ id }).likes(),
     comments: ({ id }) => prisma.user({ id }).comments(),
     rooms: ({ id }) => prisma.user({ id }).rooms(),
+    relChallenger: ({ id }) => prisma.user({ id }).relChallenger(),
+    preChallenger: ({ id }) => prisma.user({ id }).preChallenger(),
+    nextChallenger: ({ id }) => prisma.user({ id }).nextChallenger(),
+    tagChallenger: ({ id }) => prisma.user({ id }).tagChallenger(),
+
     postsCount: ({ id }) =>
       prisma
         .postsConnection({ where: { user: { id } } })

@@ -5,7 +5,7 @@ type User {
       value: "https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png"
     )
   username: String! @unique
-  userid: String!  
+  userid: String!
   passwd: String!
   email: String! @unique
   firstName: String @default(value: "")
@@ -17,46 +17,46 @@ type User {
   likes: [Like!]! @relation(name: "LikesOfUser", onDelete: CASCADE)
   comments: [Comment!]! @relation(name: "CommentsOfUser", onDelete: CASCADE)
   rooms: [Room!]!
+  relChallenger: [Post!] @relation(name: "RCOfPosts")
+  preChallenger: [Post!] @relation(name: "PCOfPosts")
+  nextChallenger: [Post!] @relation(name: "NCOfPosts")
+  tagChallenger: [Post!] @relation(name: "TCOfPosts")
   loginSecret: String
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
-
 type Post {
   id: ID! @id
-  location: String
   caption: String!
-  user: User @relation(name: "PostsOfUser")
+  location: String
   files: [File!]! @relation(name: "FilesOfPost", onDelete: CASCADE)
+  user: User @relation(name: "PostsOfUser")
   likes: [Like!]! @relation(name: "LikeOfPost", onDelete: CASCADE)
+  hashtags : [Hashtag!]! @relation(name: "HashtagofPost")
+  scope : Boolean!
   comments: [Comment!]! @relation(name: "CommentOfPost", onDelete: CASCADE)
+  category: String!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
+  relChallenger: [User!] @relation(name: "RCOfPosts")
+  preChallenger: [User!] @relation(name: "PCOfPosts")
+  nextChallenger: [User!] @relation(name: "NCOfPosts")
+  tagChallenger: [User!] @relation(name: "TCOfPosts")
+  video: [Video!]! @relation(name: "VideoOfPost", onDelete: CASCADE)
+  image: [Image!]! @relation(name: "ImageOfPost", onDelete: CASCADE)
+  audio: [Audio!]! @relation(name: "AudioOfPost", onDelete: CASCADE)
+  text: [Text!]! @relation(name: "TextOfPost", onDelete: CASCADE)
 }
-
-type Like {
-  id: ID! @id
-  user: User @relation(name: "LikesOfUser")
-  post: Post @relation(name: "LikeOfPost")
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
-}
-
-type Comment {
-  id: ID! @id
-  text: String!
-  user: User @relation(name: "CommentsOfUser")
-  post: Post @relation(name: "CommentOfPost")
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
-}
-
 type File {
   id: ID! @id
   url: String!
   post: Post @relation(name: "FilesOfPost")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
+  text: [Text!] @relation(name:"TextFiles")
+  video: [Video!] @relation(name:"VideoFiles")
+  audio: [Audio!] @relation(name:"AudioFiles")
+  image: [Image!] @relation(name:"ImageFiles")
 }
 
 type Room {
@@ -76,3 +76,69 @@ type Message {
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
+
+
+type Like {
+  id: ID! @id
+  user: User @relation(name: "LikesOfUser")
+  post: Post @relation(name: "LikeOfPost")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Comment {
+  id: ID! @id
+  text: String!
+  user: User @relation(name: "CommentsOfUser")
+  post: Post @relation(name: "CommentOfPost")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Video{
+  id: ID! @id
+  video_url: String!
+  createdAt: DateTime! @createdAt
+  post: Post @relation(name: "VideoOfPost")
+  files: [File!]! @relation(name: "VideoFiles", onDelete: CASCADE)
+
+}
+
+type Image{
+  id: ID! @id
+  image_url: String!
+  files: [File!]! @relation(name: "ImageFiles", onDelete: CASCADE)
+  post: Post @relation(name: "ImageOfPost", onDelete: CASCADE)
+  createdAt: DateTime! @createdAt
+}
+
+type Audio{
+  id: ID! @id
+  audio_url: String!
+  audio_img_url: String! 
+  audioFile: File! @relation(name: "AudioFiles", onDelete: CASCADE)
+  post: Post @relation(name: "AudioOfPost", onDelete: CASCADE)
+  createdAt: DateTime! @createdAt
+}
+
+type Text{
+  id: ID! @id
+  text_img_url: String! 
+  content: String!
+  imageFile: File! @relation(name: "TextFiles", onDelete: CASCADE)
+  post: Post @relation(name: "TextOfPost", onDelete: CASCADE)
+  relay: Boolean!
+  createdAt: DateTime! @createdAt
+}
+
+type Category {
+  id: ID! @id
+  cat_name: String!
+}
+
+type Hashtag{
+  id: ID! @id
+  tag_name: String!
+  post: [Post!]! @relation(name: "HashtagofPost")
+
+} 

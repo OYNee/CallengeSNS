@@ -27,6 +27,7 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "prisma": "^1.33.0",
+    "prisma-binding": "^2.3.16",
     "prisma-client": "^0.0.0",
     "prisma-client-lib": "^1.26.4",
     "yarn": "^1.22.4"
