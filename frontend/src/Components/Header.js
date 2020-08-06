@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
-import { HeartEmpty, User, Logo, Home, TextLogo, } from "./Icons";
+import { WebHeartEmpty, WebUser, WebLogo, Home, TextLogo, WebSearch } from "./Icons";
 import { useQuery } from "react-apollo-hooks";
 import { ME } from "../SharedQueries";
 
@@ -22,6 +22,7 @@ const Wrapper = styled.div`
 
 
 const Header = styled.header`
+  width: 100%;
   @media only screen and (max-width:${(props) => props.theme.sm}) {
     display: none;
   };
@@ -34,13 +35,28 @@ const MobileHeader = styled.header`
 `;
 
 const HeaderWrapper = styled.div`
-  width: 100%;
-  max-width: ${(props) => props.theme.maxWidth};
+  margin: auto 10px;
+  max-width:100%;
   display: flex;
   justify-content: center;
 `;
 
 const HeaderColumn = styled.div`
+  width: 33%;
+  text-align: center;
+  padding-top: 25px;
+  min-width: 400px;
+  &:first-child {
+    margin-right: auto;
+    text-align: left;
+  }
+  &:last-child {
+    margin-left: auto;
+    text-align: right;
+  }
+`;
+
+const TextLogoColumn = styled.div`
   width: 33%;
   text-align: center;
   &:first-child {
@@ -65,33 +81,28 @@ export default withRouter(() => {
     <Wrapper>
       <Header>
         <HeaderWrapper>
-          <HeaderColumn>
-            <Link to="/explore">
-              <Logo />
+          <TextLogoColumn>
+            <Link to="/">
+              <TextLogo />
             </Link>
-          </HeaderColumn>
+          </TextLogoColumn>
           <HeaderColumn>
-          <Link to="/explore">
-              <Logo />
-            </Link>
-          </HeaderColumn>
-          <HeaderColumn>
-            <HeaderLink to="/">
-              <Home />
+            <HeaderLink to="/explore">
+              <WebLogo />
             </HeaderLink>
             <HeaderLink to="/search">
-              <HeartEmpty />
+              <WebSearch />
             </HeaderLink>
             <HeaderLink to="/notifications">
-              <HeartEmpty />
+              <WebHeartEmpty />
             </HeaderLink>
             {!data.me ? (
               <HeaderLink to="/#">
-                <User />
+                <WebUser />
               </HeaderLink>
             ) : (
               <HeaderLink to={data.me.username}>
-                <User />
+                <WebUser />
               </HeaderLink>
             )}
           </HeaderColumn>
