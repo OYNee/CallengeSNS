@@ -9,7 +9,9 @@ export default {
             { location_starts_with: args.term },
             { caption_starts_with: args.term }
           ]
-        }
+        },
+        first: args.limit,
+        skip: args.cur
       })
   }
 };

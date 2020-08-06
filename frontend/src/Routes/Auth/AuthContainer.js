@@ -84,7 +84,9 @@ export default () => {
           if (!createAccount) {
             toast.error("Can't create account");
           } else {
-            toast.success("Account created! Log In now");
+            toast.success(
+              "Account created! Check your inbox for authentication"
+            );
             setTimeout(() => setAction("logIn"), 3000);
           }
         } catch (e) {
