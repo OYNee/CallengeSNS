@@ -7,6 +7,7 @@ import Explore from "../Routes/Explore";
 import Search from "../Routes/Search";
 import SearchUser from "../Routes/SearchUser";
 import Profile from "../Routes/Profile";
+import Notification from "../Routes/Notification"
 
 const LoggedInRoutes = () => (
   <Switch>
@@ -14,6 +15,7 @@ const LoggedInRoutes = () => (
     <Route path="/explore" component={Explore} />
     <Route path="/search" component={Search} />
     <Route path="/search-user" component={SearchUser} />
+    <Route path="/notifications" component={Notification} />
     <Route path="/:username" component={Profile} />
     <Redirect from="*" to="/" />
   </Switch>

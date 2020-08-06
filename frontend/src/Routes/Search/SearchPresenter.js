@@ -10,6 +10,9 @@ import { withRouter,Link } from "react-router-dom";
 import InfiniteScroll from 'react-infinite-scroll-component';
 const Wrapper = styled.div`
   height: 50vh;
+  @media only screen and (max-width:${(props) => props.theme.sm}) {
+    min-height: 100vh;
+  };
 `;
 const SearchInput = styled(Input)`
   background-color: ${(props) => props.theme.bgColor};
@@ -19,6 +22,8 @@ const SearchInput = styled(Input)`
   height: auto;
   text-align: center;
   width: 70%;
+  margin: 10px auto;
+  display: block;
   &::placeholder {
     opacity: 0.8;
     font-weight: 200;
@@ -27,8 +32,8 @@ const SearchInput = styled(Input)`
 const Section = styled.div`
   margin-bottom: 50px;
   display: grid;
-  grid-gap: 25px;
-  grid-template-columns: repeat(4, 160px);
+  grid-gap: 5px;
+  grid-template-columns: repeat(3, minmax(100px, auto));
   grid-template-rows: 160px;
   grid-auto-rows: 160px;
 `;
