@@ -23,10 +23,11 @@ const SearchInput = styled(Input)`
     opacity: 0.8;
     font-weight: 200;
   }
+  margin: 10px auto;
+  display: block;
 `;
 const Section = styled.div`
   margin-bottom: 50px;
-  display: grid;
   grid-gap: 25px;
   grid-template-columns: repeat(4, 160px);
   grid-template-rows: 160px;
@@ -98,13 +99,9 @@ export default withRouter(({ searchTerm, loading, data, history, fetchMore }) =>
             placeholder="Search..."
           />
         </form>
-        <Section>
-        
           <ELink to={`/search?term=${search.value}`}>
           <FatText text="< 뒤로 가기"/>
          </ELink>
-  
-        </Section>
         <Section>
           {data.searchUser.length === 0 ? (
             <FatText text="No Users Found" />
