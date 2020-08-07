@@ -7,7 +7,6 @@ import LogoImage from "../../Styles/Images/tempLogo.png";
 
 const LogoBox = styled.img`
   width: 100%;
-  height: 250px;
   margin-bottom: 30px;
 `;
 

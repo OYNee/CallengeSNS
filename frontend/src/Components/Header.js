@@ -4,6 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 import { WebHeartEmpty, WebUser, WebLogo, Home, TextLogo, WebSearch } from "./Icons";
 import { useQuery } from "react-apollo-hooks";
 import { ME } from "../SharedQueries";
+import { Button, Checkbox, Grid, Icon, Image, Menu, Segment, Sidebar,} from 'semantic-ui-react'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -19,7 +20,6 @@ const Wrapper = styled.div`
   align-items: center;
   z-index: 2;
 `;
-
 
 const Header = styled.header`
   width: 100%;
