@@ -8,12 +8,9 @@ import { Link } from "react-router-dom";
 const DropdownMenu = () => (
   <Dropdown>
     <Dropdown.Menu>
-      {/* <Dropdown.Item text="비밀번호 변경" as={Link} to="/setpasswd" />
+      <Dropdown.Item text="비밀번호 변경" as={Link} to="/setpasswd" />
       <Dropdown.Item text="공개 범위" as={Link} to="/setscope" />
-      <Dropdown.Item text="관심 설정" as={Link} to="/setcategory" /> */}
-      <Dropdown.Item text="비밀번호 변경" />
-      <Dropdown.Item text="공개 범위" />
-      <Dropdown.Item text="관심 설정" />
+      <Dropdown.Item text="관심 설정" as={Link} to="/setcategory" />
       <Dropdown.Item as={DelAccModal} />
       <Dropdown.Item as={LogoutModal} />
     </Dropdown.Menu>
@@ -49,7 +46,6 @@ const DelAccModal = () => {
         open={open}
         onClose={() => dispatch({ type: "close" })}
       >
-        <Modal.Header>회원 탈퇴</Modal.Header>
         <Modal.Content>
           <p>정말로 탈퇴하시겠어요?</p>
         </Modal.Content>
@@ -84,8 +80,9 @@ const LogoutModal = () => {
         open={open}
         onClose={() => dispatch({ type: "close" })}
       >
-        <Modal.Header>로그아웃하시겠어요?</Modal.Header>
-
+        <Modal.Content>
+          <p>로그아웃하시겠어요?</p>
+        </Modal.Content>
         <Modal.Actions>
           <Button negative onClick={() => dispatch({ type: "close" })}>
             No
