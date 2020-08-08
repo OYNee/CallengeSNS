@@ -14,6 +14,7 @@ import ChangePasswd from "../Routes/ChangePasswd";
 import SetScope from "../Routes/SetScope";
 import SetCategory from "../Routes/SetCategory";
 import DeleteAccount from "../Routes/DeleteAccount";
+import RelChallenger from "../Routes/RelChallenger";
 
 const LoggedInRoutes = () => (
   <Switch>
@@ -28,6 +29,7 @@ const LoggedInRoutes = () => (
     <Route path="/setscope" component={SetScope} />
     <Route path="/setcategory" component={SetCategory} />
     <Route path="/deleteacc" component={DeleteAccount} />
+    <Route path="/relchallenger" component={RelChallenger} />
     <Route path="/:username" component={Profile} />
     <Redirect from="*" to="/" />
   </Switch>

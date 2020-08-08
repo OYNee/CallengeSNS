@@ -8,7 +8,8 @@ export default withRouter(({ location: { search } }) => {
   const term = search.split("=")[1];
   var limit = 8;
   var cur =0;
-  const { data, loading, fetchMore } = useQuery(SEARCH, {
+  var hasMore1=true;
+  const { data, loading, fetchMore, hasMore } = useQuery(SEARCH, {
     skip: term === undefined,
     variables: {
       term,
@@ -16,5 +17,5 @@ export default withRouter(({ location: { search } }) => {
       cur
     }
   });
-  return <SearchPresenter searchTerm={term} loading={loading} data={data} fetchMore={fetchMore}/>;
+  return <SearchPresenter searchTerm={term} loading={loading} data={data} fetchMore={fetchMore} hasMore={hasMore1}/>;
 });
