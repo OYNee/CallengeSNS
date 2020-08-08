@@ -9,6 +9,7 @@ export const SEARCH = gql`
       userid
       isFollowing
       isSelf
+      bio
     }
   }
 `;

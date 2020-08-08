@@ -8,6 +8,7 @@ export default withRouter(({ location: { search } }) => {
   const term = search.split("=")[1];
   var limit = 8;
   var cur =0;
+
   const { data, loading } = useQuery(SEARCH, {
     skip: term === undefined,
     variables: {

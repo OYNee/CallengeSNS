@@ -32,14 +32,14 @@ const Temp = styled.p`
   margin: 5px 10px;
 `
 
-const UserCard = ({ id, username, isFollowing, url, isSelf }) => (
+const UserCard = ({ id, username, isFollowing, url, isSelf,bio }) => (
   <Card>
     <EAvatar url={url} size={"md"} />
   
       <ELink to={`/${username}`}>
         <FatText text={username} />
       </ELink>
-      <Temp>한줄소개를 넣을예정 입니다!</Temp>
+      <Temp>{bio}</Temp>
 
     {!isSelf && <FollowButton id={id} isFollowing={isFollowing} />}
   </Card>

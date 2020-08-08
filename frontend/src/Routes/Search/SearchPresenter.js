@@ -48,8 +48,8 @@ const ELink = styled(Link)`
   margin-bottom: 10px;
 `;
 export default withRouter(({ searchTerm, loading, data, history}) => {
-  const search = useInput("");
-  if(searchTerm) search.value=searchTerm;
+
+  const search =(searchTerm?useInput(searchTerm):useInput(""));
   const onSearchSubmit = (e) => {
     e.preventDefault();
     history.push(`/search?term=${search.value}`);
@@ -87,7 +87,7 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
         {data.searchUser.length === 0 ?(
           <FatText text="사용자 더보기"/>
         ):(
-          <ELink to={`/search-user?term=${search.value}`}>
+          <ELink to={`/search-user?term=${searchTerm}`}>
           <FatText text="사용자 더보기"/>
          </ELink>
         )}
@@ -104,6 +104,7 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
                 url={user.avatar}
                 isSelf={user.isSelf}
                 id={user.id}
+                bio={user.bio}
               />
             ))
           )}

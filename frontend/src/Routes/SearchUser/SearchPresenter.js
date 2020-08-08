@@ -39,14 +39,18 @@ const ELink = styled(Link)`
   margin-bottom: 10px;
 `;
 export default withRouter(({ searchTerm, loading, data, history, fetchMore }) => {
-  const search = useInput("");
+  const search =(searchTerm?useInput(searchTerm):useInput(""));
+
   var hasMore1 = true;
-  if(searchTerm) search.value=searchTerm;
   const onSearchSubmit = (e) => {
     e.preventDefault();
     history.push(`/search?term=${search.value}`);
   };
-
+  const onSearchbutton = (e) => {
+    e.preventDefault();
+    history.push(`/search?term=${searchTerm}`);
+    window.location.reload();
+  };
   const onLoadMore = () => {
 
     fetchMore({
@@ -99,9 +103,10 @@ export default withRouter(({ searchTerm, loading, data, history, fetchMore }) =>
             placeholder="Search..."
           />
         </form>
-          <ELink to={`/search?term=${search.value}`}>
-          <FatText text="< 뒤로 가기"/>
-         </ELink>
+          <button onClick={onSearchbutton}>
+          <FatText text="< 뒤로 가기" />
+          </button>
+
         <Section>
           {data.searchUser.length === 0 ? (
             <FatText text="No Users Found" />
