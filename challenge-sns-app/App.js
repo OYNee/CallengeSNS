@@ -52,7 +52,6 @@ export default function App() {
   useEffect(() => {
     preLoad();
   }, []);
-
   return loaded && client && isLoggedIn !== null ? (
     <ApolloProvider client={client}>
       <ThemeProvider theme={styles}>
