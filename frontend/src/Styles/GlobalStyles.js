@@ -21,4 +21,13 @@ export default createGlobalStyle`
     input:focus{
         outline:none;
     }
+
+    .now {
+        fill: ${(props) => props.theme.livingCoral};
+    }
+
+    .dropOpen {
+        color: ${(props) => props.theme.livingCoral}
+        fill: ${(props) => props.theme.livingCoral}
+    }
 `;

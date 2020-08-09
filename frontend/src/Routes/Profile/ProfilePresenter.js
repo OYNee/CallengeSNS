@@ -11,6 +11,7 @@ import Button from "../../Components/Button";
 import { Link } from "react-router-dom";
 import DropdownMenu from "../../Components/UserSetting";
 
+
 const Wrapper = styled.div`
   min-height: 100vh;
 `;
@@ -20,11 +21,16 @@ const Header = styled.header`
   align-items: center;
   justify-content: space-around;
   width: 80%;
-  margin: 0 auto;
-  margin-bottom: 40px;
+  margin: 15px auto;
+  @media only screen and (max-width:${(props) => props.theme.sm}) {
+    width: 100%;
+    height: 100px;
+  }
 `;
 
-const HeaderColumn = styled.div``;
+const HeaderColumn = styled.div`
+  width:50%;
+`;
 
 const UsernameRow = styled.div`
   display: flex;
@@ -37,23 +43,29 @@ const Username = styled.span`
 `;
 
 const Counts = styled.ul`
-  display: flex;
   margin: 15px 0px;
 `;
 
+
 const Count = styled.li`
-  font-size: 16px;
+  font-size: 15px;
+  margin: 5px
   &:not(:last-child) {
     margin-right: 10px;
   }
+`;
+
+const AvatarColumn = styled.div`
+  margin: auto
+  width:100px
 `;
 
 const FullName = styled(FatText)`
   font-size: 16px;
 `;
 
-const Bio = styled.p`
-  margin: 10px 0px;
+const Bio = styled(FatText)`
+font-size: 16px;
 `;
 
 const Posts = styled.div`
@@ -61,11 +73,21 @@ const Posts = styled.div`
   grid-template-columns: repeat(4, 200px);
   grid-template-rows: 200px;
   grid-auto-rows: 200px;
+  @media only screen and (max-width:${(props) => props.theme.sm}) {
+    grid-template-columns: repeat(3, 32vw);
+    grid-template-rows: 32vw;
+    justify-content:space-around;
+  }
 `;
+
 const ELink = styled(Link)`
   color: inherit;
   margin-bottom: 10px;
+  &:hover {
+    color: ${(props) => props.theme.livingCoral}
+  }
 `;
+
 
 export default ({ loading, data, logOut }) => {
   if (loading === true) {
@@ -97,39 +119,49 @@ export default ({ loading, data, logOut }) => {
         </Helmet>
         <Header>
           <HeaderColumn>
-            <Avatar size="lg" url={avatar} />
+            <AvatarColumn>
+              <Avatar size="lg" url={avatar} />
+            </AvatarColumn>
           </HeaderColumn>
           <HeaderColumn>
             <UsernameRow>
-              <Username>{username}</Username>{" "}
               {isSelf ? (
-                <Button onClick={logOut} text="프로필 수정" />
+                  <DropdownMenu username={username}/>
               ) : (
+                <>
+                <Username>{username}</Username>
                 <FollowButton isFollowing={isFollowing} id={id} />
+                </>
               )}
-              <HeaderColumn>
-                <DropdownMenu />
-              </HeaderColumn>
             </UsernameRow>
             <Counts>
               <Count>
                 <FatText text={String(postsCount)} /> posts
               </Count>
               <Count>
-              <ELink to={`/follower?${id}`}>
-                <FatText text={String(followersCount)} /> followers
+                <ELink to={`/follower?${id}`}>
+                  <FatText text={String(followersCount)} /> followers
                 </ELink>
               </Count>
               <Count>
                 <ELink to={`/following?${id}`}>
-                <FatText text={String(followingCount)} /> following
+                  <FatText text={String(followingCount)} /> following
                 </ELink>
               </Count>
             </Counts>
-            <FullName text={fullName} />
-            <Bio>{bio}</Bio>
           </HeaderColumn>
+              
         </Header>
+        {fullName ? (
+          <FullName text={fullName}/>
+          ) : (
+          <FullName text="fullName 없음"/>
+          )}
+        {bio ? (
+          <Bio><div>자기소개 있음</div></Bio>
+          ) : (
+            <div>자기소개 없음</div>
+          )}
         <Posts>
           {posts &&
             posts.map((post) => (

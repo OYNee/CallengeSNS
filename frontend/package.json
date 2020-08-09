@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "dependencies": {
     "apollo-boost": "^0.3.1",
-    "expo-av": "^8.4.0",
     "eslint-plugin-react-hooks": "^4.0.8",
+    "expo-av": "^8.4.0",
     "graphql": "^14.1.1",
     "open": "^7.1.0",
     "prop-types": "^15.7.2",
