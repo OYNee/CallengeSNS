@@ -23,7 +23,7 @@ const PostContainer = ({
   const [likeCountS, setLikeCount] = useState(likeCount);
   const [currentItem, setCurrentItem] = useState(0);
   const [selfComments, setSelfComments] = useState([]);
-  // const relChallenger = useQuery(FIND_USER, {variables: {user:user}})
+  const {Cuser, fetchMore} = useQuery(FIND_USER, {variables: {username:user.username}});
   const comment = useInput("");
   const toggleLikeMutation = useMutation(TOGGLE_LIKE, {
     variables: { id: user.id }
@@ -87,7 +87,8 @@ const PostContainer = ({
       toggleLike={toggleLike}
       onKeyPress={onKeyPress}
       selfComments={selfComments}
-      // relChallenger={relChallenger}
+      Cuser={Cuser}
+      fetchMore={fetchMore}
       // preChallenger={preChallenger}
       // nextChallenger={nextChallenger}
       // tagChallenger={tagChallenger}
@@ -122,7 +123,16 @@ PostContainer.propTypes = {
   ).isRequired,
   caption: PropTypes.string.isRequired,
   location: PropTypes.string,
-  createdAt: PropTypes.string.isRequired
+  createdAt: PropTypes.string.isRequired,
+  Cuser: PropTypes.arrayOf(
+    PropTypes.shape({
+      relChallenger: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        username: PropTypes.string.isRequired,
+        avatar: PropTypes.string,
+      }).isRequired
+    })
+  )
 };
 
 export default PostContainer;

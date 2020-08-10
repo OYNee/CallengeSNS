@@ -7,21 +7,46 @@ export default {
       const { user } = request;
       console.log(user.id)
      
-      const { caption, category, hashtags, 
+      const { caption, category, newPost,
         rel_challengers, pre_challengers,
         next_challengers, tag_challengers, 
-        scope,files, video, audio, text, image  } = args;
+        scope,files  } = args;
       //지금 args 에서 받아오는 부분이 이부분인데
       //category로 구분 중이면서 파일에서 처리할 수 있는 부분을 나눠놓는건 좀 낭비 같다는 생각이 좀 들어서요
 
       // console.log(rel_persons)
+      const making_hashtag=caption.split(" ");
+      
+      try {
+         
+        
+          const post = await prisma.createPost({
+          caption,
+          category,
+          user: { connect: { id: user.id } },
+          scope: scope,
+          //postId: post.id
+        });
+        const postCount = prisma.post({
+          where:{
+            post:{id: post.id}
+          },post:{
+            id
+          }
+        })
+        console.log(postCount)
+        throw Error
+        if(newPost){
+          await prisma.updatePost({
+            data:{
+              postId:{
+               
+              }
+            }
+          })
+        }
 
-      const post = await prisma.createPost({
-        caption,
-        category,
-        user: { connect: { id: user.id } },
-        scope: scope
-      });
+        
       //Relation_challenger에 관한 함수
       //여러명의 값이 들어갈 수 있기 때문에 forEach문으로 작성
       if(rel_challengers!=null){
@@ -119,18 +144,62 @@ export default {
          })
        )
      }
-  
-      hashtags.forEach(
+     
+     
+      making_hashtag.forEach(
         async hashtag =>
-         await prisma.createHashtag({
-           tag_name:hashtag,
-           post: {
-            connect: {
-              id: post.id
-            }
+        {
+          if(hashtag.includes("#")){
+            await prisma.createHashtag({
+              tag_name:hashtag,
+              post: {
+               connect: {
+                 id: post.id
+               }
+             }
+           })
+            
           }
-        })
+        }
       ) 
+      if(category=='video'){
+        files.forEach(
+          async file =>
+          await prisma.createVideo({
+            video_url: file,
+            post:{
+              connect:{
+                id:post.id
+              }
+            }
+          })
+          
+        )
+      }else if(category=='audio'){
+        files.forEach(
+          async file =>
+          await prisma.createAudio({
+            audio_url: file,
+            post:{
+              connect:{
+                id:post.id
+              }
+            }
+          })
+        )
+      }else if(category=='image'){
+        files.forEach(
+          async file =>
+          await prisma.createImage({
+            image_url: file,
+            post:{
+              connect:{
+                id:post.id
+              }
+            }
+          })
+        )
+      }
       files.forEach(
         async file =>
           await prisma.createFile({
@@ -143,6 +212,20 @@ export default {
           })
       );
       return post;
+    }
+        
+       catch (error) {
+        console.log(postCount)
+        console.log(making_hashtag)
+        making_hashtag.forEach(
+          async hashtag=>{
+            if(hashtag.includes("#")){
+              console.log(hashtag)
+            }
+          }
+                                             
+        )
+      }
     }
   }
 };

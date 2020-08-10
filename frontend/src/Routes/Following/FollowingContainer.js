@@ -15,5 +15,5 @@ export default withRouter(({ location: { following } }) => {
       cur
     }
   });
-  return <FollowingPresenter userid={id} loading={loading} data={data} fetchMore={fetchMore}/>;
+  return <FollowingPresenter nickname={id} loading={loading} data={data} fetchMore={fetchMore}/>;
 });

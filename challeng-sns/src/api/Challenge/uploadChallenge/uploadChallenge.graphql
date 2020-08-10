@@ -1,5 +1,6 @@
 type Mutation {
    uploadChallenge(
+   newPost: Boolean!,
    caption: String!, 
    category: String,
    files:[String!]!,
@@ -13,6 +14,5 @@ type Mutation {
    image: [String!],
    text: [String!],
    audio: [String!],
-
    ): Post!
 }
