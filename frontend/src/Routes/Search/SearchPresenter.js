@@ -8,6 +8,7 @@ import Input from "../../Components/Input";
 import useInput from "../../Hooks/useInput";
 import { withRouter,Link } from "react-router-dom";
 import InfiniteScroll from 'react-infinite-scroll-component';
+
 const Wrapper = styled.div`
   height: 50vh;
   @media only screen and (max-width:${(props) => props.theme.sm}) {
@@ -31,11 +32,10 @@ const SearchInput = styled(Input)`
 `;
 const Section = styled.div`
   margin-bottom: 50px;
-  display: grid;
-  grid-gap: 5px;
-  grid-template-columns: repeat(3, minmax(100px, auto));
-  grid-template-rows: 160px;
-  grid-auto-rows: 160px;
+
+  @media only screen and (max-width:${(props) => props.theme.sm}) {
+
+  };
 `;
 
 const PostSection = styled(Section)`
@@ -48,8 +48,8 @@ const ELink = styled(Link)`
   margin-bottom: 10px;
 `;
 export default withRouter(({ searchTerm, loading, data, history}) => {
-  const search = useInput("");
-  if(searchTerm) search.value=searchTerm;
+
+  const search =(searchTerm?useInput(searchTerm):useInput(""));
   const onSearchSubmit = (e) => {
     e.preventDefault();
     history.push(`/search?term=${search.value}`);
@@ -83,15 +83,15 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
             placeholder="Search..."
           />
         </form>
-        <Section>
+        <div>
         {data.searchUser.length === 0 ?(
-          <FatText text="사용자--------------------"/>
+          <FatText text="사용자 더보기"/>
         ):(
-          <ELink to={`/search-user?term=${search.value}`}>
-          <FatText text="사용자--------------------"/>
+          <ELink to={`/search-user?term=${searchTerm}`}>
+          <FatText text="사용자 더보기"/>
          </ELink>
         )}
-        </Section>
+        </div>
         <Section>
           {data.searchUser.length === 0 ? (
             <FatText text="No Users Found" />
@@ -104,19 +104,20 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
                 url={user.avatar}
                 isSelf={user.isSelf}
                 id={user.id}
+                bio={user.bio}
               />
             ))
           )}
         </Section>
-        <Section>
+        <div>
         {data.searchPost.length === 0 ?(
-          <FatText text="챌린지--------------------"/>
+          <FatText text="챌린지 더보기"/>
         ):(
           <ELink to={`/home`}>
-          <FatText text="챌린지--------------------"/>
+          <FatText text="챌린지 더보기"/>
          </ELink>
         )}
-        </Section>
+        </div>
         <PostSection>
           {data.searchPost.length === 0 ? (
             <FatText text="No Posts Found" />

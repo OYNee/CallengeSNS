@@ -9,6 +9,7 @@ export const SEARCH = gql`
       nickname
       isFollowing
       isSelf
+      bio
     }
   }
 `;

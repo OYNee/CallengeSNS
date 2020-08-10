@@ -7,8 +7,9 @@ import FatText from "../../Components/FatText";
 import FollowButton from "../../Components/FollowButton";
 import SquarePost from "../../Components/SquarePost";
 import Button from "../../Components/Button";
-import DropdownMenu from "../../Components/DropdownExampleDropdown";
+
 import { Link } from "react-router-dom";
+import DropdownMenu from "../../Components/UserSetting";
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -102,7 +103,7 @@ export default ({ loading, data, logOut }) => {
             <UsernameRow>
               <Username>{username}</Username>{" "}
               {isSelf ? (
-                <Button onClick={logOut} text="Log Out" />
+                <Button onClick={logOut} text="프로필 수정" />
               ) : (
                 <FollowButton isFollowing={isFollowing} id={id} />
               )}

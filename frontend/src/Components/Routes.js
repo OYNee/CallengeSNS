@@ -10,6 +10,11 @@ import Profile from "../Routes/Profile";
 import Following from "../Routes/Following";
 import Follower from "../Routes/Follower";
 import Notification from "../Routes/Notification"
+import ChangePasswd from "../Routes/ChangePasswd";
+import SetScope from "../Routes/SetScope";
+import SetCategory from "../Routes/SetCategory";
+import DeleteAccount from "../Routes/DeleteAccount";
+import RelChallenger from "../Routes/RelChallenger";
 
 const LoggedInRoutes = () => (
   <Switch>
@@ -20,6 +25,11 @@ const LoggedInRoutes = () => (
     <Route path="/follower" component={Follower} />
     <Route path="/search-user" component={SearchUser} />
     <Route path="/notifications" component={Notification} />
+    <Route path="/setpasswd" component={ChangePasswd} />
+    <Route path="/setscope" component={SetScope} />
+    <Route path="/setcategory" component={SetCategory} />
+    <Route path="/deleteacc" component={DeleteAccount} />
+    <Route path="/relchallenger" component={RelChallenger} />
     <Route path="/:username" component={Profile} />
     <Redirect from="*" to="/" />
   </Switch>
@@ -36,7 +46,7 @@ const AppRouter = ({ isLoggedIn }) =>
   isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />;
 
 AppRouter.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
 };
 
 export default AppRouter;

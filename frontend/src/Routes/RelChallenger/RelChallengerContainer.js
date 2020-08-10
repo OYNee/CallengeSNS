@@ -1,19 +1,19 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import FollowingPresenter from "./FollowingPresenter";
+import RelChallengerPresenter from "./RelChallengerPresenter";
 import { useQuery } from "react-apollo-hooks";
-import { FOLLOW } from "./FollowingQueries";
+import { FOLLOW } from "./RelChallengerQueries";
 
 export default withRouter(({ location: { search } }) => {
   const id= search.split('?')[1];
-  var limit = 8;
+  var limit = 100;
   var cur =0;
-  const { data, loading, fetchMore } = useQuery(FOLLOW, {
+  const { data, loading} = useQuery(FOLLOW, {
     variables: {
       id,
       limit,
       cur
     }
   });
-  return <FollowingPresenter nickname={id} loading={loading} data={data} fetchMore={fetchMore}/>;
+  return <RelChallengerPresenter userid={id} loading={loading} data={data} />;
 });

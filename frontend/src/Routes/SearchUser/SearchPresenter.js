@@ -23,10 +23,11 @@ const SearchInput = styled(Input)`
     opacity: 0.8;
     font-weight: 200;
   }
+  margin: 10px auto;
+  display: block;
 `;
 const Section = styled.div`
   margin-bottom: 50px;
-  display: grid;
   grid-gap: 25px;
   grid-template-columns: repeat(4, 160px);
   grid-template-rows: 160px;
@@ -37,15 +38,17 @@ const ELink = styled(Link)`
   color: inherit;
   margin-bottom: 10px;
 `;
-export default withRouter(({ searchTerm, loading, data, history, fetchMore }) => {
-  const search = useInput("");
-  var hasMore1 = true;
-  if(searchTerm) search.value=searchTerm;
+export default withRouter(({ searchTerm, loading, data, history, fetchMore,hasMore }) => {
+  const search =(searchTerm?useInput(searchTerm):useInput(""));
   const onSearchSubmit = (e) => {
     e.preventDefault();
     history.push(`/search?term=${search.value}`);
   };
-
+  const onSearchbutton = (e) => {
+    e.preventDefault();
+    history.push(`/search?term=${searchTerm}`);
+    window.location.reload();
+  };
   const onLoadMore = () => {
 
     fetchMore({
@@ -57,9 +60,9 @@ export default withRouter(({ searchTerm, loading, data, history, fetchMore }) =>
       updateQuery: (prev, { fetchMoreResult }) => {
         if(fetchMoreResult.searchUser.length<8)
         {
-          console.log(`${hasMore1}`);
-          hasMore1 = false;
-          console.log(`${hasMore1}`);
+          console.log(`${hasMore}`);
+          hasMore = false;
+          console.log(`${hasMore}`);
         }
         if (!fetchMoreResult){ 
           return prev;}
@@ -98,13 +101,10 @@ export default withRouter(({ searchTerm, loading, data, history, fetchMore }) =>
             placeholder="Search..."
           />
         </form>
-        <Section>
-        
-          <ELink to={`/search?term=${search.value}`}>
-          <FatText text="< 뒤로 가기"/>
-         </ELink>
-  
-        </Section>
+          <button onClick={onSearchbutton}>
+          <FatText text="< 뒤로 가기" />
+          </button>
+
         <Section>
           {data.searchUser.length === 0 ? (
             <FatText text="No Users Found" />
@@ -112,7 +112,7 @@ export default withRouter(({ searchTerm, loading, data, history, fetchMore }) =>
             <InfiniteScroll
             dataLength={data.searchUser.length}
             next={onLoadMore}
-            hasMore={hasMore1? true:false}
+            hasMore={true || false}
             loader={<Wrapper>
               <Loader />
             </Wrapper>}
