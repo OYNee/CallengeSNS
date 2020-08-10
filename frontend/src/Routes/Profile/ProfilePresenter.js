@@ -60,12 +60,17 @@ const AvatarColumn = styled.div`
   width:100px
 `;
 
-const FullName = styled(FatText)`
+const NickName = styled(FatText)`
   font-size: 16px;
+  display:block;
+  margin-bottom: 5px;
+  margin-left: 10vw;
 `;
 
-const Bio = styled(FatText)`
-font-size: 16px;
+const Bio = styled.p`
+  font-size: 12px;
+  display:block;
+  margin-left: 5vw;
 `;
 
 const Posts = styled.div`
@@ -89,6 +94,24 @@ const ELink = styled(Link)`
 `;
 
 
+const ProfilUpdateBox = styled.div`
+  text-align: center;
+  padding: 10px;
+  font-size: 20px;
+  border: 1px solid rgba(0,0,0,0.1);
+  margin: 10px 1vw;
+  border-radius: 90px;
+  background-color:rgba(255,101,97,0.66);
+  color:white;
+  &:hover {
+    background-color:rgba(255,101,97);
+    opacity: 0.88;
+    filter: alpha(opacity=88);
+    color:white;
+    zoom: 1;
+  }
+`
+
 export default ({ loading, data, logOut }) => {
   if (loading === true) {
     return (
@@ -102,7 +125,7 @@ export default ({ loading, data, logOut }) => {
         id,
         avatar,
         username,
-        fullName,
+        nickname,
         isFollowing,
         isSelf,
         bio,
@@ -150,18 +173,19 @@ export default ({ loading, data, logOut }) => {
               </Count>
             </Counts>
           </HeaderColumn>
-              
+        {}
         </Header>
-        {fullName ? (
-          <FullName text={fullName}/>
+        {nickname ? (
+          <NickName text={nickname}/>
           ) : (
-          <FullName text="fullName 없음"/>
+          <NickName text="nickname 없음"/>
           )}
         {bio ? (
-          <Bio><div>자기소개 있음</div></Bio>
+          <Bio>{bio}</Bio>
           ) : (
-            <div>자기소개 없음</div>
+            <Bio>자기소개 없음</Bio>
           )}
+        <ProfilUpdateBox>프로필 수정</ProfilUpdateBox>
         <Posts>
           {posts &&
             posts.map((post) => (

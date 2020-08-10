@@ -6,7 +6,7 @@ export const FOLLOW = gql`
       id
       avatar
       username
-      userid
+      nickname
       isFollowing
       isSelf
     }
