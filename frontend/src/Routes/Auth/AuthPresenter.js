@@ -100,7 +100,7 @@ export default ({
             <title>Sign Up | ChallengeSNS</title>
           </Helmet>
           <form onSubmit={onSubmit}>
-            <Input placeholder={"ID"} {...nickname} />
+            <Input placeholder={"Nickname"} {...nickname} />
             <Input placeholder={"Email"} {...email} type="email" />
             <Input placeholder={"Password"} {...passwd} type="Password" />
             <label htmlFor="confirmPasswordInput"></label>

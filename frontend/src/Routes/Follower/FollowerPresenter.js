@@ -11,12 +11,6 @@ const Wrapper = styled.div`
 `;
 
 const Section = styled.div`
-  margin-bottom: 50px;
-  display: grid;
-  grid-gap: 25px;
-  grid-template-columns: repeat(4, 160px);
-  grid-template-rows: 160px;
-  grid-auto-rows: 160px;
 `;
 
 const ELink = styled(Link)`
