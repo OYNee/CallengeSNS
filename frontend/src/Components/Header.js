@@ -87,9 +87,15 @@ export default withRouter(() => {
             </Link>
           </TextLogoColumn>
           <HeaderColumn>
-            <HeaderLink to="/explore">
+          {!data.me ? (
+              <HeaderLink to="/#">
+                <WebLogo />
+              </HeaderLink>
+            ) : (
+              <HeaderLink to={`/createpost?${data.me.id}`}>
               <WebLogo />
             </HeaderLink>
+            )}
             <HeaderLink to="/search">
               <WebSearch />
             </HeaderLink>
