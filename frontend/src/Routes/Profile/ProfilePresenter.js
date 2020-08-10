@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
+import Input from "../../Components/NotRequiredInput";
 import Loader from "../../Components/Loader";
 import Avatar from "../../Components/Avatar";
 import FatText from "../../Components/FatText";
@@ -14,6 +15,16 @@ import DropdownMenu from "../../Components/UserSetting";
 
 const Wrapper = styled.div`
   min-height: 100vh;
+`;
+
+const UpdateWrapper = styled.div`
+  margin-top: -60px;
+  margin-bottom: 20px;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 `;
 
 const Header = styled.header`
@@ -112,12 +123,77 @@ const ProfilUpdateBox = styled.div`
   }
 `
 
-export default ({ loading, data, logOut }) => {
+const Box = styled.div`
+  ${(props) => props.theme.whiteBox}
+  border-radius:0px;
+  width: 100%;
+  @media only screen and (max-width: ${(props) => props.theme.sm}) {
+    max-width: 350px;
+  }
+  @media only screen and (min-width: ${(props) => props.theme.sm}) {
+    max-width: 400px;
+  }
+  @media only screen and (min-width: ${(props) => props.theme.md}) {
+    max-width: 450px;
+  }
+  @media only screen and (min-width: ${(props) => props.theme.lg}) {
+    max-width: 500px;
+  }
+  @media only screen and (min-width: ${(props) => props.theme.xl}) {
+    max-width: 600px;
+  }
+`;
+
+const Form = styled(Box)`
+  padding: 40px;
+  padding-bottom: 30px;
+  margin-bottom: 15px;
+  form {
+    width: 100%;
+    input {
+      width: 100%;
+      &:not(:last-child) {
+        margin-bottom: 7px;
+      }
+    }
+    button {
+      margin-top: 10px;
+    }
+  }
+`;
+export default ({
+  loading,
+  data,
+  setAction,
+  action,
+  onSubmit,
+  newBio,
+  newUserid,
+}) => {
   if (loading === true) {
     return (
       <Wrapper>
         <Loader />
       </Wrapper>
+    );
+  } else if (action === "update" && data && data.seeUser) {
+    const {
+      seeUser: { avatar, userid, bio },
+    } = data;
+    return (
+      <UpdateWrapper>
+        <Form>
+          <Helmet>
+            <title>Update Profile | ChallengeSNS</title>
+          </Helmet>
+          <form onSubmit={onSubmit}>
+            <Avatar size="lg" url={avatar} />
+            <Input placeholder={userid} {...newUserid} />
+            <Input placeholder={bio} {...newBio} />
+            <Button text={"SAVE"} />
+          </form>
+        </Form>
+      </UpdateWrapper>
     );
   } else if (!loading && data && data.seeUser) {
     const {
@@ -149,7 +225,7 @@ export default ({ loading, data, logOut }) => {
           <HeaderColumn>
             <UsernameRow>
               {isSelf ? (
-                  <DropdownMenu username={username}/>
+                <DropdownMenu username={username}/>
               ) : (
                 <>
                 <Username>{username}</Username>
@@ -172,6 +248,8 @@ export default ({ loading, data, logOut }) => {
                 </ELink>
               </Count>
             </Counts>
+            <NickName text={nickname} />
+            <Bio>{bio}</Bio>
           </HeaderColumn>
         {}
         </Header>
@@ -185,7 +263,7 @@ export default ({ loading, data, logOut }) => {
           ) : (
             <Bio>자기소개 없음</Bio>
           )}
-        <ProfilUpdateBox>프로필 수정</ProfilUpdateBox>
+        <ProfilUpdateBox onClick={() => setAction("update")}>프로필 수정</ProfilUpdateBox>
         <Posts>
           {posts &&
             posts.map((post) => (
