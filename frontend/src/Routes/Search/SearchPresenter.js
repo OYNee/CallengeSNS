@@ -9,18 +9,24 @@ import useInput from "../../Hooks/useInput";
 import { withRouter,Link } from "react-router-dom";
 import InfiniteScroll from 'react-infinite-scroll-component';
 
+const SearchUserCard = styled(UserCard)`
+`
+
+const SearchMore = styled(FatText)`
+  color:${(props) => props.theme.livingCoral}
+`
+
+
 const Wrapper = styled.div`
-  height: 50vh;
   @media only screen and (max-width:${(props) => props.theme.sm}) {
-    min-height: 100vh;
   };
 `;
 const SearchInput = styled(Input)`
   background-color: ${(props) => props.theme.bgColor};
   padding: 5px;
   font-size: 14px;
-  border-radius: 3px;
-  height: auto;
+  border-radius: 15px;
+  height: 30px;
   text-align: center;
   width: 70%;
   margin: 10px auto;
@@ -84,20 +90,20 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
           />
         </form>
         <div>
-        {data.searchUser.length === 0 ?(
-          <FatText text="사용자 더보기"/>
-        ):(
-          <ELink to={`/search-user?term=${searchTerm}`}>
-          <FatText text="사용자 더보기"/>
-         </ELink>
-        )}
+          {data.searchUser.length === 0 ?
+            (<></>):
+            ( <ELink to={`/search-user?term=${searchTerm}`}>
+              <SearchMore text="더 많은 챌린저 보러 가기!"/>
+              </ELink>
+            )
+          }
         </div>
         <Section>
           {data.searchUser.length === 0 ? (
-            <FatText text="No Users Found" />
+            <FatText text="찾으시는 챌린저가 없습니다 ㅠ" />
           ) : (
             data.searchUser.map((user,idx) => (
-              <UserCard
+              <SearchUserCard
                 key={idx}
                 username={user.username}
                 isFollowing={user.isFollowing}
@@ -110,17 +116,16 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
           )}
         </Section>
         <div>
-        {data.searchPost.length === 0 ?(
-          <FatText text="챌린지 더보기"/>
+        {data.searchPost.length === 0 ?(<></>
         ):(
           <ELink to={`/home`}>
-          <FatText text="챌린지 더보기"/>
+          <SearchMore text="다른 챌린지 보러 가기!"/>
          </ELink>
         )}
         </div>
         <PostSection>
           {data.searchPost.length === 0 ? (
-            <FatText text="No Posts Found" />
+            <FatText text="조건에 맞는 챌린지가 없네요 ㅠㅠ" />
           ) : (
             data.searchPost.map((post,idx) => (
               <SquarePost

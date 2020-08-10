@@ -7,8 +7,6 @@ import { Dropdown } from 'semantic-ui-react'
 import Loader from "../../Components/Loader";
 
 const Wrapper = styled.div`
-  margin-top: -60PX;
-  margin-bottom: 20px;
   min-height: 80vh;
   display: flex;
   align-items: center;
@@ -64,16 +62,22 @@ export default (({
             value: user.id,
             text: `(@${user.username})`,
           }));
-        return ( <Wrapper>
-            {action === "CreatePost" && (
+        return ( 
+        <Wrapper>
+          {action === "CreatePost" && 
+            (
               <>
                 <button onClick={() => setAction("relChallenger")}>
-                    relChallenger</button>
+                  relChallenger
+                </button>
                 <button onClick={() => setAction("tagChallenger")}>
-                tagChallenger</button>
+                  tagChallenger
+                </button>
               </>
-            )}
-            {action === "relChallenger" && (
+            )
+          }
+          {action === "relChallenger" && 
+            (
               <>
                 <Section>
                     <Dropdown
@@ -81,35 +85,46 @@ export default (({
                      fluid
                      multiple
                      search
-                    selection
-                    options={userOptions}
-                    defaultValue={relChallenger}
-                    onChange={onSelectRelChallenger}
+                     selection
+                     options={userOptions}
+                     defaultValue={relChallenger}
+                     onChange={onSelectRelChallenger}
                     />
                 </Section>
                 <button onClick={onRelChallenger}>확인</button>
               </>
-            )}
-            {action === "tagChallenger" && (
+            )
+          }
+          {action === "tagChallenger" && 
+            (
               <>
                 <Section>
-                    <Dropdown
-                     placeholder='현재 선택된 사용자가 없습니다'
-                     fluid
-                     multiple
-                     search
+                  <Dropdown
+                    placeholder='현재 선택된 사용자가 없습니다'
+                    fluid
+                    multiple
+                    search
                     selection
                     defaultValue={tagChallenger}
                     options={userOptions}
                     onChange={onSelectTagChallenger}
-                    />
+                  />
                 </Section>
                 <button onClick={onTagChallenger}>확인</button>
               </>
-            )}
+            )
+          }
         </Wrapper>);
       }
-      
-   
+      return (
+        <Wrapper>
+          <button onClick={() => setAction("relChallenger")}>
+            relChallenger
+          </button>
+          <button onClick={() => setAction("tagChallenger")}>
+            tagChallenger
+          </button>
+        </Wrapper>
+      );
   });
   

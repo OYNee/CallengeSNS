@@ -15,5 +15,5 @@ export default withRouter(({ location: { search } }) => {
       cur
     }
   });
-  return <RelChallengerPresenter userid={id} loading={loading} data={data} />;
+  return <RelChallengerPresenter nickname={id} loading={loading} data={data} />;
 });

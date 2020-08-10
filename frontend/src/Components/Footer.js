@@ -22,6 +22,10 @@ const Footer = styled.footer`
   };
 `;
 
+const BlankFooter = styled.div`
+  height:47px
+`
+
 const List = styled.ul`
   display: flex;
   width:100%;
@@ -92,6 +96,7 @@ export default (defaultValue) => {
   const [now,setNow] = useState(defaultValue)
 
   return (
+    <BlankFooter>
     <Footer>
         {vertical && (
           <Sidebar
@@ -113,23 +118,31 @@ export default (defaultValue) => {
             <Grid.Row columns={4}>
               <Grid.Column>
                 <Hover>
-                  <VideoIcon />
+                  <Link to="/createpost">
+                    <VideoIcon />
+                  </Link>
                 </Hover>
               </Grid.Column>
               <Grid.Column>
                 <Hover>
-                  <PhotoIcon />              
+                  <Link to="/createpost">
+                    <PhotoIcon />              
+                  </Link>
                 </Hover>
               </Grid.Column>
               <Grid.Column>
                 <Hover>
-                  <AudioIcon />
+                  <Link to="/createpost">
+                    <AudioIcon />
+                  </Link>
                 </Hover>
               </Grid.Column>
               <Grid.Column>
-                <Hover>
-                  <TextIcon />
-                </Hover>
+                <Link to="/createpost">
+                  <Hover>
+                    <TextIcon />
+                  </Hover>
+                </Link>
               </Grid.Column>
             </Grid.Row>
           </Grid>
@@ -151,7 +164,7 @@ export default (defaultValue) => {
           onClick={() =>
             dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay'})
           }
-        >
+          >
           <Logo/>
         </div>
         </ListItem>
@@ -173,5 +186,6 @@ export default (defaultValue) => {
         </ListItem>
       </List>
     </Footer>
+    </BlankFooter>
   );
 };

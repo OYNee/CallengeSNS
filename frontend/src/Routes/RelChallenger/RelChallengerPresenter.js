@@ -22,7 +22,7 @@ const ELink = styled(Link)`
   margin-bottom: 10px;
 `;
 
-export default withRouter(({ userid, loading, data, history, fetchMore }) => {
+export default withRouter(({ nickname, loading, data, history, fetchMore }) => {
   var hasMore1 = true;
   var selctedUser = null;
   const onSelectUser = (e, {value}) => {
@@ -40,7 +40,7 @@ export default withRouter(({ userid, loading, data, history, fetchMore }) => {
     const userOptions = data.followingUser.map((user, idx) => ({
       key: idx,
       value: user.username,
-      text: `${user.username}(@${user.userid})`,
+      text: `${user.username}(@${user.nickname})`,
     }));
     return (
       <Wrapper>

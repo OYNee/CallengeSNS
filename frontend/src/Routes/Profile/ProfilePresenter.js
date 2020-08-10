@@ -14,7 +14,7 @@ import DropdownMenu from "../../Components/UserSetting";
 
 
 const Wrapper = styled.div`
-  min-height: 100vh;
+
 `;
 
 const UpdateWrapper = styled.div`
@@ -168,7 +168,7 @@ export default ({
   action,
   onSubmit,
   newBio,
-  newUserid,
+  newNickname,
 }) => {
   if (loading === true) {
     return (
@@ -178,7 +178,7 @@ export default ({
     );
   } else if (action === "update" && data && data.seeUser) {
     const {
-      seeUser: { avatar, userid, bio },
+      seeUser: { avatar, nickname, bio },
     } = data;
     return (
       <UpdateWrapper>
@@ -188,7 +188,7 @@ export default ({
           </Helmet>
           <form onSubmit={onSubmit}>
             <Avatar size="lg" url={avatar} />
-            <Input placeholder={userid} {...newUserid} />
+            <Input placeholder={nickname} {...newNickname} />
             <Input placeholder={bio} {...newBio} />
             <Button text={"SAVE"} />
           </form>
@@ -248,8 +248,6 @@ export default ({
                 </ELink>
               </Count>
             </Counts>
-            <NickName text={nickname} />
-            <Bio>{bio}</Bio>
           </HeaderColumn>
         {}
         </Header>

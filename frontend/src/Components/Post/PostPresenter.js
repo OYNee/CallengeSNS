@@ -6,19 +6,23 @@ import FatText from "../FatText";
 import Avatar from "../Avatar";
 import { HeartFull, HeartEmpty, Comment as CommentIcon } from "../Icons";
 
+const LikeText = styled(FatText)`
+  color:${(props) => props.theme.livingCoral}
+`
+
 const Post = styled.div`
   ${props => props.theme.whiteBox};
   width: 100%;
   max-width: 600px;
   user-select: none;
-  margin-bottom:40px;
+  margin:3px 0;
   a {
     color: inherit;
   }
 `;
 
 const Header = styled.header`
-  padding: 15px;
+  padding: 10px 15px;
   display: flex;
   align-items: center;
 `;
@@ -80,7 +84,7 @@ const Timestamp = styled.span`
   font-size: 12px;
   margin: 10px 0px;
   padding-bottom: 10px;
-  border-bottom: ${props => props.theme.lightGreyColor} 1px solid;
+  border-bottom: ${props => props.theme.livingCoral} 1px solid;
 `;
 
 const Textarea = styled(TextareaAutosize)`
@@ -150,7 +154,9 @@ export default ({
           <CommentIcon />
         </Button>
       </Buttons>
-      <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
+      {isLiked ? <LikeText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} /> : <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />}
+      
+      
       <Caption>
        {Cuser}
         <FatText text={username} /> {caption}

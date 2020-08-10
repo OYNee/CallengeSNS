@@ -13,7 +13,34 @@ font-size: 7vw;
 display: inline-block;
 `;
 
+const MyButton = styled.button`
+  cursor: pointer;
+  display: inline-block;
+  border: none;
+  vertical-align: baseline;
+  color: rgba(0,0,0,.6);
+  padding: .78571429em 1.5em .78571429em;
+  text-transform: none;
+  text-shadow: none;
+  font-weight: 700;
+  line-height: 1em;
+  text-align: center;
+  text-decoration: none;
+  border-radius: .28571429rem;
+  box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34,36,38,.15) inset;
+  -webkit-tap-highlight-color: transparent;
+  margin-left: .75em;
+  margin-bottom: 15px
+`
 
+const MyYesButton = styled(MyButton)`
+  background-color:${(props) => props.theme.livingCoral};
+  color:white;
+`
+
+const MyNoButton = styled(MyButton)`
+  background-color: rgba(205,209,255,1);
+`
 
 const CloseBox = styled.div`
 width: 100vw;
@@ -34,7 +61,7 @@ const DropDownHeader = styled("div")`
 
 const DropDownListContainer = styled("div")`
   position:absolute;
-  top:130px;
+  top:100px;
 `;
 
 const DropDownList = styled("ul")`
@@ -93,12 +120,12 @@ const DelAccModal = () => {
           <p>정말로 탈퇴하시겠어요?</p>
         </Modal.Content>
         <Modal.Actions>
-          <Button negative onClick={() => dispatch({ type: "close" })}>
+          <MyNoButton onClick={() => dispatch({ type: "close" })}>
             No
-          </Button>
-          <Button positive as={Link} to="/deleteacc">
+          </MyNoButton>
+          <MyYesButton as={Link} to="/deleteacc">
             Yes
-          </Button>
+          </MyYesButton>
         </Modal.Actions>
       </Modal>
     </>
@@ -127,12 +154,12 @@ const LogoutModal = () => {
           <p>로그아웃하시겠어요?</p>
         </Modal.Content>
         <Modal.Actions>
-          <Button negative onClick={() => dispatch({ type: "close" })}>
+          <MyNoButton onClick={() => dispatch({ type: "close" })}>
             No
-          </Button>
-          <Button positive onClick={() => logout()}>
+          </MyNoButton>
+          <MyYesButton onClick={() => logout()}>
             Yes
-          </Button>
+          </MyYesButton>
         </Modal.Actions>
       </Modal>
     </>
