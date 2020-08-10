@@ -99,9 +99,9 @@ export default () => {
       if (email.value !== "") {
         try {
           const {
-            data: { changePasswd },
+            data: { findPasswd },
           } = await findPasswdMutation();
-          if (!changePasswd) {
+          if (!findPasswd) {
             toast.error("This account does not exist, try again");
           } else {
             toast.success("Check your inbox for changing your password");

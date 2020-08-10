@@ -9,7 +9,7 @@ import SearchUser from "../Routes/SearchUser";
 import Profile from "../Routes/Profile";
 import Following from "../Routes/Following";
 import Follower from "../Routes/Follower";
-import Notification from "../Routes/Notification"
+import Notification from "../Routes/Notification";
 import ChangePasswd from "../Routes/ChangePasswd";
 import SetScope from "../Routes/SetScope";
 import SetCategory from "../Routes/SetCategory";

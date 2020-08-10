@@ -89,7 +89,6 @@ const DelAccModal = () => {
         open={open}
         onClose={() => dispatch({ type: "close" })}
       >
-        <Modal.Header>회원 탈퇴</Modal.Header>
         <Modal.Content>
           <p>정말로 탈퇴하시겠어요?</p>
         </Modal.Content>
@@ -124,8 +123,9 @@ const LogoutModal = () => {
         open={open}
         onClose={() => dispatch({ type: "close" })}
       >
-        <Modal.Header>로그아웃하시겠어요?</Modal.Header>
-
+        <Modal.Content>
+          <p>로그아웃하시겠어요?</p>
+        </Modal.Content>
         <Modal.Actions>
           <Button negative onClick={() => dispatch({ type: "close" })}>
             No
