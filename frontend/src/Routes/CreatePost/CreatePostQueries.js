@@ -20,8 +20,6 @@ export const UPLOAD = gql`
     $pre_challengers: [String!]
     $next_challengers: [String!]
     $tag_challengers: [String!]
-    $newPost: Boolean!
-    $scope: Boolean!
     $files: [String!]!
     $postId: String!
   ) {
@@ -32,8 +30,6 @@ export const UPLOAD = gql`
       pre_challengers: $pre_challengers
       next_challengers: $next_challengers
       tag_challengers: $tag_challengers
-      newPost: $newPost
-      scope: $scope
       files: $files
       postId: $postId
     ) {

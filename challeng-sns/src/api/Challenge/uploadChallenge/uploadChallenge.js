@@ -10,12 +10,12 @@ export default {
       const {
         caption,
         category,
-        newPost,
+        // newPost,
         rel_challengers,
         pre_challengers,
         next_challengers,
         tag_challengers,
-        scope,
+        // scope,
         files,
         postId,
       } = args;
@@ -25,21 +25,26 @@ export default {
       // console.log(rel_persons)
       const making_hashtag = caption.split(" ");
 
+      //나중에 scope랑 newPost 삭제
+      const scope = true;
+      const newPost = true;
       try {
         const post = await prisma.createPost({
+          scope,
+          newPost,
           caption,
           category,
           user: { connect: { id: user.id } },
-          scope: scope,
-          //postId: post.id
+          postId: postId,
         });
-        console.log(post);
 
-        throw Error;
-        if (newPost) {
+        if (postId === "") {
           await prisma.updatePost({
+            where: {
+              id: post.id,
+            },
             data: {
-              postId: {},
+              postId: post.id,
             },
           });
         }
@@ -71,6 +76,7 @@ export default {
         }
 
         console.log(pre_challengers);
+        console.log("aa");
         if (pre_challengers != null) {
           pre_challengers.forEach(
             async (pre_challenger) =>
@@ -201,9 +207,10 @@ export default {
               },
             })
         );
+
         return post;
       } catch (error) {
-        console.log(making_hashtag);
+        console.log("fail:", making_hashtag);
         making_hashtag.forEach(async (hashtag) => {
           if (hashtag.includes("#")) {
             console.log(hashtag);
