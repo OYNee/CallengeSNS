@@ -11,7 +11,9 @@
 - start expo
 
 4. 안드로이드/아이폰 마켓에서 expo client 설치
-5. Run on iOS/Android Simulator -> Tunnel 선택 -> 큐알찍어서 빌드
+5. Tunnel 선택 -> Run on iOS/Android Simulator -> 빌드 시작
+
+**혹시 개발 도중에 문제 생기면 expo start –c(캐시 지우고 실행) 해보세요. 해결되는 경우도 있습니다.**
 
 ## Screens:
 
