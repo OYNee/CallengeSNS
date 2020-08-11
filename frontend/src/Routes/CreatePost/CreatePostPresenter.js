@@ -81,6 +81,12 @@ export default ({
             <button onClick={() => setAction("tagChallenger")}>
               tagChallenger
             </button>
+            <select name="category" id="category">
+                <option value="">선택</option>
+                <option value="video">비디오</option>
+                <option value="audio">오디오</option>
+                <option value="image">이미지</option>
+            </select>
             <input type="file" name="photo" id="photo" />
             <button onClick={onUpload}>업로드하기</button>
           </>

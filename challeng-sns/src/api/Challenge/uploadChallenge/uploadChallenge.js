@@ -35,7 +35,7 @@ export default {
         });
         console.log(post);
 
-        throw Error;
+       
         if (newPost) {
           await prisma.updatePost({
             data: {
