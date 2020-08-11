@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import {HeartEmpty, User, Logo, Home, Search, VideoIcon, PhotoIcon, AudioIcon, TextIcon } from "./Icons";
 import { useQuery } from "react-apollo-hooks";
@@ -61,6 +61,7 @@ const CloseButton = styled.div`
   font-size: 1.2rem;
   padding-top: 14px;
   text-align: right;
+  cursor: defalut;
 `
 
 const Line = styled.hr`
@@ -69,8 +70,16 @@ const Line = styled.hr`
   border-color: rgba(0,0,0,0.2);
 `
 
-export default () => {
+const Hover = styled.div`
+  &:hover {
+    fill:${(props) => props.theme.livingCoral}
+  }
+`
+
+
+export default (defaultValue) => {
   const { data } = useQuery(ME);
+  // const [nowTab, setNowTab] = useState("home")
 
   const [state, dispatch] = React.useReducer(exampleReducer, {
     animation: 'overlay',
@@ -80,7 +89,8 @@ export default () => {
 
   const { animation, direction, visible } = state
   const vertical = direction === 'bottom'
-  
+  const [now,setNow] = useState(defaultValue)
+
   return (
     <Footer>
         {vertical && (
@@ -89,29 +99,37 @@ export default () => {
           animation={animation}
           direction={direction}
           visible={visible}
-        >
+          >
           <Grid textAlign='center'>
             <Header onClick={() =>
                   dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
-                  }>
+                }>
               <h1>New Challenge</h1>
             </Header>
             <CloseButton onClick={() =>
               dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
-              }> X</CloseButton>
+            }> X</CloseButton>
               <Line/>
             <Grid.Row columns={4}>
               <Grid.Column>
-                <VideoIcon />
+                <Hover>
+                  <VideoIcon />
+                </Hover>
               </Grid.Column>
               <Grid.Column>
-                <PhotoIcon />
+                <Hover>
+                  <PhotoIcon />              
+                </Hover>
               </Grid.Column>
               <Grid.Column>
-                <AudioIcon />
+                <Hover>
+                  <AudioIcon />
+                </Hover>
               </Grid.Column>
               <Grid.Column>
-                <TextIcon />
+                <Hover>
+                  <TextIcon />
+                </Hover>
               </Grid.Column>
             </Grid.Row>
           </Grid>
@@ -120,18 +138,18 @@ export default () => {
       <List>
         <ListItem>
           <Link to="/">
-            <Home />
+            <Home onClick={()=>setNow("home")} now={now}/>
           </Link>
         </ListItem>
         <ListItem>
           <Link to="/search">
-            <Search />
+            <Search onClick={()=>setNow("search")} now={now} />
           </Link>
         </ListItem>
         <ListItem>
         <div
           onClick={() =>
-            dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
+            dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay'})
           }
         >
           <Logo/>
@@ -139,17 +157,17 @@ export default () => {
         </ListItem>
         <ListItem>
           <Link to="/notifications">
-            <HeartEmpty />
+            <HeartEmpty onClick={()=>setNow("notification")} now={now}/>
           </Link>
         </ListItem>
         <ListItem>
           {!data.me ? (
             <Link to="/#">
-              <User />
+              <User onClick={()=>setNow("profile")} now={now}/>
             </Link>
           ) : (
             <Link to={data.me.username}>
-              <User />
+              <User onClick={()=>setNow("profile")} now={now}/>
             </Link>
           )}
         </ListItem>
