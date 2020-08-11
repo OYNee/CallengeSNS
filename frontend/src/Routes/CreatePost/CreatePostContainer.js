@@ -4,7 +4,7 @@ import useInput from "../../Hooks/useInput";
 import { useMutation, useQuery } from "react-apollo-hooks";
 import { ME } from "../../SharedQueries";
 import FormData from "form-data";
-import { FOLLOW, UPLOAD} from "./CreatePostQueries";
+import { FOLLOW, UPLOAD } from "./CreatePostQueries";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -15,13 +15,14 @@ export default () => {
   const [tagChallenger, setTagChallenger] = useState(``);
   const caption = useInput("");
   const photo = useInput("");
+  const path = "";
   var limit = 100;
   var cur = 0;
   var id = "";
   const meQuery = useQuery(ME);
-  var data="", loading="";
-  if(meQuery.data.me)
-  {
+  var data = "",
+    loading = "";
+  if (meQuery.data.me) {
     id = meQuery.data.me.id;
 
     const FOLLOWQuery = useQuery(FOLLOW, {
@@ -37,16 +38,14 @@ export default () => {
 
   const uploadMutation = useMutation(UPLOAD, {
     variables: {
-      caption: caption.value,
+      caption: "caption.value #안녕 #하세요",
       category: "image",
-      rel_challengers: "D",
-      pre_challengers: "C",
-      next_challengers: "B",
-      tag_challengers: "A",
-      newPost: true,
-      scope: true,
-      files: `C:/Users/multicampus/Desktop`,
-      postId: "1",
+      rel_challengers: "",
+      pre_challengers: "",
+      next_challengers: "",
+      tag_challengers: "",
+      files: path,
+      postId: "",
     },
   });
   const onSubmit = async (e) => {

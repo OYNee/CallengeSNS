@@ -1,6 +1,5 @@
 type Mutation {
   uploadChallenge(
-    newPost: Boolean!
     caption: String!
     category: String
     files: [String!]!
@@ -8,7 +7,6 @@ type Mutation {
     pre_challengers: [String!]
     next_challengers: [String!]
     tag_challengers: [String]
-    scope: Boolean!
     video: [String!]
     image: [String!]
     text: [String!]
