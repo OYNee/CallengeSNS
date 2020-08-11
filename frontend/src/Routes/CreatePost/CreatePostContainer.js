@@ -4,11 +4,11 @@ import useInput from "../../Hooks/useInput";
 import { useMutation, useQuery } from "react-apollo-hooks";
 import { ME } from "../../SharedQueries";
 import FormData from "form-data";
-import { FOLLOW, UPLOAD } from "./CreatePostQueries";
+import { FOLLOW, UPLOAD} from "./CreatePostQueries";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default ({ location: { search } }) => {
+export default () => {
   const [action, setAction] = useState("CreatePost");
   const [create, setCreate] = useState(false);
   const [relChallenger, setRelChallenger] = useState(``);
@@ -17,14 +17,24 @@ export default ({ location: { search } }) => {
   const photo = useInput("");
   var limit = 100;
   var cur = 0;
-  const id = search.split("?")[1];
-  const { data, loading } = useQuery(FOLLOW, {
-    variables: {
-      id,
-      limit,
-      cur,
-    },
-  });
+  var id = "";
+  const meQuery = useQuery(ME);
+  var data="", loading="";
+  if(meQuery.data.me)
+  {
+    id = meQuery.data.me.id;
+
+    const FOLLOWQuery = useQuery(FOLLOW, {
+      variables: {
+        id,
+        limit,
+        cur,
+      },
+    });
+    data = FOLLOWQuery.data;
+    loading = FOLLOWQuery.loading;
+  }
+
   const uploadMutation = useMutation(UPLOAD, {
     variables: {
       caption: caption.value,

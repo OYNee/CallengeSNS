@@ -9,13 +9,8 @@ export const FOLLOW = gql`
       isFollowing
       isSelf
     }
-    me {
-      username
-      id
-    }
   }
 `;
-
 // 캡션, scope 필수 아니게 고치기
 export const UPLOAD = gql`
   mutation uploadChallenge(

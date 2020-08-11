@@ -38,7 +38,7 @@ const ELink = styled(Link)`
   color: inherit;
   margin-bottom: 10px;
 `;
-export default withRouter(({ searchTerm, loading, data, history, fetchMore,hasMore }) => {
+export default withRouter(({ searchTerm, loading, data, history, fetchMore,hasMore,setHasMore }) => {
   const search =(searchTerm?useInput(searchTerm):useInput(""));
   const onSearchSubmit = (e) => {
     e.preventDefault();
@@ -60,9 +60,9 @@ export default withRouter(({ searchTerm, loading, data, history, fetchMore,hasMo
       updateQuery: (prev, { fetchMoreResult }) => {
         if(fetchMoreResult.searchUser.length<8)
         {
-          console.log(`${hasMore}`);
-          hasMore = false;
-          console.log(`${hasMore}`);
+          console.log(`1 = ${hasMore}`);
+          setHasMore(false);
+          console.log(`2 = ${hasMore}`);
         }
         if (!fetchMoreResult){ 
           return prev;}
@@ -112,7 +112,7 @@ export default withRouter(({ searchTerm, loading, data, history, fetchMore,hasMo
             <InfiniteScroll
             dataLength={data.searchUser.length}
             next={onLoadMore}
-            hasMore={true || false}
+            hasMore={hasMore}
             loader={<Wrapper>
               <Loader />
             </Wrapper>}
