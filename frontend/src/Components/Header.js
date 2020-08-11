@@ -1,10 +1,26 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
-import { WebHeartEmpty, WebUser, WebLogo, Home, TextLogo, WebSearch } from "./Icons";
+import {
+  WebHeartEmpty,
+  WebUser,
+  WebLogo,
+  Home,
+  TextLogo,
+  WebSearch,
+} from "./Icons";
 import { useQuery } from "react-apollo-hooks";
 import { ME } from "../SharedQueries";
-import { Button, Checkbox, Grid, Icon, Image, Menu, Segment, Sidebar,} from 'semantic-ui-react'
+import {
+  Button,
+  Checkbox,
+  Grid,
+  Icon,
+  Image,
+  Menu,
+  Segment,
+  Sidebar,
+} from "semantic-ui-react";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -23,20 +39,20 @@ const Wrapper = styled.div`
 
 const Header = styled.header`
   width: 100%;
-  @media only screen and (max-width:${(props) => props.theme.sm}) {
+  @media only screen and (max-width: ${(props) => props.theme.sm}) {
     display: none;
-  };
+  }
 `;
 
 const MobileHeader = styled.header`
-  @media only screen and (min-width:${(props) => props.theme.sm}) {
+  @media only screen and (min-width: ${(props) => props.theme.sm}) {
     display: none;
-  };
+  }
 `;
 
 const HeaderWrapper = styled.div`
   margin: auto 10px;
-  max-width:100%;
+  max-width: 100%;
   display: flex;
   justify-content: center;
 `;
@@ -87,14 +103,14 @@ export default withRouter(() => {
             </Link>
           </TextLogoColumn>
           <HeaderColumn>
-          {!data.me ? (
+            {!data.me ? (
               <HeaderLink to="/#">
                 <WebLogo />
               </HeaderLink>
             ) : (
               <HeaderLink to={`/createpost?${data.me.id}`}>
-              <WebLogo />
-            </HeaderLink>
+                <WebLogo />
+              </HeaderLink>
             )}
             <HeaderLink to="/search">
               <WebSearch />
@@ -114,7 +130,9 @@ export default withRouter(() => {
           </HeaderColumn>
         </HeaderWrapper>
       </Header>
-      <MobileHeader><TextLogo /></MobileHeader>
+      <MobileHeader>
+        <TextLogo />
+      </MobileHeader>
     </Wrapper>
   );
 });
