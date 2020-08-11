@@ -15,11 +15,12 @@ import SetScope from "../Routes/SetScope";
 import SetCategory from "../Routes/SetCategory";
 import DeleteAccount from "../Routes/DeleteAccount";
 import RelChallenger from "../Routes/RelChallenger";
+import UploadChallenge from "../Routes/UploadChallenge";
 
 const LoggedInRoutes = () => (
   <Switch>
     <Route exact path="/" component={Feed} />
-    <Route path="/explore" component={Explore} />
+    <Route path="/upload" component={UploadChallenge} />
     <Route path="/search" component={Search} />
     <Route path="/following" component={Following} />
     <Route path="/follower" component={Follower} />
