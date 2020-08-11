@@ -108,7 +108,7 @@ export default withRouter(() => {
                 <WebLogo />
               </HeaderLink>
             ) : (
-              <HeaderLink to={`/createpost?${data.me.id}`}>
+              <HeaderLink to={`/createpost?`}>
                 <WebLogo />
               </HeaderLink>
             )}
