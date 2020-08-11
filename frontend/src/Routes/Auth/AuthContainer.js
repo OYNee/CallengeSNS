@@ -80,7 +80,6 @@ export default () => {
           const {
             data: { createAccount },
           } = await createAccountMutation();
-          console.log(createAccount);
           if (!createAccount) {
             toast.error("Can't create account");
           } else {

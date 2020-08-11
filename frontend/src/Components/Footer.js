@@ -94,6 +94,10 @@ export default (defaultValue) => {
   const { animation, direction, visible } = state
   const vertical = direction === 'bottom'
   const [now,setNow] = useState(defaultValue)
+  const fa = () => {
+    dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay'})
+    setNow("create")
+  }
 
   return (
     <BlankFooter>
@@ -105,37 +109,43 @@ export default (defaultValue) => {
           direction={direction}
           visible={visible}
           >
-          <Grid textAlign='center'>
+          <Grid textAlign='center' onClick={() =>
+              dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
+            }>
             <Header onClick={() =>
                   dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
                 }>
-              <h1>New Challenge</h1>
+              <h1 onClick={() =>
+                  dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
+                }>New Challenge</h1>
             </Header>
             <CloseButton onClick={() =>
               dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
-            }> X</CloseButton>
+            }> <h1 onClick={() =>
+              dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
+            }>X</h1></CloseButton>
               <Line/>
             <Grid.Row columns={4}>
               <Grid.Column>
-                <Hover>
                   <Link to="/createpost">
+                <Hover>
                     <VideoIcon />
-                  </Link>
                 </Hover>
+                  </Link>
               </Grid.Column>
               <Grid.Column>
-                <Hover>
                   <Link to="/createpost">
-                    <PhotoIcon />              
-                  </Link>
+                <Hover>
+                    <PhotoIcon  />              
                 </Hover>
+                  </Link>
               </Grid.Column>
               <Grid.Column>
-                <Hover>
                   <Link to="/createpost">
+                <Hover>
                     <AudioIcon />
-                  </Link>
                 </Hover>
+                  </Link>
               </Grid.Column>
               <Grid.Column>
                 <Link to="/createpost">
@@ -160,13 +170,8 @@ export default (defaultValue) => {
           </Link>
         </ListItem>
         <ListItem>
-        <div
-          onClick={() =>
-            dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay'})
-          }
-          >
-          <Logo/>
-        </div>
+          <Logo  onClick={() => fa()
+          }  now={now}/>
         </ListItem>
         <ListItem>
           <Link to="/notifications">

@@ -91,7 +91,6 @@ export default () => {
       console.log(`tagChallenger = ${tagChallenger}`);
     }
   };
-  console.log(`1`);
   return (
     <CreatePostPresenter
       setAction={setAction}

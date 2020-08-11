@@ -6,10 +6,17 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
+const Test = styled.img`
+
+`
+
+
+
 export default () =>{
   return (
     <Wrapper>
       "Notifications"
+      <Test src=""></Test>
     </Wrapper>
   )
 };

@@ -133,11 +133,7 @@ export default withRouter(() => {
         </HeaderWrapper>
       </Header>
       <MobileHeader>
-<<<<<<< HEAD
         <MobileTextLogo />
-=======
-        <TextLogo />
->>>>>>> 617905a5142527286d22e80c92d48315e766d922
       </MobileHeader>
     </Wrapper>
   );
