@@ -15,7 +15,7 @@ export default () => {
   const [tagChallenger, setTagChallenger] = useState(``);
   const caption = useInput("");
   const photo = useInput("");
-  const path = "";
+  let filePath = [];
   var limit = 100;
   var cur = 0;
   var id = "";
@@ -38,13 +38,13 @@ export default () => {
 
   const uploadMutation = useMutation(UPLOAD, {
     variables: {
-      caption: "caption.value #안녕 #하세요",
+      caption: "caption.value",
       category: "image",
       rel_challengers: "",
       pre_challengers: "",
       next_challengers: "",
       tag_challengers: "",
-      files: path,
+      files: filePath,
       postId: "",
     },
   });
@@ -70,7 +70,8 @@ export default () => {
               "content-type": "multipart/form-data",
             },
           });
-
+          filePath[0] = path;
+          console.log("file", filePath);
           const {
             data: { uploadChallenge },
           } = await uploadMutation();

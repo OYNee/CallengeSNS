@@ -19,6 +19,7 @@ export default {
         files,
         postId,
       } = args;
+      console.log(files);
       //지금 args 에서 받아오는 부분이 이부분인데
       //category로 구분 중이면서 파일에서 처리할 수 있는 부분을 나눠놓는건 좀 낭비 같다는 생각이 좀 들어서요
 

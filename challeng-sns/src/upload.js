@@ -15,5 +15,6 @@ export const uploadController = (req, res) => {
   const {
     file: { path },
   } = req;
+
   res.json({ path });
 };
