@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { AppLoading } from "expo";
@@ -20,14 +19,11 @@ export default function App() {
   const [client, setClient] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const preLoad = async () => {
-    // 앱에서 필요한 자원들을 미리 불러오기
     try {
-      // 폰트 불러오기
       await Font.loadAsync({
         ...Ionicons.font,
       });
-      // 이미지 자원 배열로 가져오기
-      await Asset.loadAsync([require("./assets/tempLogo.png")]);
+      await Asset.loadAsync([require("./assets/logo.png")]);
       const cache = new InMemoryCache();
       await persistCache({
         cache,
@@ -35,6 +31,12 @@ export default function App() {
       });
       const client = new ApolloClient({
         cache,
+        request: async (operation) => {
+          const token = await AsyncStorage.getItem("jwt");
+          return operation.setContext({
+            headers: { Authorization: `Bearer ${token}` },
+          });
+        },
         ...apolloClientOptions,
       });
       const isLoggedIn = await AsyncStorage.getItem("isLoggedIn");
@@ -52,6 +54,7 @@ export default function App() {
   useEffect(() => {
     preLoad();
   }, []);
+
   return loaded && client && isLoggedIn !== null ? (
     <ApolloProvider client={client}>
       <ThemeProvider theme={styles}>
