@@ -15,6 +15,7 @@ import SetScope from "../Routes/SetScope";
 import SetCategory from "../Routes/SetCategory";
 import DeleteAccount from "../Routes/DeleteAccount";
 import RelChallenger from "../Routes/RelChallenger";
+import SelectPhoto from "../Routes/SelectPhoto";
 import CreatePost from "../Routes/CreatePost";
 
 const LoggedInRoutes = () => (
@@ -31,6 +32,7 @@ const LoggedInRoutes = () => (
     <Route path="/setcategory" component={SetCategory} />
     <Route path="/deleteacc" component={DeleteAccount} />
     <Route path="/relchallenger" component={RelChallenger} />
+    <Route path="/selectphoto" component={SelectPhoto} />
     <Route path="/createpost" component={CreatePost} />
     <Route path="/:username" component={Profile} />
     <Redirect from="*" to="/" />

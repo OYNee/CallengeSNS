@@ -105,14 +105,14 @@ export default withRouter(() => {
             </Link>
           </TextLogoColumn>
           <HeaderColumn>
-          {!data.me ? (
+            {!data.me ? (
               <HeaderLink to="/#">
                 <WebLogo />
               </HeaderLink>
             ) : (
-              <HeaderLink to={`/createpost?${data.me.id}`}>
-              <WebLogo />
-            </HeaderLink>
+              <HeaderLink to={`/createpost?`}>
+                <WebLogo />
+              </HeaderLink>
             )}
             <HeaderLink to="/search">
               <WebSearch />
@@ -133,7 +133,11 @@ export default withRouter(() => {
         </HeaderWrapper>
       </Header>
       <MobileHeader>
+<<<<<<< HEAD
         <MobileTextLogo />
+=======
+        <TextLogo />
+>>>>>>> 617905a5142527286d22e80c92d48315e766d922
       </MobileHeader>
     </Wrapper>
   );
