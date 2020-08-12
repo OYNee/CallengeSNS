@@ -5,19 +5,19 @@ export default {
     editUser: async (_, args, { request, isAuthenticated }) => {
       isAuthenticated(request);
       console.log(args);
-      const { userid, bio, avatar } = args;
+      const { nickname, bio, avatar } = args;
       const { user } = request;
 
-      if (userid == "") {
+      if (nickname == "") {
         await prisma.updateUser({
           where: { id: user.id },
-          data: { userid: user.username, bio: bio },
+          data: { nickname: user.username, bio: bio },
         });
         return true;
       } else {
         await prisma.updateUser({
           where: { id: user.id },
-          data: { userid: userid, bio: bio },
+          data: { nickname: nickname, bio: bio },
         });
         return true;
       }

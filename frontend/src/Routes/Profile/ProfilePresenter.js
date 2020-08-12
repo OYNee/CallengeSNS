@@ -31,12 +31,15 @@ const Header = styled.header`
   align-items: center;
   justify-content: space-around;
   width: 80%;
-  margin: 0 auto;
-  margin-bottom: 40px;
+  margin: 15px auto;
+  @media only screen and (max-width: ${(props) => props.theme.sm}) {
+    width: 100%;
+    height: 100px;
+  }
 `;
 
 const HeaderColumn = styled.div`
-  margin: 0 auto;
+  width: 50%;
 `;
 
 const UsernameRow = styled.div`
@@ -50,22 +53,33 @@ const Username = styled.span`
 `;
 
 const Counts = styled.ul`
-  display: flex;
   margin: 15px 0px;
 `;
 
 const Count = styled.li`
-  font-size: 16px;
+  font-size: 15px;
+  margin: 5px
   &:not(:last-child) {
     margin-right: 10px;
   }
 `;
 
-const FullName = styled(FatText)`
+const AvatarColumn = styled.div`
+  margin: auto
+  width:100px
+`;
+
+const NickName = styled(FatText)`
   font-size: 16px;
+  display: block;
+  margin-bottom: 5px;
+  margin-left: 10vw;
 `;
 
 const Bio = styled.p`
+  font-size: 12px;
+  display: block;
+  margin-left: 5vw;
   margin: 10px 0px;
 `;
 
@@ -74,12 +88,37 @@ const Posts = styled.div`
   grid-template-columns: repeat(4, 200px);
   grid-template-rows: 200px;
   grid-auto-rows: 200px;
+  @media only screen and (max-width: ${(props) => props.theme.sm}) {
+    grid-template-columns: repeat(3, 32vw);
+    grid-template-rows: 32vw;
+    justify-content: space-around;
+  }
 `;
 const ELink = styled(Link)`
   color: inherit;
   margin-bottom: 10px;
+  &:hover {
+    color: ${(props) => props.theme.livingCoral};
+  }
 `;
 
+const ProfilUpdateBox = styled.div`
+  text-align: center;
+  padding: 10px;
+  font-size: 20px;
+  border: 1px solid rgba(0,0,0,0.1);
+  margin: 10px 1vw;
+  border-radius: 90px;
+  background-color:rgba(255,101,97,0.66);
+  color:white;
+  &:hover {
+    background-color:rgba(255,101,97);
+    opacity: 0.88;
+    filter: alpha(opacity=88);
+    color:white;
+    zoom: 1;
+
+`;
 const Box = styled.div`
   ${(props) => props.theme.whiteBox}
   border-radius:0px;
@@ -93,6 +132,7 @@ const Box = styled.div`
   @media only screen and (min-width: ${(props) => props.theme.md}) {
     max-width: 450px;
   }
+
   @media only screen and (min-width: ${(props) => props.theme.lg}) {
     max-width: 500px;
   }
@@ -118,6 +158,7 @@ const Form = styled(Box)`
     }
   }
 `;
+
 export default ({
   loading,
   data,
@@ -145,7 +186,7 @@ export default ({
           </Helmet>
           <form onSubmit={onSubmit}>
             <Avatar size="lg" url={avatar} />
-            <Input val={nickname} {...newNickname} />
+            <Input placeholder={nickname} {...newNickname} />
             <Input placeholder={bio} {...newBio} />
             <Button text={"SAVE"} />
           </form>
@@ -175,22 +216,20 @@ export default ({
         </Helmet>
         <Header>
           <HeaderColumn>
-            <Avatar size="lg" url={avatar} />
+            <AvatarColumn>
+              <Avatar size="lg" url={avatar} />
+            </AvatarColumn>
           </HeaderColumn>
           <HeaderColumn>
             <UsernameRow>
-              <Username>{username}</Username>{" "}
               {isSelf ? (
-                <Button
-                  onClick={() => setAction("update")}
-                  text="프로필 수정"
-                />
+                <DropdownMenu username={username} />
               ) : (
-                <FollowButton isFollowing={isFollowing} id={id} />
+                <>
+                  <Username>{username}</Username>
+                  <FollowButton isFollowing={isFollowing} id={id} />
+                </>
               )}
-              <HeaderColumn>
-                <DropdownMenu />
-              </HeaderColumn>
             </UsernameRow>
             <Counts>
               <Count>
@@ -207,10 +246,19 @@ export default ({
                 </ELink>
               </Count>
             </Counts>
-            <FullName text={nickname} />
-            <Bio>{bio}</Bio>
           </HeaderColumn>
+          {}
         </Header>
+        {nickname ? (
+          <NickName text={nickname} />
+        ) : (
+          <NickName text="nickname 없음" />
+        )}
+        {bio ? <Bio>{bio}</Bio> : <Bio>자기소개 없음</Bio>}
+        <ProfilUpdateBox onClick={() => setAction("update")}>
+          프로필 수정
+        </ProfilUpdateBox>
+
         <Posts>
           {posts &&
             posts.map((post) => (

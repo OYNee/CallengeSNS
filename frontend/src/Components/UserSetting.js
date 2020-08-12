@@ -158,6 +158,8 @@ const DropdownMenu = ({ username }) => {
             <ListItem as={Link} to="/setpasswd">
               비밀번호 변경
             </ListItem>
+            <ListItem>공개 범위</ListItem>
+            <ListItem>관심 설정</ListItem>
             <ListItem as={DelAccModal}>회원탈퇴</ListItem>
             <ListItem as={LogoutModal}>로그아웃</ListItem>
           </DropDownList>
