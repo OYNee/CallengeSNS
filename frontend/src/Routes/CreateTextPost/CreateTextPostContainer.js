@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import CreatePostPresenter from "./CreatePostPresenter";
+import CreateTextPostPresenter from "./CreateTextPostPresenter";
 import useInput from "../../Hooks/useInput";
 import { useMutation, useQuery } from "react-apollo-hooks";
 import { ME } from "../../SharedQueries";
 import FormData from "form-data";
-import { FOLLOW, UPLOAD } from "./CreatePostQueries";
+import { FOLLOW, UPLOAD } from "./CreateTextPostQueries";
 import axios from "axios";
 import { toast } from "react-toastify";
+
 
 export default ({cat, pid}) => {
   const [action, setAction] = useState("CreatePost");
@@ -81,7 +82,7 @@ export default ({cat, pid}) => {
     }
   };
   return (
-    <CreatePostPresenter
+    <CreateTextPostPresenter
       setAction={setAction}
       action={action}
       setCreate={setCreate}

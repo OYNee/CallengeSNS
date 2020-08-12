@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import Input from "../../Components/Input";
@@ -74,8 +74,7 @@ export default ({
   data,
   setRelChallenger,
   setTagChallenger,
-  cat,
-  pid
+  aa,
 }) => {
   const onSelectRelChallenger = (e, { value }) => {
     e.preventDefault();
@@ -97,6 +96,7 @@ export default ({
     setCreate(true);
     onSubmit(e);
   };
+
   if (loading === true) {
     return (
       <Wrapper>
@@ -110,37 +110,65 @@ export default ({
       text: `(@${user.username})`,
     }));
     return (
+      // <Wrapper>
+      //   {action === "CreatePost" && (
+      //     <>
+      //       <button onClick={() => setAction("relChallenger")}>
+      //         relChallenger
+      //       </button>
+      //       <button onClick={() => setAction("tagChallenger")}>
+      //         tagChallenger
+      //       </button>
+      //       <input type="file" name="photo" id="photo" />
+      //       <button onClick={onUpload}>업로드하기</button>
+      //     </>
+      //   )}
+      //   {action === "relChallenger" && (
+      //     <>
+      //       <Section>
+      //         <Dropdown
+      //           placeholder="현재 선택된 사용자가 없습니다"
+      //           fluid
+      //           multiple
+      //           search
+      //           selection
+      //           options={userOptions}
+      //           defaultValue={relChallenger}
+      //           onChange={onSelectRelChallenger}
+      //         />
+      //       </Section>
+      //       <button onClick={onRelChallenger}>확인</button>
+      //     </>
+      //   )}
+      //   {action === "tagChallenger" && (
+      //     <>
+      //       <Section>
+      //         <Dropdown
+      //           placeholder="현재 선택된 사용자가 없습니다"
+      //           fluid
+      //           multiple
+      //           search
+      //           selection
+      //           defaultValue={tagChallenger}
+      //           options={userOptions}
+      //           onChange={onSelectTagChallenger}
+      //         />
+      //       </Section>
+      //       <button onClick={onTagChallenger}>확인</button>
+      //     </>
+      //   )}
+      // </Wrapper>
       <Wrapper>
+        <PostBox>
         {action === "CreatePost" && (
           <>
-            <button onClick={() => setAction("relChallenger")}>
-              relChallenger
-            </button>
-            <button onClick={() => setAction("tagChallenger")}>
-              tagChallenger
-            </button>
-            <input type="file" name="photo" id="photo" />
-            <button onClick={onUpload}>업로드하기</button>
-          </>
-        )}
-        {action === "relChallenger" && (
-          <>
-            <Section>
-              <Dropdown
-                placeholder="현재 선택된 사용자가 없습니다"
-                fluid
-                multiple
-                search
-                selection
-                options={userOptions}
-                defaultValue={relChallenger}
-                onChange={onSelectRelChallenger}
-              />
-            </Section>
-            <button onClick={onRelChallenger}>확인</button>
-          </>
-        )}
-        {action === "tagChallenger" && (
+          <ContentBox>
+            <ImageInput></ImageInput>
+          </ContentBox>
+          <button onClick = {() => setAction("tag")}>다음</button>
+            
+          </>)}
+         {action === "tag" && (
           <>
             <Section>
               <Dropdown
@@ -155,29 +183,24 @@ export default ({
               />
             </Section>
             <button onClick={onTagChallenger}>확인</button>
-          </>
-        )}
+            <Section>
+              <Dropdown
+                placeholder="현재 선택된 사용자가 없습니다"
+                fluid
+                multiple
+                search
+                selection
+                defaultValue={tagChallenger}
+                options={userOptions}
+                onChange={onSelectTagChallenger}
+              />
+            </Section>
+            <button onClick={onTagChallenger}>확인</button>
+          </>)}
+        </PostBox>
       </Wrapper>
-      // <Wrapper>
-      //   {action === "CreatePost" && (
-      //   <PostBox>
-      //     <ContentBox>
-      //       <ImageInput></ImageInput>
-      //     </ContentBox>
-      //     <TagBox>
-      //     </TagBox>
-      //     <RelBox>
-      //       지목 박스
-      //     </RelBox>
-      //     <CaptionBox>
-      //       한줄소감
-      //     </CaptionBox>
-      //     <CompleteButton>작성완료</CompleteButton>
-      //   </PostBox>
-      // )}
-      // </Wrapper>
-    );
-  } else {
+      )
+    } else {
       return (
       <Wrapper>
         하위
@@ -185,3 +208,16 @@ export default ({
       )
     }
 };
+
+
+          {/* <TagBox>
+            태그 버트
+          </TagBox>
+          <RelBox>
+            지목 박스 오디오
+          </RelBox>
+          <CaptionBox>
+            한줄소감
+          </CaptionBox>
+          <CompleteButton>작성완료</CompleteButton>
+ */}

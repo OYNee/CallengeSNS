@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import CreatePostPresenter from "./CreatePostPresenter";
+import CreateAudioPostPresenter from "./CreateAudioPostPresenter";
 import useInput from "../../Hooks/useInput";
 import { useMutation, useQuery } from "react-apollo-hooks";
 import { ME } from "../../SharedQueries";
 import FormData from "form-data";
-import { FOLLOW, UPLOAD } from "./CreatePostQueries";
+import { FOLLOW, UPLOAD } from "./CreateAudioPostQueries";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -22,6 +22,7 @@ export default ({cat, pid}) => {
   const meQuery = useQuery(ME);
   var data = "",
     loading = "";
+  console.log("audio")
   if (meQuery.data.me) {
     id = meQuery.data.me.id;
 
@@ -81,7 +82,7 @@ export default ({cat, pid}) => {
     }
   };
   return (
-    <CreatePostPresenter
+    <CreateAudioPostPresenter
       setAction={setAction}
       action={action}
       setCreate={setCreate}
@@ -95,8 +96,6 @@ export default ({cat, pid}) => {
       loading={loading}
       data={data}
       id={id}
-      cat={cat}
-      pid={pid}
     />
   );
 };

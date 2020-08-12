@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import CreatePostPresenter from "./CreatePostPresenter";
+import CreatePhotoPostPresenter from "./CreatePhotoPostPresenter";
 import useInput from "../../Hooks/useInput";
 import { useMutation, useQuery } from "react-apollo-hooks";
 import { ME } from "../../SharedQueries";
 import FormData from "form-data";
-import { FOLLOW, UPLOAD } from "./CreatePostQueries";
+import { FOLLOW, UPLOAD } from "./CreatePhotoPostQueries";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default ({cat, pid}) => {
+
+export default () => {
   const [action, setAction] = useState("CreatePost");
   const [create, setCreate] = useState(false);
   const [relChallenger, setRelChallenger] = useState(``);
@@ -33,6 +34,7 @@ export default ({cat, pid}) => {
       },
     });
     data = FOLLOWQuery.data;
+    console.log(data)
     loading = FOLLOWQuery.loading;
   }
 
@@ -54,7 +56,7 @@ export default ({cat, pid}) => {
       if (create) {
         let formData = new FormData();
         let photoFile = document.getElementById("photo");
-
+        console.log(photoFile.files[0])
         formData.append("file", photoFile.files[0]);
         try {
           const {
@@ -81,7 +83,7 @@ export default ({cat, pid}) => {
     }
   };
   return (
-    <CreatePostPresenter
+    <CreatePhotoPostPresenter
       setAction={setAction}
       action={action}
       setCreate={setCreate}
@@ -95,8 +97,7 @@ export default ({cat, pid}) => {
       loading={loading}
       data={data}
       id={id}
-      cat={cat}
-      pid={pid}
+      cat="image"
     />
   );
 };

@@ -17,6 +17,10 @@ import DeleteAccount from "../Routes/DeleteAccount";
 import RelChallenger from "../Routes/RelChallenger";
 import SelectPhoto from "../Routes/SelectPhoto";
 import CreatePost from "../Routes/CreatePost";
+import CreateVideoPost from "../Routes/CreateVideoPost";
+import CreatePhotoPost from "../Routes/CreatePhotoPost";
+import CreateAudioPost from "../Routes/CreateAudioPost";
+import CreateTextPost from "../Routes/CreateTextPost";
 
 const LoggedInRoutes = () => (
   <Switch>
@@ -34,6 +38,10 @@ const LoggedInRoutes = () => (
     <Route path="/relchallenger" component={RelChallenger} />
     <Route path="/selectphoto" component={SelectPhoto} />
     <Route path="/createpost" component={CreatePost} />
+    <Route path="/createvideopost" component={CreateVideoPost} />
+    <Route path="/createphotopost" component={CreatePhotoPost} />
+    <Route path="/createaudiopost" component={CreateAudioPost} />
+    <Route path="/createtextpost" component={CreateTextPost} />
     <Route path="/:username" component={Profile} />
     <Redirect from="*" to="/" />
   </Switch>

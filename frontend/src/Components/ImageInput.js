@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import {Frame} from "./Icons"
 
 const Img = styled.img`
-  width:100%;
-  height: 100%;
+  width:86vw;
+  height: 86vw;
 `
 const Wrapper = styled.div`
-  width:90vw;
-  height:90vw;
-  background-color:violet;
+  width:100%;
+  height:100%;
 `
 const Blank = styled.div`
   width:100%;
   height:100%;
-  background-color:violet;
 `
 
 const ImageInput = () => {
@@ -43,16 +42,16 @@ const ImageInput = () => {
   // };
   return (
     <Wrapper>
-      <label htmlFor="upload-button">
+      <label htmlFor="photo">
         {image.preview ? (
           <Img src={image.preview} alt={"dummy"}/>
         ) : (
-          <Blank>눌러서 사진 올리기</Blank>
+          <Blank><Frame/></Blank>
         )}
       </label>
       <input
         type="file"
-        id="upload-button"
+        id="photo"
         style={{ display: "none" }}
         onChange={handleChange}
       />

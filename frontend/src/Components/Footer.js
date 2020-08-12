@@ -81,7 +81,7 @@ const Hover = styled.div`
 `
 
 
-export default (defaultValue) => {
+export default (defaultValue1,defaultValue2) => {
   const { data } = useQuery(ME);
   // const [nowTab, setNowTab] = useState("home")
 
@@ -93,7 +93,8 @@ export default (defaultValue) => {
 
   const { animation, direction, visible } = state
   const vertical = direction === 'bottom'
-  const [now,setNow] = useState(defaultValue)
+  const [now,setNow] = useState(defaultValue1)
+  const [n,setN] = useState(defaultValue2)
   const fa = () => {
     dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay'})
     setNow("create")
@@ -127,21 +128,21 @@ export default (defaultValue) => {
               <Line/>
             <Grid.Row columns={4}>
               <Grid.Column>
-                  <Link to="/createpost">
+                  <Link to="/createvideopost">
                 <Hover>
                     <VideoIcon />
                 </Hover>
                   </Link>
               </Grid.Column>
               <Grid.Column>
-                  <Link to="/createpost">
+                  <Link to="/createphotopost">
                 <Hover>
                     <PhotoIcon  />              
                 </Hover>
                   </Link>
               </Grid.Column>
               <Grid.Column>
-                  <Link to="/createpost">
+                  <Link to="/createaudiopost">
                 <Hover>
                     <AudioIcon />
                 </Hover>
