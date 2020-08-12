@@ -98,32 +98,32 @@ export default withRouter(() => {
       <Header>
         <HeaderWrapper>
           <TextLogoColumn>
-            <Link to="/">
+            <Link to="/" replace>
               <TextLogo />
             </Link>
           </TextLogoColumn>
           <HeaderColumn>
             {!data.me ? (
-              <HeaderLink to="/#">
+              <HeaderLink to="/#" replace>
                 <WebLogo />
               </HeaderLink>
             ) : (
-              <HeaderLink to={`/createpost?`}>
+              <HeaderLink to={`/createpost?`} replace>
                 <WebLogo />
               </HeaderLink>
             )}
-            <HeaderLink to="/search">
+            <HeaderLink to="/search" replace>
               <WebSearch />
             </HeaderLink>
-            <HeaderLink to="/notifications">
+            <HeaderLink to="/notifications" replace>
               <WebHeartEmpty />
             </HeaderLink>
             {!data.me ? (
-              <HeaderLink to="/#">
+              <HeaderLink to="/#" replace>
                 <WebUser />
               </HeaderLink>
             ) : (
-              <HeaderLink to={data.me.username}>
+              <HeaderLink to={data.me.username} replace>
                 <WebUser />
               </HeaderLink>
             )}

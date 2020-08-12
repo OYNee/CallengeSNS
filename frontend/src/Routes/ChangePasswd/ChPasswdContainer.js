@@ -4,7 +4,6 @@ import useInput from "../../Hooks/useInput";
 import { useMutation } from "react-apollo-hooks";
 import { SET_PASSWD } from "./ChPasswdQueries";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
 
 export default () => {
   const passwd = useInput("");
