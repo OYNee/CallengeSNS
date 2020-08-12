@@ -144,8 +144,8 @@ type Category {
 }
 
 type Hashtag{
-  tag_id: ID! 
+  id: ID! 
   tag_name: String!
-  post: [Post!]! 
-
+  post: [Post!]
+  postCount: Int!
 } 

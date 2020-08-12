@@ -6,13 +6,5 @@ export const SEARCH = gql`
       id
       tag_name
     }
-    searchUser(term: $term, limit: $limit, cur: $cur) {
-      id
-      avatar
-      username
-      isFollowing
-      isSelf
-      bio
-    }
   }
 `;

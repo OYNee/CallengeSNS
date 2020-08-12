@@ -8,17 +8,20 @@ import { FOLLOW, UPLOAD } from "./CreatePostQueries";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default () => {
+export default ({ cat, pid }) => {
+  const [preAction, setPreAction] = useState(cat);
   const [action, setAction] = useState("CreatePost");
   const [create, setCreate] = useState(false);
   const [relChallenger, setRelChallenger] = useState(``);
   const [tagChallenger, setTagChallenger] = useState(``);
   const caption = useInput("");
   const photo = useInput("");
+  const postId = pid;
   let filePath = [];
   var limit = 100;
   var cur = 0;
   var id = "";
+
   const meQuery = useQuery(ME);
   var data = "",
     loading = "";
@@ -38,7 +41,8 @@ export default () => {
 
   const uploadMutation = useMutation(UPLOAD, {
     variables: {
-      caption: "caption.value",
+      caption: caption.value,
+      // category: preAction,
       category: "image",
       rel_challengers: "",
       pre_challengers: "",
@@ -64,13 +68,13 @@ export default () => {
         console.log(photoFile.files[0]);
         try {
           const {
-            data: { path },
+            data: { location },
           } = await axios.post("http://localhost:4000/api/upload", formData, {
             headers: {
               "content-type": "multipart/form-data",
             },
           });
-          filePath[0] = path;
+          filePath[0] = location;
           console.log("file", filePath);
           const {
             data: { uploadChallenge },

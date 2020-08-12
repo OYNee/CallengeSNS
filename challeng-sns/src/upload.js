@@ -1,20 +1,33 @@
 import multer from "multer";
-const path = "./uploads";
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path);
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
+import multerS3 from "multer-s3";
+import aws from "aws-sdk";
+
+const s3 = new aws.S3({
+  accessKeyId: process.env.S3_KEY,
+  secretAccessKey: process.env.S3_SECRET_KEY,
+  region: "ap-northeast-2",
 });
-const upload = multer({ storage, dest: path });
+
+const upload = multer({
+  storage: multerS3({
+    s3,
+    acl: "public-read",
+    bucket: "challengesns",
+    metadata: function(req, file, cb) {
+      cb(null, { fieldName: file.fieldname });
+    },
+    key: function(req, file, cb) {
+      cb(null, Date.now().toString());
+    },
+  }),
+});
+
 export const uploadMiddleware = upload.single("file");
 
 export const uploadController = (req, res) => {
+  console.log(req);
   const {
-    file: { path },
+    file: { location },
   } = req;
-
-  res.json({ path });
+  res.json({ location });
 };

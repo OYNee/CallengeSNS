@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { HeartFull, CommentFull } from "./Icons";
+import { Link } from "react-router-dom";
 
 const Overlay = styled.div`
   @media only screen and (min-width:${(props) => props.theme.sm}) {
@@ -54,6 +55,7 @@ const NumberText = styled.span`
 
 const SquarePost = ({ likeCount, commentCount, file }) => (
   <Container bg={file.url}>
+    <Link to="/">
     <Overlay>
       <Number>
         <HeartFull />
@@ -64,6 +66,7 @@ const SquarePost = ({ likeCount, commentCount, file }) => (
         <NumberText>{commentCount}</NumberText>
       </Number>
     </Overlay>
+    </Link>
   </Container>
 );
 

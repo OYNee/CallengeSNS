@@ -6,6 +6,7 @@ import Feed from "../Routes/Feed";
 import Explore from "../Routes/Explore";
 import Search from "../Routes/Search";
 import SearchUser from "../Routes/SearchUser";
+import SearchHashtag from "../Routes/SearchHashtag";
 import Profile from "../Routes/Profile";
 import Following from "../Routes/Following";
 import Follower from "../Routes/Follower";
@@ -14,9 +15,9 @@ import ChangePasswd from "../Routes/ChangePasswd";
 import SetScope from "../Routes/SetScope";
 import SetCategory from "../Routes/SetCategory";
 import DeleteAccount from "../Routes/DeleteAccount";
-import RelChallenger from "../Routes/RelChallenger";
 import SelectPhoto from "../Routes/SelectPhoto";
 import CreatePost from "../Routes/CreatePost";
+import findPasswd from "../Routes/findPasswd";
 
 const LoggedInRoutes = () => (
   <Switch>
@@ -25,12 +26,13 @@ const LoggedInRoutes = () => (
     <Route path="/following" component={Following} />
     <Route path="/follower" component={Follower} />
     <Route path="/search-user" component={SearchUser} />
+    <Route path="/search-challenge" component={SearchHashtag} />
     <Route path="/notifications" component={Notification} />
+    <Route path="/findpasswd" component={findPasswd} />
     <Route path="/setpasswd" component={ChangePasswd} />
     <Route path="/setscope" component={SetScope} />
     <Route path="/setcategory" component={SetCategory} />
     <Route path="/deleteacc" component={DeleteAccount} />
-    <Route path="/relchallenger" component={RelChallenger} />
     <Route path="/selectphoto" component={SelectPhoto} />
     <Route path="/createpost" component={CreatePost} />
     <Route path="/:username" component={Profile} />

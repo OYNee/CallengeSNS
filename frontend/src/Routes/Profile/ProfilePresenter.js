@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
+import Input from "../../Components/NotRequiredInput";
 import Loader from "../../Components/Loader";
 import Avatar from "../../Components/Avatar";
 import FatText from "../../Components/FatText";
@@ -11,9 +12,18 @@ import Button from "../../Components/Button";
 import { Link } from "react-router-dom";
 import DropdownMenu from "../../Components/UserSetting";
 
-
 const Wrapper = styled.div`
   min-height: 100vh;
+`;
+
+const UpdateWrapper = styled.div`
+  margin-top: -60px;
+  margin-bottom: 20px;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 `;
 
 const Header = styled.header`
@@ -22,14 +32,14 @@ const Header = styled.header`
   justify-content: space-around;
   width: 80%;
   margin: 15px auto;
-  @media only screen and (max-width:${(props) => props.theme.sm}) {
+  @media only screen and (max-width: ${(props) => props.theme.sm}) {
     width: 100%;
     height: 100px;
   }
 `;
 
 const HeaderColumn = styled.div`
-  width:50%;
+  width: 50%;
 `;
 
 const UsernameRow = styled.div`
@@ -46,7 +56,6 @@ const Counts = styled.ul`
   margin: 15px 0px;
 `;
 
-
 const Count = styled.li`
   font-size: 15px;
   margin: 5px
@@ -62,15 +71,16 @@ const AvatarColumn = styled.div`
 
 const NickName = styled(FatText)`
   font-size: 16px;
-  display:block;
+  display: block;
   margin-bottom: 5px;
   margin-left: 10vw;
 `;
 
 const Bio = styled.p`
   font-size: 12px;
-  display:block;
+  display: block;
   margin-left: 5vw;
+  margin: 10px 0px;
 `;
 
 const Posts = styled.div`
@@ -78,21 +88,19 @@ const Posts = styled.div`
   grid-template-columns: repeat(4, 200px);
   grid-template-rows: 200px;
   grid-auto-rows: 200px;
-  @media only screen and (max-width:${(props) => props.theme.sm}) {
+  @media only screen and (max-width: ${(props) => props.theme.sm}) {
     grid-template-columns: repeat(3, 32vw);
     grid-template-rows: 32vw;
-    justify-content:space-around;
+    justify-content: space-around;
   }
 `;
-
 const ELink = styled(Link)`
   color: inherit;
   margin-bottom: 10px;
   &:hover {
-    color: ${(props) => props.theme.livingCoral}
+    color: ${(props) => props.theme.livingCoral};
   }
 `;
-
 
 const ProfilUpdateBox = styled.div`
   text-align: center;
@@ -109,15 +117,81 @@ const ProfilUpdateBox = styled.div`
     filter: alpha(opacity=88);
     color:white;
     zoom: 1;
-  }
-`
 
-export default ({ loading, data, logOut }) => {
+`;
+const Box = styled.div`
+  ${(props) => props.theme.whiteBox}
+  border-radius:0px;
+  width: 100%;
+  @media only screen and (max-width: ${(props) => props.theme.sm}) {
+    max-width: 350px;
+  }
+  @media only screen and (min-width: ${(props) => props.theme.sm}) {
+    max-width: 400px;
+  }
+  @media only screen and (min-width: ${(props) => props.theme.md}) {
+    max-width: 450px;
+  }
+
+  @media only screen and (min-width: ${(props) => props.theme.lg}) {
+    max-width: 500px;
+  }
+  @media only screen and (min-width: ${(props) => props.theme.xl}) {
+    max-width: 600px;
+  }
+`;
+
+const Form = styled(Box)`
+  padding: 40px;
+  padding-bottom: 30px;
+  margin-bottom: 15px;
+  form {
+    width: 100%;
+    input {
+      width: 100%;
+      &:not(:last-child) {
+        margin-bottom: 7px;
+      }
+    }
+    button {
+      margin-top: 10px;
+    }
+  }
+`;
+
+export default ({
+  loading,
+  data,
+  setAction,
+  action,
+  onSubmit,
+  newBio,
+  newNickname,
+}) => {
   if (loading === true) {
     return (
       <Wrapper>
         <Loader />
       </Wrapper>
+    );
+  } else if (action === "update" && data && data.seeUser) {
+    const {
+      seeUser: { avatar, nickname, bio },
+    } = data;
+    return (
+      <UpdateWrapper>
+        <Form>
+          <Helmet>
+            <title>Update Profile | ChallengeSNS</title>
+          </Helmet>
+          <form onSubmit={onSubmit}>
+            <Avatar size="lg" url={avatar} />
+            <Input placeholder={nickname} {...newNickname} />
+            <Input placeholder={bio} {...newBio} />
+            <Button text={"SAVE"} />
+          </form>
+        </Form>
+      </UpdateWrapper>
     );
   } else if (!loading && data && data.seeUser) {
     const {
@@ -149,11 +223,11 @@ export default ({ loading, data, logOut }) => {
           <HeaderColumn>
             <UsernameRow>
               {isSelf ? (
-                  <DropdownMenu username={username}/>
+                <DropdownMenu username={username} />
               ) : (
                 <>
-                <Username>{username}</Username>
-                <FollowButton isFollowing={isFollowing} id={id} />
+                  <Username>{username}</Username>
+                  <FollowButton isFollowing={isFollowing} id={id} />
                 </>
               )}
             </UsernameRow>
@@ -173,19 +247,18 @@ export default ({ loading, data, logOut }) => {
               </Count>
             </Counts>
           </HeaderColumn>
-        {}
+          {}
         </Header>
         {nickname ? (
-          <NickName text={nickname}/>
-          ) : (
-          <NickName text="nickname 없음"/>
-          )}
-        {bio ? (
-          <Bio>{bio}</Bio>
-          ) : (
-            <Bio>자기소개 없음</Bio>
-          )}
-        <ProfilUpdateBox>프로필 수정</ProfilUpdateBox>
+          <NickName text={nickname} />
+        ) : (
+          <NickName text="nickname 없음" />
+        )}
+        {bio ? <Bio>{bio}</Bio> : <Bio>자기소개 없음</Bio>}
+        <ProfilUpdateBox onClick={() => setAction("update")}>
+          프로필 수정
+        </ProfilUpdateBox>
+
         <Posts>
           {posts &&
             posts.map((post) => (
