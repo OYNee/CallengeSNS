@@ -1,13 +1,14 @@
 import { gql } from "apollo-boost";
 
 export const FOLLOW = gql`
-  query follow($id: String!, $limit: Int!, $cur: Int!) {
-    followingUser(id: $id, limit: $limit, cur: $cur) {
+  query follow($id: String!) {
+    followingUser(id: $id) {
       id
       avatar
       username
       isFollowing
       isSelf
+      nickname
     }
   }
 `;

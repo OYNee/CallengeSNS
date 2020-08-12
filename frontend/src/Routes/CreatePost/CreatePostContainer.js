@@ -16,8 +16,6 @@ export default () => {
   const caption = useInput("");
   const photo = useInput("");
   let filePath = [];
-  var limit = 100;
-  var cur = 0;
   var id = "";
   const meQuery = useQuery(ME);
   var data = "",
@@ -27,9 +25,7 @@ export default () => {
 
     const FOLLOWQuery = useQuery(FOLLOW, {
       variables: {
-        id,
-        limit,
-        cur,
+        id
       },
     });
     data = FOLLOWQuery.data;

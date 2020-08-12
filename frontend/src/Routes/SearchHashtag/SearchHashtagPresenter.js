@@ -2,9 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import FatText from "../../Components/FatText";
 import Loader from "../../Components/Loader";
-import UserCard from "../../Components/UserCard";
 import HashtagCard from "../../Components/HashtagCard";
-import SquarePost from "../../Components/SquarePost";
 import Input from "../../Components/Input";
 import useInput from "../../Hooks/useInput";
 import { withRouter,Link } from "react-router-dom";
@@ -12,9 +10,6 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Wrapper = styled.div`
   height: 50vh;
-  @media only screen and (max-width:${(props) => props.theme.sm}) {
-    min-height: 100vh;
-  };
 `;
 const SearchInput = styled(Input)`
   background-color: ${(props) => props.theme.bgColor};
@@ -24,40 +19,62 @@ const SearchInput = styled(Input)`
   height: auto;
   text-align: center;
   width: 70%;
-  margin: 10px auto;
-  display: block;
   &::placeholder {
     opacity: 0.8;
     font-weight: 200;
   }
+  margin: 10px auto;
+  display: block;
 `;
 const Section = styled.div`
   margin-bottom: 50px;
-
-  @media only screen and (max-width:${(props) => props.theme.sm}) {
-
-  };
+  grid-gap: 25px;
+  grid-template-columns: repeat(4, 160px);
+  grid-template-rows: 160px;
+  grid-auto-rows: 160px;
 `;
 
-const PostSection = styled(Section)`
-  grid-template-columns: repeat(4, 200px);
-  grid-template-rows: 200px;
-  grid-auto-rows: 200px;
-`;
 const ELink = styled(Link)`
   color: inherit;
   margin-bottom: 10px;
 `;
-export default withRouter(({ searchTerm, loading, data, history}) => {
-
+export default withRouter(({ searchTerm, loading, data, history, fetchMore,hasMore,setHasMore }) => {
   const search =(searchTerm?useInput(searchTerm):useInput(""));
   const onSearchSubmit = (e) => {
     e.preventDefault();
     history.push(`/search?term=${search.value}`);
   };
+  const onSearchbutton = (e) => {
+    e.preventDefault();
+    history.push(`/search?term=${searchTerm}`);
+    window.location.reload();
+  };
+  const onLoadMore = () => {
+
+    fetchMore({
+      variables: {
+        cur: data.searchHashtag.length,
+        limit:8,
+        term: search.value
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if(fetchMoreResult.searchHashtag.length<8)
+        {
+          console.log(`1 = ${hasMore}`);
+          setHasMore(false);
+          console.log(`2 = ${hasMore}`);
+        }
+        if (!fetchMoreResult){ 
+          return prev;}
+        return Object.assign({}, prev, {
+          searchHashtag: [...prev.searchHashtag, ...fetchMoreResult.searchHashtag]
+        });
+      }
+    })
+
+  };
   if (searchTerm === undefined) {
-    return (
-      
+    return (  
       <Wrapper>
         <form onSubmit={onSearchSubmit}>
       <SearchInput
@@ -74,7 +91,7 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
         <Loader />
       </Wrapper>
     );
-  } else if (data && data.searchUser && data.searchHashtag) {
+  } else if (data && data.searchHashtag) {
     return (
       <Wrapper>
         <form onSubmit={onSearchSubmit}>
@@ -84,53 +101,29 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
             placeholder="Search..."
           />
         </form>
-        <div>
-        {data.searchUser.length === 0 ?(
-          <FatText text="사용자 더보기"/>
-        ):(
-          <ELink to={`/search-user?term=${searchTerm}`}>
-          <FatText text="사용자 더보기"/>
-         </ELink>
-        )}
-        </div>
-        <Section>
-          {data.searchUser.length === 0 ? (
-            <FatText text="사용자를 찾을 수 없습니다." />
-          ) : (
-            data.searchUser.map((user,idx) => (
-              <UserCard
-                key={idx}
-                username={user.username}
-                isFollowing={user.isFollowing}
-                url={user.avatar}
-                isSelf={user.isSelf}
-                id={user.id}
-                bio={user.bio}
-              />
-            ))
-          )}
-        </Section>
-        <div>
-        {data.searchHashtag.length === 0 ?(
-          <FatText text="챌린지 더보기"/>
-        ):(
-          <ELink to={`/search-challenge?term=${searchTerm}`}>
-          <FatText text="챌린지 더보기"/>
-         </ELink>
-        )}
-        </div>
+          <button onClick={onSearchbutton}>
+          <FatText text="< 뒤로 가기" />
+          </button>
+
         <Section>
           {data.searchHashtag.length === 0 ? (
-            <div>
-            <FatText text="챌린지를 찾을 수 없습니다." />
-            </div>
+            <FatText text="No Users Found" />
           ) : (
+            <InfiniteScroll
+            dataLength={data.searchHashtag.length}
+            next={onLoadMore}
+            hasMore={hasMore}
+            loader={<Wrapper>
+              <Loader />
+            </Wrapper>}
+          >{
             data.searchHashtag.map((hashtag,idx) => (
               <HashtagCard
               key={idx}
               username={hashtag.tag_name}
             />
-            ))
+            ))}
+            </InfiniteScroll>
           )}
         </Section>
       </Wrapper>

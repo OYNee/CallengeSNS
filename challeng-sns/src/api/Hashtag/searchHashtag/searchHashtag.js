@@ -2,15 +2,14 @@ import { prisma } from "../../../../generated/prisma-client";
 
 export default {
   Query: {
-    searchUser: async (_, args) =>
-      prisma.users({
+    searchHashtag: async (_, args) =>
+      prisma.hashtags({
         where: {
           OR: [
-            { username_contains: args.term },
-            {nickname_contains: args.term }
+            { tag_name_contains: args.term }
           ]
         },
-        first: args.limit,
+        first:args.limit,
         skip: args.cur
       })
   }
