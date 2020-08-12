@@ -78,6 +78,7 @@ export default ({
   username,
   setAction,
   onSubmit,
+  keyForVerify,
 }) => (
   <Wrapper>
     <Form>
@@ -135,6 +136,23 @@ export default ({
               placeholder="your new password"
               required
               {...passwd}
+              type="Password"
+            />
+            <Button text={"Confirm"} />
+          </form>
+        </>
+      )}
+      
+      {action === "confirmEmail" && (
+        <>
+          <Helmet>
+            <title>Confirm Email | ChallengeSNS</title>
+          </Helmet>
+          <form onSubmit={onSubmit}>
+            <Input
+              placeholder="write your code"
+              required
+              {...keyForVerify}
               type="Password"
             />
             <Button text={"Confirm"} />

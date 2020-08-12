@@ -26,6 +26,11 @@ export const FIND_PASSWD = gql`
     changePasswd(email: $email)
   }
 `;
+export const CONFIRM_EMAIL = gql`
+  mutation confirmEmail($keyForVerify: String!,$email: String!) {
+    confirmEmail(keyForVerify: $keyForVerify, email: $email)
+  }
+`;
 export const CONFIRM_SECRET = gql`
   mutation confirmSecret($secret: String!, $email: String!) {
     confirmSecret(secret: $secret, email: $email)

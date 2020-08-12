@@ -29,6 +29,8 @@ type User {
   tagChallenger: [User!]
   scope: Boolean
   favCategory: String
+  confirmEmail: Boolean
+  keyForVerify: String
 }
 
 type Post {

@@ -26,6 +26,8 @@ type User {
   updatedAt: DateTime! @updatedAt
   scope: Boolean
   favCategory: String
+  confirmEmail: Boolean
+  keyForVerify: String
 }
 type Post {
   id: ID! @id

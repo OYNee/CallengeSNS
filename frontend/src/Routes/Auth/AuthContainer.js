@@ -8,6 +8,7 @@ import {
   CREATE_ACCOUNT,
   CONFIRM_SECRET,
   LOCAL_LOG_IN,
+  CONFIRM_EMAIL,
 } from "./AuthQueries";
 import { toast } from "react-toastify";
 
@@ -19,6 +20,7 @@ export default () => {
   const passwdCheck = useInput("");
   const secret = useInput("");
   const email = useInput("");
+  const keyForVerify = useInput("");
 
   const logIn = useMutation(LOG_IN, {
     variables: { email: email.value, passwd: passwd.value },
@@ -31,6 +33,12 @@ export default () => {
   // const requestSecretMutation = useMutation(LOG_IN, {
   //   variables: { email: email.value },
   // });
+  const confirmEmailMutation = useMutation(CONFIRM_EMAIL, {
+    variables:{
+      email: email.value,
+      keyForVerify: keyForVerify.value,
+    }
+  });
 
   const createAccountMutation = useMutation(CREATE_ACCOUNT, {
     variables: {
@@ -44,6 +52,7 @@ export default () => {
     variables: {
       email: email.value,
       secret: secret.value,
+     
     },
   });
   const localLogInMutation = useMutation(LOCAL_LOG_IN);
@@ -77,17 +86,21 @@ export default () => {
         username.value !== ""
       ) {
         try {
-          const {
+          const {data,
             data: { createAccount },
           } = await createAccountMutation();
+          console.log(email.value)
           console.log(createAccount);
+          
           if (!createAccount) {
             toast.error("Can't create account");
           } else {
+            console.log(createAccount)
+            
             toast.success(
               "Account created! Check your inbox for authentication"
             );
-            setTimeout(() => setAction("logIn"), 3000);
+            setTimeout(() => setAction("confirmEmail"), 3000);
           }
         } catch (e) {
           toast.error(e.message);
@@ -126,6 +139,22 @@ export default () => {
           toast.error("Cant confirm secret,check again");
         }
       }
+    }else if(action==="confirmEmail"){
+      if(keyForVerify.value !== ""){
+        try {
+          const {
+            data:{confirmEmail: token}
+          }=await confirmEmailMutation();
+          if(token !=="" && token !== undefined ){
+            localLogInMutation({variables:{token}});
+          }else{
+            throw Error();
+          }
+          
+        } catch  {
+          toast.error("Can't confirm email,check again");
+        }
+      }
     }
   };
 
@@ -139,6 +168,7 @@ export default () => {
       passwd={passwd}
       passwdCheck={passwdCheck}
       secret={secret}
+      keyForVerify={keyForVerify}
       onSubmit={onSubmit}
     />
   );
