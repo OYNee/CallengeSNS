@@ -92,6 +92,7 @@ const Posts = styled.div`
   @media only screen and (max-width:${(props) => props.theme.sm}) {
     grid-template-columns: repeat(3, 32vw);
     grid-template-rows: 32vw;
+    grid-auto-rows: 32vw;
     justify-content:space-around;
   }
 `;
@@ -180,6 +181,7 @@ export default ({
     const {
       seeUser: { avatar, nickname, bio },
     } = data;
+    console.log(data)
     return (
       <UpdateWrapper>
         <Form>
@@ -188,7 +190,7 @@ export default ({
           </Helmet>
           <form onSubmit={onSubmit}>
             <Avatar size="lg" url={avatar} />
-            <Input placeholder={nickname} {...newNickname} />
+            <Input placeholder={nickname} value={nickname} {...newNickname} />
             <Input placeholder={bio} {...newBio} />
             <Button text={"SAVE"} />
           </form>
@@ -211,6 +213,7 @@ export default ({
         posts,
       },
     } = data;
+    // console.log(data)
     return (
       <Wrapper>
         <Helmet>
@@ -270,6 +273,7 @@ export default ({
                 likeCount={post.likeCount}
                 commentCount={post.commentCount}
                 file={post.files[0]}
+                post={post}
               />
             ))}
         </Posts>

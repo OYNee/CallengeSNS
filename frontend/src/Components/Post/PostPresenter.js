@@ -140,10 +140,12 @@ export default ({
       </UserColumn>
     </Header>
     <Files>
-      {files &&
-        files.map((file, index) => (
-          <File key={file.id} src={file.url} showing={index === currentItem} />
-        ))}
+      {files && files.map((file, index) => {
+        if (file.url) {
+          return (<File key={file.id} src={file.url} showing={index === currentItem} />)
+        } else {
+            return (<File key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
+          }})}
     </Files>
     <Meta>
       <Buttons>

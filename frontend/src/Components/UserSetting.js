@@ -71,14 +71,16 @@ const DropDownList = styled("ul")`
   border: 2px solid #e5e5e5;
   // position:absolute; 
   &:first-child {
-    padding-top: 0.8em;
   }
 `;
 
-const ListItem = styled("li")`
+const ListItem = styled("a")`
   list-style: none;
+  display:block
   padding: 0.8em;
+  font-size:16px;
   cursor:default;
+  color:black;
   &:hover {
     color:${(props) => props.theme.livingCoral};
     background-color:rgba(0,0,0,0.01)
@@ -185,10 +187,10 @@ const DropdownMenu = ({username}) => {
       {isOpen && (
       <DropDownListContainer>
         <DropDownList>
-            {/* <ListItem as={Link} to="/setpasswd">비밀번호 변경</ListItem>
-            <ListItem as={Link} to="/setscope">공개 범위</ListItem>
-            <ListItem as={Link} to="/setcatego">관심 설정</ListItem> */}
-            <ListItem>비밀번호 변경</ListItem>
+            <ListItem as={Link} to="/setpasswd">비밀번호 변경</ListItem>
+            {/* <ListItem as={Link} to="/setscope">공개 범위</ListItem>
+            <ListItem as={Link} to="/setcatego">관심 설정</ListItem>
+            <ListItem>비밀번호 변경</ListItem> */}
             <ListItem>공개 범위</ListItem>
             <ListItem>관심 설정</ListItem>
             <ListItem as={DelAccModal}>회원탈퇴</ListItem>

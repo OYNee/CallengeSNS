@@ -22,11 +22,28 @@ const GET_USER = gql`
       postsCount
       posts {
         id
+        location
+        caption
+        user {
+          id
+          avatar
+          username
+        }
         files {
+          id
           url
         }
         likeCount
-        commentCount
+        isLiked
+        comments {
+          id
+          text
+          user {
+            id
+            username
+          }
+        }
+        createdAt
       }
     }
   }
@@ -74,6 +91,7 @@ export default withRouter(
         }
       }
     };
+    console.log(data)
     return (
       <ProfilePresenter
         loading={loading}
