@@ -41,17 +41,19 @@ const DropDownList = styled("ul")`
   border: 2px solid #e5e5e5;
   // position:absolute;
   &:first-child {
-    padding-top: 0.8em;
   }
 `;
 
-const ListItem = styled("li")`
+const ListItem = styled("a")`
   list-style: none;
+  display:block
   padding: 0.8em;
-  cursor: default;
+  font-size:16px;
+  cursor:default;
+  color:black;
   &:hover {
-    color: ${(props) => props.theme.livingCoral};
-    background-color: rgba(0, 0, 0, 0.01);
+    color:${(props) => props.theme.livingCoral};
+    background-color:rgba(0,0,0,0.01)
   }
 `;
 
