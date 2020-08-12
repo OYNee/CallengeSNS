@@ -1,21 +1,65 @@
-import React from "react";
+
+import React, { useState } from "react";
 import { Dropdown, Button, Modal } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+import {DropdownIcon} from "../Components/Icons";
 
 // TODO: This is missing functionality for sub-menu here from SUI core examples.
 // The "Publish To Web" item should contain a sub-menu.
 
-const DropdownMenu = () => (
-  <Dropdown>
-    <Dropdown.Menu>
-      <Dropdown.Item text="비밀번호 변경" as={Link} to="/setpasswd" />
-      <Dropdown.Item text="공개 범위" as={Link} to="/setscope" />
-      <Dropdown.Item text="관심 설정" as={Link} to="/setcategory" />
-      <Dropdown.Item as={DelAccModal} />
-      <Dropdown.Item as={LogoutModal} />
-    </Dropdown.Menu>
-  </Dropdown>
-);
+
+const Username = styled.span`
+font-size: 7vw;
+display: inline-block;
+`;
+
+
+
+const CloseBox = styled.div`
+width: 100vw;
+height: 100vh;
+position: absolute;
+top: 80px;
+left: 0px;
+background:white;
+`
+
+const DropDownContainer = styled("div")`
+  display:flex;
+`;
+
+const DropDownHeader = styled("div")`
+  display:block;
+`;
+
+const DropDownListContainer = styled("div")`
+  position:absolute;
+  top:130px;
+`;
+
+const DropDownList = styled("ul")`
+  padding: 0;
+  margin: 0;
+  background: #ffffff;
+  border: 2px solid #e5e5e5;
+  // position:absolute; 
+  &:first-child {
+    padding-top: 0.8em;
+  }
+`;
+
+const ListItem = styled("li")`
+  list-style: none;
+  padding: 0.8em;
+  cursor:default;
+  &:hover {
+    color:${(props) => props.theme.livingCoral};
+    background-color:rgba(0,0,0,0.01)
+  }
+`;
+
+
 
 function exampleReducer(state, action) {
   switch (action.type) {
@@ -37,15 +81,16 @@ const DelAccModal = () => {
 
   return (
     <>
-      <Dropdown.Item onClick={() => dispatch({ type: "open", size: "tiny" })}>
+      <ListItem onClick={() => dispatch({ type: "open", size: "tiny" })}>
         회원 탈퇴
-      </Dropdown.Item>
+      </ListItem>
 
       <Modal
         size={size}
         open={open}
         onClose={() => dispatch({ type: "close" })}
       >
+        <Modal.Header>회원 탈퇴</Modal.Header>
         <Modal.Content>
           <p>정말로 탈퇴하시겠어요?</p>
         </Modal.Content>
@@ -71,18 +116,17 @@ const LogoutModal = () => {
 
   return (
     <>
-      <Dropdown.Item onClick={() => dispatch({ type: "open", size: "tiny" })}>
+      <ListItem onClick={() => dispatch({ type: "open", size: "tiny" })}>
         로그아웃
-      </Dropdown.Item>
+      </ListItem>
 
       <Modal
         size={size}
         open={open}
         onClose={() => dispatch({ type: "close" })}
       >
-        <Modal.Content>
-          <p>로그아웃하시겠어요?</p>
-        </Modal.Content>
+        <Modal.Header>로그아웃하시겠어요?</Modal.Header>
+
         <Modal.Actions>
           <Button negative onClick={() => dispatch({ type: "close" })}>
             No
@@ -99,6 +143,33 @@ function logout() {
   localStorage.removeItem("token");
   window.location.reload();
   return null;
-}
+};
+
+const DropdownMenu = ({username}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggling = () => setIsOpen(!isOpen);
+  
+
+  return (
+    <DropDownContainer>
+      <DropDownHeader onClick={toggling} className={isOpen ? ("dropOpen") : ("")}>
+        <Username>{username}</Username>
+        <DropdownIcon/>  
+      </DropDownHeader>
+      {isOpen && (
+      <DropDownListContainer>
+        <DropDownList>
+            <ListItem as={Link} to="/setpasswd">비밀번호 변경</ListItem>
+
+            <ListItem as={DelAccModal}>회원탈퇴</ListItem>
+            <ListItem as={LogoutModal}>로그아웃</ListItem>
+        </DropDownList>
+      </DropDownListContainer>
+      )}
+    </DropDownContainer>
+  );
+};
+
+
 
 export default DropdownMenu;
