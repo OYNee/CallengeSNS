@@ -24,6 +24,7 @@ export default {
         ]
       });
     },
+   
     likeCount: parent =>
       prisma
         .likesConnection({

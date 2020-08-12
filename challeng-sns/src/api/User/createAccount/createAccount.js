@@ -3,22 +3,22 @@ import bcrypt from "bcryptjs"
 export default {
   Mutation: {
     createAccount: async (_, args) => {
-      const { username, email, userid, passwd,  bio = "" } = args;
+      const { username, email, nickname, passwd,  bio = "" } = args;
       const exists = await prisma.$exists.user({
         OR: [
          
           { email },
-          {userid}
+          {nickname}
         ]
       });
       if (exists) {
-        throw Error("This userid / email is already taken");
+        throw Error("This nickname / email is already taken");
       }
       const hashedPassword = await bcrypt.hash(passwd, 5);
       console.log(hashedPassword)
       await prisma.createUser({
         username,
-        userid,
+        nickname,
         passwd: hashedPassword,
         email,
         bio

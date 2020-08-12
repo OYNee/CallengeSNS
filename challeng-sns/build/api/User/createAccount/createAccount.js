@@ -19,19 +19,19 @@ var _default = {
   Mutation: {
     createAccount: function () {
       var _createAccount = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, args) {
-        var username, email, userid, passwd, _args$bio, bio, exists, hashedPassword;
+        var username, email, nickname, passwd, _args$bio, bio, exists, hashedPassword;
 
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                username = args.username, email = args.email, userid = args.userid, passwd = args.passwd, _args$bio = args.bio, bio = _args$bio === void 0 ? "" : _args$bio;
+                username = args.username, email = args.email, nickname = args.nickname, passwd = args.passwd, _args$bio = args.bio, bio = _args$bio === void 0 ? "" : _args$bio;
                 _context.next = 3;
                 return _prismaClient.prisma.$exists.user({
                   OR: [{
                     email: email
                   }, {
-                    userid: userid
+                    nickname: nickname
                   }]
                 });
 
@@ -43,7 +43,7 @@ var _default = {
                   break;
                 }
 
-                throw Error("This userid / email is already taken");
+                throw Error("This nickname / email is already taken");
 
               case 6:
                 _context.next = 8;
@@ -55,7 +55,7 @@ var _default = {
                 _context.next = 12;
                 return _prismaClient.prisma.createUser({
                   username: username,
-                  userid: userid,
+                  nickname: nickname,
                   passwd: hashedPassword,
                   email: email,
                   bio: bio

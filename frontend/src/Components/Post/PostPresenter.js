@@ -11,7 +11,7 @@ const Post = styled.div`
   width: 100%;
   max-width: 600px;
   user-select: none;
-  margin-bottom: 25px;
+  margin-bottom:40px;
   a {
     color: inherit;
   }
@@ -109,7 +109,7 @@ const Caption = styled.div`
 `;
 
 export default ({
-  user: { username, avatar, relChallenger },
+  user: { username, avatar},
   location,
   files,
   isLiked,
@@ -122,6 +122,7 @@ export default ({
   comments,
   selfComments,
   caption,
+  Cuser
   
 }) => (
   <Post>
@@ -151,7 +152,7 @@ export default ({
       </Buttons>
       <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
       <Caption>
-        {relChallenger}
+       {Cuser}
         <FatText text={username} /> {caption}
       </Caption>
       {comments && (

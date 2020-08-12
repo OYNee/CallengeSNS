@@ -1,18 +1,16 @@
 type Mutation {
-   uploadChallenge(
-   caption: String!, 
-   category: String,
-   files:[String!]!,
-   rel_challengers:[String!],
-   pre_challengers:[String!],
-   next_challengers:[String!],
-   tag_challengers:[String],
-   scope: Boolean!,
-   hashtags: [String!]!,
-   video: [String!],
-   image: [String!],
-   text: [String!],
-   audio: [String!],
-
-   ): Post!
+  uploadChallenge(
+    caption: String!
+    category: String
+    files: [String!]!
+    rel_challengers: [String!]
+    pre_challengers: [String!]
+    next_challengers: [String!]
+    tag_challengers: [String]
+    video: [String!]
+    image: [String!]
+    text: [String!]
+    audio: [String!]
+    postId: String
+  ): Post!
 }

@@ -6,7 +6,8 @@ export default {
       prisma.users({
         where: {
           OR: [
-            { username_contains: args.term }
+            { username_contains: args.term },
+            {nickname_contains: args.term }
           ]
         },
         first: args.limit,

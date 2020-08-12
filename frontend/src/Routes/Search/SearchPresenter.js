@@ -3,6 +3,7 @@ import styled from "styled-components";
 import FatText from "../../Components/FatText";
 import Loader from "../../Components/Loader";
 import UserCard from "../../Components/UserCard";
+import HashtagCard from "../../Components/HashtagCard";
 import SquarePost from "../../Components/SquarePost";
 import Input from "../../Components/Input";
 import useInput from "../../Hooks/useInput";
@@ -73,7 +74,7 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
         <Loader />
       </Wrapper>
     );
-  } else if (data && data.searchUser && data.searchPost) {
+  } else if (data && data.searchUser && data.searchHashtag) {
     return (
       <Wrapper>
         <form onSubmit={onSearchSubmit}>
@@ -94,7 +95,7 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
         </div>
         <Section>
           {data.searchUser.length === 0 ? (
-            <FatText text="No Users Found" />
+            <FatText text="사용자를 찾을 수 없습니다." />
           ) : (
             data.searchUser.map((user,idx) => (
               <UserCard
@@ -110,28 +111,28 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
           )}
         </Section>
         <div>
-        {data.searchPost.length === 0 ?(
+        {data.searchHashtag.length === 0 ?(
           <FatText text="챌린지 더보기"/>
         ):(
-          <ELink to={`/home`}>
+          <ELink to={`/search-challenge?term=${searchTerm}`}>
           <FatText text="챌린지 더보기"/>
          </ELink>
         )}
         </div>
-        <PostSection>
-          {data.searchPost.length === 0 ? (
-            <FatText text="No Posts Found" />
+        <Section>
+          {data.searchHashtag.length === 0 ? (
+            <div>
+            <FatText text="챌린지를 찾을 수 없습니다." />
+            </div>
           ) : (
-            data.searchPost.map((post,idx) => (
-              <SquarePost
-                key={idx}
-                likeCount={post.likeCount}
-                commentCount={post.commentCount}
-                file={post.files[0]}
-              />
+            data.searchHashtag.map((hashtag,idx) => (
+              <HashtagCard
+              key={idx}
+              username={hashtag.tag_name}
+            />
             ))
           )}
-        </PostSection>
+        </Section>
       </Wrapper>
     );
   }

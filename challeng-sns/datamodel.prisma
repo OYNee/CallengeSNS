@@ -5,7 +5,7 @@ type User {
       value: "https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png"
     )
   username: String! @unique
-  userid: String!
+  nickname: String!
   passwd: String!
   email: String! @unique
   firstName: String @default(value: "")
@@ -24,9 +24,13 @@ type User {
   loginSecret: String
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
+  scope: Boolean
+  favCategory: String
 }
 type Post {
   id: ID! @id
+  postId: String!
+  newPost: Boolean!
   caption: String!
   location: String
   files: [File!]! @relation(name: "FilesOfPost", onDelete: CASCADE)

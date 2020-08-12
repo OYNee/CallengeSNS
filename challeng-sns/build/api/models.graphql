@@ -3,7 +3,7 @@ type User {
   avatar: String
   username: String!
   email: String!
-  userid: String!
+  nickname: String!
   passwd: String!
   firstName: String
   lastName: String

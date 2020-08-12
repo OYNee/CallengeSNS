@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import { Logo } from "./Icons";
+import { Logo1 } from "./Icons";
 
 const Animation = keyframes`
     0%{
@@ -17,11 +17,15 @@ const Animation = keyframes`
 const Loader = styled.div`
   animation: ${Animation} 1s linear infinite;
   width: 100%;
+  height: 100vh;
   text-align: center;
+  padding: 35vh 0;
+  fill:${(props) => props.theme.livingCoral}
 `;
 
 export default () => (
   <Loader>
-    <Logo size={36} />
+    <Logo1
+    />
   </Loader>
 );

@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 
 export default () => {
   const [action, setAction] = useState("logIn");
-  const userid = useInput("");
+  const nickname = useInput("");
   const username = useInput("");
   const passwd = useInput("");
   const passwdCheck = useInput("");
@@ -34,7 +34,7 @@ export default () => {
 
   const createAccountMutation = useMutation(CREATE_ACCOUNT, {
     variables: {
-      userid: userid.value,
+      nickname: nickname.value,
       email: email.value,
       username: username.value,
       passwd: passwd.value,
@@ -71,7 +71,7 @@ export default () => {
       }
     } else if (action === "signUp") {
       if (
-        userid.value !== "" &&
+        nickname.value !== "" &&
         email.value !== "" &&
         passwd.value !== "" &&
         username.value !== ""
@@ -133,7 +133,7 @@ export default () => {
     <AuthPresenter
       setAction={setAction}
       action={action}
-      userid={userid}
+      nickname={nickname}
       email={email}
       username={username}
       passwd={passwd}

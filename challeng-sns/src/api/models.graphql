@@ -3,7 +3,7 @@ type User {
   avatar: String
   username: String!
   email: String!
-  userid: String!
+  nickname: String!
   passwd: String!
   firstName: String
   lastName: String
@@ -27,10 +27,14 @@ type User {
   preChallenger: [User!]
   nextChallenger: [User!]
   tagChallenger: [User!]
+  scope: Boolean
+  favCategory: String
 }
 
 type Post {
   id: ID!
+  postId: String!
+  newPost: Boolean!
   location: String
   caption: String!
   user: User!
@@ -138,8 +142,8 @@ type Category {
 }
 
 type Hashtag{
-  tag_id: ID! 
+  id: ID! 
   tag_name: String!
-  post: [Post!]! 
-
+  post: [Post!]
+  postCount: Int!
 } 
