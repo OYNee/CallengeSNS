@@ -5,7 +5,7 @@ import { useQuery } from "react-apollo-hooks";
 import { SEARCH } from "./SearchHashtagQueries";
 
 export default withRouter(({ location: { search } }) => {
-  const term = search.split("=")[1];
+  const term = decodeURIComponent(search.split("=")[1]);
   const [hasMore, setHasMore] = useState(true);
   var limit = 8;
   var cur =0;

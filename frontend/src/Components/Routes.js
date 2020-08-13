@@ -17,11 +17,8 @@ import SetCategory from "../Routes/SetCategory";
 import DeleteAccount from "../Routes/DeleteAccount";
 import SelectPhoto from "../Routes/SelectPhoto";
 import CreatePost from "../Routes/CreatePost";
-<<<<<<< Updated upstream
 import findPasswd from "../Routes/findPasswd";
-=======
 import Challenge from "../Routes/Challenge";
->>>>>>> Stashed changes
 
 const LoggedInRoutes = () => (
   <Switch>

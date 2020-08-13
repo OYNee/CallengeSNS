@@ -9,6 +9,7 @@ import Input from "../../Components/Input";
 import useInput from "../../Hooks/useInput";
 import { withRouter,Link } from "react-router-dom";
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { encode } from "utf8";
 
 const Wrapper = styled.div`
   height: 50vh;
@@ -53,7 +54,7 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
   const search =(searchTerm?useInput(searchTerm):useInput(""));
   const onSearchSubmit = (e) => {
     e.preventDefault();
-    history.push(`/search?term=${search.value}`);
+    history.push(`/search?term=`+encodeURIComponent(search.value));
   };
   if (searchTerm === undefined) {
     return (
@@ -87,7 +88,7 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
         {data.searchUser.length === 0 ?(
           <FatText text="사용자 더보기"/>
         ):(
-          <ELink to={`/search-user?term=${searchTerm}`}>
+          <ELink to={`/search-user?term=`+decodeURIComponent(searchTerm)}>
           <FatText text="사용자 더보기"/>
          </ELink>
         )}
@@ -113,7 +114,7 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
         {data.searchHashtag.length === 0 ?(
           <FatText text="챌린지 더보기"/>
         ):(
-          <ELink to={`/search-challenge?term=${searchTerm}`}>
+          <ELink to={`/search-challenge?term=`+decodeURIComponent(searchTerm)}>
           <FatText text="챌린지 더보기"/>
          </ELink>
         )}

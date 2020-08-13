@@ -13,7 +13,6 @@ const GET_USER = gql`
       avatar
       username
       nickname
-      fullName
       isFollowing
       isSelf
       bio
