@@ -5,6 +5,7 @@ import { useQuery, useMutation } from "react-apollo-hooks";
 import ProfilePresenter from "./ProfilePresenter";
 import useInput from "../../Hooks/useInput";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const GET_USER = gql`
   query seeUser($username: String!) {
@@ -47,20 +48,39 @@ export default withRouter(
     const [action, setAction] = useState("profile");
     const newNickname = useInput("");
     const newBio = useInput("");
-    const avatar = useInput("");
-    const update = useMutation(UPDATE_PROFILE, {
-      variables: {
-        nickname: newNickname.value,
-        bio: newBio.value,
-      },
-    });
+    let newAvatar = "";
+    const update = useMutation(UPDATE_PROFILE);
     const onSubmit = async (e) => {
       e.preventDefault();
       if (action === "update") {
+        let formData = new FormData();
+        let photoFile = document.getElementById("photo");
+        formData.append("file", photoFile.files[0]);
+        console.log(photoFile.files[0]);
+
         try {
+          if (photoFile.files[0]) {
+            const {
+              data: { location },
+            } = await axios.post("http://localhost:4000/api/upload", formData, {
+              headers: {
+                "content-type": "multipart/form-data",
+              },
+            });
+            console.log(location);
+            newAvatar = location;
+          }
+          console.log(newAvatar);
           const {
             data: { editUser },
-          } = await update();
+          } = await update({
+            variables: {
+              nickname: newNickname.value,
+              bio: newBio.value,
+              avatar: newAvatar,
+            },
+          });
+          console.log(editUser);
           if (!editUser) {
             toast.error("Fail...");
           } else {
@@ -81,7 +101,6 @@ export default withRouter(
         action={action}
         newNickname={newNickname}
         newBio={newBio}
-        avatar={avatar}
         onSubmit={onSubmit}
       />
     );
