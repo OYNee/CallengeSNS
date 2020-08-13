@@ -8,6 +8,7 @@ import FatText from "../../Components/FatText";
 import FollowButton from "../../Components/FollowButton";
 import SquarePost from "../../Components/SquarePost";
 import Button from "../../Components/Button";
+import ImageInput from "../../Components/ProfileInput";
 
 import { Link } from "react-router-dom";
 import DropdownMenu from "../../Components/UserSetting";
@@ -185,7 +186,9 @@ export default ({
             <title>Update Profile | ChallengeSNS</title>
           </Helmet>
           <form onSubmit={onSubmit}>
-            <Avatar size="lg" url={avatar} />
+            {/* <Avatar size="lg" url={avatar}> */}
+            <ImageInput></ImageInput>
+            {/* </Avatar> */}
             <Input placeholder={nickname} {...newNickname} />
             <Input placeholder={bio} {...newBio} />
             <Button text={"SAVE"} />
