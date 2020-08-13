@@ -1,6 +1,6 @@
 type Mutation {
   uploadChallenge(
-    caption: String!
+    caption: String
     category: String
     files: [String!]!
     rel_challengers: [String!]
