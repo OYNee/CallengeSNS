@@ -11,6 +11,5 @@ type Mutation {
     image: [String!]
     text: [String!]
     audio: [String!]
-    postId: String
   ): Post!
 }
