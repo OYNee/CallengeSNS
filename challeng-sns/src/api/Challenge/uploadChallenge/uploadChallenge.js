@@ -19,30 +19,19 @@ export default {
         files,
       } = args;
       console.log(files);
-     
+      //지금 args 에서 받아오는 부분이 이부분인데
+      //category로 구분 중이면서 파일에서 처리할 수 있는 부분을 나눠놓는건 좀 낭비 같다는 생각이 좀 들어서요
+
       // console.log(rel_persons)
       const making_hashtag = caption.split(" ");
 
       //나중에 scope랑 newPost 삭제
       try {
         const post = await prisma.createPost({
-          scope,
-          newPost,
           caption,
           category,
           user: { connect: { id: user.id } },
         });
-
-        if (postId === "") {
-          await prisma.updatePost({
-            where: {
-              id: post.id,
-            },
-            data: {
-              postId: post.id,
-            },
-          });
-        }
 
         //Relation_challenger에 관한 함수
         //여러명의 값이 들어갈 수 있기 때문에 forEach문으로 작성
@@ -144,14 +133,54 @@ export default {
 
         making_hashtag.forEach(async (hashtag) => {
           if (hashtag.includes("#")) {
-            await prisma.createHashtag({
-              tag_name: hashtag,
-              post: {
-                connect: {
-                  id: post.id,
+            // upsert 안먹힘
+            // await prisma.upsertHashtag({
+            //   where: { tag_name: hashtag },
+            //   update: {
+            //     post: {
+            //       connect: {
+            //         id: post.id,
+            //       },
+            //     },
+            //   },
+            //   create: {
+            //     post: {
+            //       connect: {
+            //         id: post.id,
+            //       },
+            //     },
+            //   },
+            // });
+            try {
+              // 이미 있는 해시 태그라면 그 태그 안에 post.id를 넣고
+              const hash = await prisma.createHashtag({
+                tag_name: hashtag,
+                post: {
+                  connect: {
+                    id: post.id,
+                  },
                 },
-              },
-            });
+              });
+              console.log(hash.tag_name);
+            } catch (error) {
+              // 존재하지 않는 태그라면 새로운 해시 태그 생성
+              console.log("ERROR");
+              try {
+                await prisma.updateHashtag({
+                  data: {
+                    post: {
+                      connect: {
+                        id: post.id,
+                      },
+                    },
+                  },
+                  where: { tag_name: hashtag },
+                });
+                console.log(post.id);
+              } catch (e) {
+                console.log("e");
+              }
+            }
           }
         });
         if (category == "video") {
