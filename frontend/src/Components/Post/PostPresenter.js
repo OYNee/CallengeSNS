@@ -9,7 +9,6 @@ import { HeartFull, HeartEmpty, Comment as CommentIcon } from "../Icons";
 const Post = styled.div`
   ${props => props.theme.whiteBox};
   width: 100%;
-  max-width: 600px;
   user-select: none;
   margin-bottom:40px;
   a {

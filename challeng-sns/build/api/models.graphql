@@ -5,7 +5,6 @@ type User {
   email: String!
   nickname: String!
   passwd: String!
-  fullName: String
   isFollowing: Boolean!
   isSelf: Boolean!
   bio: String

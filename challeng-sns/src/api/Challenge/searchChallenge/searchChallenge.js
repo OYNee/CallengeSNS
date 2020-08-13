@@ -1,5 +1,4 @@
 import { prisma } from "../../../../generated/prisma-client";
-
 export default {
   Query: {
     searchChallenge: async (_, args) =>

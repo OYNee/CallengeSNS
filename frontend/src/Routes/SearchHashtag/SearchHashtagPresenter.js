@@ -42,11 +42,12 @@ export default withRouter(({ searchTerm, loading, data, history, fetchMore,hasMo
   const search =(searchTerm?useInput(searchTerm):useInput(""));
   const onSearchSubmit = (e) => {
     e.preventDefault();
-    history.push(`/search?term=${search.value}`);
+    history.push(`/search?term=`+encodeURIComponent(search.value));
+    window.location.reload();
   };
   const onSearchbutton = (e) => {
     e.preventDefault();
-    history.push(`/search?term=${searchTerm}`);
+    history.push(`/search?term=`+encodeURIComponent(searchTerm));
     window.location.reload();
   };
   const onLoadMore = () => {

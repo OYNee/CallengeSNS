@@ -18,6 +18,7 @@ import DeleteAccount from "../Routes/DeleteAccount";
 import SelectPhoto from "../Routes/SelectPhoto";
 import CreatePost from "../Routes/CreatePost";
 import findPasswd from "../Routes/findPasswd";
+import Challenge from "../Routes/Challenge";
 
 const LoggedInRoutes = () => (
   <Switch>
@@ -35,6 +36,7 @@ const LoggedInRoutes = () => (
     <Route path="/deleteacc" component={DeleteAccount} />
     <Route path="/selectphoto" component={SelectPhoto} />
     <Route path="/createpost" component={CreatePost} />
+    <Route path="/challenge" component={Challenge} />
     <Route path="/:username" component={Profile} />
     <Redirect from="*" to="/" />
   </Switch>

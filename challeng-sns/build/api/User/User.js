@@ -106,7 +106,6 @@ var _default = {
         .aggregate()
         .count();
     },
-    
     isFollowing: (function() {
       var _isFollowing = (0, _asyncToGenerator2["default"])(
         /*#__PURE__*/ _regenerator["default"].mark(function _callee(

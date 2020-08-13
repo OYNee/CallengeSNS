@@ -28,13 +28,12 @@ type User {
 }
 type Post {
   id: ID! @id
-  caption: String!
+  caption: String
   location: String
   files: [File!]! @relation(name: "FilesOfPost", onDelete: CASCADE)
   user: User @relation(name: "PostsOfUser")
   likes: [Like!]! @relation(name: "LikeOfPost", onDelete: CASCADE)
   hashtags : [Hashtag!]! @relation(name: "HashtagofPost")
-  scope : Boolean!
   comments: [Comment!]! @relation(name: "CommentOfPost", onDelete: CASCADE)
   category: String!
   createdAt: DateTime! @createdAt
@@ -141,7 +140,7 @@ type Category {
 
 type Hashtag{
   id: ID! @id
-  tag_name: String!
+  tag_name: String! @unique
   post: [Post!]! @relation(name: "HashtagofPost")
 
 } 
