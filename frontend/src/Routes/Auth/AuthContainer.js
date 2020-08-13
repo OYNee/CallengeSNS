@@ -146,6 +146,9 @@ export default () => {
             data:{confirmEmail: token}
           }=await confirmEmailMutation();
           if(token !=="" && token !== undefined ){
+            toast.success(
+              "Account created! Check your email for authentication"
+            );
             localLogInMutation({variables:{token}});
           }else{
             throw Error();
