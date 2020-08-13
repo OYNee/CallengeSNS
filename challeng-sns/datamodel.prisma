@@ -8,8 +8,6 @@ type User {
   nickname: String!
   passwd: String!
   email: String! @unique
-  firstName: String @default(value: "")
-  lastName: String
   bio: String
   following: [User!]! @relation(name: "FollowRelation")
   followers: [User!]! @relation(name: "FollowRelation")
@@ -24,20 +22,16 @@ type User {
   loginSecret: String
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
-  scope: Boolean
   favCategory: String
 }
 type Post {
   id: ID! @id
-  postId: String!
-  newPost: Boolean!
-  caption: String!
+  caption: String
   location: String
   files: [File!]! @relation(name: "FilesOfPost", onDelete: CASCADE)
   user: User @relation(name: "PostsOfUser")
   likes: [Like!]! @relation(name: "LikeOfPost", onDelete: CASCADE)
   hashtags : [Hashtag!]! @relation(name: "HashtagofPost")
-  scope : Boolean!
   comments: [Comment!]! @relation(name: "CommentOfPost", onDelete: CASCADE)
   category: String!
   createdAt: DateTime! @createdAt
@@ -45,6 +39,8 @@ type Post {
   relChallenger: [User!] @relation(name: "RCOfPosts")
   preChallenger: [User!] @relation(name: "PCOfPosts")
   nextChallenger: [User!] @relation(name: "NCOfPosts")
+  nextPosts: [Post!] @relation(name: "ChallengeRelation")
+  prePosts: [Post!] @relation(name: "ChallengeRelation")
   tagChallenger: [User!] @relation(name: "TCOfPosts")
   video: [Video!]! @relation(name: "VideoOfPost", onDelete: CASCADE)
   image: [Image!]! @relation(name: "ImageOfPost", onDelete: CASCADE)
@@ -142,7 +138,7 @@ type Category {
 
 type Hashtag{
   id: ID! @id
-  tag_name: String!
+  tag_name: String! @unique
   post: [Post!]! @relation(name: "HashtagofPost")
 
 } 

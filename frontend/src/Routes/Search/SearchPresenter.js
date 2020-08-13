@@ -57,7 +57,6 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
   };
   if (searchTerm === undefined) {
     return (
-      
       <Wrapper>
         <form onSubmit={onSearchSubmit}>
       <SearchInput

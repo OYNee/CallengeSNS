@@ -53,9 +53,9 @@ const NumberText = styled.span`
   }
 `;
 
-const SquarePost = ({ likeCount, commentCount, file }) => (
+const SquarePost = ({ likeCount, commentCount, file,id }) => (
   <Container bg={file.url}>
-    <Link to="/">
+    <Link to={`challenge?${id}`}>
     <Overlay>
       <Number>
         <HeartFull />
