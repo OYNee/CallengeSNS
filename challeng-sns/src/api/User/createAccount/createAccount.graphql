@@ -4,6 +4,7 @@ type Mutation {
     nickname: String!
     passwd: String!
     email: String!
-    bio: String
+    confirmEmail: Boolean
+    keyForVerify: String
   ): Boolean!
 }

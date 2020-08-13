@@ -23,6 +23,8 @@ type User {
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
   favCategory: String
+  confirmEmail: Boolean
+  keyForVerify: String
 }
 type Post {
   id: ID! @id

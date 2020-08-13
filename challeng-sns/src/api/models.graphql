@@ -25,6 +25,8 @@ type User {
   nextChallenger: [User!]
   tagChallenger: [User!]
   favCategory: String
+  confirmEmail: Boolean
+  keyForVerify: String
 }
 
 type Post {

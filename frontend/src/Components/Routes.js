@@ -23,7 +23,6 @@ import Challenge from "../Routes/Challenge";
 const LoggedInRoutes = () => (
   <Switch>
     <Route exact path="/" component={Feed} />
-    <Route path="/explore" component={Explore} />
     <Route path="/search" component={Search} />
     <Route path="/following" component={Following} />
     <Route path="/follower" component={Follower} />
