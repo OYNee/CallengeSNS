@@ -267,15 +267,16 @@ export default ({
         <ProfilUpdateBox onClick={() => setAction("update")}>프로필 수정</ProfilUpdateBox>
         <Posts>
           {posts &&
-            posts.map((post) => (
+            posts.map((post) => {
+              return(
               <SquarePost
                 key={post.id}
                 likeCount={post.likeCount}
-                commentCount={post.commentCount}
+                commentCount={post.comments.length}
                 file={post.files[0]}
                 post={post}
               />
-            ))}
+            )})}
         </Posts>
       </Wrapper>
     );

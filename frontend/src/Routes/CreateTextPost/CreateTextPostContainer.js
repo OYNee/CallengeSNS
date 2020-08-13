@@ -15,7 +15,7 @@ export default ({cat, pid}) => {
   const [relChallenger, setRelChallenger] = useState(``);
   const [tagChallenger, setTagChallenger] = useState(``);
   const caption = useInput("");
-  const photo = useInput("");
+  const textContent = useInput("");
   const path = "";
   var limit = 100;
   var cur = 0;
@@ -54,9 +54,9 @@ export default ({cat, pid}) => {
     if (action === "CreatePost") {
       if (create) {
         let formData = new FormData();
-        let photoFile = document.getElementById("photo");
+        let textContentFile = document.getElementById("textContent");
 
-        formData.append("file", photoFile.files[0]);
+        formData.append("file", textContentFile.files[0]);
         try {
           const {
             data: { path },
@@ -87,7 +87,7 @@ export default ({cat, pid}) => {
       action={action}
       setCreate={setCreate}
       create={create}
-      photo={photo}
+      textContent={textContent}
       onSubmit={onSubmit}
       relChallenger={relChallenger}
       tagChallenger={tagChallenger}
@@ -96,8 +96,7 @@ export default ({cat, pid}) => {
       loading={loading}
       data={data}
       id={id}
-      cat={cat}
-      pid={pid}
+      cat="textContent"
     />
   );
 };

@@ -42,7 +42,6 @@ const Wrapper = styled.div`
   align-items: center;
   min-height: 80vh;
   @media only screen and (max-width:${(props) => props.theme.sm}) {
-    min-height: 100vh;
   };
 `;
 

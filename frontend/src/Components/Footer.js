@@ -149,7 +149,7 @@ export default (defaultValue1,defaultValue2) => {
                   </Link>
               </Grid.Column>
               <Grid.Column>
-                <Link to="/createpost">
+                <Link to="/createtextpost">
                   <Hover>
                     <TextIcon />
                   </Hover>

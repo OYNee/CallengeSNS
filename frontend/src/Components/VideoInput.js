@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import {Frame} from "./Icons"
 
-const Img = styled.img`
+const Img = styled.iframe`
   width:86vw;
   height: 86vw;
 `
@@ -15,7 +15,7 @@ const Blank = styled.div`
   height:100%;
 `
 
-const ImageInput = () => {
+const VideoInput = () => {
   const [image, setImage] = useState({ preview: "", raw: "" });
   
   const handleChange = e => {
@@ -42,17 +42,30 @@ const ImageInput = () => {
   // };
   return (
     <Wrapper>
-      <label htmlFor="photo">
+      <label htmlFor="video">
         {image.preview ? (
-          <Img src={image.preview} alt={"dummy"}/>
+          <>
+            <Img src={image.preview} alt={"dummy"}/>
+            <label>다시선택!
+              <input
+                type="file"
+                id="video"
+                accept="video/*"
+                style={{ display: "none" }}
+                onChange={handleChange}
+              />
+            </label>
+          </>
         ) : (
-        <Blank><Frame/></Blank>
-          )}
+          <Blank>
+            <Frame/>
+          </Blank>
+        )}
       </label>
       <input
         type="file"
-        id="photo"
-        accept="image/*"
+        id="video"
+        accept="video/*"
         style={{ display: "none" }}
         onChange={handleChange}
       />
@@ -63,4 +76,4 @@ const ImageInput = () => {
 }
 
 
-export default ImageInput
+export default VideoInput

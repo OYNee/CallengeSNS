@@ -15,7 +15,7 @@ const Blank = styled.div`
   height:100%;
 `
 
-const ImageInput = () => {
+const AudioImageInput = () => {
   const [image, setImage] = useState({ preview: "", raw: "" });
   
   const handleChange = e => {
@@ -46,8 +46,8 @@ const ImageInput = () => {
         {image.preview ? (
           <Img src={image.preview} alt={"dummy"}/>
         ) : (
-        <Blank><Frame/></Blank>
-          )}
+          <Blank><Frame/></Blank>
+        )}
       </label>
       <input
         type="file"
@@ -56,6 +56,7 @@ const ImageInput = () => {
         style={{ display: "none" }}
         onChange={handleChange}
       />
+
       {/* <br /> */}
       {/* <button onClick={handleUpload}>Upload</button> */}
     </Wrapper>
@@ -63,4 +64,4 @@ const ImageInput = () => {
 }
 
 
-export default ImageInput
+export default AudioImageInput

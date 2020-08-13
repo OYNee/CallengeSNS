@@ -89,8 +89,14 @@ function exampleReducer(state, action) {
 }
 
 const ListItem = styled.div`
-  width:100%;
-  height:100%;
+  width:200px;
+  height:200px;
+  position:absolute;
+  @media only screen and (max-width:${(props) => props.theme.sm}){
+    width:32vw;
+    height:32vw;
+
+  }
 `
 
 
@@ -141,18 +147,17 @@ const SquarePost = ({ likeCount, commentCount, file, post }) => {
     <Container bg={file.url}>
       <ListItem as={PostModal} 
         post={post}
-        file={file}
-      />
-      <Overlay>
-        <Number>
-          <HeartFull />
-          <NumberText>{likeCount}</NumberText>
-        </Number>
-        <Number>
-          <CommentFull />
-          <NumberText>{commentCount}</NumberText>
-        </Number>
-      </Overlay>
+        file={file}/>
+        <Overlay>
+          <Number>
+            <HeartFull />
+            <NumberText>{likeCount}</NumberText>
+          </Number>
+          <Number>
+            <CommentFull />
+            <NumberText>{commentCount}</NumberText>
+          </Number>
+        </Overlay>
     </Container>
   )}
   else {

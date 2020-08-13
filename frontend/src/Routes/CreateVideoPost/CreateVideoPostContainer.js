@@ -9,13 +9,13 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 
-export default ({cat, pid}) => {
+export default () => {
   const [action, setAction] = useState("CreatePost");
   const [create, setCreate] = useState(false);
   const [relChallenger, setRelChallenger] = useState(``);
   const [tagChallenger, setTagChallenger] = useState(``);
   const caption = useInput("");
-  const photo = useInput("");
+  const video = useInput("");
   const path = "";
   var limit = 100;
   var cur = 0;
@@ -34,6 +34,7 @@ export default ({cat, pid}) => {
       },
     });
     data = FOLLOWQuery.data;
+    console.log(data)
     loading = FOLLOWQuery.loading;
   }
 
@@ -54,9 +55,9 @@ export default ({cat, pid}) => {
     if (action === "CreatePost") {
       if (create) {
         let formData = new FormData();
-        let photoFile = document.getElementById("photo");
-
-        formData.append("file", photoFile.files[0]);
+        let videoFile = document.getElementById("video");
+        console.log(videoFile.files[0])
+        formData.append("file", videoFile.files[0]);
         try {
           const {
             data: { path },
@@ -87,7 +88,7 @@ export default ({cat, pid}) => {
       action={action}
       setCreate={setCreate}
       create={create}
-      photo={photo}
+      video={video}
       onSubmit={onSubmit}
       relChallenger={relChallenger}
       tagChallenger={tagChallenger}
@@ -96,8 +97,7 @@ export default ({cat, pid}) => {
       loading={loading}
       data={data}
       id={id}
-      cat={cat}
-      pid={pid}
+      cat="video"
     />
   );
 };

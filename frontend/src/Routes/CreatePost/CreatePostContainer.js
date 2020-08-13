@@ -95,7 +95,7 @@ export default ({cat, pid}) => {
       loading={loading}
       data={data}
       id={id}
-      cat={cat}
+      cat="audio"
       pid={pid}
     />
   );

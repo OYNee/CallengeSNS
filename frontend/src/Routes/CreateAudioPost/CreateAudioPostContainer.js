@@ -8,13 +8,13 @@ import { FOLLOW, UPLOAD } from "./CreateAudioPostQueries";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default ({cat, pid}) => {
+export default () => {
   const [action, setAction] = useState("CreatePost");
   const [create, setCreate] = useState(false);
   const [relChallenger, setRelChallenger] = useState(``);
   const [tagChallenger, setTagChallenger] = useState(``);
   const caption = useInput("");
-  const photo = useInput("");
+  const audio = useInput("");
   const path = "";
   var limit = 100;
   var cur = 0;
@@ -22,7 +22,6 @@ export default ({cat, pid}) => {
   const meQuery = useQuery(ME);
   var data = "",
     loading = "";
-  console.log("audio")
   if (meQuery.data.me) {
     id = meQuery.data.me.id;
 
@@ -54,9 +53,9 @@ export default ({cat, pid}) => {
     if (action === "CreatePost") {
       if (create) {
         let formData = new FormData();
-        let photoFile = document.getElementById("photo");
-
-        formData.append("file", photoFile.files[0]);
+        let audioFile = document.getElementById("audio");
+        console.log(audioFile.files[0])
+        formData.append("file", audioFile.files[0]);
         try {
           const {
             data: { path },
@@ -87,7 +86,7 @@ export default ({cat, pid}) => {
       action={action}
       setCreate={setCreate}
       create={create}
-      photo={photo}
+      audio={audio}
       onSubmit={onSubmit}
       relChallenger={relChallenger}
       tagChallenger={tagChallenger}
@@ -96,6 +95,7 @@ export default ({cat, pid}) => {
       loading={loading}
       data={data}
       id={id}
+      cat="audio"
     />
   );
 };
