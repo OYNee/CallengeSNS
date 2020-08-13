@@ -15,14 +15,13 @@ export const FOLLOW = gql`
 // 캡션, scope 필수 아니게 고치기
 export const UPLOAD = gql`
   mutation uploadChallenge(
-    $caption: String!
+    $caption: String
     $category: String!
     $rel_challengers: [String!]
     $pre_challengers: [String!]
     $next_challengers: [String!]
     $tag_challengers: [String!]
     $files: [String!]!
-    $postId: String!
   ) {
     uploadChallenge(
       caption: $caption
@@ -32,10 +31,8 @@ export const UPLOAD = gql`
       next_challengers: $next_challengers
       tag_challengers: $tag_challengers
       files: $files
-      postId: $postId
     ) {
       id
-      postId
       caption
     }
   }
