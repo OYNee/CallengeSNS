@@ -9,14 +9,12 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 export default ({ cat, pid }) => {
-  const [preAction, setPreAction] = useState(cat);
   const [action, setAction] = useState("CreatePost");
   const [create, setCreate] = useState(false);
   const [relChallenger, setRelChallenger] = useState(``);
   const [tagChallenger, setTagChallenger] = useState(``);
   const caption = useInput("");
   const photo = useInput("");
-  const postId = pid;
   let filePath = [];
   var limit = 100;
   var cur = 0;
@@ -41,7 +39,7 @@ export default ({ cat, pid }) => {
 
   const uploadMutation = useMutation(UPLOAD, {
     variables: {
-      caption: caption.value,
+      caption: "caption.value #다시 #태그 #중복 #제거 #test4",
       // category: preAction,
       category: "image",
       rel_challengers: "",
@@ -49,7 +47,6 @@ export default ({ cat, pid }) => {
       next_challengers: "",
       tag_challengers: "",
       files: filePath,
-      postId: "",
     },
   });
   const onSubmit = async (e) => {
@@ -80,7 +77,7 @@ export default ({ cat, pid }) => {
             data: { uploadChallenge },
           } = await uploadMutation();
           if (uploadChallenge.id) {
-            window.location.href = "/";
+            // window.location.href = "/";
           }
         } catch (e) {
           toast.error("Cant upload", "Try later");
