@@ -129,6 +129,8 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
               <HashtagCard
               key={idx}
               username={hashtag.tag_name}
+              postCount={hashtag.postCount}
+              posts={hashtag.posts.slice(0,3)}
             />
             ))
           )}

@@ -6,9 +6,7 @@ export const SEARCH = gql`
       id
       tag_name
       postCount
-      post{
-        id
-      }
+
     }
   }
 `;

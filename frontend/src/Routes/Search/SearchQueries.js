@@ -5,6 +5,15 @@ export const SEARCH = gql`
     searchHashtag(term: $term, limit: $limit, cur: $cur) {
       id
       tag_name
+      postCount
+      posts{
+        id
+        files {
+          url
+        }
+        likeCount
+        commentCount
+      }
     }
     searchUser(term: $term, limit: $limit, cur: $cur) {
       id
@@ -14,5 +23,6 @@ export const SEARCH = gql`
       isSelf
       bio
     }
+  
   }
 `;
