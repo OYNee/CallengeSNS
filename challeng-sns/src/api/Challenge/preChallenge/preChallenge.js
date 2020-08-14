@@ -5,11 +5,11 @@ export default {
     preChallenge: async (_, args, { request, isAuthenticated })  =>{
         isAuthenticated(request);
         const {user} = request;
-        const {nextPost} = args;
+        const {prePost} = args;
         const post = await prisma.$exists.post({user:{id: user.id}})
         if(post){
             return prisma.updatePost({
-                data:{prePosts:nextPost},
+                data:{prePosts:prePost},
                 where:{id:user.id}
             })
         }else{

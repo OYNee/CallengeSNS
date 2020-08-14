@@ -67,6 +67,7 @@ export default () => {
           } = await logIn();
           if (token !== "" && token !== undefined) {
             localLogInMutation({ variables: { token } });
+            window.location.reload();
           } else {
             throw Error();
           }
@@ -132,6 +133,7 @@ export default () => {
           } = await confirmSecretMutation();
           if (token !== "" && token !== undefined) {
             localLogInMutation({ variables: { token } });
+            
           } else {
             throw Error();
           }
@@ -149,7 +151,10 @@ export default () => {
             toast.success(
               "Account created! Check your email for authentication"
             );
-            localLogInMutation({variables:{token}});
+            localStorage.removeItem(token)
+            setTimeout(()=>4000)
+            window.location.reload()
+            // localLogInMutation({variables:{email: email.value, passwd: passwd.value}});
           }else{
             throw Error();
           }

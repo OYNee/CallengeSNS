@@ -31,8 +31,6 @@ type User {
 
 type Post {
   id: ID!
-  postId: String!
-  newPost: Boolean!
   location: String
   caption: String!
   user: User!
