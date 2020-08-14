@@ -6,18 +6,22 @@ import FatText from "../FatText";
 import Avatar from "../Avatar";
 import { HeartFull, HeartEmpty, Comment as CommentIcon } from "../Icons";
 
+const LikeText = styled(FatText)`
+  color:${(props) => props.theme.livingCoral}
+`
+
 const Post = styled.div`
   ${props => props.theme.whiteBox};
   width: 100%;
   user-select: none;
-  margin-bottom:40px;
+  margin:3px 0;
   a {
     color: inherit;
   }
 `;
 
 const Header = styled.header`
-  padding: 15px;
+  padding: 10px 15px;
   display: flex;
   align-items: center;
 `;
@@ -79,7 +83,7 @@ const Timestamp = styled.span`
   font-size: 12px;
   margin: 10px 0px;
   padding-bottom: 10px;
-  border-bottom: ${props => props.theme.lightGreyColor} 1px solid;
+  border-bottom: ${props => props.theme.livingCoral} 1px solid;
 `;
 
 const Textarea = styled(TextareaAutosize)`
@@ -135,10 +139,12 @@ export default ({
       </UserColumn>
     </Header>
     <Files>
-      {files &&
-        files.map((file, index) => (
-          <File key={file.id} src={file.url} showing={index === currentItem} />
-        ))}
+      {files && files.map((file, index) => {
+        if (file.url) {
+          return (<File key={file.id} src={file.url} showing={index === currentItem} />)
+        } else {
+            return (<File key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
+          }})}
     </Files>
     <Meta>
       <Buttons>
@@ -149,7 +155,9 @@ export default ({
           <CommentIcon />
         </Button>
       </Buttons>
-      <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
+      {isLiked ? <LikeText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} /> : <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />}
+      
+      
       <Caption>
        {Cuser}
         <FatText text={username} /> {caption}

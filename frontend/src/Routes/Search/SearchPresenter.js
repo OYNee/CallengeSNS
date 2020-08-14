@@ -11,18 +11,24 @@ import { withRouter,Link } from "react-router-dom";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { encode } from "utf8";
 
+const SearchUserCard = styled(UserCard)`
+`
+
+const SearchMore = styled(FatText)`
+  color:${(props) => props.theme.livingCoral}
+`
+
+
 const Wrapper = styled.div`
-  height: 50vh;
   @media only screen and (max-width:${(props) => props.theme.sm}) {
-    min-height: 100vh;
   };
 `;
 const SearchInput = styled(Input)`
   background-color: ${(props) => props.theme.bgColor};
   padding: 5px;
   font-size: 14px;
-  border-radius: 3px;
-  height: auto;
+  border-radius: 15px;
+  height: 30px;
   text-align: center;
   width: 70%;
   margin: 10px auto;
@@ -51,11 +57,13 @@ const ELink = styled(Link)`
 `;
 export default withRouter(({ searchTerm, loading, data, history}) => {
 
+
   const search =(searchTerm?useInput(searchTerm):useInput(""));
   const onSearchSubmit = (e) => {
     e.preventDefault();
     history.push(`/search?term=`+encodeURIComponent(search.value));
   };
+  console.log(data)
   if (searchTerm === undefined) {
     return (
       <Wrapper>
@@ -85,20 +93,20 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
           />
         </form>
         <div>
-        {data.searchUser.length === 0 ?(
-          <FatText text="사용자 더보기"/>
-        ):(
-          <ELink to={`/search-user?term=`+decodeURIComponent(searchTerm)}>
-          <FatText text="사용자 더보기"/>
-         </ELink>
-        )}
+          {data.searchUser.length === 0 ?
+            (<></>):
+            ( <ELink to={`/search-user?term=${searchTerm}`}>
+              <SearchMore text="더 많은 챌린저 보러 가기!"/>
+              </ELink>
+            )
+          }
         </div>
         <Section>
           {data.searchUser.length === 0 ? (
-            <FatText text="사용자를 찾을 수 없습니다." />
+            <FatText text="찾으시는 챌린저가 없습니다 ㅠ" />
           ) : (
             data.searchUser.map((user,idx) => (
-              <UserCard
+              <SearchUserCard
                 key={idx}
                 username={user.username}
                 isFollowing={user.isFollowing}
@@ -111,19 +119,16 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
           )}
         </Section>
         <div>
-        {data.searchHashtag.length === 0 ?(
-          <FatText text="챌린지 더보기"/>
+        {data.searchHashtag.length === 0 ?(<></>
         ):(
-          <ELink to={`/search-challenge?term=`+decodeURIComponent(searchTerm)}>
-          <FatText text="챌린지 더보기"/>
+          <ELink to={`/home`}>
+          <SearchMore text="다른 챌린지 보러 가기!"/>
          </ELink>
         )}
         </div>
-        <Section>
+        <PostSection>
           {data.searchHashtag.length === 0 ? (
-            <div>
-            <FatText text="챌린지를 찾을 수 없습니다." />
-            </div>
+            <FatText text="조건에 맞는 챌린지가 없네요 ㅠㅠ" />
           ) : (
             data.searchHashtag.map((hashtag,idx) => (
               <HashtagCard
@@ -132,7 +137,7 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
             />
             ))
           )}
-        </Section>
+        </PostSection>
       </Wrapper>
     );
   }

@@ -1,28 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import Input from "../../Components/Input";
+import ImageInput from "../../Components/ImageInput";
 import Button from "../../Components/Button";
 import { Dropdown } from "semantic-ui-react";
 import Loader from "../../Components/Loader";
 
+
+
 const Wrapper = styled.div`
-  margin-top: -60px;
-  margin-bottom: 20px;
-  min-height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  padding: 3vw;
+  margin: 0 4vw;
+  @media only screen and (max-width:${(props) => props.theme.sm})
 `;
 const Section = styled.div`
-  margin-bottom: 50px;
-  display: grid;
-  grid-gap: 25px;
-  grid-template-columns: repeat(4, 160px);
-  grid-template-rows: 160px;
-  grid-auto-rows: 160px;
+  width: 100%;
+  margin: 15px auto;
 `;
+
+const PostBox = styled.div`
+  width: 86vw;
+  background-color: rgba(0,0,0,0);
+  margin: 3vw auto;
+  border-radius: 10px;
+`;
+
+const ContentBox = styled.div`
+  width: 86vw;
+  height: 86vw;
+`;
+
+
+const CaptionInput = styled.textarea`
+  border: 0;
+  border: ${(props) => props.theme.boxBorder};
+  border-radius: ${(props) => props.theme.borderRadius};
+  width:86vw;
+  height 10vh;
+  font-size: 12px;
+  padding: 0px 15px;
+  resize: none;
+`;
+
+const CompleteButton = styled.button`
+  height:10vh;
+`;
+
+
 
 export default ({
   action,
@@ -30,7 +55,7 @@ export default ({
   setAction,
   setCreate,
   create,
-  photo,
+  audio,
   onSubmit,
   relChallenger,
   tagChallenger,
@@ -38,6 +63,8 @@ export default ({
   data,
   setRelChallenger,
   setTagChallenger,
+  cat,
+  pid
 }) => {
   const onSelectRelChallenger = (e, { value }) => {
     e.preventDefault();
@@ -55,8 +82,9 @@ export default ({
     setAction("CreatePost");
     onSubmit(e);
   };
-  const onUpload = (e) => {
+  const onUpload = (e) => {   
     setCreate(true);
+    console.log(e)
     onSubmit(e);
   };
   if (loading === true) {
@@ -71,48 +99,22 @@ export default ({
       value: user.id,
       text: `${user.nickname}(@${user.username})`,
     }));
-    return (
-      <Wrapper>
-        {action === "CreatePost" && (
-          <>
-            <button onClick={() => setAction("relChallenger")}>
-              relChallenger
-            </button>
-            <button onClick={() => setAction("tagChallenger")}>
-              tagChallenger
-            </button>
-            <select name="category" id="category">
-                <option value="">선택</option>
-                <option value="video">비디오</option>
-                <option value="audio">오디오</option>
-                <option value="image">이미지</option>
-            </select>
-            <input type="file" name="photo" id="photo" />
-            <button onClick={onUpload}>업로드하기</button>
-          </>
-        )}
-        {action === "relChallenger" && (
-          <>
+    if (cat === "video") {
+      return (
+        <Wrapper>
+          <PostBox>
+          {action === "CreatePost" && (
+            <>
+            <ContentBox>
+              <ImageInput></ImageInput>
+            </ContentBox>
+            <h1>"video"</h1>
+            <CaptionInput
+              placeholder="video"/>
+            <h1>누구와 함께?</h1>
             <Section>
               <Dropdown
-                placeholder="현재 선택된 사용자가 없습니다"
-                fluid
-                multiple
-                search
-                selection
-                options={userOptions}
-                defaultValue={relChallenger}
-                onChange={onSelectRelChallenger}
-              />
-            </Section>
-            <button onClick={onRelChallenger}>확인</button>
-          </>
-        )}
-        {action === "tagChallenger" && (
-          <>
-            <Section>
-              <Dropdown
-                placeholder="현재 선택된 사용자가 없습니다"
+                placeholder="video"
                 fluid
                 multiple
                 search
@@ -122,10 +124,223 @@ export default ({
                 onChange={onSelectTagChallenger}
               />
             </Section>
-            <button onClick={onTagChallenger}>확인</button>
-          </>
-        )}
+            <Section>
+                <Dropdown
+                  placeholder="video"
+                  fluid
+                  multiple
+                  search
+                  selection
+                  options={userOptions}
+                  defaultValue={relChallenger}
+                  onChange={onSelectRelChallenger}
+                />
+              </Section>
+            <Button onClick={onUpload} text="업로드"/>
+              
+            </>)}
+          {action !== "CreatePost" ? (<h1>하위</h1>) : (<h1>바위</h1>)}
+          </PostBox>
+        </Wrapper>
+      );
+    } else if (cat === "audio") {
+      return (
+        <Wrapper>
+          <PostBox>
+          {action === "CreatePost" && (
+            <>
+            <ContentBox>
+              <ImageInput></ImageInput>
+            </ContentBox>
+            <h1>"audio"</h1>
+            <CaptionInput
+              placeholder="audio"/>
+            <h1>누구와 함께?</h1>
+            <Section>
+              <Dropdown
+                placeholder="audio"
+                fluid
+                multiple
+                search
+                selection
+                defaultValue={tagChallenger}
+                options={userOptions}
+                onChange={onSelectTagChallenger}
+              />
+            </Section>
+            <Section>
+                <Dropdown
+                  placeholder="audio"
+                  fluid
+                  multiple
+                  search
+                  selection
+                  options={userOptions}
+                  defaultValue={relChallenger}
+                  onChange={onSelectRelChallenger}
+                />
+              </Section>
+            <Button onClick={onUpload} text="업로드"/>
+              
+            </>)}
+          {action !== "CreatePost" ? (<h1>하위</h1>) : (<h1>바위</h1>)}
+          </PostBox>
+        </Wrapper>
+      );
+
+    } else if (cat === "text") {
+      return (
+        <Wrapper>
+          <PostBox>
+          {action === "CreatePost" && (
+            <>
+            <ContentBox>
+              <ImageInput></ImageInput>
+            </ContentBox>
+            <h1>"text""text""text""text"</h1>
+            <CaptionInput
+              placeholder="text"/>
+            <h1>누구와 함께?</h1>
+            <Section>
+              <Dropdown
+                placeholder="text"
+                fluid
+                multiple
+                search
+                selection
+                defaultValue={tagChallenger}
+                options={userOptions}
+                onChange={onSelectTagChallenger}
+              />
+            </Section>
+            <Section>
+                <Dropdown
+                  placeholder="text"
+                  fluid
+                  multiple
+                  search
+                  selection
+                  options={userOptions}
+                  defaultValue={relChallenger}
+                  onChange={onSelectRelChallenger}
+                />
+              </Section>
+            <Button onClick={onUpload} text="업로드"/>
+              
+            </>)}
+          {action !== "CreatePost" ? (<h1>하위</h1>) : (<h1>바위</h1>)}
+          </PostBox>
+        </Wrapper>
+      );
+
+    } else {
+      return (
+        <Wrapper>
+          <PostBox>
+          {action === "CreatePost" && (
+            <>
+            <ContentBox>
+              <ImageInput></ImageInput>
+            </ContentBox>
+            <h1>"photo""photo""photo""photo""photo""photo"</h1>
+            <CaptionInput
+              placeholder="photo"/>
+            <h1>누구와 함께?</h1>
+            <Section>
+              <Dropdown
+                placeholder="photo"
+                fluid
+                multiple
+                search
+                selection
+                defaultValue={tagChallenger}
+                options={userOptions}
+                onChange={onSelectTagChallenger}
+              />
+            </Section>
+            <Section>
+                <Dropdown
+                  placeholder="photo"
+                  fluid
+                  multiple
+                  search
+                  selection
+                  options={userOptions}
+                  defaultValue={relChallenger}
+                  onChange={onSelectRelChallenger}
+                />
+              </Section>
+            <Button onClick={onUpload} text="업로드"/>
+              
+            </>)}
+          {action !== "CreatePost" ? (<h1>하위</h1>) : (<h1>바위</h1>)}
+          </PostBox>
+        </Wrapper>
+      );
+
+    }
+  } else {
+      return (
+      <Wrapper>
+        하위
       </Wrapper>
-    );
-  }
+      )
+    }
 };
+
+
+
+
+
+
+
+
+
+
+// return (
+//   <Wrapper>
+//     <button onCLick={() => setCategory("video")}>video</button>
+//     <button onCLick={() => setCategory("audio")}>audio</button>
+//     <button onCLick={() => setCategory("photo")}>photo</button>
+//     <button onCLick={() => setCategory("text")}>text</button>
+//     <PostBox>
+//     {action === "CreatePost" && (
+//       <>
+//       <ContentBox>
+//         <ImageInput></ImageInput>
+//       </ContentBox>
+//       <h1>{category} {category}</h1>
+//       <CaptionInput
+//         placeholder={category}/>
+//       <h1>누구와 함께?</h1>
+//       <Section>
+//         <Dropdown
+//           placeholder={category}
+//           fluid
+//           multiple
+//           search
+//           selection
+//           defaultValue={tagChallenger}
+//           options={userOptions}
+//           onChange={onSelectTagChallenger}
+//         />
+//       </Section>
+//       <Section>
+//           <Dropdown
+//             placeholder={category}
+//             fluid
+//             multiple
+//             search
+//             selection
+//             options={userOptions}
+//             defaultValue={relChallenger}
+//             onChange={onSelectRelChallenger}
+//           />
+//         </Section>
+//       <Button onClick={onUpload} text="업로드"/>
+        
+//       </>)}
+//     {action !== "CreatePost" ? (<h1>하위</h1>) : (<h1>바위</h1>)}
+//     </PostBox>
+//   </Wrapper>
+// );

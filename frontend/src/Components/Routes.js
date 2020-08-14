@@ -19,6 +19,10 @@ import SelectPhoto from "../Routes/SelectPhoto";
 import CreatePost from "../Routes/CreatePost";
 import findPasswd from "../Routes/findPasswd";
 import Challenge from "../Routes/Challenge";
+import CreateVideoPost from "../Routes/CreateVideoPost";
+import CreatePhotoPost from "../Routes/CreatePhotoPost";
+import CreateAudioPost from "../Routes/CreateAudioPost";
+import CreateTextPost from "../Routes/CreateTextPost";
 
 const LoggedInRoutes = () => (
   <Switch>
@@ -37,6 +41,10 @@ const LoggedInRoutes = () => (
     <Route path="/selectphoto" component={SelectPhoto} />
     <Route path="/createpost" component={CreatePost} />
     <Route path="/challenge" component={Challenge} />
+    <Route path="/createvideopost" component={CreateVideoPost} />
+    <Route path="/createphotopost" component={CreatePhotoPost} />
+    <Route path="/createaudiopost" component={CreateAudioPost} />
+    <Route path="/createtextpost" component={CreateTextPost} />
     <Route path="/:username" component={Profile} />
     <Redirect from="*" to="/" />
   </Switch>

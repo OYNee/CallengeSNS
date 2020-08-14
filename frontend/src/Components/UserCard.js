@@ -34,7 +34,7 @@ const Temp = styled.p`
 
 const UserCard = ({ id, username, isFollowing, url, isSelf,bio }) => (
   <Card>
-    <EAvatar url={url} size={"md"} />
+    <EAvatar url={url} size={"sm"} />
   
       <ELink to={`/${username}`}>
         <FatText text={username} />

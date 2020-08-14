@@ -79,7 +79,6 @@ type Message {
   updatedAt: DateTime! @updatedAt
 }
 
-
 type Like {
   id: ID! @id
   user: User @relation(name: "LikesOfUser")
