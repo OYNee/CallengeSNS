@@ -1,21 +1,22 @@
 import React, { useState } from "react";
-import CreatePostPresenter from "./CreatePostPresenter";
+import CreatePhotoPostPresenter from "./CreatePhotoPostPresenter";
 import useInput from "../../Hooks/useInput";
 import { useMutation, useQuery } from "react-apollo-hooks";
 import { ME } from "../../SharedQueries";
 import FormData from "form-data";
-import { FOLLOW, UPLOAD } from "./CreatePostQueries";
+import { FOLLOW, UPLOAD } from "./CreatePhotoPostQueries";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default ({ category, pid, hashtags }) => {
+
+export default () => {
   const [action, setAction] = useState("CreatePost");
   const [create, setCreate] = useState(false);
   const [relChallenger, setRelChallenger] = useState(``);
   const [tagChallenger, setTagChallenger] = useState(``);
   const caption = useInput("");
   const photo = useInput("");
-  let filePath = [];
+  const path = "";
   var limit = 100;
   var cur = 0;
   var id = "";
@@ -33,19 +34,20 @@ export default ({ category, pid, hashtags }) => {
       },
     });
     data = FOLLOWQuery.data;
+    console.log(data)
     loading = FOLLOWQuery.loading;
   }
 
   const uploadMutation = useMutation(UPLOAD, {
     variables: {
-      caption: "caption.value #다시 #태그 #중복 #제거 #test4",
-      // category: preAction,
+      caption: "caption.value #안녕 #하세요",
       category: "image",
       rel_challengers: "",
       pre_challengers: "",
       next_challengers: "",
       tag_challengers: "",
-      files: filePath,
+      files: path,
+      postId: "",
     },
   });
   const onSubmit = async (e) => {
@@ -54,23 +56,22 @@ export default ({ category, pid, hashtags }) => {
       if (create) {
         let formData = new FormData();
         let photoFile = document.getElementById("photo");
-
+        console.log(photoFile.files[0])
         formData.append("file", photoFile.files[0]);
         try {
           const {
-            data: { location },
+            data: { path },
           } = await axios.post("http://localhost:4000/api/upload", formData, {
             headers: {
               "content-type": "multipart/form-data",
             },
           });
-          filePath[0] = location;
-          console.log("file", filePath);
+
           const {
             data: { uploadChallenge },
           } = await uploadMutation();
           if (uploadChallenge.id) {
-            // window.location.href = "/";
+            window.location.href = "/";
           }
         } catch (e) {
           toast.error("Cant upload", "Try later");
@@ -82,7 +83,7 @@ export default ({ category, pid, hashtags }) => {
     }
   };
   return (
-    <CreatePostPresenter
+    <CreatePhotoPostPresenter
       setAction={setAction}
       action={action}
       setCreate={setCreate}
@@ -96,10 +97,7 @@ export default ({ category, pid, hashtags }) => {
       loading={loading}
       data={data}
       id={id}
-      category={category}
-      pid={pid}
-      hashtags={hashtags}
-
+      cat="image"
     />
   );
 };

@@ -22,6 +22,10 @@ const Footer = styled.footer`
   };
 `;
 
+const BlankFooter = styled.div`
+  height:47px
+`
+
 const List = styled.ul`
   display: flex;
   width:100%;
@@ -77,7 +81,7 @@ const Hover = styled.div`
 `
 
 
-export default (defaultValue) => {
+export default (defaultValue1,defaultValue2) => {
   const { data } = useQuery(ME);
   // const [nowTab, setNowTab] = useState("home")
 
@@ -89,9 +93,15 @@ export default (defaultValue) => {
 
   const { animation, direction, visible } = state
   const vertical = direction === 'bottom'
-  const [now,setNow] = useState(defaultValue)
+  const [now,setNow] = useState(defaultValue1)
+  const [n,setN] = useState(defaultValue2)
+  const fa = () => {
+    dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay'})
+    setNow("create")
+  }
 
   return (
+    <BlankFooter>
     <Footer>
         {vertical && (
           <Sidebar
@@ -100,36 +110,50 @@ export default (defaultValue) => {
           direction={direction}
           visible={visible}
           >
-          <Grid textAlign='center'>
+          <Grid textAlign='center' onClick={() =>
+              dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
+            }>
             <Header onClick={() =>
                   dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
                 }>
-              <h1>New Challenge</h1>
+              <h1 onClick={() =>
+                  dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
+                }>New Challenge</h1>
             </Header>
             <CloseButton onClick={() =>
               dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
-            }> X</CloseButton>
+            }> <h1 onClick={() =>
+              dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
+            }>X</h1></CloseButton>
               <Line/>
             <Grid.Row columns={4}>
               <Grid.Column>
+                  <Link to="/createvideopost">
                 <Hover>
-                  <VideoIcon />
+                    <VideoIcon />
                 </Hover>
+                  </Link>
               </Grid.Column>
               <Grid.Column>
+                  <Link to="/createphotopost">
                 <Hover>
-                  <PhotoIcon />              
+                    <PhotoIcon  />              
                 </Hover>
+                  </Link>
               </Grid.Column>
               <Grid.Column>
+                  <Link to="/createaudiopost">
                 <Hover>
-                  <AudioIcon />
+                    <AudioIcon />
                 </Hover>
+                  </Link>
               </Grid.Column>
               <Grid.Column>
-                <Hover>
-                  <TextIcon />
-                </Hover>
+                <Link to="/createtextpost">
+                  <Hover>
+                    <TextIcon />
+                  </Hover>
+                </Link>
               </Grid.Column>
             </Grid.Row>
           </Grid>
@@ -147,13 +171,8 @@ export default (defaultValue) => {
           </Link>
         </ListItem>
         <ListItem>
-        <div
-          onClick={() =>
-            dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay'})
-          }
-        >
-          <Logo/>
-        </div>
+          <Logo  onClick={() => fa()
+          }  now={now}/>
         </ListItem>
         <ListItem>
           <Link to="/notifications">
@@ -173,5 +192,6 @@ export default (defaultValue) => {
         </ListItem>
       </List>
     </Footer>
+    </BlankFooter>
   );
 };

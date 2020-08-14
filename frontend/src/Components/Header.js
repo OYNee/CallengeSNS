@@ -8,6 +8,7 @@ import {
   Home,
   TextLogo,
   WebSearch,
+  MobileTextLogo,
 } from "./Icons";
 import { useQuery } from "react-apollo-hooks";
 import { ME } from "../SharedQueries";
@@ -28,8 +29,9 @@ const Wrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  background-color: white;
-  border-bottom: ${(props) => props.theme.boxBorder};
+  background-color: rgba(205,209,255,0.3);
+  // opacity: 0;
+  // border-bottom: ${(props) => props.theme.boxBorder};
   border-radius: 0px;
   display: flex;
   justify-content: center;
@@ -131,7 +133,7 @@ export default withRouter(() => {
         </HeaderWrapper>
       </Header>
       <MobileHeader>
-        <TextLogo />
+        <MobileTextLogo />
       </MobileHeader>
     </Wrapper>
   );

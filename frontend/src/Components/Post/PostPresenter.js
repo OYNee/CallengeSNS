@@ -1,23 +1,29 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { Modal } from "semantic-ui-react";
 import TextareaAutosize from "react-autosize-textarea";
 import FatText from "../FatText";
 import Avatar from "../Avatar";
-import { HeartFull, HeartEmpty, Comment as CommentIcon } from "../Icons";
+import { HeartFull, HeartEmpty, Comment as CommentIcon, Logo } from "../Icons";
+import CreatePost from "../../Routes/CreatePost"
+
+const LikeText = styled(FatText)`
+  color:${(props) => props.theme.livingCoral}
+`
 
 const Post = styled.div`
   ${props => props.theme.whiteBox};
   width: 100%;
   user-select: none;
-  margin-bottom:40px;
+  margin:3px 0;
   a {
     color: inherit;
   }
 `;
 
 const Header = styled.header`
-  padding: 15px;
+  padding: 10px 15px;
   display: flex;
   align-items: center;
 `;
@@ -79,7 +85,7 @@ const Timestamp = styled.span`
   font-size: 12px;
   margin: 10px 0px;
   padding-bottom: 10px;
-  border-bottom: ${props => props.theme.lightGreyColor} 1px solid;
+  border-bottom: ${props => props.theme.livingCoral} 1px solid;
 `;
 
 const Textarea = styled(TextareaAutosize)`
@@ -107,6 +113,62 @@ const Caption = styled.div`
   margin: 10px 0px;
 `;
 
+
+
+const CreateButton = styled.button`
+width:10px;
+height:10px;
+`
+
+
+function exampleReducer(state, action) {
+  switch (action.type) {
+    case "close":
+      return { open: false };
+    case "open":
+      return { open: true, size: action.size };
+    default:
+      throw new Error("Unsupported action...");
+  }
+}
+
+
+const CreateModal = ({category, pid, hashtags }) => {
+  const [state, dispatch] = React.useReducer(exampleReducer, {
+    open: false,
+    size: undefined,
+  });
+  const { open, size } = state;
+
+  return (
+    <>
+      <Logo onClick={() => dispatch({ type: "open", size: "tiny" })}></Logo>
+      <Modal
+        size={size}
+        open={open}
+        onClose={() => dispatch({ type: "close" })}
+      >
+        <Modal.Content>
+          <CreatePost
+            category = {category}
+            pid={pid}
+            hashtags={hashtags}
+            />
+        </Modal.Content>
+        <Modal.Actions>
+          <Button onClick={() => dispatch({ type: "close" })}>
+            Close
+          </Button>
+        </Modal.Actions>
+      </Modal>
+    </>
+  );
+};
+
+
+
+
+
 export default ({
   user: { username, avatar},
   location,
@@ -121,9 +183,13 @@ export default ({
   comments,
   selfComments,
   caption,
-  Cuser
+  Cuser,
+  category,
+  id,
+  hashtags,
   
-}) => (
+}) => {
+  return(
   <Post>
     <Header>
       <Avatar size="sm" url={avatar} />
@@ -135,10 +201,12 @@ export default ({
       </UserColumn>
     </Header>
     <Files>
-      {files &&
-        files.map((file, index) => (
-          <File key={file.id} src={file.url} showing={index === currentItem} />
-        ))}
+      {files && files.map((file, index) => {
+        if (file.url) {
+          return (<File key={file.id} src={file.url} showing={index === currentItem} />)
+        } else {
+            return (<File key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
+          }})}
     </Files>
     <Meta>
       <Buttons>
@@ -148,8 +216,14 @@ export default ({
         <Button>
           <CommentIcon />
         </Button>
+        <Button>
+          <CreateModal category={category} pid={id} hashtags={hashtags}/>
+
+        </Button>
       </Buttons>
-      <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
+      {isLiked ? <LikeText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} /> : <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />}
+
+      
       <Caption>
        {Cuser}
         <FatText text={username} /> {caption}
@@ -179,4 +253,4 @@ export default ({
       />
     </Meta>
   </Post>
-);
+)};

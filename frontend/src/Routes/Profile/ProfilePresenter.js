@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import DropdownMenu from "../../Components/UserSetting";
 
 const Wrapper = styled.div`
-  min-height: 100vh;
+
 `;
 
 const UpdateWrapper = styled.div`
@@ -26,6 +26,7 @@ const UpdateWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
 `;
+
 
 const Header = styled.header`
   display: flex;
@@ -92,7 +93,8 @@ const Posts = styled.div`
   @media only screen and (max-width: ${(props) => props.theme.sm}) {
     grid-template-columns: repeat(3, 32vw);
     grid-template-rows: 32vw;
-    justify-content: space-around;
+    grid-auto-rows: 32vw;
+    justify-content:space-around;
   }
 `;
 const ELink = styled(Link)`
@@ -159,7 +161,6 @@ const Form = styled(Box)`
     }
   }
 `;
-
 export default ({
   loading,
   data,
@@ -212,6 +213,7 @@ export default ({
         posts,
       },
     } = data;
+    // console.log(data)
     return (
       <Wrapper>
         <Helmet>
@@ -264,15 +266,17 @@ export default ({
 
         <Posts>
           {posts &&
-            posts.map((post) => (
+            posts.map((post) => {
+              return(
               <SquarePost
                 key={post.id}
                 id={post.id}
                 likeCount={post.likeCount}
-                commentCount={post.commentCount}
+                commentCount={post.comments.length}
                 file={post.files[0]}
+                post={post}
               />
-            ))}
+            )})}
         </Posts>
       </Wrapper>
     );
