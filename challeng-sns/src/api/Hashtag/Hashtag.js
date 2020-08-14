@@ -5,7 +5,7 @@ export default {
     postCount: (parent) =>
       prisma
         .postsConnection({
-          where: { Hashtag: { id: parent.id } },
+          where: { post: { id: parent.id } },
         })
         .aggregate()
         .count(),

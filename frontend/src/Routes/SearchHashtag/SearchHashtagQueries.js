@@ -5,6 +5,10 @@ export const SEARCH = gql`
     searchHashtag(term: $term, limit: $limit, cur: $cur) {
       id
       tag_name
+      postCount
+      post{
+        id
+      }
     }
   }
 `;

@@ -122,6 +122,7 @@ export default withRouter(({ searchTerm, loading, data, history, fetchMore,hasMo
               <HashtagCard
               key={idx}
               username={hashtag.tag_name}
+              postCount={hashtag.postCount}
             />
             ))}
             </InfiniteScroll>
