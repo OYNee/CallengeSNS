@@ -30,9 +30,6 @@ export default () => {
     variables: { email: email.value },
   });
 
-  // const requestSecretMutation = useMutation(LOG_IN, {
-  //   variables: { email: email.value },
-  // });
   const confirmEmailMutation = useMutation(CONFIRM_EMAIL, {
     variables:{
       email: email.value,

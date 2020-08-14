@@ -142,6 +142,6 @@ type Category {
 type Hashtag{
   id: ID! 
   tag_name: String!
-  post: [Post!]
+  posts: [Post!]
   postCount: Int!
 } 

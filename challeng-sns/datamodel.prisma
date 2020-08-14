@@ -141,6 +141,6 @@ type Category {
 type Hashtag{
   id: ID! @id
   tag_name: String! @unique
-  post: [Post!]! @relation(name: "HashtagofPost")
+  posts: [Post!]! @relation(name: "HashtagofPost")
 
 } 
