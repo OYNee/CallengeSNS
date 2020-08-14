@@ -22,10 +22,11 @@ const ELink = styled(Link)`
   margin: 5px 10px;
 `;
 
-const HashtagCard = ({ id, username}) => (
+const HashtagCard = ({ id, username,postCount}) => (
   <Card> 
       <ELink to={`challenge/${username}`}>
         <FatText text={username} />
+        <FatText text={`UPLOAD ${postCount}`} />
       </ELink>
   </Card>
 );
