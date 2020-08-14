@@ -8,7 +8,7 @@ import { DropdownIcon } from "../Components/Icons";
 // The "Publish To Web" item should contain a sub-menu.
 
 const Username = styled.span`
-  font-size: 7vw;
+  font-size: 5vw;
   display: inline-block;
 `;
 

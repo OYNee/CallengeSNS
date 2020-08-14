@@ -7,6 +7,11 @@ export const FEED_QUERY = gql`
       id
       location
       caption
+      category
+      hashtags {
+        id
+        tag_name
+      }
       user {
         id
         avatar

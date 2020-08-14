@@ -57,7 +57,8 @@ export default withRouter(({ loading, data, history, fetchMore,hasMore,setHasMor
               <Loader />
             </Wrapper>}
           >{
-        data.seeFeed.map((post) => (
+        data.seeFeed.map((post) => {
+          return(
           <Post
             key={post.id}
             id={post.id}
@@ -69,8 +70,10 @@ export default withRouter(({ loading, data, history, fetchMore,hasMore,setHasMor
             isLiked={post.isLiked}
             comments={post.comments}
             createdAt={post.createdAt}
+            category={post.category}
+            hashtags={post.hashtags}
           />
-        ))}
+        )})}
         </InfiniteScroll>
           )}
       </Wrapper>

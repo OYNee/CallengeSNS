@@ -3,8 +3,7 @@ import styled from "styled-components";
 import {Frame} from "./Icons"
 
 const Img = styled.img`
-  width:86vw;
-  height: 86vw;
+  width:100%;
 `
 const Wrapper = styled.div`
   width:100%;

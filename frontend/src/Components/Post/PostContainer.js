@@ -16,7 +16,8 @@ const PostContainer = ({
   createdAt,
   caption,
   location,
-
+  category,
+  hashtags,
 
 }) => {
   const [isLikedS, setIsLiked] = useState(isLiked);
@@ -89,6 +90,10 @@ const PostContainer = ({
       selfComments={selfComments}
       Cuser={Cuser}
       fetchMore={fetchMore}
+      category={category}
+      id={id}
+      hashtags={hashtags}
+
       // preChallenger={preChallenger}
       // nextChallenger={nextChallenger}
       // tagChallenger={tagChallenger}

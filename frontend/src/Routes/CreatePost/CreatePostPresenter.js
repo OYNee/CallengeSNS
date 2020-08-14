@@ -20,15 +20,14 @@ const Section = styled.div`
 `;
 
 const PostBox = styled.div`
-  width: 86vw;
+  width: 100%;
   background-color: rgba(0,0,0,0);
   margin: 3vw auto;
   border-radius: 10px;
 `;
 
 const ContentBox = styled.div`
-  width: 86vw;
-  height: 86vw;
+  width: 100%;
 `;
 
 
@@ -36,7 +35,7 @@ const CaptionInput = styled.textarea`
   border: 0;
   border: ${(props) => props.theme.boxBorder};
   border-radius: ${(props) => props.theme.borderRadius};
-  width:86vw;
+  width:100%;
   height 10vh;
   font-size: 12px;
   padding: 0px 15px;
@@ -47,7 +46,12 @@ const CompleteButton = styled.button`
   height:10vh;
 `;
 
+const HashTags = styled.div`
 
+`
+const HashTag = styled.span`
+
+`
 
 export default ({
   action,
@@ -63,8 +67,9 @@ export default ({
   data,
   setRelChallenger,
   setTagChallenger,
-  cat,
-  pid
+  category,
+  pid,
+  hashtags,
 }) => {
   const onSelectRelChallenger = (e, { value }) => {
     e.preventDefault();
@@ -99,7 +104,7 @@ export default ({
       value: user.id,
       text: `${user.nickname}(@${user.username})`,
     }));
-    if (cat === "video") {
+    if (category === "video") {
       return (
         <Wrapper>
           <PostBox>
@@ -143,7 +148,7 @@ export default ({
           </PostBox>
         </Wrapper>
       );
-    } else if (cat === "audio") {
+    } else if (category === "audio") {
       return (
         <Wrapper>
           <PostBox>
@@ -188,7 +193,7 @@ export default ({
         </Wrapper>
       );
 
-    } else if (cat === "text") {
+    } else if (category === "image") {
       return (
         <Wrapper>
           <PostBox>
@@ -197,9 +202,18 @@ export default ({
             <ContentBox>
               <ImageInput></ImageInput>
             </ContentBox>
-            <h1>"text""text""text""text"</h1>
+          <h1>pid : {pid}</h1>
+          <h1>category : {category}</h1>
+          <HashTags>
+          {hashtags.map(hashtag => (
+            <HashTag key={hashtag.id}>
+              {hashtag.tag_name}
+            </HashTag>
+          ))}
+        </HashTags>
+          <h1>한마디 남기기</h1>
             <CaptionInput
-              placeholder="text"/>
+              placeholder="image image"/>
             <h1>누구와 함께?</h1>
             <Section>
               <Dropdown
@@ -215,7 +229,7 @@ export default ({
             </Section>
             <Section>
                 <Dropdown
-                  placeholder="text"
+                  placeholder=" image image image image image image image image image image image image"
                   fluid
                   multiple
                   search
@@ -228,7 +242,6 @@ export default ({
             <Button onClick={onUpload} text="업로드"/>
               
             </>)}
-          {action !== "CreatePost" ? (<h1>하위</h1>) : (<h1>바위</h1>)}
           </PostBox>
         </Wrapper>
       );
@@ -242,13 +255,13 @@ export default ({
             <ContentBox>
               <ImageInput></ImageInput>
             </ContentBox>
-            <h1>"photo""photo""photo""photo""photo""photo"</h1>
+            <h1>"text text text text text text vtext text vtext text "</h1>
             <CaptionInput
-              placeholder="photo"/>
+              placeholder="text text text text text text vtext text vtext text"/>
             <h1>누구와 함께?</h1>
             <Section>
               <Dropdown
-                placeholder="photo"
+                placeholder="text text text text text text vtext text vtext text"
                 fluid
                 multiple
                 search
@@ -260,7 +273,7 @@ export default ({
             </Section>
             <Section>
                 <Dropdown
-                  placeholder="photo"
+                  placeholder="text text text text text text vtext text vtext text"
                   fluid
                   multiple
                   search

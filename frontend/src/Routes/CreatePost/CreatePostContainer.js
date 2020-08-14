@@ -8,7 +8,7 @@ import { FOLLOW, UPLOAD } from "./CreatePostQueries";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default ({ cat, pid }) => {
+export default ({ category, pid, hashtags }) => {
   const [action, setAction] = useState("CreatePost");
   const [create, setCreate] = useState(false);
   const [relChallenger, setRelChallenger] = useState(``);
@@ -19,7 +19,6 @@ export default ({ cat, pid }) => {
   var limit = 100;
   var cur = 0;
   var id = "";
-
   const meQuery = useQuery(ME);
   var data = "",
     loading = "";
@@ -97,8 +96,10 @@ export default ({ cat, pid }) => {
       loading={loading}
       data={data}
       id={id}
-      cat="audio"
+      category={category}
       pid={pid}
+      hashtags={hashtags}
+
     />
   );
 };
