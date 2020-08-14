@@ -14,6 +14,7 @@ export default {
                 data:{prePosts:{
                     connect:{
                         id:pid
+                        
                     }
                 },
                 category:category
