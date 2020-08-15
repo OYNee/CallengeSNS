@@ -55,6 +55,8 @@ type Post {
   image: [Image!]
   audio: [Audio!]
   text: [Text!]
+  nextPostCount: Int
+  prePostCount: Int
 }
 
 type Like {
@@ -119,7 +121,7 @@ type Audio {
   audio_id: ID!
   audio_url: String!
   audio_img_url: String!
-  audioFile: File!
+  audioFile: [File!]
   post: Post
   createdAt: String
 }
