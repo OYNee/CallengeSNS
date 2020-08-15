@@ -110,7 +110,7 @@ export default withRouter(() => {
                 <WebLogo />
               </HeaderLink>
             ) : (
-              <HeaderLink to={`/createaudiopost?`} replace>
+              <HeaderLink to={`/createtextpost?`} replace>
                 <WebLogo />
               </HeaderLink>
             )}

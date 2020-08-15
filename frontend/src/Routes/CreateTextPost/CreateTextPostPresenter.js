@@ -7,12 +7,10 @@ import Button from "../../Components/Button";
 import { Dropdown } from "semantic-ui-react";
 import Loader from "../../Components/Loader";
 
-
-
 const Wrapper = styled.div`
   padding: 3vw;
   margin: 0 4vw;
-  @media only screen and (max-width:${(props) => props.theme.sm})
+  @media only screen and (max-width: ${(props) => props.theme.sm});
 `;
 const Section = styled.div`
   width: 100%;
@@ -21,7 +19,7 @@ const Section = styled.div`
 
 const PostBox = styled.div`
   width: 86vw;
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
   margin: 3vw auto;
   border-radius: 10px;
 `;
@@ -30,7 +28,6 @@ const ContentBox = styled.div`
   width: 86vw;
   height: 86vw;
 `;
-
 
 const CaptionInput = styled.textarea`
   border: 0;
@@ -44,10 +41,8 @@ const CaptionInput = styled.textarea`
 `;
 
 const CompleteButton = styled.button`
-  height:10vh;
+  height: 10vh;
 `;
-
-
 
 export default ({
   action,
@@ -60,10 +55,11 @@ export default ({
   relChallenger,
   tagChallenger,
   loading,
+  caption,
   data,
   setRelChallenger,
   setTagChallenger,
-  cat
+  cat,
 }) => {
   const onSelectRelChallenger = (e, { value }) => {
     e.preventDefault();
@@ -81,9 +77,9 @@ export default ({
     setAction("CreatePost");
     onSubmit(e);
   };
-  const onUpload = (e) => {   
+  const onUpload = (e) => {
     setCreate(true);
-    console.log(e)
+    console.log(e);
     onSubmit(e);
   };
   if (loading === true) {
@@ -101,50 +97,45 @@ export default ({
     return (
       <Wrapper>
         <PostBox>
-        {action === "CreatePost" && (
-          <>
-          <ContentBox>
-            <ImageInput></ImageInput>
-          </ContentBox>
-          <h1>한마디 부탁해요!</h1>
-          <CaptionInput
-            placeholder="한마디 부탁해요!"/>
-          <h1>누구와 함께?</h1>
-          <Section>
-            <Dropdown
-              placeholder="누구와 함께 했나요?"
-              fluid
-              multiple
-              search
-              selection
-              defaultValue={tagChallenger}
-              options={userOptions}
-              onChange={onSelectTagChallenger}
-            />
-          </Section>
-          <Section>
-              <Dropdown
-                placeholder="다음 챌린처를 지목해주세요!"
-                fluid
-                multiple
-                search
-                selection
-                options={userOptions}
-                defaultValue={relChallenger}
-                onChange={onSelectRelChallenger}
-              />
-            </Section>
-          <Button onClick={onUpload} text="업로드"/>
-            
-          </>)}
+          {action === "CreatePost" && (
+            <>
+              <ContentBox>
+                <ImageInput></ImageInput>
+              </ContentBox>
+              <h1>한마디 부탁해요!</h1>
+              <CaptionInput placeholder="한마디 부탁해요!" {...caption} />
+              <h1>누구와 함께?</h1>
+              <Section>
+                <Dropdown
+                  placeholder="누구와 함께 했나요?"
+                  fluid
+                  multiple
+                  search
+                  selection
+                  defaultValue={tagChallenger}
+                  options={userOptions}
+                  onChange={onSelectTagChallenger}
+                />
+              </Section>
+              <Section>
+                <Dropdown
+                  placeholder="다음 챌린처를 지목해주세요!"
+                  fluid
+                  multiple
+                  search
+                  selection
+                  options={userOptions}
+                  defaultValue={relChallenger}
+                  onChange={onSelectRelChallenger}
+                />
+              </Section>
+              <Button onClick={onUpload} text="업로드" />
+            </>
+          )}
         </PostBox>
       </Wrapper>
     );
   } else {
-      return (
-      <Wrapper>
-        하위
-      </Wrapper>
-      )
-    }
+    return <Wrapper>하위</Wrapper>;
+  }
 };

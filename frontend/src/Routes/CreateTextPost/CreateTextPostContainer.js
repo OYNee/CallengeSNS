@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import CreateTextPostPresenter from "./CreateTextPostPresenter";
 import useInput from "../../Hooks/useInput";
+import useCaptionInput from "../../Hooks/useCaptionInput";
+
 import { useMutation, useQuery } from "react-apollo-hooks";
 import { ME } from "../../SharedQueries";
 import FormData from "form-data";
@@ -8,13 +10,13 @@ import { FOLLOW, UPLOAD } from "./CreateTextPostQueries";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-
-export default ({cat, pid}) => {
+export default ({ cat, pid }) => {
   const [action, setAction] = useState("CreatePost");
   const [create, setCreate] = useState(false);
   const [relChallenger, setRelChallenger] = useState(``);
   const [tagChallenger, setTagChallenger] = useState(``);
-  const caption = useInput("");
+  const caption = useCaptionInput("");
+
   const textContent = useInput("");
   const path = "";
   var limit = 100;
@@ -40,13 +42,12 @@ export default ({cat, pid}) => {
   const uploadMutation = useMutation(UPLOAD, {
     variables: {
       caption: "caption.value #안녕 #하세요",
-      category: "image",
+      category: "text",
       rel_challengers: "",
       pre_challengers: "",
       next_challengers: "",
       tag_challengers: "",
       files: path,
-      postId: "",
     },
   });
   const onSubmit = async (e) => {
@@ -95,8 +96,8 @@ export default ({cat, pid}) => {
       setTagChallenger={setTagChallenger}
       loading={loading}
       data={data}
+      caption={caption}
       id={id}
-      cat="textContent"
     />
   );
 };

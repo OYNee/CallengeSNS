@@ -152,23 +152,23 @@ export default {
             //   },
             // });
             try {
-              // 이미 있는 해시 태그라면 그 태그 안에 post.id를 넣고
-              const hash = await prisma.createHashtag({
+              // 존재하지 않는 태그라면 새로운 해시 태그 생성
+              console.log(hashtag);
+              await prisma.createHashtag({
                 tag_name: hashtag,
-                post: {
+                posts: {
                   connect: {
                     id: post.id,
                   },
                 },
               });
-              console.log(hash.tag_name);
             } catch (error) {
-              // 존재하지 않는 태그라면 새로운 해시 태그 생성
+              // 이미 있는 해시 태그라면 그 태그 안에 post.id를 넣기
               console.log("ERROR");
               try {
                 await prisma.updateHashtag({
                   data: {
-                    post: {
+                    posts: {
                       connect: {
                         id: post.id,
                       },
@@ -176,15 +176,17 @@ export default {
                   },
                   where: { tag_name: hashtag },
                 });
+                console.log(post.id);
               } catch (e) {
                 console.log("e");
               }
             }
           }
         });
+
         console.log(post.id);
 
-        // if (category == "video") {
+        // if (category == "video1") {
         //   files.forEach(
         //     async (file) =>
         //       await prisma.createVideo({
@@ -196,7 +198,7 @@ export default {
         //         },
         //       })
         //   );
-        // } else if (category == "audio") {
+        // } else if (category == "audio1") {
         //   console.log("1 audio:", files[0]);
         //   files.forEach(
         //     async (file) =>
@@ -210,7 +212,7 @@ export default {
         //         },
         //       })
         //   );
-        // } else if (category == "image") {
+        // } else if (category == "image1") {
         //   files.forEach(
         //     async (file) =>
         //       await prisma.createImage({
