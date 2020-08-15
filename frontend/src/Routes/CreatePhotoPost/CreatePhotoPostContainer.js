@@ -82,7 +82,7 @@ export default () => {
             data: { uploadChallenge },
           } = await uploadMutation();
           if (uploadChallenge.id) {
-            // window.location.href = "/";
+            window.location.href = "/";
           }
         } catch (e) {
           toast.error("챌린지 등록을 실패했습니다.");
