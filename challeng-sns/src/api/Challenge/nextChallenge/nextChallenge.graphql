@@ -1,3 +1,3 @@
 type Mutation{
-    nextChallenge(id: String!):[Post!]
+    nextChallenge(id:String! pid: String! category:String!):[Post!]
 }

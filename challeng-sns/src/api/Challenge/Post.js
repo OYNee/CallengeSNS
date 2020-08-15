@@ -5,6 +5,8 @@ export default {
     files: ({ id }) => prisma.post({ id }).files(),
     comments: ({ id }) => prisma.post({ id }).comments(),
     user: ({ id }) => prisma.post({ id }).user(),
+    nextPosts:({ id }) => prisma.post({ id }).nextPosts(),
+    prePosts:({ id }) => prisma.post({ id }).prePosts(),
     relChallenger: ({ id }) => prisma.post({ id }).relChallenger(),
     preChallenger: ({ id }) => prisma.post({ id }).preChallenger(),
     nextChallenger: ({ id }) => prisma.post({ id }).nextChallenger(),
@@ -43,6 +45,22 @@ export default {
           where: { post: { id: parent.id } }
         })
         .aggregate()
-        .count()
+        .count(),
+    nextPostCount: parent =>
+      prisma
+      .postsConnection({
+        where:{prePosts_some:{id: parent.id} }
+      })
+      .aggregate()
+      .count(),
+    prePostCount: parent =>
+      prisma
+      .postsConnection({
+        where:{nextPosts_some:{id: parent.id} }
+      })
+      .aggregate()
+      .count(),
+
+
   }
 };

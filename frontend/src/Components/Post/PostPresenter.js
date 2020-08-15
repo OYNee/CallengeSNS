@@ -47,7 +47,40 @@ const Files = styled.div`
   flex-shrink: 0;
 `;
 
-const File = styled.div`
+const ImageFile = styled.div`
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  background-image: url(${props => props.src});
+  background-size: cover;
+  background-position: center;
+  opacity: ${props => (props.showing ? 1 : 0)};
+  transition: opacity 0.5s linear;
+`;
+const VideoFile = styled.iframe`
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+`;
+
+const AudioFile = styled.div`
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  background-image: url(${props => props.src});
+  background-size: cover;
+  background-position: center;
+  opacity: ${props => (props.showing ? 1 : 0)};
+  transition: opacity 0.5s linear;
+`;
+
+const TextFile = styled.div`
   max-width: 100%;
   width: 100%;
   height: 100%;
@@ -200,14 +233,50 @@ export default ({
         <Location>{location}</Location>
       </UserColumn>
     </Header>
+    {category === "image" && 
+    (
     <Files>
       {files && files.map((file, index) => {
         if (file.url) {
-          return (<File key={file.id} src={file.url} showing={index === currentItem} />)
+          return (<ImageFile key={file.id} src={file.url} showing={index === currentItem} />)
         } else {
-            return (<File key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
+            return (<ImageFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
           }})}
     </Files>
+    )}
+    {category === "video" && 
+    (
+      <Files>
+      {files && files.map((file, index) => {
+        if (file.url) {
+          return (<VideoFile key={file.id} src={file.url} showing={index === currentItem} />)
+        } else {
+            return (<VideoFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
+          }})}
+    </Files>
+    )}
+    {category === "audio" && 
+    (
+      <Files>
+      {files && files.map((file, index) => {
+        if (file.url) {
+          return (<AudioFile key={file.id} src={file.url} showing={index === currentItem} />)
+        } else {
+            return (<AudioFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
+          }})}
+    </Files>
+    )}
+    {category === "text" && 
+    (
+      <Files>
+      {files && files.map((file, index) => {
+        if (file.url) {
+          return (<TextFile key={file.id} src={file.url} showing={index === currentItem} />)
+        } else {
+            return (<TextFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
+          }})}
+    </Files>
+    )}
     <Meta>
       <Buttons>
         <Button onClick={toggleLike}>

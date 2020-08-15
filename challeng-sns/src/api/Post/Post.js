@@ -5,6 +5,8 @@ export default {
     files: ({ id }) => prisma.post({ id }).files(),
     comments: ({ id }) => prisma.post({ id }).comments(),
     hashtags: ({ id }) => prisma.post({ id }).hashtags(),
+    nextPosts:({ id }) => prisma.post({ id }).nextPosts(),
+    prePosts:({ id }) => prisma.post({ id }).prePosts(),
     user: ({ id }) => prisma.post({ id }).user(),
     likes: ({ id }) => prisma.post({ id }).likes(),
     isLiked: (parent, _, { request }) => {

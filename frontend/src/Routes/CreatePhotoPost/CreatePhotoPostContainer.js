@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CreatePhotoPostPresenter from "./CreatePhotoPostPresenter";
 import useInput from "../../Hooks/useInput";
+import useCaptionInput from "../../Hooks/useCaptionInput";
 import { useMutation, useQuery } from "react-apollo-hooks";
 import { ME } from "../../SharedQueries";
 import FormData from "form-data";
@@ -8,15 +9,14 @@ import { FOLLOW, UPLOAD } from "./CreatePhotoPostQueries";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-
 export default () => {
   const [action, setAction] = useState("CreatePost");
   const [create, setCreate] = useState(false);
   const [relChallenger, setRelChallenger] = useState(``);
   const [tagChallenger, setTagChallenger] = useState(``);
-  const caption = useInput("");
+  const caption = useCaptionInput("");
   const photo = useInput("");
-  const path = "";
+  let filePath = [];
   var limit = 100;
   var cur = 0;
   var id = "";
@@ -34,39 +34,39 @@ export default () => {
       },
     });
     data = FOLLOWQuery.data;
-    console.log(data)
+    console.log(data);
     loading = FOLLOWQuery.loading;
   }
 
   const uploadMutation = useMutation(UPLOAD, {
     variables: {
-      caption: "caption.value #안녕 #하세요",
+      caption: caption.value,
       category: "image",
       rel_challengers: "",
       pre_challengers: "",
       next_challengers: "",
       tag_challengers: "",
-      files: path,
-      postId: "",
+      files: filePath,
     },
   });
   const onSubmit = async (e) => {
     e.preventDefault();
     if (action === "CreatePost") {
       if (create) {
+        console.log(caption.value);
         let formData = new FormData();
         let photoFile = document.getElementById("photo");
-        console.log(photoFile.files[0])
+        console.log(photoFile.files[0]);
         formData.append("file", photoFile.files[0]);
         try {
           const {
-            data: { path },
+            data: { location },
           } = await axios.post("http://localhost:4000/api/upload", formData, {
             headers: {
               "content-type": "multipart/form-data",
             },
           });
-
+          filePath[0] = location;
           const {
             data: { uploadChallenge },
           } = await uploadMutation();
@@ -74,7 +74,7 @@ export default () => {
             window.location.href = "/";
           }
         } catch (e) {
-          toast.error("Cant upload", "Try later");
+          toast.error("Cant upload, Try later");
         } finally {
         }
       }
@@ -96,6 +96,7 @@ export default () => {
       setTagChallenger={setTagChallenger}
       loading={loading}
       data={data}
+      caption={caption}
       id={id}
       cat="image"
     />
