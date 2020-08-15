@@ -176,13 +176,14 @@ export default {
                   },
                   where: { tag_name: hashtag },
                 });
-                console.log(post.id);
               } catch (e) {
                 console.log("e");
               }
             }
           }
         });
+        console.log(post.id);
+
         if (category == "video") {
           files.forEach(
             async (file) =>

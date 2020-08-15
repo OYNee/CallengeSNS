@@ -80,6 +80,13 @@ export default ({
     console.log(e);
     onSubmit(e);
   };
+  const addImage = (e) => {
+    let imageBox = document.getElementById("contentBox");
+    console.log(imageBox);
+  };
+  const delImage = (e) => {
+    console.log("제거");
+  };
   if (loading === true) {
     return (
       <Wrapper>
@@ -100,9 +107,11 @@ export default ({
               <Helmet>
                 <title>Image Challenge | ChallengeSNS</title>
               </Helmet>
-              <ContentBox>
+              <ContentBox id="contentBox">
                 <ImageInput></ImageInput>
               </ContentBox>
+              <Button onClick={addImage} text="+"></Button>
+              <Button onClick={delImage} text="-"></Button>
               <h1>한마디 부탁해요!</h1>
               <CaptionInput placeholder="한마디 부탁해요!" {...caption} />
               <h1>누구와 함께?</h1>

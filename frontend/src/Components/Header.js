@@ -117,7 +117,7 @@ export default withRouter(() => {
             <HeaderLink to="/search" replace>
               <WebSearch />
             </HeaderLink>
-            <HeaderLink to="/notifications" replace>
+            <HeaderLink to="/temp" replace>
               <WebHeartEmpty />
             </HeaderLink>
             {!data.me ? (

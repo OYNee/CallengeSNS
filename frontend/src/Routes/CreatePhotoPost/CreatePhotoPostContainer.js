@@ -20,6 +20,7 @@ export default () => {
   var limit = 100;
   var cur = 0;
   var id = "";
+
   const meQuery = useQuery(ME);
   var data = "",
     loading = "";
@@ -54,28 +55,37 @@ export default () => {
     if (action === "CreatePost") {
       if (create) {
         console.log(caption.value);
-        let formData = new FormData();
+
         let photoFile = document.getElementById("photo");
-        console.log(photoFile.files[0]);
-        formData.append("file", photoFile.files[0]);
+        // start for
+        for (let i = 0; i < photoFile.files.length; i++) {
+          try {
+            let formData = new FormData();
+
+            formData.append("file", photoFile.files[i]);
+
+            const {
+              data: { location },
+            } = await axios.post("http://localhost:4000/api/upload", formData, {
+              headers: {
+                "content-type": "multipart/form-data",
+              },
+            });
+            filePath.push(location);
+          } catch (e) {
+            toast.error("Cant upload, Try later");
+          } finally {
+          }
+        } // end for
         try {
-          const {
-            data: { location },
-          } = await axios.post("http://localhost:4000/api/upload", formData, {
-            headers: {
-              "content-type": "multipart/form-data",
-            },
-          });
-          filePath[0] = location;
           const {
             data: { uploadChallenge },
           } = await uploadMutation();
           if (uploadChallenge.id) {
-            window.location.href = "/";
+            // window.location.href = "/";
           }
         } catch (e) {
-          toast.error("Cant upload, Try later");
-        } finally {
+          toast.error("챌린지 등록을 실패했습니다.");
         }
       }
     } else if (action === "relChallenger") {
