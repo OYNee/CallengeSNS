@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import Input from "../../Components/Input";
-import ImageInput from "../../Components/ImageInput";
-import Button from "../../Components/Button";
+import TextInput from "../../Components/TextInput";
+import Btn from "../../Components/Button";
 import { Dropdown } from "semantic-ui-react";
 import Loader from "../../Components/Loader";
+import { PhotoshopPicker } from "react-color";
+import { Button, Popup } from "semantic-ui-react";
 
 const Wrapper = styled.div`
   padding: 3vw;
@@ -59,7 +61,10 @@ export default ({
   data,
   setRelChallenger,
   setTagChallenger,
-  cat,
+  color,
+  setColor,
+  fcolor,
+  setFColor,
 }) => {
   const onSelectRelChallenger = (e, { value }) => {
     e.preventDefault();
@@ -82,6 +87,9 @@ export default ({
     console.log(e);
     onSubmit(e);
   };
+  // const [color, setColor] = useState("#ffffff");
+  // const [fcolor, setFColor] = useState("#000000");
+
   if (loading === true) {
     return (
       <Wrapper>
@@ -100,8 +108,58 @@ export default ({
           {action === "CreatePost" && (
             <>
               <ContentBox>
-                <ImageInput></ImageInput>
+                <div
+                  style={{
+                    backgroundColor: color,
+                    height: "100%",
+                    transition: "ease all 500ms",
+                  }}
+                >
+                  {/* <textarea
+                    style={
+                      ({ color: fcolor },
+                      { backgroundColor: "transparent" },
+                      { fontSize: "30px" })
+                    }
+                    required
+                  ></textarea> */}
+                  <TextInput
+                    placeholder="Text Challenge"
+                    {...textContent}
+                    style={{ color: fcolor }}
+                  ></TextInput>
+                </div>
               </ContentBox>
+              <div>
+                <Popup
+                  content={
+                    <PhotoshopPicker
+                      color={color}
+                      onChangeComplete={(color) => {
+                        setColor(color.hex);
+                      }}
+                    />
+                  }
+                  on="click"
+                  pinned
+                  trigger={<Button content="배경색 고르기" />}
+                />
+              </div>
+              <div>
+                <Popup
+                  content={
+                    <PhotoshopPicker
+                      color={fcolor}
+                      onChangeComplete={(color) => {
+                        setFColor(color.hex);
+                      }}
+                    />
+                  }
+                  on="click"
+                  pinned
+                  trigger={<Button content="글자색 고르기" />}
+                />
+              </div>
               <h1>한마디 부탁해요!</h1>
               <CaptionInput placeholder="한마디 부탁해요!" {...caption} />
               <h1>누구와 함께?</h1>
@@ -129,7 +187,7 @@ export default ({
                   onChange={onSelectRelChallenger}
                 />
               </Section>
-              <Button onClick={onUpload} text="업로드" />
+              <Btn onClick={onUpload} text="업로드" />
             </>
           )}
         </PostBox>
