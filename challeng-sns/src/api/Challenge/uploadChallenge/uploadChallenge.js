@@ -184,43 +184,45 @@ export default {
         });
         console.log(post.id);
 
-        if (category == "video") {
-          files.forEach(
-            async (file) =>
-              await prisma.createVideo({
-                video_url: file,
-                post: {
-                  connect: {
-                    id: post.id,
-                  },
-                },
-              })
-          );
-        } else if (category == "audio") {
-          files.forEach(
-            async (file) =>
-              await prisma.createAudio({
-                audio_url: file,
-                post: {
-                  connect: {
-                    id: post.id,
-                  },
-                },
-              })
-          );
-        } else if (category == "image") {
-          files.forEach(
-            async (file) =>
-              await prisma.createImage({
-                image_url: file,
-                post: {
-                  connect: {
-                    id: post.id,
-                  },
-                },
-              })
-          );
-        }
+        // if (category == "video") {
+        //   files.forEach(
+        //     async (file) =>
+        //       await prisma.createVideo({
+        //         video_url: file,
+        //         post: {
+        //           connect: {
+        //             id: post.id,
+        //           },
+        //         },
+        //       })
+        //   );
+        // } else if (category == "audio") {
+        //   console.log("1 audio:", files[0]);
+        //   files.forEach(
+        //     async (file) =>
+        //       await prisma.createAudio({
+        //         audio_url: file,
+        //         audio_img_url: file,
+        //         post: {
+        //           connect: {
+        //             id: post.id,
+        //           },
+        //         },
+        //       })
+        //   );
+        // } else if (category == "image") {
+        //   files.forEach(
+        //     async (file) =>
+        //       await prisma.createImage({
+        //         image_url: file,
+        //         post: {
+        //           connect: {
+        //             id: post.id,
+        //           },
+        //         },
+        //       })
+        //   );
+        // }
         files.forEach(
           async (file) =>
             await prisma.createFile({

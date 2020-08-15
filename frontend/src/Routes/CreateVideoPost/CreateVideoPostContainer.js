@@ -8,15 +8,13 @@ import { FOLLOW, UPLOAD } from "./CreateVideoPostQueries";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-
 export default () => {
   const [action, setAction] = useState("CreatePost");
   const [create, setCreate] = useState(false);
   const [relChallenger, setRelChallenger] = useState(``);
   const [tagChallenger, setTagChallenger] = useState(``);
   const caption = useInput("");
-  const video = useInput("");
-  const path = "";
+  let filePath = [];
   var limit = 100;
   var cur = 0;
   var id = "";
@@ -34,20 +32,19 @@ export default () => {
       },
     });
     data = FOLLOWQuery.data;
-    console.log(data)
+    console.log(data);
     loading = FOLLOWQuery.loading;
   }
 
   const uploadMutation = useMutation(UPLOAD, {
     variables: {
-      caption: "caption.value #안녕 #하세요",
-      category: "image",
+      caption: caption.value,
+      category: "video",
       rel_challengers: "",
       pre_challengers: "",
       next_challengers: "",
       tag_challengers: "",
-      files: path,
-      postId: "",
+      files: filePath,
     },
   });
   const onSubmit = async (e) => {
@@ -56,16 +53,17 @@ export default () => {
       if (create) {
         let formData = new FormData();
         let videoFile = document.getElementById("video");
-        console.log(videoFile.files[0])
+        console.log(videoFile.files[0]);
         formData.append("file", videoFile.files[0]);
         try {
           const {
-            data: { path },
+            data: { location },
           } = await axios.post("http://localhost:4000/api/upload", formData, {
             headers: {
               "content-type": "multipart/form-data",
             },
           });
+          filePath.push(location);
 
           const {
             data: { uploadChallenge },
@@ -88,16 +86,15 @@ export default () => {
       action={action}
       setCreate={setCreate}
       create={create}
-      video={video}
       onSubmit={onSubmit}
       relChallenger={relChallenger}
       tagChallenger={tagChallenger}
       setRelChallenger={setRelChallenger}
       setTagChallenger={setTagChallenger}
       loading={loading}
+      caption={caption}
       data={data}
       id={id}
-      cat="video"
     />
   );
 };
