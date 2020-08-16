@@ -162,7 +162,7 @@ class CustomColorPicker extends React.Component {
             onChange={this.props.onChange}
           />
         </div>
-        {this.props.colors.length && (
+        {this.props.colors && (
           <div
             style={{
               display: "flex",
