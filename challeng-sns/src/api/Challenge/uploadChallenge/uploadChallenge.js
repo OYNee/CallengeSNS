@@ -16,7 +16,7 @@ export default {
         next_challengers,
         tag_challengers,
         // scope,
-        location,
+        textContent,
         files,
       } = args;
       console.log(files);
@@ -29,7 +29,7 @@ export default {
         const post = await prisma.createPost({
           caption,
           category,
-          location,
+          textContent,
           user: { connect: { id: user.id } },
         });
 

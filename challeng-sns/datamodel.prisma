@@ -31,7 +31,7 @@ type Post {
   caption: String
   location: String
   files: [File!]! @relation(name: "FilesOfPost", onDelete: CASCADE)
-  user: User @relation(name: "PostsOfUser")
+  user: User! @relation(name: "PostsOfUser")
   likes: [Like!]! @relation(name: "LikeOfPost", onDelete: CASCADE)
   hashtags : [Hashtag!]! @relation(name: "HashtagofPost")
   comments: [Comment!]! @relation(name: "CommentOfPost", onDelete: CASCADE)
@@ -44,6 +44,7 @@ type Post {
   nextPosts: [Post!] @relation(name: "ChallengeRelation")
   prePosts: [Post!] @relation(name: "ChallengeRelation")
   tagChallenger: [User!] @relation(name: "TCOfPosts")
+  textContent: String
   video: [Video!]! @relation(name: "VideoOfPost", onDelete: CASCADE)
   image: [Image!]! @relation(name: "ImageOfPost", onDelete: CASCADE)
   audio: [Audio!]! @relation(name: "AudioOfPost", onDelete: CASCADE)

@@ -49,7 +49,7 @@ export default ({ cat, pid }) => {
       next_challengers: "",
       tag_challengers: "",
       files: bgColor,
-      location: textContent.value,
+      textContent: textContent.value,
     },
   });
   const onSubmit = async (e) => {
@@ -64,7 +64,7 @@ export default ({ cat, pid }) => {
             data: { uploadChallenge },
           } = await uploadMutation();
           if (uploadChallenge.id) {
-            // window.location.href = "/";
+            window.location.href = "/";
           }
         } catch (e) {
           toast.error("Cant upload", "Try later");

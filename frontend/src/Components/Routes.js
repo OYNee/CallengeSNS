@@ -23,7 +23,7 @@ import CreateVideoPost from "../Routes/CreateVideoPost";
 import CreatePhotoPost from "../Routes/CreatePhotoPost";
 import CreateAudioPost from "../Routes/CreateAudioPost";
 import CreateTextPost from "../Routes/CreateTextPost";
-import temp from "../Routes/temp";
+import temp from "./ReactColorCustom";
 
 const LoggedInRoutes = () => (
   <Switch>
