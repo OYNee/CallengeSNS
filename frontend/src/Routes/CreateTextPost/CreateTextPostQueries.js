@@ -21,6 +21,7 @@ export const UPLOAD = gql`
     $next_challengers: [String!]
     $tag_challengers: [String!]
     $files: [String!]!
+    $location: String
   ) {
     uploadChallenge(
       caption: $caption
@@ -30,6 +31,7 @@ export const UPLOAD = gql`
       next_challengers: $next_challengers
       tag_challengers: $tag_challengers
       files: $files
+      location: $location
     ) {
       id
       caption

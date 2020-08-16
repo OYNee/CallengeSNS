@@ -57,7 +57,8 @@ export default ({ cat, pid }) => {
     if (action === "CreatePost") {
       if (create) {
         try {
-          bgColor.push(color + fcolor);
+          bgColor.push(color);
+          bgColor.push(fcolor);
           console.log(textContent.value);
           const {
             data: { uploadChallenge },
@@ -84,7 +85,7 @@ export default ({ cat, pid }) => {
       action={action}
       setCreate={setCreate}
       create={create}
-      texctContent={textContent}
+      textContent={textContent}
       onSubmit={onSubmit}
       relChallenger={relChallenger}
       tagChallenger={tagChallenger}
