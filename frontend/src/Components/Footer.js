@@ -175,7 +175,7 @@ export default (defaultValue1,defaultValue2) => {
           }  now={now}/>
         </ListItem>
         <ListItem>
-          <Link to="/notifications">
+          <Link to="/temp">
             <HeartEmpty onClick={()=>setNow("notification")} now={now}/>
           </Link>
         </ListItem>

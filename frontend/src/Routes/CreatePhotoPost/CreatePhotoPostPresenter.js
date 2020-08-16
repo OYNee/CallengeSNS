@@ -110,8 +110,6 @@ export default ({
               <ContentBox id="contentBox">
                 <ImageInput></ImageInput>
               </ContentBox>
-              <Button onClick={addImage} text="+"></Button>
-              <Button onClick={delImage} text="-"></Button>
               <h1>한마디 부탁해요!</h1>
               <CaptionInput placeholder="한마디 부탁해요!" {...caption} />
               <h1>누구와 함께?</h1>

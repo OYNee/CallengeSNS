@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Frame } from "./Icons";
+import Carousel from "flat-carousel";
+import "../Styles/carousel.css";
 
 const Img = styled.img`
   width: 100%;
@@ -19,12 +21,14 @@ const ImageInput = () => {
 
   const handleChange = (e) => {
     if (e.target.files.length) {
-      setImage({
-        preview: URL.createObjectURL(e.target.files[0]),
+        setImage({
+        preview: e.target.files,
         raw: e.target.files[0],
       });
     }
   };
+var previews = Object.keys(image.preview).map(key => image.preview[key])
+console.log(previews);
 
   // const handleUpload = async e => {
   //   e.preventDefault();
@@ -41,15 +45,26 @@ const ImageInput = () => {
   // };
   return (
     <Wrapper>
-      <label htmlFor="photo">
         {image.preview ? (
-          <Img src={image.preview} alt={"dummy"} />
+          <>
+            <Carousel>  
+              {previews.map((pre, index) => (
+                <img
+                  key={index}
+                  className="demo-item"
+                  src={URL.createObjectURL(pre)}
+                />
+              ))}
+            </Carousel>
+            
+          </>
         ) : (
+          <label htmlFor="photo">
           <Blank>
             <Frame />
           </Blank>
+          </label>
         )}
-      </label>
       <input
         type="file"
         id="photo"
