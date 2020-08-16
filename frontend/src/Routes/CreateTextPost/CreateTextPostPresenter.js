@@ -1,12 +1,33 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
-import Input from "../../Components/Input";
 import TextInput from "../../Components/TextInput";
 import Btn from "../../Components/Button";
 import { Dropdown } from "semantic-ui-react";
 import Loader from "../../Components/Loader";
-import { PhotoshopPicker } from "react-color";
+import {
+  MaskedTextBox,
+  NumericTextBox,
+  Input,
+  Switch,
+  Slider,
+  RangeSlider,
+  SliderLabel,
+  ColorGradient,
+  ColorPalette,
+  ColorPicker,
+  Checkbox,
+  RadioButton,
+  RadioGroup,
+} from "@progress/kendo-react-inputs";
+import "@progress/kendo-react-intl";
+import "@progress/kendo-drawing";
+import "@progress/kendo-react-tooltip";
+import "@progress/kendo-react-form";
+import "@progress/kendo-react-dropdowns";
+import "@progress/kendo-react-buttons";
+import "@progress/kendo-react-labels";
+
 import { Button, Popup } from "semantic-ui-react";
 
 const Wrapper = styled.div`
@@ -87,8 +108,13 @@ export default ({
     console.log(e);
     onSubmit(e);
   };
-  // const [color, setColor] = useState("#ffffff");
-  // const [fcolor, setFColor] = useState("#000000");
+  const colorPick = (e) => {
+    console.log(color);
+    onSubmit(e);
+  };
+  const gradientSettings = {
+    opacity: false,
+  };
 
   if (loading === true) {
     return (
@@ -131,33 +157,23 @@ export default ({
                 </div>
               </ContentBox>
               <div>
-                <Popup
-                  content={
-                    <PhotoshopPicker
-                      color={color}
-                      onChangeComplete={(color) => {
-                        setColor(color.hex);
-                      }}
-                    />
-                  }
-                  on="click"
-                  pinned
-                  trigger={<Button content="배경색 고르기" />}
+                <ColorPicker
+                  defaultValue={color}
+                  view={"gradient"}
+                  onChange={(color) => {
+                    setColor(color.value);
+                  }}
                 />
               </div>
               <div>
-                <Popup
-                  content={
-                    <PhotoshopPicker
-                      color={fcolor}
-                      onChangeComplete={(color) => {
-                        setFColor(color.hex);
-                      }}
-                    />
-                  }
-                  on="click"
-                  pinned
-                  trigger={<Button content="글자색 고르기" />}
+                <ColorPicker
+                  defaultValue={fcolor}
+                  view={"gradient"}
+                  icon={"edit-tools"}
+                  gradientSettings={gradientSettings}
+                  onChange={(fcolor) => {
+                    setFColor(fcolor.value);
+                  }}
                 />
               </div>
               <h1>한마디 부탁해요!</h1>
