@@ -23,6 +23,7 @@ import CreateVideoPost from "../Routes/CreateVideoPost";
 import CreatePhotoPost from "../Routes/CreatePhotoPost";
 import CreateAudioPost from "../Routes/CreateAudioPost";
 import CreateTextPost from "../Routes/CreateTextPost";
+import temp from "../Routes/temp";
 
 const LoggedInRoutes = () => (
   <Switch>
@@ -45,6 +46,7 @@ const LoggedInRoutes = () => (
     <Route path="/createphotopost" component={CreatePhotoPost} />
     <Route path="/createaudiopost" component={CreateAudioPost} />
     <Route path="/createtextpost" component={CreateTextPost} />
+    <Route path="/temp" component={temp} />
     <Route path="/:username" component={Profile} />
     <Redirect from="*" to="/" />
   </Switch>

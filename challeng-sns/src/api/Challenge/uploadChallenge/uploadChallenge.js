@@ -16,6 +16,7 @@ export default {
         next_challengers,
         tag_challengers,
         // scope,
+        location,
         files,
       } = args;
       console.log(files);
@@ -28,6 +29,7 @@ export default {
         const post = await prisma.createPost({
           caption,
           category,
+          location,
           user: { connect: { id: user.id } },
         });
 
@@ -150,23 +152,23 @@ export default {
             //   },
             // });
             try {
-              // 이미 있는 해시 태그라면 그 태그 안에 post.id를 넣고
-              const hash = await prisma.createHashtag({
+              // 존재하지 않는 태그라면 새로운 해시 태그 생성
+              console.log(hashtag);
+              await prisma.createHashtag({
                 tag_name: hashtag,
-                post: {
+                posts: {
                   connect: {
                     id: post.id,
                   },
                 },
               });
-              console.log(hash.tag_name);
             } catch (error) {
-              // 존재하지 않는 태그라면 새로운 해시 태그 생성
+              // 이미 있는 해시 태그라면 그 태그 안에 post.id를 넣기
               console.log("ERROR");
               try {
                 await prisma.updateHashtag({
                   data: {
-                    post: {
+                    posts: {
                       connect: {
                         id: post.id,
                       },
@@ -181,43 +183,49 @@ export default {
             }
           }
         });
-        if (category == "video") {
-          files.forEach(
-            async (file) =>
-              await prisma.createVideo({
-                video_url: file,
-                post: {
-                  connect: {
-                    id: post.id,
-                  },
-                },
-              })
-          );
-        } else if (category == "audio") {
-          files.forEach(
-            async (file) =>
-              await prisma.createAudio({
-                audio_url: file,
-                post: {
-                  connect: {
-                    id: post.id,
-                  },
-                },
-              })
-          );
-        } else if (category == "image") {
-          files.forEach(
-            async (file) =>
-              await prisma.createImage({
-                image_url: file,
-                post: {
-                  connect: {
-                    id: post.id,
-                  },
-                },
-              })
-          );
-        }
+
+        console.log(post.id);
+
+        // if (category == "video1") {
+        //   files.forEach(
+        //     async (file) =>
+        //       await prisma.createVideo({
+        //         video_url: file,
+        //         post: {
+        //           connect: {
+        //             id: post.id,
+        //           },
+        //         },
+        //       })
+        //   );
+        // } else if (category == "audio1") {
+        //   console.log("1 audio:", files[0]);
+        //   files.forEach(
+        //     async (file) =>
+        //       await prisma.createAudio({
+        //         audio_url: file,
+        //         audio_img_url: file,
+        //         post: {
+        //           connect: {
+        //             id: post.id,
+        //           },
+        //         },
+        //       })
+        //   );
+        // } else if (category == "image1") {
+        //   files.forEach(
+        //     async (file) =>
+        //       await prisma.createImage({
+        //         image_url: file,
+        //         post: {
+        //           connect: {
+        //             id: post.id,
+        //           },
+        //         },
+        //       })
+        //   );
+        // }
+
         files.forEach(
           async (file) =>
             await prisma.createFile({

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CreateAudioPostPresenter from "./CreateAudioPostPresenter";
 import useInput from "../../Hooks/useInput";
+import useCaptionInput from "../../Hooks/useCaptionInput";
 import { useMutation, useQuery } from "react-apollo-hooks";
 import { ME } from "../../SharedQueries";
 import FormData from "form-data";
@@ -13,9 +14,9 @@ export default () => {
   const [create, setCreate] = useState(false);
   const [relChallenger, setRelChallenger] = useState(``);
   const [tagChallenger, setTagChallenger] = useState(``);
-  const caption = useInput("");
-  const audio = useInput("");
-  const path = "";
+  const caption = useCaptionInput("");
+  let filePath = [];
+
   var limit = 100;
   var cur = 0;
   var id = "";
@@ -38,42 +39,59 @@ export default () => {
 
   const uploadMutation = useMutation(UPLOAD, {
     variables: {
-      caption: "caption.value #안녕 #하세요",
-      category: "image",
+      caption: caption.value,
+      category: "audio",
       rel_challengers: "",
       pre_challengers: "",
       next_challengers: "",
       tag_challengers: "",
-      files: path,
-      postId: "",
+      files: filePath,
     },
   });
   const onSubmit = async (e) => {
     e.preventDefault();
     if (action === "CreatePost") {
       if (create) {
-        let formData = new FormData();
+        let photoFile = document.getElementById("photo");
         let audioFile = document.getElementById("audio");
-        console.log(audioFile.files[0])
-        formData.append("file", audioFile.files[0]);
+        console.log(photoFile.files[0]);
+        console.log(audioFile.files[0]);
+        // start for
+        for (let i = 0; i < 2; i++) {
+          try {
+            let formData = new FormData();
+
+            if (i == 0) {
+              formData.append("file", audioFile.files[0]);
+            } else if (i == 1) {
+              formData.append("file", photoFile.files[0]);
+            }
+
+            const {
+              data: { location },
+            } = await axios.post("http://localhost:4000/api/upload", formData, {
+              headers: {
+                "content-type": "multipart/form-data",
+              },
+            });
+            console.log("두번", location);
+            filePath.push(location);
+          } catch (e) {
+            toast.error("Cant upload", "Try later");
+          } finally {
+          }
+        } // end for
         try {
-          const {
-            data: { path },
-          } = await axios.post("http://localhost:4000/api/upload", formData, {
-            headers: {
-              "content-type": "multipart/form-data",
-            },
-          });
+          console.log(filePath);
 
           const {
             data: { uploadChallenge },
           } = await uploadMutation();
           if (uploadChallenge.id) {
-            window.location.href = "/";
+            // window.location.href = "/";
           }
         } catch (e) {
-          toast.error("Cant upload", "Try later");
-        } finally {
+          toast.error("챌린지 등록을 실패했습니다.");
         }
       }
     } else if (action === "relChallenger") {
@@ -86,16 +104,15 @@ export default () => {
       action={action}
       setCreate={setCreate}
       create={create}
-      audio={audio}
       onSubmit={onSubmit}
       relChallenger={relChallenger}
       tagChallenger={tagChallenger}
       setRelChallenger={setRelChallenger}
       setTagChallenger={setTagChallenger}
       loading={loading}
+      caption={caption}
       data={data}
       id={id}
-      cat="audio"
     />
   );
 };

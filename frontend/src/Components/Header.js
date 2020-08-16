@@ -110,14 +110,14 @@ export default withRouter(() => {
                 <WebLogo />
               </HeaderLink>
             ) : (
-              <HeaderLink to={`/createphotopost?`} replace>
+              <HeaderLink to={`/createtextpost?`} replace>
                 <WebLogo />
               </HeaderLink>
             )}
             <HeaderLink to="/search" replace>
               <WebSearch />
             </HeaderLink>
-            <HeaderLink to="/notifications" replace>
+            <HeaderLink to="/temp" replace>
               <WebHeartEmpty />
             </HeaderLink>
             {!data.me ? (

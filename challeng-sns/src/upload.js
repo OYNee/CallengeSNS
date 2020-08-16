@@ -25,7 +25,6 @@ const upload = multer({
 export const uploadMiddleware = upload.single("file");
 
 export const uploadController = (req, res) => {
-  console.log(req);
   const {
     file: { location },
   } = req;
