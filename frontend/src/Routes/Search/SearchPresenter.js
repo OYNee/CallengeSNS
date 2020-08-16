@@ -121,7 +121,7 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
         <div>
         {data.searchHashtag.length === 0 ?(<></>
         ):(
-          <ELink to={`/home`}>
+          <ELink to={`/search-challenge?term=${searchTerm}`}>
           <SearchMore text="다른 챌린지 보러 가기!"/>
          </ELink>
         )}
@@ -134,6 +134,8 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
               <HashtagCard
               key={idx}
               username={hashtag.tag_name}
+              postCount={hashtag.postCount}
+              posts={hashtag.posts.slice(0,3)}
             />
             ))
           )}

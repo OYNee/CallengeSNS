@@ -45,6 +45,26 @@ const GET_USER = gql`
           }
         }
         createdAt
+        nextPostCount
+        prePostCount
+        nextPosts{
+          user{
+          id
+          avatar
+          username
+          isFollowing
+          isSelf
+          bio}
+        }
+        prePosts{
+          user{
+          id
+          avatar
+          username
+          isFollowing
+          isSelf
+          bio}
+        }
       }
     }
   }

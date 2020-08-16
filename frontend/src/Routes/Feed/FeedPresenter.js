@@ -72,6 +72,10 @@ export default withRouter(({ loading, data, history, fetchMore,hasMore,setHasMor
             createdAt={post.createdAt}
             category={post.category}
             hashtags={post.hashtags}
+            prePostCount={post.prePostCount}
+            nextPostCount={post.nextPostCount}
+            nextPosts = {post.nextPosts}
+            prePosts = {post.prePosts}
           />
         )})}
         </InfiniteScroll>

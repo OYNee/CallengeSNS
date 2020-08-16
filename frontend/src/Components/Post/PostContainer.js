@@ -18,7 +18,10 @@ const PostContainer = ({
   location,
   category,
   hashtags,
-
+  prePostCount,
+  nextPostCount,
+  prePosts,
+  nextPosts
 }) => {
   const [isLikedS, setIsLiked] = useState(isLiked);
   const [likeCountS, setLikeCount] = useState(likeCount);
@@ -93,7 +96,10 @@ const PostContainer = ({
       category={category}
       id={id}
       hashtags={hashtags}
-
+      prePostCount ={prePostCount}
+      nextPostCount={nextPostCount}
+      prePosts={prePosts}
+      nextPosts={nextPosts}
       // preChallenger={preChallenger}
       // nextChallenger={nextChallenger}
       // tagChallenger={tagChallenger}

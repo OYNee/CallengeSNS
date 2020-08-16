@@ -38,8 +38,7 @@ export default ({ category, pid, hashtags }) => {
 
   const uploadMutation = useMutation(UPLOAD, {
     variables: {
-      caption: "caption.value #다시 #태그 #중복 #제거 #test4",
-      // category: preAction,
+      caption: caption.value,
       category: "image",
       rel_challengers: "",
       pre_challengers: "",
@@ -70,7 +69,7 @@ export default ({ category, pid, hashtags }) => {
             data: { uploadChallenge },
           } = await uploadMutation();
           if (uploadChallenge.id) {
-            // window.location.href = "/";
+            window.location.href = "/";
           }
         } catch (e) {
           toast.error("Cant upload", "Try later");
@@ -99,7 +98,6 @@ export default ({ category, pid, hashtags }) => {
       category={category}
       pid={pid}
       hashtags={hashtags}
-
     />
   );
 };
