@@ -1,9 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
-import ImageInput from "../Components/ImageInput";
+import Input from "../Components/Input";
+import AudioImageInput from "../Components/AudioImageInput";
 import Button from "../Components/Button";
-
+import { Dropdown } from "semantic-ui-react";
+import Loader from "../Components/Loader";
+import {Frame} from "../Components/Icons"
+import Audio from "../Components/Audio/Audio"
+import { Modal } from "semantic-ui-react";
 const Wrapper = styled.div`
   padding: 3vw;
   margin: 0 4vw;
@@ -23,7 +28,7 @@ const PostBox = styled.div`
 
 const ContentBox = styled.div`
   width: 86vw;
-  height: 86vw;
+  // height: 86vw;
 `;
 
 const CaptionInput = styled.textarea`
@@ -31,7 +36,7 @@ const CaptionInput = styled.textarea`
   border: ${(props) => props.theme.boxBorder};
   border-radius: ${(props) => props.theme.borderRadius};
   width:86vw;
-  height 20vh;
+  height 5vh;
   font-size: 12px;
   padding: 0px 15px;
   resize: none;
@@ -40,48 +45,155 @@ const CaptionInput = styled.textarea`
 const CompleteButton = styled.button`
   height: 10vh;
 `;
-const action = "CreatePost";
-// 추가되는 부분
-// const imageInput = "";
-// const [images, setImages] = useState([
-//   {
-//     id: 1,
-//     imageInput: { ImageInput },
-//   },
-// ]);
-// const nextId = useRef(2);
 
-// const onCreate = () => {
-//   const image = {
-//     id: nextId.current,
-//     imageInput,
-//   };
-//   setImages(images.concat(image));
-//   nextId.current += 1;
-// };
-export default ({}) => {
-  const addImage = (e) => {};
-  const delImage = (e) => {
-    console.log("제거");
-  };
-  if (action === "CreatePost") {
+
+const AudioWrapper = styled.div`
+  width:100%;
+  height:100%;
+`
+const Blank = styled.div`
+  width:100%;
+  height:100%;
+`
+
+const Img = styled.img`
+  width:86vw;
+  height: 86vw;
+`
+
+
+// const AudioInput = () => {
+
+
+  // return (
+  //   <AudioWrapper>
+  //       {audio.preview ? (
+  //         <>
+  //           <input type="file" id="audio" accept="audio/*"></input>
+  //         </>
+  //       ) : (
+  //         <label htmlFor="audio">
+  //           <input
+  //             type="file"
+  //             id="audio"
+  //             accept="audio/*"
+  //             onChange={handleChange}
+  //           />
+  //         </label>
+  //       )}
+
+      
+  //   </AudioWrapper>
+  // );
+// }
+
+const ListItem = styled.div`
+  width:30px;
+  height:30px;
+  background-color:black;
+`
+
+
+function exampleReducer(state, action) {
+  switch (action.type) {
+    case "close":
+      return { open: false };
+    case "open":
+      return { open: true, size: action.size };
+    default:
+      throw new Error("Unsupported action...");
+  }
+}
+
+const PostModal = ({videourl,imgurl}) => {
+  const [state, dispatch] = React.useReducer(exampleReducer, {
+    open: false,
+    size: undefined,
+  });
+  const { open, size } = state;
+  return (
+    <>
+      <ListItem onClick={() => dispatch({ type: "open", size: "tiny" })}></ListItem>
+      <Modal
+        size={size}
+        open={open}
+        onClose={() => dispatch({ type: "close" })}
+      >
+        <Modal.Content>
+        <Audio
+          videourl={videourl}
+          imgurl={imgurl}
+          />
+        </Modal.Content>
+        <Modal.Actions>
+          <Button onClick={() => dispatch({ type: "close" })}>
+            모달끄기
+          </Button>
+        </Modal.Actions>
+      </Modal>
+    </>
+  );
+};
+
+
+
+
+export default ({
+
+}) => {
+  const [audio, setAudio] = useState({ preview: "", raw: "" });
+
+const audioHandleChange = e => {
+  if (e.target.files.length) {
+    setAudio({
+      preview: URL.createObjectURL(e.target.files[0]),
+      raw: e.target.files[0]
+    });
+    console.log(URL.createObjectURL(e.target.files[0]))
+    console.log(e.target.files)
+  }
+};
+
+  const [image, setImage] = useState({ preview: "", raw: "" });
+  
+  const handleChange = e => {
+    if (e.target.files.length) {
+      setImage({
+        preview: URL.createObjectURL(e.target.files[0]),
+        raw: e.target.files[0]
+      });
+      console.log(URL.createObjectURL(e.target.files[0]))
+      console.log(e.target.files)
+    }
+  }
+  
     return (
       <Wrapper>
         <PostBox>
-          {action === "CreatePost" && (
-            <>
-              <Helmet>
-                <title>Image Challenge | ChallengeSNS</title>
-              </Helmet>
-              <ContentBox id="contentBox">
-                <ImageInput></ImageInput>
-              </ContentBox>
-            </>
-          )}
+          <ContentBox>
+            {/* <AudioImageInput /> */}
+            <label htmlFor="photo">
+        {image.preview ? (
+          <Img src={image.preview} alt={"dummy"}/>
+        ) : (
+          <Blank><Frame/></Blank>
+        )}
+      </label>
+      <input
+        type="file"
+        id="photo"
+        accept="image/*"
+        style={{ display: "none" }}
+        onChange={handleChange}
+      />
+            {/* <AudioInput/> */}
+            <input type="file" id="video" accept="audio/*"
+            onChange={audioHandleChange}/>
+        {audio.preview && image.preview && (<ListItem as={PostModal}
+                  videourl={audio.preview}
+                  imgurl={image.preview} />)}
+          </ContentBox>
         </PostBox>
       </Wrapper>
     );
-  } else {
-    return <Wrapper>하위</Wrapper>;
   }
-};

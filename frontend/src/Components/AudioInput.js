@@ -9,7 +9,7 @@ import AudioImageInput from "./AudioImageInput"
 //   height: 86vw;
 //   background-color: violet;
 // `
-const Wrapper = styled.div`
+const AudioWrapper = styled.div`
   width:100%;
   height:100%;
 `
@@ -46,34 +46,20 @@ const AudioInput = () => {
   //   });
   // };
   return (
-    <Wrapper>
+    <AudioWrapper>
         {audio.preview ? (
           <>
             <Audio
               videourl={audio.preview}
               imgurl="https://cdn.pixabay.com/photo/2016/06/16/09/34/death-1460981_960_720.png"
               />
-            <label>
-              <button>다시다시다시다시</button>
-              <input
-                type="file"
-                id="audio"
-                accept="audio/*"
-                style={{ display: "none" }}
-                onChange={handleChange}
-              />
-            </label>
           </>
         ) : (
           <label htmlFor="audio">
-            <Blank>
-              <Frame/>
-            </Blank>
             <input
               type="file"
               id="audio"
               accept="audio/*"
-              style={{ display: "none" }}
               onChange={handleChange}
             />
           </label>
@@ -82,7 +68,7 @@ const AudioInput = () => {
       {/* <br /> */}
       {/* <button onClick={handleUpload}>Upload</button> */}
       
-    </Wrapper>
+    </AudioWrapper>
   );
 }
 
