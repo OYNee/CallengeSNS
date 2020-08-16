@@ -29,8 +29,8 @@ const Audio = ({videourl, imgurl, onClick}) => {
 
   return (
     <AudioBox style={{backgroundImage: `url(${imgurl})`,
-    backgroundSize: `contain`,
-    backgroundRepeat: `round`,}} onClick={() => setPlaying(!playing)}>
+    backgroundSize: `cover`,
+    backgroundRepeat: `norepeat`, backgroundPosition: `center`,}} onClick={() => setPlaying(!playing)}>
       <audio id="audio">
         <source src={videourl} />
       </audio>
