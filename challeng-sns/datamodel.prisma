@@ -141,5 +141,4 @@ type Hashtag{
   id: ID! @id
   tag_name: String! @unique
   posts: [Post!]! @relation(name: "HashtagofPost")
-
 } 
