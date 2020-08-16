@@ -217,18 +217,33 @@ const SeeChallenger = ({prePosts,nextPosts,nextPostCount,prePostCount }) => {
         onClose={() => dispatch({ type: "close" })}
       >
         <Modal.Content>
-          {nextPosts.length === 0 ? (
-            <FatText text="동참한 챌린저가 없습니다." />
+          {prePosts.length === 0 ? (
+            <FatText text="이전 챌린저가 없습니다." />
           ) : (
-            nextPosts.map((user,idx) => (
+            prePosts.map((post,idx) => (
               <UserCard
                 key={idx}
-                username={user.username}
-                isFollowing={user.isFollowing}
-                url={user.avatar}
-                isSelf={user.isSelf}
-                id={user.id}
-                bio={user.bio}
+                username={post.user.username}
+                isFollowing={post.user.isFollowing}
+                url={post.user.avatar}
+                isSelf={post.user.isSelf}
+                id={post.user.id}
+                bio={post.user.bio}
+              />
+            ))
+          )}
+           {nextPosts.length === 0 ? (
+            <FatText text="동참한 챌린저가 없습니다." />
+          ) : (
+            nextPosts.map((post,idx) => (
+              <UserCard
+                key={idx}
+                username={post.user.username}
+                isFollowing={post.user.isFollowing}
+                url={post.user.avatar}
+                isSelf={post.user.isSelf}
+                id={post.user.id}
+                bio={post.user.bio}
               />
             ))
           )}
