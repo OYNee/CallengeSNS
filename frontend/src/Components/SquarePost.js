@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { HeartFull, CommentFull } from "./Icons";
 import { Link } from "react-router-dom";
 import Post from "./Post";
+import SquareVideo from"./SquareVideo/SquareVideo"
 
 const Overlay = styled.div`
   @media only screen and (min-width:${(props) => props.theme.sm}) {
@@ -96,8 +97,12 @@ const ListItem = styled.div`
   @media only screen and (max-width:${(props) => props.theme.sm}){
     width:32vw;
     height:32vw;
-
   }
+`
+
+const VideoBox = styled.div`
+  width:100%;
+  height:100%;
 `
 
 
@@ -107,7 +112,6 @@ const PostModal = ({post, file}) => {
     size: undefined,
   });
   const { open, size } = state;
-
   return (
     <>
       <ListItem onClick={() => dispatch({ type: "open", size: "tiny" })}></ListItem>
@@ -128,6 +132,7 @@ const PostModal = ({post, file}) => {
             isLiked={post.isLiked}
             comments={post.comments}
             createdAt={post.createdAt}
+            category={post.category}
           />
         </Modal.Content>
         <Modal.Actions>
@@ -141,11 +146,11 @@ const PostModal = ({post, file}) => {
 };
 
 
-const SquarePost = ({ likeCount, commentCount, file, post }) => {
-  // console.log(post)
-  if (file.url) {
+const SquarePost = ({ likeCount, commentCount, file, post, file1,files }) => {
+  if (post.category === "audio") {
   return (
-    <Container bg={file.url}>
+    <Container bg={files[1].url}>
+      <h1>음성</h1>
       <ListItem as={PostModal} 
         post={post}
         file={file}/>
@@ -161,9 +166,10 @@ const SquarePost = ({ likeCount, commentCount, file, post }) => {
         </Overlay>
     </Container>
   )}
-  else {
+  else if (post.category ==="image") {
     return (
-      <Container bg={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"}>
+      <Container bg={file.url}>
+        <h1>이미지</h1>
         <ListItem as={PostModal} 
           post={post}
           file={file}
@@ -179,7 +185,32 @@ const SquarePost = ({ likeCount, commentCount, file, post }) => {
           </Number>
         </Overlay>
       </Container>
-    );};
+    );
+  } else if (post.category ==="video") {
+    console.log(files)
+    return (
+    <SquareVideo
+    videourl={files[0].url}
+    post={post}
+    file={file}>
+    <h1>영상</h1>
+    <Overlay>
+      <Number>
+        <HeartFull />
+        <NumberText>{likeCount}</NumberText>
+      </Number>
+      <Number>
+        <CommentFull />
+        <NumberText>{commentCount}</NumberText>
+      </Number>
+    </Overlay>
+      </SquareVideo>
+      )
+  } else {
+    return(
+      <h1>텍스트</h1>
+    )
+  }
 }
 
 SquarePost.propTypes = {

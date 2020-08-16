@@ -7,6 +7,8 @@ import FatText from "../FatText";
 import Avatar from "../Avatar";
 import { HeartFull, HeartEmpty, Comment as CommentIcon, Logo } from "../Icons";
 import CreatePost from "../../Routes/CreatePost"
+import Audio from "../Audio/Audio"
+import Video from "../Video/Video"
 
 const LikeText = styled(FatText)`
   color:${(props) => props.theme.livingCoral}
@@ -47,27 +49,23 @@ const Files = styled.div`
   flex-shrink: 0;
 `;
 
-const ImageFile = styled.div`
-  max-width: 100%;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  background-image: url(${props => props.src});
-  background-size: cover;
-  background-position: center;
-  opacity: ${props => (props.showing ? 1 : 0)};
-  transition: opacity 0.5s linear;
-`;
-const VideoFile = styled.iframe`
-  max-width: 100%;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
+const AudioFiles = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex-shrink: 0;
 `;
 
-const AudioFile = styled.div`
+const VideoFiles = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex-shrink: 0;
+`;
+
+const ImageFile = styled.div`
   max-width: 100%;
   width: 100%;
   height: 100%;
@@ -246,25 +244,32 @@ export default ({
     )}
     {category === "video" && 
     (
-      <Files>
-      {files && files.map((file, index) => {
+      <VideoFiles>
+        <Video
+         videourl={files[0].url}
+         />
+      {/* <video controls width="100%">
+      <source src={files[0].url} type="video/mp4"/>
+     </video> */}
+      {/* {files && files.map((file, index) => {
         if (file.url) {
+          console.log(category)
+          console.log(file.url)
           return (<VideoFile key={file.id} src={file.url} showing={index === currentItem} />)
         } else {
             return (<VideoFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
-          }})}
-    </Files>
+          }})} */}
+    </VideoFiles>
     )}
     {category === "audio" && 
     (
-      <Files>
-      {files && files.map((file, index) => {
-        if (file.url) {
-          return (<AudioFile key={file.id} src={file.url} showing={index === currentItem} />)
-        } else {
-            return (<AudioFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
-          }})}
-    </Files>
+      <AudioFiles>
+        <Audio
+          videourl={files[0].url}
+          imgurl={files[1].url}
+          />
+
+    </AudioFiles>
     )}
     {category === "text" && 
     (

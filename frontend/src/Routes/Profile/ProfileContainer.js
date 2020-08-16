@@ -24,6 +24,7 @@ const GET_USER = gql`
         id
         location
         caption
+        category
         user {
           id
           avatar

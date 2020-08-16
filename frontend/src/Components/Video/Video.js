@@ -1,18 +1,18 @@
 import React from "react";
 import Bar from "./Bar";
-import useAudioPlayer from './useAudioPlayer';
+import useVideoPlayer from './useVideoPlayer';
 import styled from "styled-components";
 
 
 
-const AudioBox = styled.div`
+const VideoBox = styled.div`
   width:86vw;
-  height:86vw;
+  position:relative;
 `
 const ControlBox = styled.div`
   width:100%;
   height:100%;
-  position:relative;
+  
 `
 
 const Button = styled.button`
@@ -24,16 +24,14 @@ const Button = styled.button`
   left: 33vw;
 `
 
-const Audio = ({videourl, imgurl, onClick}) => {
-  const { curTime, duration, playing, setPlaying, setClickedTime } = useAudioPlayer();
+const Video = ({videourl}) => {
+  const { curTime, duration, playing, setPlaying, setClickedTime } = useVideoPlayer();
 
   return (
-    <AudioBox style={{backgroundImage: `url(${imgurl})`,
-    backgroundSize: `contain`,
-    backgroundRepeat: `round`,}} onClick={() => setPlaying(!playing)}>
-      <audio id="audio">
+    <VideoBox onClick={() => setPlaying(!playing)}>
+      <video id="video" width="100%">
         <source src={videourl} />
-      </audio>
+      </video>
       <ControlBox>
         {playing ? 
           <Button>정지</Button> :
@@ -41,8 +39,8 @@ const Audio = ({videourl, imgurl, onClick}) => {
         }
         <Bar curTime={curTime} duration={duration} onTimeUpdate={(time) => setClickedTime(time)}/>
       </ControlBox>
-    </AudioBox>
+    </VideoBox>
   );
 }
 
-export default Audio;
+export default Video;

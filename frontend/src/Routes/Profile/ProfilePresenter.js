@@ -267,6 +267,7 @@ export default ({
         <Posts>
           {posts &&
             posts.map((post) => {
+              console.log(post)
               return(
               <SquarePost
                 key={post.id}
@@ -274,6 +275,8 @@ export default ({
                 likeCount={post.likeCount}
                 commentCount={post.comments.length}
                 file={post.files[0]}
+                file1={post.files[1]}
+                files = {post.files}
                 post={post}
               />
             )})}
