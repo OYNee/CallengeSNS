@@ -36,7 +36,7 @@ const Posts = styled.div`
 const HashtagCard = ({ id, username,postCount,posts}) => (
   <div>
   <Card> 
-      <ELink to={`challenge/${username}`}>
+      <ELink to={`/challenge?`+encodeURIComponent(username)}>
         <FatText text={username} />
         <FatText text={`UPLOAD ${postCount}`} />
       </ELink>

@@ -5,16 +5,12 @@ import { useQuery } from "react-apollo-hooks";
 import { SEARCH } from "./HashtagPageQueries";
 
 export default withRouter(({ location: { search } }) => {
-  const term = decodeURIComponent(search.split("=")[1]);
+  const term = decodeURIComponent(search.split('?')[1]);
   const [hasMore, setHasMore] = useState(true);
-  var limit = 8;
-  var cur =0;
   const { data, loading, fetchMore} = useQuery(SEARCH, {
     skip: term === undefined,
     variables: {
-      term,
-      limit,
-      cur
+      term
     }
   });
   return <HashtagPagePresenter searchTerm={term} loading={loading} data={data} fetchMore={fetchMore} hasMore={hasMore} setHasMore={setHasMore}/>;

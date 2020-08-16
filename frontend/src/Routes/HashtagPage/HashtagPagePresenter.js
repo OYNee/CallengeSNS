@@ -21,39 +21,20 @@ const Posts = styled.div`
   }
 `;
 
-const Wrapper = styled.div`
-  height: 50vh;
-`;
-const SearchInput = styled(Input)`
-  background-color: ${(props) => props.theme.bgColor};
-  padding: 5px;
-  font-size: 14px;
-  border-radius: 3px;
-  height: auto;
-  text-align: center;
-  width: 70%;
-  &::placeholder {
-    opacity: 0.8;
-    font-weight: 200;
-  }
-  margin: 10px auto;
-  display: block;
-`;
-const Section = styled.div`
-  margin-bottom: 50px;
-  grid-gap: 25px;
-  grid-template-columns: repeat(4, 160px);
-  grid-template-rows: 160px;
-  grid-auto-rows: 160px;
+const Hashtag = styled.div`
+display: flex;
+flex-basis: 100%;
+align-items: center;
+color: rgba(0, 0, 0, 0.35);
+font-size: 30px;
+margin: 20px 0px 20px;
 `;
 
-const ELink = styled(Link)`
-  color: inherit;
-  margin-bottom: 10px;
+const Wrapper = styled.div`
+height: 50vh;
 `;
 export default withRouter(({ searchTerm, loading, data, history, fetchMore,hasMore,setHasMore }) => {
   const onLoadMore = () => {
-
     fetchMore({
       variables: {
         cur: data.HashtagPost.length,
@@ -83,40 +64,25 @@ export default withRouter(({ searchTerm, loading, data, history, fetchMore,hasMo
   } else if (data && data.HashtagPost) {
     return (
       <Wrapper>
-        <FatText text={`${searchTerm}`} />
-
-        <Section>
-          {data.HashtagPost.length === 0 ? (
-            <FatText text="챌린지를 찾을 수 없습니다." />
-          ) : (
-            <InfiniteScroll
-            dataLength={data.HashtagPost.length}
-            next={onLoadMore}
-            hasMore={hasMore}
-            loader={<Wrapper>
-              <Loader />
-            </Wrapper>}
-          >{
-            data.HashtagPost.map((posts,idx) => (
-              <Posts>
-              {posts &&
-                posts.map((post) => {
-                  console.log(post.prePostCount);
-                  return(
-                  <SquarePost
-                    key={post.id}
-                    id={post.id}
-                    likeCount={post.likeCount}
-                    commentCount={post.comments.length}
-                    file={post.files[0]}
-                    post={post}
-                  />
-                )})}
-            </Posts>
-            ))}
-            </InfiniteScroll>
+        <Hashtag> {searchTerm}</Hashtag>
+        <Posts>
+          {data.HashtagPost.length === 0 ?
+          (<FatText text="해당하는 챌린지 정보가 없습니다." />):(
+            data.HashtagPost[0].posts.map((post) => {
+              return(
+              <SquarePost
+                key={post.id}
+                id={post.id}
+                likeCount={post.likeCount}
+                commentCount={post.comments.length}
+                file={post.files[0]}
+                file1={post.files[1]}
+                files = {post.files}
+                post={post}
+              />
+            )})
           )}
-        </Section>
+        </Posts>
       </Wrapper>
     );
   }
