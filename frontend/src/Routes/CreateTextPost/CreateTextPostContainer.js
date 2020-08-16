@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 
 export default ({ cat, pid }) => {
   const [color, setColor] = useState("rgba(255, 255, 255, 1)");
-  const [fcolor, setFColor] = useState("#000000");
+  const [fcolor, setFColor] = useState("rgba(0, 0, 0, 1)");
   const [action, setAction] = useState("CreatePost");
   const [create, setCreate] = useState(false);
   const [relChallenger, setRelChallenger] = useState(``);

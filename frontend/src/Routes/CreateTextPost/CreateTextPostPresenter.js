@@ -160,15 +160,20 @@ export default ({
                 <ColorPicker
                   defaultValue={color}
                   view={"gradient"}
-                  gradientSettings={gradientSettings}
+                  onChange={(color) => {
+                    setColor(color.value);
+                  }}
                 />
               </div>
               <div>
                 <ColorPicker
                   defaultValue={fcolor}
                   view={"gradient"}
+                  icon={"edit-tools"}
                   gradientSettings={gradientSettings}
-                  onChange={colorPick}
+                  onChange={(fcolor) => {
+                    setFColor(fcolor.value);
+                  }}
                 />
               </div>
               <h1>한마디 부탁해요!</h1>
