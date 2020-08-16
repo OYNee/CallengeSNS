@@ -79,6 +79,10 @@ const PostModal = ({post, file}) => {
             comments={post.comments}
             createdAt={post.createdAt}
             category={post.category}
+            prePostCount={post.prePostCount}
+            nextPostCount={post.nextPostCount}
+            nextPosts = {post.nextPosts}
+            prePosts = {post.prePosts}
           />
         </Modal.Content>
         <Modal.Actions>
