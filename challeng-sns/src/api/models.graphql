@@ -42,7 +42,7 @@ type Post {
   tagChallenger: [User!]
   nextPosts: [Post!]
   prePosts: [Post!]
-  hashtags: [Hashtag!] 
+  hashtags: [Hashtag!]
   scope: Boolean!
   comments: [Comment!]!
   category: String!
@@ -55,6 +55,7 @@ type Post {
   image: [Image!]
   audio: [Audio!]
   text: [Text!]
+  textContent: String
   nextPostCount: Int
   prePostCount: Int
 }
@@ -141,9 +142,9 @@ type Category {
   cat_name: String!
 }
 
-type Hashtag{
-  id: ID! 
+type Hashtag {
+  id: ID!
   tag_name: String!
-  posts: [Post!]
+  posts: [Post!]!
   postCount: Int!
-} 
+}
