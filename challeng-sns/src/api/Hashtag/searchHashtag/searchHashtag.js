@@ -10,11 +10,7 @@ export default {
           ]
         },
         first:args.limit,
-        skip: args.cur,
-        sort:{
-          field: postCount,
-          order: ASC
-        }
+        skip: args.cur
       })
   }
 };

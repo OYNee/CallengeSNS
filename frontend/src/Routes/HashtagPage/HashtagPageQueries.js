@@ -2,12 +2,8 @@ import { gql } from "apollo-boost";
 
 export const SEARCH = gql`
   query search($term: String!, $limit: Int!, $cur: Int!) {
-    searchHashtag(term: $term, limit: $limit, cur: $cur) {
+    HashtagPost(tag_name: $term, limit: $limit, cur: $cur) {
       id
-      tag_name
-      postCount
-      posts {
-        id
         location
         caption
         user {
@@ -30,27 +26,6 @@ export const SEARCH = gql`
           }
         }
         createdAt
-        nextPostCount
-        prePostCount
-        nextPosts{
-          user{
-          id
-          avatar
-          username
-          isFollowing
-          isSelf
-          bio}
-        }
-        prePosts{
-          user{
-          id
-          avatar
-          username
-          isFollowing
-          isSelf
-          bio}
-        }
-      }
     }
   }
 `;

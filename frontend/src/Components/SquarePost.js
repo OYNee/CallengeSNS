@@ -128,6 +128,10 @@ const PostModal = ({post, file}) => {
             isLiked={post.isLiked}
             comments={post.comments}
             createdAt={post.createdAt}
+            prePostCount={post.prePostCount}
+            nextPostCount={post.nextPostCount}
+            nextPosts = {post.nextPosts}
+            prePosts = {post.prePosts}
           />
         </Modal.Content>
         <Modal.Actions>

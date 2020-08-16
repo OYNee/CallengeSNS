@@ -121,7 +121,7 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
         <div>
         {data.searchHashtag.length === 0 ?(<></>
         ):(
-          <ELink to={`/home`}>
+          <ELink to={`/search-challenge?term=${searchTerm}`}>
           <SearchMore text="다른 챌린지 보러 가기!"/>
          </ELink>
         )}

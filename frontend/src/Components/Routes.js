@@ -18,7 +18,7 @@ import DeleteAccount from "../Routes/DeleteAccount";
 import SelectPhoto from "../Routes/SelectPhoto";
 import CreatePost from "../Routes/CreatePost";
 import findPasswd from "../Routes/findPasswd";
-import Challenge from "../Routes/Challenge";
+import HashtagPage from "../Routes/HashtagPage";
 import CreateVideoPost from "../Routes/CreateVideoPost";
 import CreatePhotoPost from "../Routes/CreatePhotoPost";
 import CreateAudioPost from "../Routes/CreateAudioPost";
@@ -40,7 +40,7 @@ const LoggedInRoutes = () => (
     <Route path="/deleteacc" component={DeleteAccount} />
     <Route path="/selectphoto" component={SelectPhoto} />
     <Route path="/createpost" component={CreatePost} />
-    <Route path="/challenge" component={Challenge} />
+    <Route path="/challenge" component={HashtagPage} />
     <Route path="/createvideopost" component={CreateVideoPost} />
     <Route path="/createphotopost" component={CreatePhotoPost} />
     <Route path="/createaudiopost" component={CreateAudioPost} />

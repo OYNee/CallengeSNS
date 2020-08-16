@@ -18,7 +18,6 @@ const Card = styled.div`
   margin:10px auto;
 `;
 
-
 const ELink = styled(Link)`
   color: inherit;
   margin: 5px 10px;
@@ -44,15 +43,18 @@ const HashtagCard = ({ id, username,postCount,posts}) => (
   </Card>
   <Posts>
   {posts &&
-    posts.map((post) => (
-      <SquarePost
-        key={post.id}
-        id={post.id}
-        likeCount={post.likeCount}
-        commentCount={post.commentCount}
-        file={post.files[0]}
-      />
-    ))}
+    posts.map((post) => {
+      return(
+        <SquarePost
+          key={post.id}
+          id={post.id}
+          likeCount={post.likeCount}
+          commentCount={post.comments.length}
+          file={post.files[0]}
+          post={post}
+        />
+      )
+    })}
 </Posts>
 </div>
 );

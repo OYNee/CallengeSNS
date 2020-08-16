@@ -6,13 +6,50 @@ export const SEARCH = gql`
       id
       tag_name
       postCount
-      posts{
+      posts {
         id
+        location
+        caption
+        user {
+          id
+          avatar
+          username
+        }
         files {
+          id
           url
         }
         likeCount
-        commentCount
+        isLiked
+        comments {
+          id
+          text
+          user {
+            id
+            username
+          }
+        }
+        createdAt
+        nextPostCount
+        prePostCount
+        nextPosts{
+          user{
+          id
+          avatar
+          username
+          isFollowing
+          isSelf
+          bio}
+        }
+        prePosts{
+          user{
+          id
+          avatar
+          username
+          isFollowing
+          isSelf
+          bio}
+        }
       }
     }
     searchUser(term: $term, limit: $limit, cur: $cur) {

@@ -1,0 +1,3 @@
+type Query {
+  HashtagPost(tag_name: String!,limit: Int,cur: Int): [Post!]
+}

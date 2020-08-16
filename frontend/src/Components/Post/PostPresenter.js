@@ -6,7 +6,8 @@ import TextareaAutosize from "react-autosize-textarea";
 import FatText from "../FatText";
 import Avatar from "../Avatar";
 import { HeartFull, HeartEmpty, Comment as CommentIcon, Logo } from "../Icons";
-import CreatePost from "../../Routes/CreatePost"
+import CreatePost from "../../Routes/CreatePost";
+import UserCard from "../UserCard";
 
 const LikeText = styled(FatText)`
   color:${(props) => props.theme.livingCoral}
@@ -198,7 +199,49 @@ const CreateModal = ({category, pid, hashtags }) => {
   );
 };
 
+const SeeChallenger = ({prePosts,nextPosts,nextPostCount,prePostCount }) => {
+  const [state, dispatch] = React.useReducer(exampleReducer, {
+    open: false,
+    size: undefined,
+  });
+  const { open, size } = state;
 
+  return (
+    <>
+     <button onClick={() => dispatch({ type: "open", size: "tiny" })} text={` ${nextPostCount + prePostCount} Challege`} >
+     {nextPostCount + prePostCount} Challege
+     </button>
+      <Modal
+        size={size}
+        open={open}
+        onClose={() => dispatch({ type: "close" })}
+      >
+        <Modal.Content>
+          {nextPosts.length === 0 ? (
+            <FatText text="동참한 챌린저가 없습니다." />
+          ) : (
+            nextPosts.map((user,idx) => (
+              <UserCard
+                key={idx}
+                username={user.username}
+                isFollowing={user.isFollowing}
+                url={user.avatar}
+                isSelf={user.isSelf}
+                id={user.id}
+                bio={user.bio}
+              />
+            ))
+          )}
+        </Modal.Content>
+        <Modal.Actions>
+          <Button onClick={() => dispatch({ type: "close" })}>
+            Close
+          </Button>
+        </Modal.Actions>
+      </Modal>
+    </>
+  );
+};
 
 
 
@@ -220,6 +263,10 @@ export default ({
   category,
   id,
   hashtags,
+  prePostCount,
+  nextPostCount,
+  prePosts,
+  nextPosts
   
 }) => {
   return(
@@ -291,8 +338,11 @@ export default ({
         </Button>
       </Buttons>
       {isLiked ? <LikeText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} /> : <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />}
-
       
+       <Button>
+          <SeeChallenger prePosts={prePosts} nextPosts={nextPosts} nextPostCount={nextPostCount} prePostCount={prePostCount}  />
+
+        </Button>
       <Caption>
        {Cuser}
         <FatText text={username} /> {caption}
