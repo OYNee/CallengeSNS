@@ -11,6 +11,9 @@ import Audio from "../Audio/Audio"
 import Video from "../Video/Video"
 import UserCard from "../UserCard";
 
+import Carousel from "flat-carousel";
+import "../../Styles/carousel.css";
+
 const LikeText = styled(FatText)`
   color:${(props) => props.theme.livingCoral}
 `
@@ -44,6 +47,14 @@ const Location = styled.span`
 const Files = styled.div`
   position: relative;
   padding-bottom: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex-shrink: 0;
+`;
+
+const ImageFiles = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -295,14 +306,17 @@ export default ({
     </Header>
     {category === "image" && 
     (
-    <Files>
-      {files && files.map((file, index) => {
-        if (file.url) {
-          return (<ImageFile key={file.id} src={file.url} showing={index === currentItem} />)
-        } else {
-            return (<ImageFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
-          }})}
-    </Files>
+    <ImageFiles>
+                  <Carousel>  
+              {files.map((pre, index) => (
+                <img
+                  key={index}
+                  className="demo-item"
+                  src={pre.url}
+                />
+              ))}
+            </Carousel>
+    </ImageFiles>
     )}
     {category === "video" && 
     (
