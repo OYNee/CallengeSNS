@@ -46,7 +46,6 @@ const Location = styled.span`
 
 const Files = styled.div`
   position: relative;
-  padding-bottom: 100%;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -290,7 +289,8 @@ export default ({
   prePostCount,
   nextPostCount,
   prePosts,
-  nextPosts
+  nextPosts,
+  textContent
   
 }) => {
   return(
@@ -306,7 +306,7 @@ export default ({
     </Header>
     {category === "image" && 
     (
-    <ImageFiles>
+    <Files>
                   <Carousel>  
               {files.map((pre, index) => (
                 <img
@@ -316,11 +316,11 @@ export default ({
                 />
               ))}
             </Carousel>
-    </ImageFiles>
+    </Files>
     )}
     {category === "video" && 
     (
-      <VideoFiles>
+      <Files>
         <Video
          videourl={files[0].url}
          />
@@ -335,28 +335,34 @@ export default ({
         } else {
             return (<VideoFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
           }})} */}
-    </VideoFiles>
+    </Files>
     )}
     {category === "audio" && 
     (
-      <AudioFiles>
+      <Files>
         <Audio
           videourl={files[0].url}
           imgurl={files[1].url}
           />
 
-    </AudioFiles>
+    </Files>
     )}
     {category === "text" && 
     (
       <Files>
-      {files && files.map((file, index) => {
+      {files && (<div
+        style={{
+          backgroundColor: files[0].url,
+          color: files[1].url,
+          fontSize: "100px",
+        }}>{textContent}</div>)}
+      {/* {files && files.map((file, index) => {
         if (file.url) {
           return (<TextFile key={file.id} src={file.url} showing={index === currentItem} />)
         } else {
             return (<TextFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
-          }})}
-    </Files>
+          }})} */}
+      </Files>
     )}
     <Meta>
       <Buttons>

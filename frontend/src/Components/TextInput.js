@@ -12,6 +12,7 @@ const Container = styled.textarea`
   font-size: 30px;
   text-align: center;
   padding: 0px 15px;
+  color:${(props) => props.fcolor}
 `;
 
 const TextArea = ({

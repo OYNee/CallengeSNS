@@ -137,6 +137,7 @@ const PostModal = ({post, file}) => {
             nextPostCount={post.nextPostCount}
             nextPosts = {post.nextPosts}
             prePosts = {post.prePosts}
+            textContent = {post.textContent}
           />
         </Modal.Content>
         <Modal.Actions>
@@ -212,7 +213,23 @@ const SquarePost = ({ likeCount, commentCount, file, post, file1,files }) => {
       )
   } else {
     return(
+      <Container bg="https://svgsilh.com/svg/2126884.svg"
+        style={{backgroundColor:files[0].url}}>
       <h1>텍스트</h1>
+      <ListItem as={PostModal} 
+        post={post}
+        file={file}/>
+        <Overlay>
+          <Number>
+            <HeartFull />
+            <NumberText>{likeCount}</NumberText>
+          </Number>
+          <Number>
+            <CommentFull />
+            <NumberText>{commentCount}</NumberText>
+          </Number>
+        </Overlay>
+    </Container>
     )
   }
 }

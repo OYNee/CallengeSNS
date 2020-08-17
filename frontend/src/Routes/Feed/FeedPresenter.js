@@ -16,6 +16,7 @@ const Wrapper = styled.div`
   }
 `;
 export default withRouter(({ loading, data, history, fetchMore,hasMore,setHasMore }) => {
+  console.log(data)
   const onLoadMore = () => {
 
     fetchMore({
@@ -76,6 +77,7 @@ export default withRouter(({ loading, data, history, fetchMore,hasMore,setHasMor
             nextPostCount={post.nextPostCount}
             nextPosts = {post.nextPosts}
             prePosts = {post.prePosts}
+            textContent = {post.textContent}
           />
         )})}
         </InfiniteScroll>
