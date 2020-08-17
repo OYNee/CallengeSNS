@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import CreateTextPostPresenter from "./CreateTextPostPresenter";
 import useInput from "../../Hooks/useInput";
 import useCaptionInput from "../../Hooks/useCaptionInput";
-
 import { useMutation, useQuery } from "react-apollo-hooks";
 import { ME } from "../../SharedQueries";
 import FormData from "form-data";
@@ -55,16 +54,16 @@ export default ({ create, setCreate, selHashtags, pid }) => {
       try {
         bgColor.push(color);
         bgColor.push(fcolor);
-        console.log(relChallenger.value);
-        console.log(tagChallenger.value);
+        console.log(relChallenger);
+        console.log(tagChallenger);
         const {
           data: { uploadChallenge },
         } = await uploadMutation({
           variables: {
             caption: caption.value,
             category: "text",
-            rel_challengers: relChallenger.value,
-            tag_challengers: tagChallenger.value,
+            rel_challengers: relChallenger,
+            tag_challengers: tagChallenger,
             files: bgColor,
             textContent: textContent.value,
           },
@@ -78,9 +77,9 @@ export default ({ create, setCreate, selHashtags, pid }) => {
               pid: pid,
             },
           });
-          window.location.href = "/";
+          // window.location.href = "/";
         } else {
-          window.location.href = "/";
+          // window.location.href = "/";
         }
       } catch (e) {
         toast.error("Cant upload", "Try later");

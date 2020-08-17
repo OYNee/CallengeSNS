@@ -198,7 +198,7 @@ export default ({
             {/* <AudioInput/> */}
             <input
               type="file"
-              id="video"
+              id="audio"
               accept="audio/*"
               onChange={audioHandleChange}
             />
