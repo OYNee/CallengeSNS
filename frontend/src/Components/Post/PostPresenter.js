@@ -265,6 +265,7 @@ export default ({
   setPid,
   cat,
   setCat,
+  textContent,
 }) => {
   function setting() {
     console.log("setting중");
@@ -286,59 +287,54 @@ export default ({
         </UserColumn>
       </Header>
       {category === "image" && (
-        <ImageFiles>
+        <Files>
           <Carousel>
             {files.map((pre, index) => (
               <img key={index} className="demo-item" src={pre.url} />
             ))}
           </Carousel>
-        </ImageFiles>
+        </Files>
       )}
       {category === "video" && (
-        <VideoFiles>
+        <Files>
           <Video videourl={files[0].url} />
           {/* <video controls width="100%">
-      <source src={files[0].url} type="video/mp4"/>
-     </video> */}
+        <source src={files[0].url} type="video/mp4"/>
+       </video> */}
           {/* {files && files.map((file, index) => {
-        if (file.url) {
-          console.log(category)
-          console.log(file.url)
-          return (<VideoFile key={file.id} src={file.url} showing={index === currentItem} />)
-        } else {
-            return (<VideoFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
-          }})} */}
-        </VideoFiles>
+          if (file.url) {
+            console.log(category)
+            console.log(file.url)
+            return (<VideoFile key={file.id} src={file.url} showing={index === currentItem} />)
+          } else {
+              return (<VideoFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
+            }})} */}
+        </Files>
       )}
       {category === "audio" && (
-        <AudioFiles>
+        <Files>
           <Audio videourl={files[0].url} imgurl={files[1].url} />
-        </AudioFiles>
+        </Files>
       )}
       {category === "text" && (
         <Files>
-          {files &&
-            files.map((file, index) => {
-              if (file.url) {
-                return (
-                  <TextFile
-                    key={file.id}
-                    src={file.url}
-                    showing={index === currentItem}
-                  />
-                );
-              } else {
-                return (
-                  <TextFile
-                    key={file.id}
-                    src={
-                      "https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"
-                    }
-                    showing={index === currentItem}
-                  />
-                );
-              }
-            })}
+          {files && (
+            <div
+              style={{
+                backgroundColor: files[0].url,
+                color: files[1].url,
+                fontSize: "100px",
+              }}
+            >
+              {textContent}
+            </div>
+          )}
+          {/* {files && files.map((file, index) => {
+          if (file.url) {
+            return (<TextFile key={file.id} src={file.url} showing={index === currentItem} />)
+          } else {
+              return (<TextFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
+            }})} */}
         </Files>
       )}
       <Meta>
@@ -349,6 +345,7 @@ export default ({
           <Button>
             <CommentIcon />
           </Button>
+
           <Button>
             <Logo onClick={() => setting()}></Logo>
           </Button>

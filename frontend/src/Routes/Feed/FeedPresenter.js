@@ -96,6 +96,7 @@ export default withRouter(
                     nextPostCount={post.nextPostCount}
                     nextPosts={post.nextPosts}
                     prePosts={post.prePosts}
+                    textContent={post.textContent}
                     create={create}
                     setCreate={setCreate}
                     selHashtags={selHashtags}
