@@ -22,7 +22,8 @@ export default {
       console.log(files);
 
       // console.log(rel_persons)
-      const making_hashtag = caption.split(" ");
+
+      const making_hashtag = caption.replace("\n", " ").split(" ");
 
       //나중에 scope랑 newPost 삭제
       try {
@@ -45,13 +46,13 @@ export default {
                     connect: { id: post.id },
                   },
                 },
-                where: { username: rel_challenger },
+                where: { id: rel_challenger },
               }),
             async (rel_challenger) =>
               await prisma.updatePost({
                 data: {
                   relChallenger: {
-                    connect: { username: rel_challenger },
+                    connect: { id: rel_challenger },
                   },
                 },
                 where: { id: post.id },
@@ -59,55 +60,11 @@ export default {
           );
         }
 
-        console.log(pre_challengers);
-        console.log("aa");
-        if (pre_challengers != null) {
-          pre_challengers.forEach(
-            async (pre_challenger) =>
-              //그냥은 들어가지 않아서 update유저로 갱신을 시켜주는 방식으로 제작하였습니다.
-              await prisma.updateUser({
-                data: {
-                  preChallenger: {
-                    connect: { id: post.id },
-                  },
-                },
-                where: { username: pre_challenger },
-              }),
-            async (pre_challenger) =>
-              await prisma.updatePost({
-                data: {
-                  preChallenger: {
-                    connect: { username: pre_challenger },
-                  },
-                },
-                where: { id: post.id },
-              })
-          );
-        }
-        if (next_challengers != "" || next_challengers != null) {
-          next_challengers.forEach(
-            async (next_challenger) =>
-              //그냥은 들어가지 않아서 update유저로 갱신을 시켜주는 방식으로 제작하였습니다.
-              await prisma.updateUser({
-                data: {
-                  nextChallenger: {
-                    connect: { id: post.id },
-                  },
-                },
-                where: { username: next_challenger },
-              }),
-            async (next_challenger) =>
-              await prisma.updatePost({
-                data: {
-                  nextChallenger: {
-                    connect: { username: next_challenger },
-                  },
-                },
-                where: { id: post.id },
-              })
-          );
-        }
-        if (tag_challengers != "" || tag_challengers != null) {
+        console.log(rel_challengers);
+
+        console.log("여기가 문제?");
+
+        if (tag_challengers != null) {
           tag_challengers.forEach(
             async (tag_challenger) =>
               //그냥은 들어가지 않아서 update유저로 갱신을 시켜주는 방식으로 제작하였습니다.
@@ -117,19 +74,20 @@ export default {
                     connect: { id: post.id },
                   },
                 },
-                where: { username: tag_challenger },
+                where: { id: tag_challenger },
               }),
             async (tag_challenger) =>
               await prisma.updatePost({
                 data: {
                   tagChallenger: {
-                    connect: { username: tag_challenger },
+                    connect: { id: tag_challenger },
                   },
                 },
                 where: { id: post.id },
               })
           );
         }
+        console.log("여기가 문제?");
 
         making_hashtag.forEach(async (hashtag) => {
           if (hashtag.includes("#")) {

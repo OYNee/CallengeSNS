@@ -104,21 +104,15 @@ export default ({
   const onSelectRelChallenger = (e, { value }) => {
     e.preventDefault();
     setRelChallenger(value);
+    console.log(relChallenger);
   };
   const onSelectTagChallenger = (e, { value }) => {
     e.preventDefault();
     setTagChallenger(value);
+    console.log(tagChallenger);
   };
-  const onRelChallenger = (e) => {
-    setAction("CreatePost");
-    onSubmit(e);
-  };
-  const onTagChallenger = (e) => {
-    setAction("CreatePost");
-    onSubmit(e);
-  };
+
   const onUpload = (e) => {
-    setCreate(true);
     console.log(e);
     onSubmit(e);
   };

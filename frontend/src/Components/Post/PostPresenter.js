@@ -6,23 +6,21 @@ import TextareaAutosize from "react-autosize-textarea";
 import FatText from "../FatText";
 import Avatar from "../Avatar";
 import { HeartFull, HeartEmpty, Comment as CommentIcon, Logo } from "../Icons";
-import CreatePost from "../../Routes/CreatePost"
-import Audio from "../Audio/Audio"
-import Video from "../Video/Video"
+import Audio from "../Audio/Audio";
+import Video from "../Video/Video";
 import UserCard from "../UserCard";
-
 import Carousel from "flat-carousel";
 import "../../Styles/carousel.css";
 
 const LikeText = styled(FatText)`
-  color:${(props) => props.theme.livingCoral}
-`
+  color: ${(props) => props.theme.livingCoral};
+`;
 
 const Post = styled.div`
-  ${props => props.theme.whiteBox};
+  ${(props) => props.theme.whiteBox};
   width: 100%;
   user-select: none;
-  margin:3px 0;
+  margin: 3px 0;
   a {
     color: inherit;
   }
@@ -82,10 +80,10 @@ const ImageFile = styled.div`
   height: 100%;
   position: absolute;
   top: 0;
-  background-image: url(${props => props.src});
+  background-image: url(${(props) => props.src});
   background-size: cover;
   background-position: center;
-  opacity: ${props => (props.showing ? 1 : 0)};
+  opacity: ${(props) => (props.showing ? 1 : 0)};
   transition: opacity 0.5s linear;
 `;
 
@@ -95,10 +93,10 @@ const TextFile = styled.div`
   height: 100%;
   position: absolute;
   top: 0;
-  background-image: url(${props => props.src});
+  background-image: url(${(props) => props.src});
   background-size: cover;
   background-position: center;
-  opacity: ${props => (props.showing ? 1 : 0)};
+  opacity: ${(props) => (props.showing ? 1 : 0)};
   transition: opacity 0.5s linear;
 `;
 
@@ -127,7 +125,7 @@ const Timestamp = styled.span`
   font-size: 12px;
   margin: 10px 0px;
   padding-bottom: 10px;
-  border-bottom: ${props => props.theme.livingCoral} 1px solid;
+  border-bottom: ${(props) => props.theme.livingCoral} 1px solid;
 `;
 
 const Textarea = styled(TextareaAutosize)`
@@ -155,13 +153,10 @@ const Caption = styled.div`
   margin: 10px 0px;
 `;
 
-
-
 const CreateButton = styled.button`
-width:10px;
-height:10px;
-`
-
+  width: 10px;
+  height: 10px;
+`;
 
 function exampleReducer(state, action) {
   switch (action.type) {
@@ -174,8 +169,12 @@ function exampleReducer(state, action) {
   }
 }
 
-
-const CreateModal = ({category, pid, hashtags }) => {
+const SeeChallenger = ({
+  prePosts,
+  nextPosts,
+  nextPostCount,
+  prePostCount,
+}) => {
   const [state, dispatch] = React.useReducer(exampleReducer, {
     open: false,
     size: undefined,
@@ -184,41 +183,12 @@ const CreateModal = ({category, pid, hashtags }) => {
 
   return (
     <>
-      <Logo onClick={() => dispatch({ type: "open", size: "tiny" })}></Logo>
-      <Modal
-        size={size}
-        open={open}
-        onClose={() => dispatch({ type: "close" })}
+      <button
+        onClick={() => dispatch({ type: "open", size: "tiny" })}
+        text={` ${nextPostCount + prePostCount} Challege`}
       >
-        <Modal.Content>
-          <CreatePost
-            category = {category}
-            pid={pid}
-            hashtags={hashtags}
-            />
-        </Modal.Content>
-        <Modal.Actions>
-          <Button onClick={() => dispatch({ type: "close" })}>
-            Close
-          </Button>
-        </Modal.Actions>
-      </Modal>
-    </>
-  );
-};
-
-const SeeChallenger = ({prePosts,nextPosts,nextPostCount,prePostCount }) => {
-  const [state, dispatch] = React.useReducer(exampleReducer, {
-    open: false,
-    size: undefined,
-  });
-  const { open, size } = state;
-
-  return (
-    <>
-     <button onClick={() => dispatch({ type: "open", size: "tiny" })} text={` ${nextPostCount + prePostCount} Challege`} >
-     {nextPostCount + prePostCount} Challege
-     </button>
+        {nextPostCount + prePostCount} Challege
+      </button>
       <Modal
         size={size}
         open={open}
@@ -228,7 +198,7 @@ const SeeChallenger = ({prePosts,nextPosts,nextPostCount,prePostCount }) => {
           {prePosts.length === 0 ? (
             <FatText text="이전 챌린저가 없습니다." />
           ) : (
-            prePosts.map((post,idx) => (
+            prePosts.map((post, idx) => (
               <UserCard
                 key={idx}
                 username={post.user.username}
@@ -240,10 +210,10 @@ const SeeChallenger = ({prePosts,nextPosts,nextPostCount,prePostCount }) => {
               />
             ))
           )}
-           {nextPosts.length === 0 ? (
+          {nextPosts.length === 0 ? (
             <FatText text="동참한 챌린저가 없습니다." />
           ) : (
-            nextPosts.map((post,idx) => (
+            nextPosts.map((post, idx) => (
               <UserCard
                 key={idx}
                 username={post.user.username}
@@ -257,19 +227,15 @@ const SeeChallenger = ({prePosts,nextPosts,nextPostCount,prePostCount }) => {
           )}
         </Modal.Content>
         <Modal.Actions>
-          <Button onClick={() => dispatch({ type: "close" })}>
-            Close
-          </Button>
+          <Button onClick={() => dispatch({ type: "close" })}>Close</Button>
         </Modal.Actions>
       </Modal>
     </>
   );
 };
 
-
-
 export default ({
-  user: { username, avatar},
+  user: { username, avatar },
   location,
   files,
   isLiked,
@@ -290,126 +256,141 @@ export default ({
   nextPostCount,
   prePosts,
   nextPosts,
-  textContent
-  
+  create,
+  setCreate,
+  selHashtags,
+  setSelHashtags,
+  pid,
+  setPid,
+  cat,
+  setCat,
+  textContent,
 }) => {
-  return(
-  <Post>
-    <Header>
-      <Avatar size="sm" url={avatar} />
-      <UserColumn>
-        <Link to={`/${username}`}>
-          <FatText text={username} />
-        </Link>
-        <Location>{location}</Location>
-      </UserColumn>
-    </Header>
-    {category === "image" && 
-    (
-    <Files>
-                  <Carousel>  
-              {files.map((pre, index) => (
-                <img
-                  key={index}
-                  className="demo-item"
-                  src={pre.url}
-                />
-              ))}
-            </Carousel>
-    </Files>
-    )}
-    {category === "video" && 
-    (
-      <Files>
-        <Video
-         videourl={files[0].url}
-         />
-      {/* <video controls width="100%">
-      <source src={files[0].url} type="video/mp4"/>
-     </video> */}
-      {/* {files && files.map((file, index) => {
-        if (file.url) {
-          console.log(category)
-          console.log(file.url)
-          return (<VideoFile key={file.id} src={file.url} showing={index === currentItem} />)
-        } else {
-            return (<VideoFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
-          }})} */}
-    </Files>
-    )}
-    {category === "audio" && 
-    (
-      <Files>
-        <Audio
-          videourl={files[0].url}
-          imgurl={files[1].url}
-          />
-
-    </Files>
-    )}
-    {category === "text" && 
-    (
-      <Files>
-      {files && (<div
-        style={{
-          backgroundColor: files[0].url,
-          color: files[1].url,
-          fontSize: "100px",
-        }}>{textContent}</div>)}
-      {/* {files && files.map((file, index) => {
-        if (file.url) {
-          return (<TextFile key={file.id} src={file.url} showing={index === currentItem} />)
-        } else {
-            return (<TextFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
-          }})} */}
-      </Files>
-    )}
-    <Meta>
-      <Buttons>
-        <Button onClick={toggleLike}>
-          {isLiked ? <HeartFull /> : <HeartEmpty />}
-        </Button>
-        <Button>
-          <CommentIcon />
-        </Button>
-        <Button>
-          <CreateModal category={category} pid={id} hashtags={hashtags}/>
-
-        </Button>
-      </Buttons>
-      {isLiked ? <LikeText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} /> : <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />}
-      
-       <Button>
-          <SeeChallenger prePosts={prePosts} nextPosts={nextPosts} nextPostCount={nextPostCount} prePostCount={prePostCount}  />
-
-        </Button>
-      <Caption>
-       {Cuser}
-        <FatText text={username} /> {caption}
-      </Caption>
-      {comments && (
-        <Comments>
-          {comments.map(comment => (
-            <Comment key={comment.id}>
-              <FatText text={comment.user.username} />
-              {comment.text}
-            </Comment>
-          ))}
-          {selfComments.map(comment => (
-            <Comment key={comment.id}>
-              <FatText text={comment.user.username} />
-              {comment.text}
-            </Comment>
-          ))}
-        </Comments>
+  function setting() {
+    console.log("setting중");
+    setCat(category);
+    setPid(id);
+    setSelHashtags(hashtags);
+    setCreate(true);
+    console.log("찍혀라", category, id, hashtags);
+  }
+  return (
+    <Post>
+      <Header>
+        <Avatar size="sm" url={avatar} />
+        <UserColumn>
+          <Link to={`/${username}`}>
+            <FatText text={username} />
+          </Link>
+          <Location>{location}</Location>
+        </UserColumn>
+      </Header>
+      {category === "image" && (
+        <Files>
+          <Carousel>
+            {files.map((pre, index) => (
+              <img key={index} className="demo-item" src={pre.url} />
+            ))}
+          </Carousel>
+        </Files>
       )}
-      <Timestamp>{createdAt}</Timestamp>
-      <Textarea
-        onKeyPress={onKeyPress}
-        placeholder={"Add a comment..."}
-        value={newComment.value}
-        onChange={newComment.onChange}
-      />
-    </Meta>
-  </Post>
-)};
+      {category === "video" && (
+        <Files>
+          <Video videourl={files[0].url} />
+          {/* <video controls width="100%">
+        <source src={files[0].url} type="video/mp4"/>
+       </video> */}
+          {/* {files && files.map((file, index) => {
+          if (file.url) {
+            console.log(category)
+            console.log(file.url)
+            return (<VideoFile key={file.id} src={file.url} showing={index === currentItem} />)
+          } else {
+              return (<VideoFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
+            }})} */}
+        </Files>
+      )}
+      {category === "audio" && (
+        <Files>
+          <Audio videourl={files[0].url} imgurl={files[1].url} />
+        </Files>
+      )}
+      {category === "text" && (
+        <Files>
+          {files && (
+            <div
+              style={{
+                backgroundColor: files[0].url,
+                color: files[1].url,
+                fontSize: "100px",
+              }}
+            >
+              {textContent}
+            </div>
+          )}
+          {/* {files && files.map((file, index) => {
+          if (file.url) {
+            return (<TextFile key={file.id} src={file.url} showing={index === currentItem} />)
+          } else {
+              return (<TextFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
+            }})} */}
+        </Files>
+      )}
+      <Meta>
+        <Buttons>
+          <Button onClick={toggleLike}>
+            {isLiked ? <HeartFull /> : <HeartEmpty />}
+          </Button>
+          <Button>
+            <CommentIcon />
+          </Button>
+
+          <Button>
+            <Logo onClick={() => setting()}></Logo>
+          </Button>
+        </Buttons>
+        {isLiked ? (
+          <LikeText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
+        ) : (
+          <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
+        )}
+
+        <Button>
+          <SeeChallenger
+            prePosts={prePosts}
+            nextPosts={nextPosts}
+            nextPostCount={nextPostCount}
+            prePostCount={prePostCount}
+          />
+        </Button>
+        <Caption>
+          {Cuser}
+          <FatText text={username} /> {caption}
+        </Caption>
+        {comments && (
+          <Comments>
+            {comments.map((comment) => (
+              <Comment key={comment.id}>
+                <FatText text={comment.user.username} />
+                {comment.text}
+              </Comment>
+            ))}
+            {selfComments.map((comment) => (
+              <Comment key={comment.id}>
+                <FatText text={comment.user.username} />
+                {comment.text}
+              </Comment>
+            ))}
+          </Comments>
+        )}
+        <Timestamp>{createdAt}</Timestamp>
+        <Textarea
+          onKeyPress={onKeyPress}
+          placeholder={"Add a comment..."}
+          value={newComment.value}
+          onChange={newComment.onChange}
+        />
+      </Meta>
+    </Post>
+  );
+};

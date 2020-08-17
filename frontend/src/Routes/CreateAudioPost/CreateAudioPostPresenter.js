@@ -8,8 +8,8 @@ import Button from "../../Components/Button";
 import { Dropdown } from "semantic-ui-react";
 import Loader from "../../Components/Loader";
 import { Modal } from "semantic-ui-react";
-import {Frame} from "../../Components/Icons"
-import Audio from "../../Components/Audio/Audio"
+import { Frame } from "../../Components/Icons";
+import Audio from "../../Components/Audio/Audio";
 
 const Wrapper = styled.div`
   padding: 3vw;
@@ -21,16 +21,15 @@ const Section = styled.div`
   margin: 15px auto;
 `;
 
-
 const Blank = styled.div`
-  width:100%;
-  height:100%;
-`
+  width: 100%;
+  height: 100%;
+`;
 
 const Img = styled.img`
-  width:86vw;
+  width: 86vw;
   height: 86vw;
-`
+`;
 const PostBox = styled.div`
   width: 86vw;
   background-color: rgba(0, 0, 0, 0);
@@ -59,11 +58,10 @@ const CompleteButton = styled.button`
 `;
 
 const ListItem = styled.div`
-  width:30px;
-  height:30px;
-  background-color:black;
-`
-
+  width: 30px;
+  height: 30px;
+  background-color: black;
+`;
 
 function exampleReducer(state, action) {
   switch (action.type) {
@@ -76,7 +74,7 @@ function exampleReducer(state, action) {
   }
 }
 
-const PostModal = ({videourl,imgurl}) => {
+const PostModal = ({ videourl, imgurl }) => {
   const [state, dispatch] = React.useReducer(exampleReducer, {
     open: false,
     size: undefined,
@@ -84,31 +82,24 @@ const PostModal = ({videourl,imgurl}) => {
   const { open, size } = state;
   return (
     <>
-      <ListItem onClick={() => dispatch({ type: "open", size: "tiny" })}></ListItem>
+      <ListItem
+        onClick={() => dispatch({ type: "open", size: "tiny" })}
+      ></ListItem>
       <Modal
         size={size}
         open={open}
         onClose={() => dispatch({ type: "close" })}
       >
         <Modal.Content>
-        <Audio
-          videourl={videourl}
-          imgurl={imgurl}
-          />
+          <Audio videourl={videourl} imgurl={imgurl} />
         </Modal.Content>
         <Modal.Actions>
-          <Button onClick={() => dispatch({ type: "close" })}>
-            모달끄기
-          </Button>
+          <Button onClick={() => dispatch({ type: "close" })}>모달끄기</Button>
         </Modal.Actions>
       </Modal>
     </>
   );
 };
-
-
-
-
 
 export default ({
   action,
@@ -142,34 +133,33 @@ export default ({
     onSubmit(e);
   };
   const onUpload = (e) => {
-    setCreate(true);
     onSubmit(e);
   };
   const [audio, setAudio] = useState({ preview: "", raw: "" });
 
-const audioHandleChange = e => {
-  if (e.target.files.length) {
-    setAudio({
-      preview: URL.createObjectURL(e.target.files[0]),
-      raw: e.target.files[0]
-    });
-    console.log(URL.createObjectURL(e.target.files[0]))
-    console.log(e.target.files)
-  }
-};
+  const audioHandleChange = (e) => {
+    if (e.target.files.length) {
+      setAudio({
+        preview: URL.createObjectURL(e.target.files[0]),
+        raw: e.target.files[0],
+      });
+      console.log(URL.createObjectURL(e.target.files[0]));
+      console.log(e.target.files);
+    }
+  };
 
   const [image, setImage] = useState({ preview: "", raw: "" });
-  
-  const handleChange = e => {
+
+  const handleChange = (e) => {
     if (e.target.files.length) {
       setImage({
         preview: URL.createObjectURL(e.target.files[0]),
-        raw: e.target.files[0]
+        raw: e.target.files[0],
       });
-      console.log(URL.createObjectURL(e.target.files[0]))
-      console.log(e.target.files)
+      console.log(URL.createObjectURL(e.target.files[0]));
+      console.log(e.target.files);
     }
-  }
+  };
 
   if (loading === true) {
     return (
@@ -190,25 +180,35 @@ const audioHandleChange = e => {
           <ContentBox>
             {/* <AudioImageInput /> */}
             <label htmlFor="photo">
-        {image.preview ? (
-          <Img src={image.preview} alt={"dummy"}/>
-        ) : (
-          <Blank><Frame/></Blank>
-        )}
-      </label>
-      <input
-        type="file"
-        id="photo"
-        accept="image/*"
-        style={{ display: "none" }}
-        onChange={handleChange}
-      />
+              {image.preview ? (
+                <Img src={image.preview} alt={"dummy"} />
+              ) : (
+                <Blank>
+                  <Frame />
+                </Blank>
+              )}
+            </label>
+            <input
+              type="file"
+              id="photo"
+              accept="image/*"
+              style={{ display: "none" }}
+              onChange={handleChange}
+            />
             {/* <AudioInput/> */}
-            <input type="file" id="video" accept="audio/*"
-            onChange={audioHandleChange}/>
-        {audio.preview && image.preview && (<ListItem as={PostModal}
-                  videourl={audio.preview}
-                  imgurl={image.preview} />)}
+            <input
+              type="file"
+              id="audio"
+              accept="audio/*"
+              onChange={audioHandleChange}
+            />
+            {audio.preview && image.preview && (
+              <ListItem
+                as={PostModal}
+                videourl={audio.preview}
+                imgurl={image.preview}
+              />
+            )}
           </ContentBox>
           <h1>한마디 부탁해요!</h1>
           <CaptionInput placeholder="한마디 부탁해요!" {...caption} />

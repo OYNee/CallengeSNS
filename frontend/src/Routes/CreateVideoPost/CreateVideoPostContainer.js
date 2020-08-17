@@ -4,20 +4,26 @@ import useInput from "../../Hooks/useInput";
 import { useMutation, useQuery } from "react-apollo-hooks";
 import { ME } from "../../SharedQueries";
 import FormData from "form-data";
-import { FOLLOW, UPLOAD } from "./CreateVideoPostQueries";
+import { FOLLOW, UPLOAD, NEXT_CHALLENGER } from "./CreateVideoPostQueries";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default () => {
+export default ({ create, setCreate, selHashtags, pid }) => {
   const [action, setAction] = useState("CreatePost");
-  const [create, setCreate] = useState(false);
   const [relChallenger, setRelChallenger] = useState(``);
   const [tagChallenger, setTagChallenger] = useState(``);
-  const caption = useInput("");
+  let hashtag = "";
+  if (selHashtags) {
+    for (let i = 0; i < selHashtags.length; i++) {
+      hashtag += selHashtags[i].tag_name + " ";
+    }
+  }
+  const caption = useInput(hashtag);
   let filePath = [];
   var limit = 100;
   var cur = 0;
   var id = "";
+
   const meQuery = useQuery(ME);
   var data = "",
     loading = "";
@@ -40,41 +46,52 @@ export default () => {
     variables: {
       caption: caption.value,
       category: "video",
-      rel_challengers: "",
+      rel_challengers: relChallenger.value,
       pre_challengers: "",
       next_challengers: "",
-      tag_challengers: "",
+      tag_challengers: tagChallenger.value,
       files: filePath,
     },
   });
+
+  const nextMutation = useMutation(NEXT_CHALLENGER);
+
   const onSubmit = async (e) => {
     e.preventDefault();
     if (action === "CreatePost") {
-      if (create) {
-        let formData = new FormData();
-        let videoFile = document.getElementById("video");
-        console.log(videoFile.files[0]);
-        formData.append("file", videoFile.files[0]);
-        try {
+      let formData = new FormData();
+      let videoFile = document.getElementById("video");
+      console.log(videoFile.files[0]);
+      formData.append("file", videoFile.files[0]);
+      try {
+        const {
+          data: { location },
+        } = await axios.post("http://localhost:4000/api/upload", formData, {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        });
+        filePath.push(location);
+
+        const {
+          data: { uploadChallenge },
+        } = await uploadMutation();
+        if (uploadChallenge.id && pid) {
           const {
-            data: { location },
-          } = await axios.post("http://localhost:4000/api/upload", formData, {
-            headers: {
-              "content-type": "multipart/form-data",
+            data: { nextChallenge },
+          } = await nextMutation({
+            variables: {
+              id: uploadChallenge.id,
+              pid: pid,
             },
           });
-          filePath.push(location);
-
-          const {
-            data: { uploadChallenge },
-          } = await uploadMutation();
-          if (uploadChallenge.id) {
-            window.location.href = "/";
-          }
-        } catch (e) {
-          toast.error("Cant upload", "Try later");
-        } finally {
+          window.location.href = "/";
+        } else {
+          window.location.href = "/";
         }
+      } catch (e) {
+        toast.error("Cant upload", "Try later");
+      } finally {
       }
     } else if (action === "relChallenger") {
     } else if (action === "tagChallenger") {
