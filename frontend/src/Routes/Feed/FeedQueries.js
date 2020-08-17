@@ -8,6 +8,7 @@ export const FEED_QUERY = gql`
       location
       caption
       category
+      textContent
       hashtags {
         id
         tag_name

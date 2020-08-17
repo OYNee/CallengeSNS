@@ -75,6 +75,7 @@ export default ({ cat, pid }) => {
     } else if (action === "tagChallenger") {
     }
   };
+  console.log(fcolor)
   return (
     <CreateTextPostPresenter
       setColor={setColor}

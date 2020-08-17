@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
-import TextInput from "../../Components/TextInput";
+// import TextInput from "../../Components/TextInput";
 import Btn from "../../Components/Button";
 import { Dropdown } from "semantic-ui-react";
 import Loader from "../../Components/Loader";
@@ -66,6 +66,20 @@ const CaptionInput = styled.textarea`
 const CompleteButton = styled.button`
   height: 10vh;
 `;
+
+const TextInput = styled.textarea`
+  border: 0;
+  border: ${(props) => props.theme.boxBorder};
+  border-radius: ${(props) => props.theme.borderRadius};
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  font-size: 30px;
+  text-align: center;
+  padding: 0px 15px;
+  // color:${(props) => props.fcolor}
+  resize: none;
+`
 
 export default ({
   action,
@@ -141,6 +155,11 @@ export default ({
                     transition: "ease all 500ms",
                   }}
                 >
+                  <TextInput
+                    placeholder="Text Challenge"
+                    {...textContent}
+                    style={{ color: fcolor }}
+                    />
                   {/* <textarea
                     style={
                       ({ color: fcolor },
@@ -149,11 +168,11 @@ export default ({
                     }
                     required
                   ></textarea> */}
-                  <TextInput
+                  {/* <textarea
                     placeholder="Text Challenge"
                     {...textContent}
                     style={{ color: fcolor }}
-                  ></TextInput>
+                  ></textarea> */}
                 </div>
               </ContentBox>
               <div>
