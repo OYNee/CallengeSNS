@@ -11,6 +11,7 @@ export const SEARCH = gql`
         location
         caption
         category
+        textContent
         user {
           id
           avatar

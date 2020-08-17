@@ -25,6 +25,7 @@ const GET_USER = gql`
         location
         caption
         category
+        textContent
         user {
           id
           avatar

@@ -23,6 +23,7 @@ import CreateVideoPost from "../Routes/CreateVideoPost";
 import CreatePhotoPost from "../Routes/CreatePhotoPost";
 import CreateAudioPost from "../Routes/CreateAudioPost";
 import CreateTextPost from "../Routes/CreateTextPost";
+import Challenge from "../Routes/Challenge";
 import Temp from "../Routes/temp";
 
 const LoggedInRoutes = () => (
@@ -42,6 +43,7 @@ const LoggedInRoutes = () => (
     <Route path="/selectphoto" component={SelectPhoto} />
     <Route path="/createpost" component={CreatePost} />
     <Route path="/challenge" component={HashtagPage} />
+    <Route path="/challengepost" component={Challenge} />
     <Route path="/createvideopost" component={CreateVideoPost} />
     <Route path="/createphotopost" component={CreatePhotoPost} />
     <Route path="/createaudiopost" component={CreateAudioPost} />

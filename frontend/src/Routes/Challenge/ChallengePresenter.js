@@ -11,7 +11,9 @@ flex-direction: column;
 align-items: center;
 min-height: 80vh;
 `;
-
+const EFatText = styled(FatText)`
+line-height:600px;
+`;
 export default withRouter(({loading, data}) => {
 
  
@@ -25,7 +27,7 @@ export default withRouter(({loading, data}) => {
     return (
       <Wrapper>
           {data.seeChallenge.length === 0 ? (
-            <FatText text="챌린지를 찾을 수 없습니다." />
+            <EFatText text="챌린지를 찾을 수 없습니다." />
           ) : (
             data.seeChallenge.map((post) => (
               <Post
@@ -39,6 +41,12 @@ export default withRouter(({loading, data}) => {
                 isLiked={post.isLiked}
                 comments={post.comments}
                 createdAt={post.createdAt}
+                category={post.category}
+                hashtags={post.hashtags}
+                prePostCount={post.prePostCount}
+                nextPostCount={post.nextPostCount}
+                nextPosts = {post.nextPosts}
+                prePosts = {post.prePosts}
               />
             ))
           )}

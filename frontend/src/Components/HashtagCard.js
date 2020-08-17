@@ -51,6 +51,8 @@ const HashtagCard = ({ id, username,postCount,posts}) => (
           likeCount={post.likeCount}
           commentCount={post.comments.length}
           file={post.files[0]}
+          file1={post.files[1]}
+          files = {post.files}
           post={post}
         />
       )

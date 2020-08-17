@@ -4,7 +4,6 @@ import FatText from "../../Components/FatText";
 import Loader from "../../Components/Loader";
 import UserCard from "../../Components/UserCard";
 import HashtagCard from "../../Components/HashtagCard";
-import SquarePost from "../../Components/SquarePost";
 import Input from "../../Components/Input";
 import useInput from "../../Hooks/useInput";
 import { withRouter,Link } from "react-router-dom";

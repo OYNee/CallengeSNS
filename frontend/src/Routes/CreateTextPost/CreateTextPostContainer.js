@@ -89,6 +89,7 @@ export default ({ create, setCreate, selHashtags, pid }) => {
     } else if (action === "tagChallenger") {
     }
   };
+  console.log(fcolor)
   return (
     <CreateTextPostPresenter
       setColor={setColor}

@@ -33,9 +33,7 @@ const Section = styled.div`
   grid-template-rows: 160px;
   grid-auto-rows: 160px;
 `;
-const Button = styled.button`
-background-color: #ffffff;
-`;
+
 const ELink = styled(Link)`
   color: inherit;
   margin-bottom: 10px;
@@ -104,9 +102,9 @@ export default withRouter(({ searchTerm, loading, data, history, fetchMore,hasMo
             placeholder="Search..."
           />
         </form>
-          <Button onClick={onSearchbutton}>
-          <FatText text="< 뒤로 가기" />
-          </Button>
+        <a onClick={onSearchbutton}>
+          <FatText text="< 뒤로 가기"/>
+        </a>
 
         <Section>
           {data.searchUser.length === 0 ? (

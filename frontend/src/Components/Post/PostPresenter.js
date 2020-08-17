@@ -44,7 +44,6 @@ const Location = styled.span`
 
 const Files = styled.div`
   position: relative;
-  padding-bottom: 100%;
   display: flex;
   flex-direction: column;
   align-items: stretch;
