@@ -39,4 +39,12 @@ export const UPLOAD = gql`
   }
 `;
 
+export const NEXT_CHALLENGER = gql`
+  mutation nextChallenge($id: String!, $pid: String!) {
+    nextChallenge(id: $id, pid: $pid) {
+      id
+    }
+  }
+`;
+
 //location -> 추후 그룹 포스트 아이디로

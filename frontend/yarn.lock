@@ -1400,6 +1400,15 @@
   resolved "https://registry.yarnpkg.com/@progress/kendo-popup-common/-/kendo-popup-common-1.7.0.tgz#d0d29dbc5eacdaba8803aa3d0f69f8a8ad05dbff"
   integrity sha512-KxPIXDkirDpJaF/UWFKbe8QpbO5CwdQH/HyNT5Fj1qZb25YaO68VZCisls2qkcEVPHBlXesDcN3QJlt4vJ6tJw==
 
+"@progress/kendo-react-animation@3.15.0":
+  version "3.15.0"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-react-animation/-/kendo-react-animation-3.15.0.tgz#851f6816ea8e528ef5d5d2805f8bae78d02a9fbf"
+  integrity sha512-Nv3OPjzM5riKWH1M0MONOsTRRKSoqFqdZBNjQ8L60xhpjrweomt8ekJlnUhBCVxO+QupHo6DAZP62fJD2m+nMw==
+  dependencies:
+    "@progress/kendo-react-common" "3.15.0"
+    prop-types "^15.6.0"
+    react-transition-group "^2.2.0"
+
 "@progress/kendo-react-buttons@^3.15.0":
   version "3.15.0"
   resolved "https://registry.yarnpkg.com/@progress/kendo-react-buttons/-/kendo-react-buttons-3.15.0.tgz#642abbd5ca8dad9fb18739a4d46ffbed516abb11"
@@ -1461,12 +1470,30 @@
     "@progress/kendo-react-common" "3.15.0"
     prop-types "^15.6.0"
 
+"@progress/kendo-react-layout@^3.15.0":
+  version "3.15.0"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-react-layout/-/kendo-react-layout-3.15.0.tgz#10b0277a4e48c4f98fdd6d702a999d25e3744338"
+  integrity sha512-LC/CoutII6VPXo386yIff93TsAW1EM677OfBTuz+L25fdS51O7o9Iys2Q+IW1EpaEzoo+vzRvzcLNP9qxTVE3A==
+  dependencies:
+    "@progress/kendo-react-animation" "3.15.0"
+    "@progress/kendo-react-common" "3.15.0"
+    "@progress/kendo-react-popup" "3.15.0"
+    prop-types "^15.6.0"
+
 "@progress/kendo-react-popup@3.15.0":
   version "3.15.0"
   resolved "https://registry.yarnpkg.com/@progress/kendo-react-popup/-/kendo-react-popup-3.15.0.tgz#d805caeca694ce71d9545afd9fe4cda6909fa1c1"
   integrity sha512-4ExRIGzBQfW1mdgLqXOXgNJo4X3amdXA+yhH0gbLDeMF/gb3nukiZxlie1DbFr7hzleDlHHRYTsw8oUfc4JxeQ==
   dependencies:
     "@progress/kendo-popup-common" "^1.2.2"
+    "@progress/kendo-react-common" "3.15.0"
+    prop-types "^15.6.0"
+
+"@progress/kendo-react-progressbars@^3.15.0":
+  version "3.15.0"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-react-progressbars/-/kendo-react-progressbars-3.15.0.tgz#63603933d0865150836c34d15420e69e2967239f"
+  integrity sha512-S8OO7XJk6zQccK7JjzJ6ZfliAkJdmY492kcmM43OlLCA64ytmSA3kyWwNS+CaEvgJ6yDqcNA34hUm2F8YKnomg==
+  dependencies:
     "@progress/kendo-react-common" "3.15.0"
     prop-types "^15.6.0"
 
@@ -10176,7 +10203,7 @@ react-toastify@^4.5.2:
     prop-types "^15.6.0"
     react-transition-group "^2.4.0"
 
-react-transition-group@^2.4.0:
+react-transition-group@^2.2.0, react-transition-group@^2.4.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.9.0.tgz#df9cdb025796211151a436c69a8f3b97b5b07c8d"
   integrity sha512-+HzNTCHpeQyl4MJ/bdE0u6XRMe9+XG/+aL4mCxVN4DnPBQ0/5bfHWPDuOZUzYdMj94daZaZdCCc1Dzt9R/xSSg==

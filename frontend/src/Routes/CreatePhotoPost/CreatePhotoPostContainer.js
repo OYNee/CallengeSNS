@@ -9,9 +9,8 @@ import { FOLLOW, UPLOAD } from "./CreatePhotoPostQueries";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default () => {
+export default ({ create, setCreate, selHashtags, pid }) => {
   const [action, setAction] = useState("CreatePost");
-  const [create, setCreate] = useState(false);
   const [relChallenger, setRelChallenger] = useState(``);
   const [tagChallenger, setTagChallenger] = useState(``);
   const caption = useCaptionInput("");
@@ -20,6 +19,7 @@ export default () => {
   var limit = 100;
   var cur = 0;
   var id = "";
+  console.log("pid", pid, "selHashtags", selHashtags);
 
   const meQuery = useQuery(ME);
   var data = "",
@@ -43,10 +43,10 @@ export default () => {
     variables: {
       caption: caption.value,
       category: "image",
-      rel_challengers: "",
+      rel_challengers: relChallenger.value,
       pre_challengers: "",
       next_challengers: "",
-      tag_challengers: "",
+      tag_challengers: tagChallenger.value,
       files: filePath,
     },
   });
@@ -96,8 +96,6 @@ export default () => {
     <CreatePhotoPostPresenter
       setAction={setAction}
       action={action}
-      setCreate={setCreate}
-      create={create}
       photo={photo}
       onSubmit={onSubmit}
       relChallenger={relChallenger}

@@ -61,53 +61,55 @@ export default {
 
         console.log(pre_challengers);
         console.log("aa");
-        if (pre_challengers != null) {
-          pre_challengers.forEach(
-            async (pre_challenger) =>
-              //그냥은 들어가지 않아서 update유저로 갱신을 시켜주는 방식으로 제작하였습니다.
-              await prisma.updateUser({
-                data: {
-                  preChallenger: {
-                    connect: { id: post.id },
-                  },
-                },
-                where: { username: pre_challenger },
-              }),
-            async (pre_challenger) =>
-              await prisma.updatePost({
-                data: {
-                  preChallenger: {
-                    connect: { username: pre_challenger },
-                  },
-                },
-                where: { id: post.id },
-              })
-          );
-        }
-        if (next_challengers != "" || next_challengers != null) {
-          next_challengers.forEach(
-            async (next_challenger) =>
-              //그냥은 들어가지 않아서 update유저로 갱신을 시켜주는 방식으로 제작하였습니다.
-              await prisma.updateUser({
-                data: {
-                  nextChallenger: {
-                    connect: { id: post.id },
-                  },
-                },
-                where: { username: next_challenger },
-              }),
-            async (next_challenger) =>
-              await prisma.updatePost({
-                data: {
-                  nextChallenger: {
-                    connect: { username: next_challenger },
-                  },
-                },
-                where: { id: post.id },
-              })
-          );
-        }
-        if (tag_challengers != "" || tag_challengers != null) {
+        // if (pre_challengers != null) {
+        //   pre_challengers.forEach(
+        //     async (pre_challenger) =>
+        //       //그냥은 들어가지 않아서 update유저로 갱신을 시켜주는 방식으로 제작하였습니다.
+        //       await prisma.updateUser({
+        //         data: {
+        //           preChallenger: {
+        //             connect: { id: post.id },
+        //           },
+        //         },
+        //         where: { username: pre_challenger },
+        //       }),
+        //     async (pre_challenger) =>
+        //       await prisma.updatePost({
+        //         data: {
+        //           preChallenger: {
+        //             connect: { username: pre_challenger },
+        //           },
+        //         },
+        //         where: { id: post.id },
+        //       })
+        //   );
+        // }
+        // if (next_challengers != "" || next_challengers != null) {
+        //   next_challengers.forEach(
+        //     async (next_challenger) =>
+        //       //그냥은 들어가지 않아서 update유저로 갱신을 시켜주는 방식으로 제작하였습니다.
+        //       await prisma.updateUser({
+        //         data: {
+        //           nextChallenger: {
+        //             connect: { id: post.id },
+        //           },
+        //         },
+        //         where: { username: next_challenger },
+        //       }),
+        //     async (next_challenger) =>
+        //       await prisma.updatePost({
+        //         data: {
+        //           nextChallenger: {
+        //             connect: { username: next_challenger },
+        //           },
+        //         },
+        //         where: { id: post.id },
+        //       })
+        //   );
+        // }
+        console.log("여기가 문제?");
+
+        if (tag_challengers != null) {
           tag_challengers.forEach(
             async (tag_challenger) =>
               //그냥은 들어가지 않아서 update유저로 갱신을 시켜주는 방식으로 제작하였습니다.
@@ -130,6 +132,7 @@ export default {
               })
           );
         }
+        console.log("여기가 문제?");
 
         making_hashtag.forEach(async (hashtag) => {
           if (hashtag.includes("#")) {

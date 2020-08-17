@@ -47,9 +47,7 @@ export default ({
   action,
   id,
   setAction,
-  setCreate,
   caption,
-  create,
   photo,
   onSubmit,
   relChallenger,
@@ -76,8 +74,6 @@ export default ({
     onSubmit(e);
   };
   const onUpload = (e) => {
-    setCreate(true);
-    console.log(e);
     onSubmit(e);
   };
   const addImage = (e) => {

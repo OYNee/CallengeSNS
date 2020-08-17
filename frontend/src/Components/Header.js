@@ -22,6 +22,8 @@ import {
   Segment,
   Sidebar,
 } from "semantic-ui-react";
+import { Drawer, DrawerContent } from "@progress/kendo-react-layout";
+import { Switch } from "@progress/kendo-react-inputs";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -95,6 +97,13 @@ const HeaderLink = styled(Link)`
 
 export default withRouter(() => {
   const { data } = useQuery(ME);
+  // const items = [
+  //   { text: "Video", icon: ".k-i-video-external", selected: true },
+  //   { text: "Image", icon: ".k-i-image-edit" },
+  //   { text: "Audio", icon: "k-i-calendar" },
+  //   { text: "Text", icon: "k-i-hyperlink-email" },
+  // ];
+
   return (
     <Wrapper>
       <Header>

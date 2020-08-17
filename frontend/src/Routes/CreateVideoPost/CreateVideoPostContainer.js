@@ -8,9 +8,8 @@ import { FOLLOW, UPLOAD } from "./CreateVideoPostQueries";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default () => {
+export default ({ create, setCreate, selHashtags, pid }) => {
   const [action, setAction] = useState("CreatePost");
-  const [create, setCreate] = useState(false);
   const [relChallenger, setRelChallenger] = useState(``);
   const [tagChallenger, setTagChallenger] = useState(``);
   const caption = useInput("");
@@ -40,10 +39,10 @@ export default () => {
     variables: {
       caption: caption.value,
       category: "video",
-      rel_challengers: "",
+      rel_challengers: relChallenger.value,
       pre_challengers: "",
       next_challengers: "",
-      tag_challengers: "",
+      tag_challengers: tagChallenger.value,
       files: filePath,
     },
   });
