@@ -13,7 +13,7 @@ const Card = styled.div`
   justify-content:space-between;
   align-items: center;
   padding: 10px;
-  width:95%;
+  width:100%;
   max-width: 700px;
   margin:10px auto;
 `;
