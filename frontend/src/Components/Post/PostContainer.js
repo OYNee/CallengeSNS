@@ -41,7 +41,7 @@ const PostContainer = ({
   });
   const comment = useInput("");
   const toggleLikeMutation = useMutation(TOGGLE_LIKE, {
-    variables: { id: user.id },
+    variables: { postId: id },
   });
   const addCommentMutation = useMutation(ADD_COMMENT, {
     variables: { postId: id, text: comment.value },
