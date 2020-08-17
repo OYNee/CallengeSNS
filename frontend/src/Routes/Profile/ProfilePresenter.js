@@ -14,7 +14,13 @@ import { Link } from "react-router-dom";
 import DropdownMenu from "../../Components/UserSetting";
 
 const Wrapper = styled.div`
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 80vh;
+  @media only screen and (max-width: ${(props) => props.theme.sm}) {
+    min-height: 100vh;
+  }
 `;
 
 const UpdateWrapper = styled.div`
@@ -161,6 +167,11 @@ const Form = styled(Box)`
     }
   }
 `;
+
+const EFatText = styled(FatText)`
+line-height:500px;
+`;
+
 export default ({
   loading,
   data,
@@ -215,7 +226,7 @@ export default ({
     } = data;
     // console.log(data)
     return (
-      <Wrapper>
+      <div>
         <Helmet>
           <title>{username} | ChallengeSNS</title>
         </Helmet>
@@ -264,10 +275,15 @@ export default ({
           프로필 수정
         </ProfilUpdateBox>
 
-        <Posts>
+
           {posts &&
-            posts.map((post) => {
-              console.log(post)
+            (posts.length === 0 ? (
+              <Wrapper>
+              <EFatText text="현재 존재하는 챌린지가 없습니다." />
+              </Wrapper>
+            ) :(
+              <Posts>
+              {posts.map((post) => {
               return(
               <SquarePost
                 key={post.id}
@@ -279,9 +295,10 @@ export default ({
                 files = {post.files}
                 post={post}
               />
-            )})}
-        </Posts>
-      </Wrapper>
+            )})   }     
+            </Posts>))}
+
+      </div>
     );
   }
   return null;
