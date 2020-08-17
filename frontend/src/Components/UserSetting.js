@@ -17,29 +17,29 @@ const MyButton = styled.button`
   display: inline-block;
   border: none;
   vertical-align: baseline;
-  color: rgba(0,0,0,.6);
-  padding: .78571429em 1.5em .78571429em;
+  color: rgba(0, 0, 0, 0.6);
+  padding: 0.78571429em 1.5em 0.78571429em;
   text-transform: none;
   text-shadow: none;
   font-weight: 700;
   line-height: 1em;
   text-align: center;
   text-decoration: none;
-  border-radius: .28571429rem;
-  box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34,36,38,.15) inset;
+  border-radius: 0.28571429rem;
+  box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34, 36, 38, 0.15) inset;
   -webkit-tap-highlight-color: transparent;
-  margin-left: .75em;
-  margin-bottom: 15px
-`
+  margin-left: 0.75em;
+  margin-bottom: 15px;
+`;
 
 const MyYesButton = styled(MyButton)`
-  background-color:${(props) => props.theme.livingCoral};
-  color:white;
-`
+  background-color: ${(props) => props.theme.livingCoral};
+  color: white;
+`;
 
 const MyNoButton = styled(MyButton)`
-  background-color: rgba(205,209,255,1);
-`
+  background-color: rgba(205, 209, 255, 1);
+`;
 
 const CloseBox = styled.div`
   width: 100vw;
@@ -59,8 +59,8 @@ const DropDownHeader = styled("div")`
 `;
 
 const DropDownListContainer = styled("div")`
-  position:absolute;
-  top:100px;
+  position: absolute;
+  top: 100px;
 `;
 
 const DropDownList = styled("ul")`
@@ -156,9 +156,7 @@ const LogoutModal = () => {
           <MyNoButton onClick={() => dispatch({ type: "close" })}>
             No
           </MyNoButton>
-          <MyYesButton onClick={() => logout()}>
-            Yes
-          </MyYesButton>
+          <MyYesButton onClick={() => logout()}>Yes</MyYesButton>
         </Modal.Actions>
       </Modal>
     </>
@@ -189,8 +187,6 @@ const DropdownMenu = ({ username }) => {
             <ListItem as={Link} to="/setpasswd">
               비밀번호 변경
             </ListItem>
-            <ListItem>공개 범위</ListItem>
-            <ListItem>관심 설정</ListItem>
             <ListItem as={DelAccModal}>회원탈퇴</ListItem>
             <ListItem as={LogoutModal}>로그아웃</ListItem>
           </DropDownList>
