@@ -66,6 +66,9 @@ export default ({ create, setCreate, selHashtags, pid }) => {
       let photoFile = document.getElementById("photo");
       // start for
       try {
+        if (photoFile.files.length == 0) {
+          throw "파일을 선택해야 합니다";
+        }
         for (let i = 0; i < photoFile.files.length; i++) {
           let formData = new FormData();
 
