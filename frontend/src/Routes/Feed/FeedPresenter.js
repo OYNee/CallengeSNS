@@ -20,6 +20,7 @@ const EFatText = styled(FatText)`
 line-height:600px;
 `;
 export default withRouter(({ loading, data, history, fetchMore,hasMore,setHasMore }) => {
+  console.log(data)
   const onLoadMore = () => {
 
     fetchMore({
@@ -80,6 +81,7 @@ export default withRouter(({ loading, data, history, fetchMore,hasMore,setHasMor
             nextPostCount={post.nextPostCount}
             nextPosts = {post.nextPosts}
             prePosts = {post.prePosts}
+            textContent = {post.textContent}
           />
         )})}
         </InfiniteScroll>

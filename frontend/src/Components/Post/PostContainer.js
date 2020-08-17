@@ -21,7 +21,8 @@ const PostContainer = ({
   prePostCount,
   nextPostCount,
   prePosts,
-  nextPosts
+  nextPosts,
+  textContent,
 }) => {
   const [isLikedS, setIsLiked] = useState(isLiked);
   const [likeCountS, setLikeCount] = useState(likeCount);
@@ -100,6 +101,7 @@ const PostContainer = ({
       nextPostCount={nextPostCount}
       prePosts={prePosts}
       nextPosts={nextPosts}
+      textContent={textContent}
       // preChallenger={preChallenger}
       // nextChallenger={nextChallenger}
       // tagChallenger={tagChallenger}
