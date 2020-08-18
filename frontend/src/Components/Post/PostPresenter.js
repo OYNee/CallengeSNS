@@ -23,8 +23,11 @@ const Post = styled.div`
   a {
     color: inherit;
   }
-  @media only screen and (max-width:${(props) => props.theme.sm}) {
+  @media only screen and (max-width: ${(props) => props.theme.sm}) {
     width: 100%;
+  }
+  @media only screen and (min-width: ${(props) => props.theme.sm}) {
+    width: 754.9px;
   }
 `;
 
@@ -90,11 +93,11 @@ const ImageFile = styled.div`
 `;
 
 const TextFile = styled.div`
-  @media only screen and (min-width:${(props) => props.theme.sm}) {
-    height:760px;
+  @media only screen and (min-width: ${(props) => props.theme.sm}) {
+    height: 760px;
   }
-  @media only screen and (max-width:${(props) => props.theme.sm}) {
-    height:100vw;
+  @media only screen and (max-width: ${(props) => props.theme.sm}) {
+    height: 100vw;
   }
 `;
 
@@ -294,9 +297,7 @@ export default ({
       )}
       {category === "video" && (
         <Files>
-          <Video videoURL={files[0].url} 
-          videoID ={id}
-          />
+          <Video videoURL={files[0].url} videoID={id} />
           {/* <video controls width="100%">
         <source src={files[0].url} type="video/mp4"/>
        </video> */}
@@ -312,7 +313,7 @@ export default ({
       )}
       {category === "audio" && (
         <Files>
-          <Audio audioURL={files[0].url} imgURL={files[1].url} audioID={id}/>
+          <Audio audioURL={files[0].url} imgURL={files[1].url} audioID={id} />
         </Files>
       )}
       {category === "text" && (

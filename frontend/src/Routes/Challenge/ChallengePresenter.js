@@ -69,6 +69,7 @@ export default withRouter(
                 setPid={setPid}
                 cat={cat}
                 setCat={setCat}
+                textContent={post.textContent}
               />
             ))
           )}
