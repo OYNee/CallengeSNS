@@ -22,6 +22,11 @@ const ELink = styled(Link)`
   color: inherit;
   margin-bottom: 10px;
 `;
+const EFatText = styled(FatText)`
+  color:#999999;
+  font-weight: 600;
+  font-size: 70%;
+`;
 
 const NewUserCard = ({ id, username, isFollowing, url, isSelf, nickname }) => (
   <Card>
@@ -30,7 +35,7 @@ const NewUserCard = ({ id, username, isFollowing, url, isSelf, nickname }) => (
     <FatText text={nickname} />
     </ELink>
     <ELink to={`/${username}`}>
-    <FatText text={`@${username}`} />
+    <EFatText text={`@${username}`} />
     </ELink>
     {!isSelf && <FollowButton id={id} isFollowing={isFollowing} />}
   </Card>

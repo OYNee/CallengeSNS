@@ -16,7 +16,6 @@ const SearchMore = styled(FatText)`
   color:#999999;
 `;
 
-
 const Wrapper = styled.div`
   @media only screen and (max-width:${(props) => props.theme.sm}) {
   };
@@ -46,14 +45,16 @@ const Section = styled.div`
 const UserSection = styled.div`
   margin-bottom: 50px;
   display: grid;
-  grid-gap: 25px;
+  justify-content:space-around;
   grid-template-columns: repeat(4, 160px);
-  grid-template-rows: 160px;
-  grid-auto-rows: 160px;
+  grid-template-rows: 220px;
+  grid-auto-rows: 220px;
   max-width:700px;
   margin:15px auto;
   @media only screen and (max-width:${(props) => props.theme.sm}) {
-
+    grid-template-rows: 210px;
+    grid-auto-rows: 210px;
+    grid-template-columns: repeat(3, 32vw);
   };
 `;
 const PostSection = styled(Section)`
