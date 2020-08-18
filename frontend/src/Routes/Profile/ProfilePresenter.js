@@ -40,9 +40,10 @@ const Header = styled.header`
   justify-content: space-around;
   width: 80%;
   margin: 15px auto;
+  height: 250px;
   @media only screen and (max-width: ${(props) => props.theme.sm}) {
     width: 100%;
-    height: 100px;
+    height: 150px;
   }
 `;
 
@@ -56,7 +57,7 @@ const UsernameRow = styled.div`
 `;
 
 const Username = styled.span`
-  font-size: 26px;
+  font-size: 40px;
   display: block;
   @media only screen and (max-width:${(props) => props.theme.sm}) {
     font-size: 5vw;
@@ -68,30 +69,43 @@ const Counts = styled.ul`
 `;
 
 const Count = styled.li`
-  font-size: 15px;
+  font-size: 4vw;
   margin: 5px
   &:not(:last-child) {
     margin-right: 10px;
+  }
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    font-size :25px;
   }
 `;
 
 const AvatarColumn = styled.div`
   margin: auto
   width:100px
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    width:unset;
+  }
 `;
 
 const NickName = styled(FatText)`
-  font-size: 16px;
+  font-size: 6vw;
   display: block;
   margin-bottom: 5px;
   margin-left: 10vw;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    font-size : 30px;
+  }
 `;
 
 const Bio = styled.p`
-  font-size: 12px;
+  font-size: 4vw;
   display: block;
-  margin-left: 5vw;
-  margin: 10px 0px;
+  margin-left: 8vw;
+  margin-top:3vw;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    font-size : 25px;
+    margin-top: 10px;
+  }
 `;
 
 const Posts = styled.div`
@@ -120,7 +134,7 @@ const ProfilUpdateBox = styled.div`
   font-size: 20px;
   border: 1px solid rgba(0,0,0,0.1);
   margin: 10px 1vw;
-  border-radius: 90px;
+  border-radius: 10px;
   background-color:rgba(255,101,97,0.66);
   color:white;
   &:hover {
@@ -227,7 +241,7 @@ export default ({
         <Header>
           <HeaderColumn>
             <AvatarColumn>
-              <Avatar size="lg" url={avatar} />
+              <Avatar size="WebProfile" url={avatar} />
             </AvatarColumn>
           </HeaderColumn>
           <HeaderColumn>

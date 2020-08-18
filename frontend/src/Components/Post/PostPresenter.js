@@ -357,14 +357,24 @@ export default ({
       <Meta>
         <Buttons>
           <Button onClick={toggleLike}>
-            {isLiked ? <HeartFull /> : <HeartEmpty />}
+            {isLiked ? <HeartFull 
+                          width="24"
+                          height="24"/> : <HeartEmpty 
+                          width="24"
+                          height="24"/>}
           </Button>
           <Button>
-            <CommentIcon />
+            <CommentIcon 
+              width="24"
+              height="24"
+            />
           </Button>
 
           <Button>
-            <Logo onClick={() => setting()}></Logo>
+            <Logo onClick={() => setting()}
+                          width="24"
+                          height="24"
+            ></Logo>
           </Button>
         </Buttons>
         {isLiked ? (

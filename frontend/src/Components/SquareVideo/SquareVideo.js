@@ -5,6 +5,47 @@ import styled from "styled-components";
 import { Modal } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import Post from "../Post";
+import {VideoIcon, HeartFull, CommentFull} from "../Icons"
+
+
+
+const Overlay = styled.div`
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    transition: opacity 0.3s linear;
+    svg {
+      fill: white;
+    }
+  }
+`;
+
+const Number = styled.div`
+  color: white;
+  display: flex;
+  align-items: center;
+  &:first-child {
+    margin-right: 30px;
+  }
+  @media only screen and (max-width:${(props) => props.theme.sm}) {
+    display:none;
+  }
+`;
+
+const NumberText = styled.span`
+  margin-left: 10px;
+  font-size: 16px;
+  @media only screen and (max-width:${(props) => props.theme.sm}) {
+    display:none;
+  }
+`;
 
 
 const ControlBox = styled.div`
@@ -50,6 +91,11 @@ const VideoBox = styled.div`
   width:100%;
   position:relative;
   @media only screen and (min-width:${(props) => props.theme.sm}) {
+    &:hover {
+      ${Overlay} {
+        opacity: 1;
+      }
+    }
   }
 `
 const VideoContent = styled.video`
@@ -105,14 +151,30 @@ const PostModal = ({post, file}) => {
 
 
 
-const SquareVideo = ({videourl, post}) => {
+const SquareVideo = ({videourl, post, likeCount, commentCount}) => {
   // const { curTime, duration, playing, setPlaying, setClickedTime } = useVideoPlayer();
 
   return (
     <VideoBox>
+              <VideoIcon 
+            position="absolute"
+            right = "0"
+            width = "40"
+            height = "40"
+            />
       <VideoContent>
         <source src={videourl} />
       </VideoContent>
+                <Overlay>
+      <Number>
+        <HeartFull />
+        <NumberText>{likeCount}</NumberText>
+      </Number>
+      <Number>
+        <CommentFull />
+        <NumberText>{commentCount}</NumberText>
+      </Number>
+    </Overlay>
     </VideoBox>
   );
 }

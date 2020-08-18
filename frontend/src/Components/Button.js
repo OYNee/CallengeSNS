@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const Container = styled.button`
   width: 100%;
-  max-width:60px;
+  // max-width:60px;
   border: 0;
   border-radius: ${(props) => props.theme.borderRadius};
   color: white;
