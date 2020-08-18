@@ -8,17 +8,19 @@ import {
   CREATE_ACCOUNT,
   CONFIRM_SECRET,
   LOCAL_LOG_IN,
+  CONFIRM_EMAIL,
 } from "./AuthQueries";
 import { toast } from "react-toastify";
 
 export default () => {
   const [action, setAction] = useState("logIn");
-  const userid = useInput("");
+  const nickname = useInput("");
   const username = useInput("");
   const passwd = useInput("");
   const passwdCheck = useInput("");
   const secret = useInput("");
   const email = useInput("");
+  const keyForVerify = useInput("");
 
   const logIn = useMutation(LOG_IN, {
     variables: { email: email.value, passwd: passwd.value },
@@ -28,13 +30,16 @@ export default () => {
     variables: { email: email.value },
   });
 
-  // const requestSecretMutation = useMutation(LOG_IN, {
-  //   variables: { email: email.value },
-  // });
+  const confirmEmailMutation = useMutation(CONFIRM_EMAIL, {
+    variables:{
+      email: email.value,
+      keyForVerify: keyForVerify.value,
+    }
+  });
 
   const createAccountMutation = useMutation(CREATE_ACCOUNT, {
     variables: {
-      userid: userid.value,
+      nickname: nickname.value,
       email: email.value,
       username: username.value,
       passwd: passwd.value,
@@ -44,6 +49,7 @@ export default () => {
     variables: {
       email: email.value,
       secret: secret.value,
+     
     },
   });
   const localLogInMutation = useMutation(LOCAL_LOG_IN);
@@ -58,6 +64,7 @@ export default () => {
           } = await logIn();
           if (token !== "" && token !== undefined) {
             localLogInMutation({ variables: { token } });
+            window.location.reload();
           } else {
             throw Error();
           }
@@ -71,23 +78,27 @@ export default () => {
       }
     } else if (action === "signUp") {
       if (
-        userid.value !== "" &&
+        nickname.value !== "" &&
         email.value !== "" &&
         passwd.value !== "" &&
         username.value !== ""
       ) {
         try {
-          const {
+          const {data,
             data: { createAccount },
           } = await createAccountMutation();
+          console.log(email.value)
           console.log(createAccount);
+          
           if (!createAccount) {
             toast.error("Can't create account");
           } else {
+            console.log(createAccount)
+            
             toast.success(
               "Account created! Check your inbox for authentication"
             );
-            setTimeout(() => setAction("logIn"), 3000);
+            setTimeout(() => setAction("confirmEmail"), 3000);
           }
         } catch (e) {
           toast.error(e.message);
@@ -99,9 +110,9 @@ export default () => {
       if (email.value !== "") {
         try {
           const {
-            data: { changePasswd },
+            data: { findPasswd },
           } = await findPasswdMutation();
-          if (!changePasswd) {
+          if (!findPasswd) {
             toast.error("This account does not exist, try again");
           } else {
             toast.success("Check your inbox for changing your password");
@@ -119,11 +130,34 @@ export default () => {
           } = await confirmSecretMutation();
           if (token !== "" && token !== undefined) {
             localLogInMutation({ variables: { token } });
+            
           } else {
             throw Error();
           }
         } catch {
           toast.error("Cant confirm secret,check again");
+        }
+      }
+    }else if(action==="confirmEmail"){
+      if(keyForVerify.value !== ""){
+        try {
+          const {
+            data:{confirmEmail: token}
+          }=await confirmEmailMutation();
+          if(token !=="" && token !== undefined ){
+            toast.success(
+              "Account created! Check your email for authentication"
+            );
+            localStorage.removeItem(token)
+            setTimeout(()=>4000)
+            window.location.reload()
+            // localLogInMutation({variables:{email: email.value, passwd: passwd.value}});
+          }else{
+            throw Error();
+          }
+          
+        } catch  {
+          toast.error("Can't confirm email,check again");
         }
       }
     }
@@ -133,12 +167,13 @@ export default () => {
     <AuthPresenter
       setAction={setAction}
       action={action}
-      userid={userid}
+      nickname={nickname}
       email={email}
       username={username}
       passwd={passwd}
       passwdCheck={passwdCheck}
       secret={secret}
+      keyForVerify={keyForVerify}
       onSubmit={onSubmit}
     />
   );

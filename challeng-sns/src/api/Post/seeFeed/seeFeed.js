@@ -2,7 +2,7 @@ import { prisma } from "../../../../generated/prisma-client";
 
 export default {
   Query: {
-    seeFeed: async (_, __, { request, isAuthenticated }) => {
+    seeFeed: async (_,args, { request, isAuthenticated }) => {
       isAuthenticated(request);
       const { user } = request;
       const following = await prisma.user({ id: user.id }).following();
@@ -12,6 +12,8 @@ export default {
             id_in: [...following.map((user) => user.id), user.id],
           },
         },
+        first:args.limit,
+        skip: args.cur,
         orderBy: "createdAt_DESC",
       });
     },

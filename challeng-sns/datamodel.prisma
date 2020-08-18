@@ -5,11 +5,9 @@ type User {
       value: "https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png"
     )
   username: String! @unique
-  userid: String!
+  nickname: String!
   passwd: String!
   email: String! @unique
-  firstName: String @default(value: "")
-  lastName: String
   bio: String
   following: [User!]! @relation(name: "FollowRelation")
   followers: [User!]! @relation(name: "FollowRelation")
@@ -24,16 +22,18 @@ type User {
   loginSecret: String
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
+  favCategory: String
+  confirmEmail: Boolean
+  keyForVerify: String
 }
 type Post {
   id: ID! @id
-  caption: String!
+  caption: String
   location: String
   files: [File!]! @relation(name: "FilesOfPost", onDelete: CASCADE)
-  user: User @relation(name: "PostsOfUser")
+  user: User! @relation(name: "PostsOfUser")
   likes: [Like!]! @relation(name: "LikeOfPost", onDelete: CASCADE)
   hashtags : [Hashtag!]! @relation(name: "HashtagofPost")
-  scope : Boolean!
   comments: [Comment!]! @relation(name: "CommentOfPost", onDelete: CASCADE)
   category: String!
   createdAt: DateTime! @createdAt
@@ -41,7 +41,10 @@ type Post {
   relChallenger: [User!] @relation(name: "RCOfPosts")
   preChallenger: [User!] @relation(name: "PCOfPosts")
   nextChallenger: [User!] @relation(name: "NCOfPosts")
+  nextPosts: [Post!] @relation(name: "ChallengeRelation")
+  prePosts: [Post!] @relation(name: "ChallengeRelation")
   tagChallenger: [User!] @relation(name: "TCOfPosts")
+  textContent: String
   video: [Video!]! @relation(name: "VideoOfPost", onDelete: CASCADE)
   image: [Image!]! @relation(name: "ImageOfPost", onDelete: CASCADE)
   audio: [Audio!]! @relation(name: "AudioOfPost", onDelete: CASCADE)
@@ -76,7 +79,6 @@ type Message {
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
-
 
 type Like {
   id: ID! @id
@@ -138,7 +140,6 @@ type Category {
 
 type Hashtag{
   id: ID! @id
-  tag_name: String!
-  post: [Post!]! @relation(name: "HashtagofPost")
-
+  tag_name: String! @unique
+  posts: [Post!]! @relation(name: "HashtagofPost")
 } 

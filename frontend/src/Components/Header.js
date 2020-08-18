@@ -1,9 +1,29 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
-import { WebHeartEmpty, WebUser, WebLogo, Home, TextLogo, WebSearch } from "./Icons";
+import {
+  WebHeartEmpty,
+  WebUser,
+  WebLogo,
+  Home,
+  TextLogo,
+  WebSearch,
+  MobileTextLogo,
+} from "./Icons";
 import { useQuery } from "react-apollo-hooks";
 import { ME } from "../SharedQueries";
+import {
+  Button,
+  Checkbox,
+  Grid,
+  Icon,
+  Image,
+  Menu,
+  Segment,
+  Sidebar,
+} from "semantic-ui-react";
+import { Drawer, DrawerContent } from "@progress/kendo-react-layout";
+import { Switch } from "@progress/kendo-react-inputs";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -11,8 +31,9 @@ const Wrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  background-color: white;
-  border-bottom: ${(props) => props.theme.boxBorder};
+  background-color: rgba(205,209,255,0.3);
+  // opacity: 0;
+  // border-bottom: ${(props) => props.theme.boxBorder};
   border-radius: 0px;
   display: flex;
   justify-content: center;
@@ -20,23 +41,22 @@ const Wrapper = styled.div`
   z-index: 2;
 `;
 
-
 const Header = styled.header`
   width: 100%;
-  @media only screen and (max-width:${(props) => props.theme.sm}) {
+  @media only screen and (max-width: ${(props) => props.theme.sm}) {
     display: none;
-  };
+  }
 `;
 
 const MobileHeader = styled.header`
-  @media only screen and (min-width:${(props) => props.theme.sm}) {
+  @media only screen and (min-width: ${(props) => props.theme.sm}) {
     display: none;
-  };
+  }
 `;
 
 const HeaderWrapper = styled.div`
   margin: auto 10px;
-  max-width:100%;
+  max-width: 100%;
   display: flex;
   justify-content: center;
 `;
@@ -77,38 +97,53 @@ const HeaderLink = styled(Link)`
 
 export default withRouter(() => {
   const { data } = useQuery(ME);
+  // const items = [
+  //   { text: "Video", icon: ".k-i-video-external", selected: true },
+  //   { text: "Image", icon: ".k-i-image-edit" },
+  //   { text: "Audio", icon: "k-i-calendar" },
+  //   { text: "Text", icon: "k-i-hyperlink-email" },
+  // ];
+
   return (
     <Wrapper>
       <Header>
         <HeaderWrapper>
           <TextLogoColumn>
-            <Link to="/">
+            <Link to="/" replace>
               <TextLogo />
             </Link>
           </TextLogoColumn>
           <HeaderColumn>
-            <HeaderLink to="/explore">
-              <WebLogo />
-            </HeaderLink>
-            <HeaderLink to="/search">
+            {!data.me ? (
+              <HeaderLink to="/#" replace>
+                <WebLogo />
+              </HeaderLink>
+            ) : (
+              <HeaderLink to={`/createtextpost?`} replace>
+                <WebLogo />
+              </HeaderLink>
+            )}
+            <HeaderLink to="/search" replace>
               <WebSearch />
             </HeaderLink>
-            <HeaderLink to="/notifications">
+            <HeaderLink to="/notifications" replace>
               <WebHeartEmpty />
             </HeaderLink>
             {!data.me ? (
-              <HeaderLink to="/#">
+              <HeaderLink to="/#" replace>
                 <WebUser />
               </HeaderLink>
             ) : (
-              <HeaderLink to={data.me.username}>
+              <HeaderLink to={data.me.username} replace>
                 <WebUser />
               </HeaderLink>
             )}
           </HeaderColumn>
         </HeaderWrapper>
       </Header>
-      <MobileHeader><TextLogo /></MobileHeader>
+      <MobileHeader>
+        <MobileTextLogo />
+      </MobileHeader>
     </Wrapper>
   );
 });

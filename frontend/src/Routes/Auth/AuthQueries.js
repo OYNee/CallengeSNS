@@ -8,13 +8,13 @@ export const LOG_IN = gql`
 
 export const CREATE_ACCOUNT = gql`
   mutation createAccount(
-    $userid: String!
+    $nickname: String!
     $email: String!
     $passwd: String!
     $username: String!
   ) {
     createAccount(
-      userid: $userid
+      nickname: $nickname
       email: $email
       passwd: $passwd
       username: $username
@@ -22,8 +22,13 @@ export const CREATE_ACCOUNT = gql`
   }
 `;
 export const FIND_PASSWD = gql`
-  mutation changePasswd($email: String!) {
-    changePasswd(email: $email)
+  mutation findPasswd($email: String!) {
+    findPasswd(email: $email)
+  }
+`;
+export const CONFIRM_EMAIL = gql`
+  mutation confirmEmail($keyForVerify: String!,$email: String!) {
+    confirmEmail(keyForVerify: $keyForVerify, email: $email)
   }
 `;
 export const CONFIRM_SECRET = gql`

@@ -7,7 +7,6 @@ import LogoImage from "../../Styles/Images/tempLogo.png";
 
 const LogoBox = styled.img`
   width: 100%;
-  height: 250px;
   margin-bottom: 30px;
 `;
 
@@ -72,13 +71,14 @@ const Form = styled(Box)`
 
 export default ({
   action,
-  userid,
+  nickname,
   email,
   passwd,
   passwdCheck,
   username,
   setAction,
   onSubmit,
+  keyForVerify,
 }) => (
   <Wrapper>
     <Form>
@@ -101,7 +101,7 @@ export default ({
             <title>Sign Up | ChallengeSNS</title>
           </Helmet>
           <form onSubmit={onSubmit}>
-            <Input placeholder={"ID"} {...userid} />
+            <Input placeholder={"Nickname"} {...nickname} />
             <Input placeholder={"Email"} {...email} type="email" />
             <Input placeholder={"Password"} {...passwd} type="Password" />
             <label htmlFor="confirmPasswordInput"></label>
@@ -136,6 +136,23 @@ export default ({
               placeholder="your new password"
               required
               {...passwd}
+              type="Password"
+            />
+            <Button text={"Confirm"} />
+          </form>
+        </>
+      )}
+      
+      {action === "confirmEmail" && (
+        <>
+          <Helmet>
+            <title>Confirm Email | ChallengeSNS</title>
+          </Helmet>
+          <form onSubmit={onSubmit}>
+            <Input
+              placeholder="write your code"
+              required
+              {...keyForVerify}
               type="Password"
             />
             <Button text={"Confirm"} />

@@ -106,9 +106,6 @@ var _default = {
         .aggregate()
         .count();
     },
-    fullName: function fullName(parent) {
-      return "".concat(parent.firstName, " ").concat(parent.lastName);
-    },
     isFollowing: (function() {
       var _isFollowing = (0, _asyncToGenerator2["default"])(
         /*#__PURE__*/ _regenerator["default"].mark(function _callee(

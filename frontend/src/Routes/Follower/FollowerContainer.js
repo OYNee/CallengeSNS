@@ -4,8 +4,8 @@ import FollowerPresenter from "./FollowerPresenter";
 import { useQuery } from "react-apollo-hooks";
 import { FOLLOW } from "./FollowerQueries";
 
-export default withRouter(({ location: { following } }) => {
-  const id= "ckdh4qxg7k1nt0a50gvgeyp5h";
+export default withRouter(({ location: { search } }) => {
+  const id= search.split('?')[1];
   var limit = 8;
   var cur =0;
   const { data, loading, fetchMore } = useQuery(FOLLOW, {
@@ -15,5 +15,5 @@ export default withRouter(({ location: { following } }) => {
       cur
     }
   });
-  return <FollowerPresenter userid={id} loading={loading} data={data} fetchMore={fetchMore}/>;
+  return <FollowerPresenter nickname={id} loading={loading} data={data} fetchMore={fetchMore}/>;
 });

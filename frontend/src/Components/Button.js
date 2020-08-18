@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 const Container = styled.button`
   width: 100%;
+  max-width:60px;
   border: 0;
   border-radius: ${(props) => props.theme.borderRadius};
   color: white;
@@ -13,6 +14,8 @@ const Container = styled.button`
   padding: 7px 0px;
   font-size: 14px;
   cursor: pointer;
+  @media only screen and (max-width: ${(props) => props.theme.sm}) {
+  }
 `;
 
 const Button = ({ text, onClick }) => (

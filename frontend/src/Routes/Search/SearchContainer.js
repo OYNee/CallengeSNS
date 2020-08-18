@@ -5,7 +5,7 @@ import { useQuery } from "react-apollo-hooks";
 import { SEARCH } from "./SearchQueries";
 
 export default withRouter(({ location: { search } }) => {
-  const term = search.split("=")[1];
+  const term = (search.split("=")[1]?decodeURIComponent(search.split("=")[1]):"");
   var limit = 8;
   var cur =0;
   const { data, loading } = useQuery(SEARCH, {

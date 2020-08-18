@@ -5,11 +5,11 @@ import PropTypes from "prop-types";
 const getSize = size => {
   let number;
   if (size === "sm") {
-    number = 30;
+    number = 40;
   } else if (size === "md") {
-    number = 50;
+    number = 90;
   } else if (size === "lg") {
-    number = 150;
+    number = 100;
   }
   return `
         width:${number}px;
@@ -18,10 +18,13 @@ const getSize = size => {
 };
 
 const Container = styled.div`
-  ${props => getSize(props.size)}
   background-image:url(${props => props.url});
   background-size:cover;
-  border-radius:50%;
+  border-radius:100%;
+  ${props => getSize(props.size)}
+  @media only screen and (max-width:${(props) => props.theme.sm}) {
+    margin-left:0;
+  }
 `;
 
 const Avatar = ({ size = "sm", url, className }) => (

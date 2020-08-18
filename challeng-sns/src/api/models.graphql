@@ -3,11 +3,8 @@ type User {
   avatar: String
   username: String!
   email: String!
-  userid: String!
+  nickname: String!
   passwd: String!
-  firstName: String
-  lastName: String
-  fullName: String
   isFollowing: Boolean!
   isSelf: Boolean!
   bio: String
@@ -23,10 +20,13 @@ type User {
   loginSecret: String!
   createdAt: String
   updatedAt: String
-  relChallenger: [User!]
-  preChallenger: [User!]
+  relChallenger: [Post!]
+  preChallenger: [Post!]
   nextChallenger: [User!]
-  tagChallenger: [User!]
+  tagChallenger: [Post!]
+  favCategory: String
+  confirmEmail: Boolean
+  keyForVerify: String
 }
 
 type Post {
@@ -40,7 +40,9 @@ type Post {
   preChallenger: [User!]
   nextChallenger: [User!]
   tagChallenger: [User!]
-  hashtags: [Hashtag!] 
+  nextPosts: [Post!]
+  prePosts: [Post!]
+  hashtags: [Hashtag!]
   scope: Boolean!
   comments: [Comment!]!
   category: String!
@@ -49,10 +51,13 @@ type Post {
   commentCount: Int!
   createdAt: String
   updatedAt: String
-  video: [Video!] 
-  image: [Image!] 
-  audio: [Audio!] 
-  text: [Text!] 
+  video: [Video!]
+  image: [Image!]
+  audio: [Audio!]
+  text: [Text!]
+  textContent: String
+  nextPostCount: Int
+  prePostCount: Int
 }
 
 type Like {
@@ -97,37 +102,37 @@ type Message {
   createdAt: String
   updatedAt: String
 }
-type Video{
-  video_id: ID! 
+type Video {
+  video_id: ID!
   video_url: String!
   createdAt: String
-  post: Post 
+  post: Post
   files: [File!]!
 }
 
-type Image{
+type Image {
   image_id: ID!
   image_url: String!
   files: [File!]!
-  post: Post 
+  post: Post
   createdAt: String
 }
 
-type Audio{
-  audio_id: ID! 
+type Audio {
+  audio_id: ID!
   audio_url: String!
-  audio_img_url: String! 
-  audioFile: File! 
-  post: Post 
+  audio_img_url: String!
+  audioFile: [File!]
+  post: Post
   createdAt: String
-  }
+}
 
-type Text{
-  text_id: ID! 
-  text_img_url: String! 
+type Text {
+  text_id: ID!
+  text_img_url: String!
   content: String!
-  imageFile: File! 
-  post: Post 
+  imageFile: File!
+  post: Post
   relay: Boolean!
   createdAt: String
 }
@@ -137,9 +142,9 @@ type Category {
   cat_name: String!
 }
 
-type Hashtag{
-  tag_id: ID! 
+type Hashtag {
+  id: ID!
   tag_name: String!
-  post: [Post!]! 
-
-} 
+  posts: [Post!]!
+  postCount: Int!
+}

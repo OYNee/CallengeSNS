@@ -7,7 +7,6 @@ export default {
             first:args.limit,
             skip: args.cur
           })
-        
         }
   };
   

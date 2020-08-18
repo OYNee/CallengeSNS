@@ -1,14 +1,15 @@
 import { prisma } from "../../../../generated/prisma-client";
-
 export default {
   Query: {
     searchChallenge: async (_, args) =>
-      prisma.posts({
+      prisma.hashtags({
         where: {
           OR: [
-            { post_caption_starts_with: args.term }
+            { tag_name_contains: args.term }
           ]
-        }
+        },
+        first:args.limit,
+        skip: args.cur
       })
   }
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import {HeartEmpty, User, Logo, Home, Search, VideoIcon, PhotoIcon, AudioIcon, TextIcon } from "./Icons";
 import { useQuery } from "react-apollo-hooks";
@@ -21,6 +21,10 @@ const Footer = styled.footer`
     border-top: solid 1px rgba(2,2,2,0.3);
   };
 `;
+
+const BlankFooter = styled.div`
+  height:47px
+`
 
 const List = styled.ul`
   display: flex;
@@ -61,6 +65,7 @@ const CloseButton = styled.div`
   font-size: 1.2rem;
   padding-top: 14px;
   text-align: right;
+  cursor: defalut;
 `
 
 const Line = styled.hr`
@@ -69,8 +74,16 @@ const Line = styled.hr`
   border-color: rgba(0,0,0,0.2);
 `
 
-export default () => {
+const Hover = styled.div`
+  &:hover {
+    fill:${(props) => props.theme.livingCoral}
+  }
+`
+
+
+export default (defaultValue1,defaultValue2) => {
   const { data } = useQuery(ME);
+  // const [nowTab, setNowTab] = useState("home")
 
   const [state, dispatch] = React.useReducer(exampleReducer, {
     animation: 'overlay',
@@ -80,8 +93,15 @@ export default () => {
 
   const { animation, direction, visible } = state
   const vertical = direction === 'bottom'
-  
+  const [now,setNow] = useState(defaultValue1)
+  const [n,setN] = useState(defaultValue2)
+  const fa = () => {
+    dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay'})
+    setNow("create")
+  }
+
   return (
+    <BlankFooter>
     <Footer>
         {vertical && (
           <Sidebar
@@ -89,29 +109,51 @@ export default () => {
           animation={animation}
           direction={direction}
           visible={visible}
-        >
-          <Grid textAlign='center'>
+          >
+          <Grid textAlign='center' onClick={() =>
+              dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
+            }>
             <Header onClick={() =>
                   dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
-                  }>
-              <h1>New Challenge</h1>
+                }>
+              <h1 onClick={() =>
+                  dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
+                }>New Challenge</h1>
             </Header>
             <CloseButton onClick={() =>
               dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
-              }> X</CloseButton>
+            }> <h1 onClick={() =>
+              dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
+            }>X</h1></CloseButton>
               <Line/>
             <Grid.Row columns={4}>
               <Grid.Column>
-                <VideoIcon />
+                  <Link to="/createvideopost">
+                <Hover>
+                    <VideoIcon />
+                </Hover>
+                  </Link>
               </Grid.Column>
               <Grid.Column>
-                <PhotoIcon />
+                  <Link to="/createphotopost">
+                <Hover>
+                    <PhotoIcon  />              
+                </Hover>
+                  </Link>
               </Grid.Column>
               <Grid.Column>
-                <AudioIcon />
+                  <Link to="/createaudiopost">
+                <Hover>
+                    <AudioIcon />
+                </Hover>
+                  </Link>
               </Grid.Column>
               <Grid.Column>
-                <TextIcon />
+                <Link to="/createtextpost">
+                  <Hover>
+                    <TextIcon />
+                  </Hover>
+                </Link>
               </Grid.Column>
             </Grid.Row>
           </Grid>
@@ -120,40 +162,36 @@ export default () => {
       <List>
         <ListItem>
           <Link to="/">
-            <Home />
+            <Home onClick={()=>setNow("home")} now={now}/>
           </Link>
         </ListItem>
         <ListItem>
           <Link to="/search">
-            <Search />
+            <Search onClick={()=>setNow("search")} now={now} />
           </Link>
         </ListItem>
         <ListItem>
-        <div
-          onClick={() =>
-            dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
-          }
-        >
-          <Logo/>
-        </div>
+          <Logo  onClick={() => fa()
+          }  now={now}/>
         </ListItem>
         <ListItem>
-          <Link to="/notifications">
-            <HeartEmpty />
+          <Link to="/temp">
+            <HeartEmpty onClick={()=>setNow("notification")} now={now}/>
           </Link>
         </ListItem>
         <ListItem>
           {!data.me ? (
             <Link to="/#">
-              <User />
+              <User onClick={()=>setNow("profile")} now={now}/>
             </Link>
           ) : (
             <Link to={data.me.username}>
-              <User />
+              <User onClick={()=>setNow("profile")} now={now}/>
             </Link>
           )}
         </ListItem>
       </List>
     </Footer>
+    </BlankFooter>
   );
 };

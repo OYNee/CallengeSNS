@@ -9,26 +9,38 @@ import FollowButton from "./FollowButton";
 const Card = styled.div`
   ${props => props.theme.whiteBox}
   display:flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content:space-between;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
+  width:100%;
+  max-width: 700px;
+  margin:10px auto;
 `;
 
 const EAvatar = styled(Avatar)`
-  margin-bottom: 15px;
+  margin-right: 10px;
+  min-width: 50px;
 `;
 
 const ELink = styled(Link)`
   color: inherit;
-  margin-bottom: 10px;
+  margin: 5px 10px;
 `;
 
-const UserCard = ({ id, username, isFollowing, url, isSelf }) => (
+const Temp = styled.p`
+  margin: 5px 10px;
+`
+
+const UserCard = ({ id, username, isFollowing, url, isSelf,bio }) => (
   <Card>
-    <EAvatar url={url} size={"md"} />
-    <ELink to={`/${username}`}>
-      <FatText text={username} />
-    </ELink>
+    <EAvatar url={url} size={"sm"} />
+  
+      <ELink to={`/${username}`}>
+        <FatText text={username} />
+      </ELink>
+      <Temp>{bio}</Temp>
+
     {!isSelf && <FollowButton id={id} isFollowing={isFollowing} />}
   </Card>
 );

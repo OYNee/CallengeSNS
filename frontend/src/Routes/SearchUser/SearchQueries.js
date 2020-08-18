@@ -6,9 +6,10 @@ export const SEARCH = gql`
       id
       avatar
       username
-      userid
+      nickname
       isFollowing
       isSelf
+      bio
     }
   }
 `;
