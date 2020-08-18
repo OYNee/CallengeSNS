@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
 import {
-  WebHeartEmpty,
-  WebUser,
-  WebLogo,
+  HeartEmpty,
+  User,
+  Logo,
   Home,
   TextLogo,
-  WebSearch,
+  Search,
   MobileTextLogo,
 } from "./Icons";
 import { useQuery } from "react-apollo-hooks";
@@ -31,7 +31,7 @@ const Wrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(205,209,255,0.3);
+  background-color:rgba(255,101,97,0.66);
   // opacity: 0;
   // border-bottom: ${(props) => props.theme.boxBorder};
   border-radius: 0px;
@@ -110,32 +110,50 @@ export default withRouter(() => {
         <HeaderWrapper>
           <TextLogoColumn>
             <Link to="/" replace>
-              <TextLogo />
+              <TextLogo/>
             </Link>
           </TextLogoColumn>
           <HeaderColumn>
             {!data.me ? (
               <HeaderLink to="/#" replace>
-                <WebLogo />
+                <Logo 
+              width="27"
+              height="27"
+              />
               </HeaderLink>
             ) : (
               <HeaderLink to={`/createtextpost?`} replace>
-                <WebLogo />
+                <Logo 
+              width="27"
+              height="27"
+              />
               </HeaderLink>
             )}
             <HeaderLink to="/search" replace>
-              <WebSearch />
+              <Search 
+              width="27"
+              height="27"
+              />
             </HeaderLink>
             <HeaderLink to="/notifications" replace>
-              <WebHeartEmpty />
+              <HeartEmpty 
+              width="27"
+              height="27"
+              />
             </HeaderLink>
             {!data.me ? (
               <HeaderLink to="/#" replace>
-                <WebUser />
+                <User 
+              width="27"
+              height="27"
+              />
               </HeaderLink>
             ) : (
               <HeaderLink to={data.me.username} replace>
-                <WebUser />
+                <User 
+              width="27"
+              height="27"
+              />
               </HeaderLink>
             )}
           </HeaderColumn>

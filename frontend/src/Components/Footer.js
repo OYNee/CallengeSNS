@@ -144,7 +144,10 @@ export default (defaultValue1,defaultValue2) => {
               <Grid.Column>
                   <Link to="/createaudiopost">
                 <Hover>
-                    <AudioIcon />
+                    <AudioIcon 
+                      width = "40"
+                      height = "40"
+                    />
                 </Hover>
                   </Link>
               </Grid.Column>
@@ -162,31 +165,48 @@ export default (defaultValue1,defaultValue2) => {
       <List>
         <ListItem>
           <Link to="/">
-            <Home onClick={()=>setNow("home")} now={now}/>
+            <Home onClick={()=>setNow("home")} now={now} 
+              width="24"
+              height="24"
+              />
           </Link>
         </ListItem>
         <ListItem>
           <Link to="/search">
-            <Search onClick={()=>setNow("search")} now={now} />
+            <Search onClick={()=>setNow("search")} now={now} 
+              width="24"
+              height="24"
+              />
           </Link>
         </ListItem>
         <ListItem>
           <Logo  onClick={() => fa()
-          }  now={now}/>
+          }  now={now}
+          width="24"
+          height="24"/>
         </ListItem>
         <ListItem>
           <Link to="/temp">
-            <HeartEmpty onClick={()=>setNow("notification")} now={now}/>
+            <HeartEmpty onClick={()=>setNow("notification")} now={now} 
+              width="24"
+              height="24"
+              />
           </Link>
         </ListItem>
         <ListItem>
           {!data.me ? (
             <Link to="/#">
-              <User onClick={()=>setNow("profile")} now={now}/>
+              <User onClick={()=>setNow("profile")} now={now} 
+              width="24"
+              height="24"
+              />
             </Link>
           ) : (
             <Link to={data.me.username}>
-              <User onClick={()=>setNow("profile")} now={now}/>
+              <User onClick={()=>setNow("profile")} now={now} 
+              width="24"
+              height="24"
+              />
             </Link>
           )}
         </ListItem>
