@@ -22,11 +22,12 @@ export default () => {
         } = await setPasswd();
         console.log(changePasswd);
         if (!changePasswd) {
-          toast.error("Error");
-          throw Error();
+          console.log("undefined");
+          // toast.error("Error");
+          // throw Error();
         } else {
           //변경완료 확인창 띄우기
-          window.location.href = "/";
+          // window.location.href = "/";
         }
       } catch {
         toast.error("패스워드가 일치하지 않습니다");

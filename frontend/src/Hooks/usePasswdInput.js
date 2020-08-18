@@ -8,6 +8,10 @@ export default (defaultValue) => {
       target: { value },
     } = e;
     setValue(value);
+    console.log(value);
+    if (value < 8) {
+      console.log("OK");
+    }
   };
 
   return { value, onChange, setValue };

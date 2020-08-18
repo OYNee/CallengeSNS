@@ -4,9 +4,7 @@ import useInput from "../../Hooks/useInput";
 import useCaptionInput from "../../Hooks/useCaptionInput";
 import { useMutation, useQuery } from "react-apollo-hooks";
 import { ME } from "../../SharedQueries";
-import FormData from "form-data";
 import { FOLLOW, UPLOAD, NEXT_CHALLENGER } from "./CreateTextPostQueries";
-import axios from "axios";
 import { toast } from "react-toastify";
 
 export default ({ create, setCreate, selHashtags, pid }) => {
@@ -89,7 +87,7 @@ export default ({ create, setCreate, selHashtags, pid }) => {
     } else if (action === "tagChallenger") {
     }
   };
-  console.log(fcolor)
+  console.log(fcolor);
   return (
     <CreateTextPostPresenter
       setColor={setColor}

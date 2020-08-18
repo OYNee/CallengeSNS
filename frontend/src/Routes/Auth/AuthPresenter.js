@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Input from "../../Components/Input";
 import Button from "../../Components/Button";
 import LogoImage from "../../Styles/Images/tempLogo.png";
+import { Field } from "@progress/kendo-react-form";
 
 const LogoBox = styled.img`
   width: 100%;
@@ -11,7 +12,7 @@ const LogoBox = styled.img`
 `;
 
 const Wrapper = styled.div`
-  margin-top: -60PX;
+  margin-top: -60px;
   margin-bottom: 20px;
   min-height: 80vh;
   display: flex;
@@ -24,21 +25,21 @@ const Box = styled.div`
   ${(props) => props.theme.whiteBox}
   border-radius:0px;
   width: 100%;
-  @media only screen and (max-width:${(props) => props.theme.sm}) {
+  @media only screen and (max-width: ${(props) => props.theme.sm}) {
     max-width: 350px;
-  };
-  @media only screen and (min-width:${(props) => props.theme.sm}) {
+  }
+  @media only screen and (min-width: ${(props) => props.theme.sm}) {
     max-width: 400px;
-  };
-  @media only screen and (min-width:${(props) => props.theme.md}) {
+  }
+  @media only screen and (min-width: ${(props) => props.theme.md}) {
     max-width: 450px;
-  };
-  @media only screen and (min-width:${(props) => props.theme.lg}) {
+  }
+  @media only screen and (min-width: ${(props) => props.theme.lg}) {
     max-width: 500px;
-  };
-  @media only screen and (min-width:${(props) => props.theme.xl}) {
+  }
+  @media only screen and (min-width: ${(props) => props.theme.xl}) {
     max-width: 600px;
-  };
+  }
 `;
 
 const StateChanger = styled(Box)`
@@ -79,6 +80,7 @@ export default ({
   setAction,
   onSubmit,
   keyForVerify,
+  error,
 }) => (
   <Wrapper>
     <Form>
@@ -101,16 +103,18 @@ export default ({
             <title>Sign Up | ChallengeSNS</title>
           </Helmet>
           <form onSubmit={onSubmit}>
-            <Input placeholder={"Nickname"} {...nickname} />
             <Input placeholder={"Email"} {...email} type="email" />
+            <Input placeholder={"ID"} {...username} />
+            <Input placeholder={"Nickname"} {...nickname} />
+
             <Input placeholder={"Password"} {...passwd} type="Password" />
-            <label htmlFor="confirmPasswordInput"></label>
+            <span name="error" id="error"></span>
+
             <Input
               placeholder={"passwdCheck"}
               {...passwdCheck}
               type="Password"
             />
-            <Input placeholder={"Username"} {...username} />
             <Button text={"Sign up"} />
           </form>
         </>
@@ -142,7 +146,7 @@ export default ({
           </form>
         </>
       )}
-      
+
       {action === "confirmEmail" && (
         <>
           <Helmet>

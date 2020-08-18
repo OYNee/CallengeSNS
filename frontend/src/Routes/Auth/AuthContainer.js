@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AuthPresenter from "./AuthPresenter";
 import useInput from "../../Hooks/useInput";
+import usePasswdInput from "../../Hooks/usePasswdInput";
 import { useMutation } from "react-apollo-hooks";
 import {
   LOG_IN,
@@ -11,13 +12,15 @@ import {
   CONFIRM_EMAIL,
 } from "./AuthQueries";
 import { toast } from "react-toastify";
+import { Error } from "@progress/kendo-react-labels";
 
 export default () => {
+  const [error, setError] = useState("");
   const [action, setAction] = useState("logIn");
   const nickname = useInput("");
   const username = useInput("");
-  const passwd = useInput("");
-  const passwdCheck = useInput("");
+  const passwd = usePasswdInput("");
+  const passwdCheck = usePasswdInput("");
   const secret = useInput("");
   const email = useInput("");
   const keyForVerify = useInput("");
@@ -31,10 +34,10 @@ export default () => {
   });
 
   const confirmEmailMutation = useMutation(CONFIRM_EMAIL, {
-    variables:{
+    variables: {
       email: email.value,
       keyForVerify: keyForVerify.value,
-    }
+    },
   });
 
   const createAccountMutation = useMutation(CREATE_ACCOUNT, {
@@ -49,7 +52,6 @@ export default () => {
     variables: {
       email: email.value,
       secret: secret.value,
-     
     },
   });
   const localLogInMutation = useMutation(LOCAL_LOG_IN);
@@ -84,17 +86,18 @@ export default () => {
         username.value !== ""
       ) {
         try {
-          const {data,
+          const {
+            data,
             data: { createAccount },
           } = await createAccountMutation();
-          console.log(email.value)
+          console.log(email.value);
           console.log(createAccount);
-          
+
           if (!createAccount) {
             toast.error("Can't create account");
           } else {
-            console.log(createAccount)
-            
+            console.log(createAccount);
+
             toast.success(
               "Account created! Check your inbox for authentication"
             );
@@ -130,7 +133,6 @@ export default () => {
           } = await confirmSecretMutation();
           if (token !== "" && token !== undefined) {
             localLogInMutation({ variables: { token } });
-            
           } else {
             throw Error();
           }
@@ -138,30 +140,30 @@ export default () => {
           toast.error("Cant confirm secret,check again");
         }
       }
-    }else if(action==="confirmEmail"){
-      if(keyForVerify.value !== ""){
+    } else if (action === "confirmEmail") {
+      if (keyForVerify.value !== "") {
         try {
           const {
-            data:{confirmEmail: token}
-          }=await confirmEmailMutation();
-          if(token !=="" && token !== undefined ){
+            data: { confirmEmail: token },
+          } = await confirmEmailMutation();
+          if (token !== "" && token !== undefined) {
             toast.success(
               "Account created! Check your email for authentication"
             );
-            localStorage.removeItem(token)
-            setTimeout(()=>4000)
-            window.location.reload()
+            localStorage.removeItem(token);
+            setTimeout(() => 4000);
+            window.location.reload();
             // localLogInMutation({variables:{email: email.value, passwd: passwd.value}});
-          }else{
+          } else {
             throw Error();
           }
-          
-        } catch  {
+        } catch {
           toast.error("Can't confirm email,check again");
         }
       }
     }
   };
+  // validation
 
   return (
     <AuthPresenter
@@ -175,6 +177,8 @@ export default () => {
       secret={secret}
       keyForVerify={keyForVerify}
       onSubmit={onSubmit}
+      error={error}
+      setError={setError}
     />
   );
 };
