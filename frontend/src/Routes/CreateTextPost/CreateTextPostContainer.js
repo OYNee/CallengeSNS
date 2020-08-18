@@ -77,9 +77,9 @@ export default ({ create, setCreate, selHashtags, pid }) => {
               pid: pid,
             },
           });
-          // window.location.href = "/";
+          window.location.href = "/";
         } else {
-          // window.location.href = "/";
+          window.location.href = "/";
         }
       } catch (e) {
         toast.error("Cant upload", "Try later");
