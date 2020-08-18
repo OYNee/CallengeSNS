@@ -24,9 +24,11 @@ const ELink = styled(Link)`
 `;
 const Posts = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 200px);
-  grid-template-rows: 200px;
-  grid-auto-rows: 200px;
+  grid-template-columns: repeat(3, 230px);
+  grid-template-rows: 230px;
+  grid-auto-rows: 230px;
+  max-width: 700px;
+    margin: 15px auto;
   @media only screen and (max-width: ${(props) => props.theme.sm}) {
     grid-template-columns: repeat(3, 32vw);
     grid-template-rows: 32vw;
@@ -38,8 +40,8 @@ const HashtagCard = ({ id, username,postCount,posts}) => (
   <Card> 
       <ELink to={`/challenge?`+encodeURIComponent(username)}>
         <FatText text={username} />
-        <FatText text={`UPLOAD ${postCount}`} />
       </ELink>
+      <FatText text={`UPLOAD ${postCount}`} />
   </Card>
   <Posts>
   {posts &&

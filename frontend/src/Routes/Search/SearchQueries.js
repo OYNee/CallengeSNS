@@ -61,6 +61,7 @@ export const SEARCH = gql`
       isFollowing
       isSelf
       bio
+      nickname
     }
   
   }

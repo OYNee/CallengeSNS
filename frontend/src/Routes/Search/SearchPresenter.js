@@ -2,20 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import FatText from "../../Components/FatText";
 import Loader from "../../Components/Loader";
-import UserCard from "../../Components/UserCard";
+import NewUserCard from "../../Components/NewUserCard";
 import HashtagCard from "../../Components/HashtagCard";
 import Input from "../../Components/Input";
 import useInput from "../../Hooks/useInput";
 import { withRouter,Link } from "react-router-dom";
-import InfiniteScroll from 'react-infinite-scroll-component';
-import { encode } from "utf8";
+import { Header } from 'semantic-ui-react'
 
-const SearchUserCard = styled(UserCard)`
-`
+const SearchUserCard = styled(NewUserCard)`
+`;
 
 const SearchMore = styled(FatText)`
-  color:${(props) => props.theme.livingCoral}
-`
+  color:#999999;
+`;
 
 
 const Wrapper = styled.div`
@@ -44,7 +43,19 @@ const Section = styled.div`
 
   };
 `;
+const UserSection = styled.div`
+  margin-bottom: 50px;
+  display: grid;
+  grid-gap: 25px;
+  grid-template-columns: repeat(4, 160px);
+  grid-template-rows: 160px;
+  grid-auto-rows: 160px;
+  max-width:700px;
+  margin:15px auto;
+  @media only screen and (max-width:${(props) => props.theme.sm}) {
 
+  };
+`;
 const PostSection = styled(Section)`
   grid-template-columns: repeat(4, 200px);
   grid-template-rows: 200px;
@@ -53,6 +64,27 @@ const PostSection = styled(Section)`
 const ELink = styled(Link)`
   color: inherit;
   margin-bottom: 10px;
+`;
+const EFatText = styled(FatText)`
+line-height:300px;
+align-items: center;
+`;
+const EWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media only screen and (max-width: ${(props) => props.theme.sm}) {
+    min-height: 100vh;
+  }
+`;
+const SDiv = styled.div`
+max-width:700px;
+margin:15px auto;
+`;
+const AddDiv = styled.div`
+max-width:700px;
+margin:15px auto;
+text-align: right;
 `;
 export default withRouter(({ searchTerm, loading, data, history}) => {
 
@@ -91,20 +123,19 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
             placeholder="Search..."
           />
         </form>
-        <div>
-          {data.searchUser.length === 0 ?
-            (<></>):
-            ( <ELink to={`/search-user?term=${searchTerm}`}>
-              <SearchMore text="더 많은 챌린저 보러 가기!"/>
-              </ELink>
-            )
-          }
-        </div>
+        <SDiv>
+          <Header as='h3' dividing>
+            챌린저
+          </Header>
+        </SDiv>
         <Section>
           {data.searchUser.length === 0 ? (
-            <FatText text="찾으시는 챌린저가 없습니다 ㅠ" />
+            <EWrapper>
+            <EFatText text="검색된 챌린저가 없습니다." />
+            </EWrapper>
           ) : (
-            data.searchUser.map((user,idx) => (
+            <UserSection>
+            {data.searchUser.map((user,idx) => (
               <SearchUserCard
                 key={idx}
                 username={user.username}
@@ -112,22 +143,31 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
                 url={user.avatar}
                 isSelf={user.isSelf}
                 id={user.id}
-                bio={user.bio}
+                nickname={user.nickname}
               />
-            ))
+            ))}
+            </UserSection>
+          )}
+          {data.searchUser.length === 0 ? (
+            console.log(``)
+          ) : (
+            <AddDiv>
+              <ELink to={`/search-user?term=${searchTerm}`}>
+                <SearchMore text="더 많은 챌린저 보러 가기!"/>
+              </ELink>
+            </AddDiv>
           )}
         </Section>
-        <div>
-        {data.searchHashtag.length === 0 ?(<></>
-        ):(
-          <ELink to={`/search-challenge?term=${searchTerm}`}>
-          <SearchMore text="다른 챌린지 보러 가기!"/>
-         </ELink>
-        )}
-        </div>
+        <SDiv>
+        <Header as='h3' dividing>
+            챌린저
+          </Header>
+        </SDiv>
         <PostSection>
           {data.searchHashtag.length === 0 ? (
-            <FatText text="조건에 맞는 챌린지가 없네요 ㅠㅠ" />
+            <EWrapper>
+               <EFatText text="검색된 챌린지가 없습니다." />
+             </EWrapper>
           ) : (
             data.searchHashtag.map((hashtag,idx) => (
               <HashtagCard
@@ -138,7 +178,17 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
             />
             ))
           )}
+            {data.searchHashtag.length === 0 ? (
+            console.log(``)
+          ) : (
+            <AddDiv>
+            <ELink to={`/search-challenge?term=${searchTerm}`}>
+            <SearchMore text="다른 챌린지 보러 가기!"/>
+           </ELink>
+           </AddDiv>
+          )}
         </PostSection>
+
       </Wrapper>
     );
   }
