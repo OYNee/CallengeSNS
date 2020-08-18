@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 
-function useAudioPlayer() {
+function useAudioPlayer(audioID) {
   const [duration, setDuration] = useState();
   const [curTime, setCurTime] = useState();
   const [playing, setPlaying] = useState(false);
   const [clickedTime, setClickedTime] = useState();
 
   useEffect(() => {
-    const audio = document.getElementById("audio");
+    const audio = document.getElementById(audioID);
 
     // state setters wrappers
     const setAudioData = () => {
