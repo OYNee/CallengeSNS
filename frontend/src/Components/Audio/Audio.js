@@ -6,8 +6,12 @@ import styled from "styled-components";
 
 
 const AudioBox = styled.div`
-  width:86vw;
-  height:86vw;
+  width:100%;
+  height:100vw;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    width:754.8px;
+    height:760px;
+  }
 `
 const ControlBox = styled.div`
   width:100%;
@@ -34,13 +38,13 @@ const Audio = ({audioURL, imgURL, audioID}) => {
       <audio id={audioID}>
         <source src={audioURL} />
       </audio>
-      <ControlBox>
+      {/* <ControlBox>
         {playing ? 
           <Button>정지</Button> :
           <Button>재생</Button>
         }
         <Bar curTime={curTime} duration={duration} onTimeUpdate={(time) => setClickedTime(time)}/>
-      </ControlBox>
+      </ControlBox> */}
     </AudioBox>
   );
 }

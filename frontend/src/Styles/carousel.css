@@ -4,6 +4,8 @@
   margin: auto;
   height: 86vw;
 }
+
+
 .carousel__main {
   border-radius: 4px;
   height: 100%;
@@ -11,4 +13,11 @@
 
 .demo-item {
   height: 100%;
+}
+
+
+@media only screen and (min-width:760px){
+  .carousel {
+    height: 760px;
+  }
 }

@@ -18,11 +18,13 @@ const LikeText = styled(FatText)`
 
 const Post = styled.div`
   ${(props) => props.theme.whiteBox};
-  width: 100%;
   user-select: none;
   margin: 3px 0;
   a {
     color: inherit;
+  }
+  @media only screen and (max-width:${(props) => props.theme.sm}) {
+    width: 100%;
   }
 `;
 
@@ -88,16 +90,12 @@ const ImageFile = styled.div`
 `;
 
 const TextFile = styled.div`
-  max-width: 100%;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  background-image: url(${(props) => props.src});
-  background-size: cover;
-  background-position: center;
-  opacity: ${(props) => (props.showing ? 1 : 0)};
-  transition: opacity 0.5s linear;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    height:760px;
+  }
+  @media only screen and (max-width:${(props) => props.theme.sm}) {
+    height:100vw;
+  }
 `;
 
 const Button = styled.span`
@@ -320,7 +318,7 @@ export default ({
       {category === "text" && (
         <Files>
           {files && (
-            <div
+            <TextFile
               style={{
                 backgroundColor: files[0].url,
                 color: files[1].url,
@@ -328,7 +326,7 @@ export default ({
               }}
             >
               {textContent}
-            </div>
+            </TextFile>
           )}
           {/* {files && files.map((file, index) => {
           if (file.url) {
