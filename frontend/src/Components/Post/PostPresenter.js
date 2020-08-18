@@ -340,6 +340,7 @@ export default ({
                 backgroundColor: files[0].url,
                 color: files[1].url,
                 fontSize: "100px",
+                width:"100%"
               }}
             >
               {textContent}

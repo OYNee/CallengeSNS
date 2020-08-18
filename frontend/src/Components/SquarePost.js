@@ -25,7 +25,9 @@ const Overlay = styled.div`
 
 const Container = styled.div`
   background-image: url(${props => props.bg});
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
   cursor: default;
   width:100%
   height:100%
@@ -91,8 +93,8 @@ function exampleReducer(state, action) {
 }
 
 const ListItem = styled.div`
-  width:200px;
-  height:200px;
+  width:33%;
+  height:33%;
   position:absolute;
   @media only screen and (max-width:${(props) => props.theme.sm}){
     width:32vw;
