@@ -71,6 +71,10 @@ export default withRouter(
               dataLength={data.seeFeed.length}
               next={onLoadMore}
               hasMore={hasMore}
+              style={{
+                overflow:"none",
+                // width:"600px",
+              }}
               loader={
                 <Wrapper>
                   <Loader />
