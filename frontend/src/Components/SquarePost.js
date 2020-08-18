@@ -154,11 +154,9 @@ const PostModal = ({post, file}) => {
 const SquarePost = ({ likeCount, commentCount, file, post, file1,files }) => {
   if (post.category === "audio") {
   return (
+    <Link to={`/challengepost?${post.id}`}>
     <Container bg={files[1].url}>
       <h1>음성</h1>
-      <ListItem as={PostModal} 
-        post={post}
-        file={file}/>
         <Overlay>
           <Number>
             <HeartFull />
@@ -170,15 +168,13 @@ const SquarePost = ({ likeCount, commentCount, file, post, file1,files }) => {
           </Number>
         </Overlay>
     </Container>
+    </Link>
   )}
   else if (post.category ==="image") {
     return (
+      <Link to={`/challengepost?${post.id}`}>
       <Container bg={file.url}>
         <h1>이미지</h1>
-        <ListItem as={PostModal} 
-          post={post}
-          file={file}
-        />
         <Overlay>
           <Number>
             <HeartFull />
@@ -190,10 +186,12 @@ const SquarePost = ({ likeCount, commentCount, file, post, file1,files }) => {
           </Number>
         </Overlay>
       </Container>
+      </Link>
     );
   } else if (post.category ==="video") {
     console.log(files)
     return (
+      <Link to={`/challengepost?${post.id}`}>
     <SquareVideo
     videourl={files[0].url}
     post={post}
@@ -210,9 +208,11 @@ const SquarePost = ({ likeCount, commentCount, file, post, file1,files }) => {
       </Number>
     </Overlay>
       </SquareVideo>
+      </Link>
       )
   } else {
     return(
+      <Link to={`/challengepost?${post.id}`}>
       <Container bg="https://svgsilh.com/svg/2126884.svg"
         style={{backgroundColor:files[0].url}}>
       <h1>텍스트</h1>
@@ -230,6 +230,7 @@ const SquarePost = ({ likeCount, commentCount, file, post, file1,files }) => {
           </Number>
         </Overlay>
     </Container>
+          </Link>
     )
   }
 }
