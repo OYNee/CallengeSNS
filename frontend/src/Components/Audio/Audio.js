@@ -24,15 +24,15 @@ const Button = styled.button`
   left: 33vw;
 `
 
-const Audio = ({videourl, imgurl, onClick}) => {
-  const { curTime, duration, playing, setPlaying, setClickedTime } = useAudioPlayer();
+const Audio = ({audioURL, imgURL, audioID}) => {
+  const { curTime, duration, playing, setPlaying, setClickedTime } = useAudioPlayer(audioID);
 
   return (
-    <AudioBox style={{backgroundImage: `url(${imgurl})`,
+    <AudioBox style={{backgroundImage: `url(${imgURL})`,
     backgroundSize: `cover`,
     backgroundRepeat: `norepeat`, backgroundPosition: `center`,}} onClick={() => setPlaying(!playing)}>
-      <audio id="audio">
-        <source src={videourl} />
+      <audio id={audioID}>
+        <source src={audioURL} />
       </audio>
       <ControlBox>
         {playing ? 

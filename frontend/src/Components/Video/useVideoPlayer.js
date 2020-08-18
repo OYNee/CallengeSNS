@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 
-function useVideoPlayer() {
+function useVideoPlayer(videoID) {
   const [duration, setDuration] = useState();
   const [curTime, setCurTime] = useState();
   const [playing, setPlaying] = useState(false);
   const [clickedTime, setClickedTime] = useState();
 
   useEffect(() => {
-    const video = document.getElementById("video");
+    const video = document.getElementById(videoID);
 
     // state setters wrappers
     const setVideoData = () => {

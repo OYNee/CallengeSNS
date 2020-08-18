@@ -296,7 +296,9 @@ export default ({
       )}
       {category === "video" && (
         <Files>
-          <Video videourl={files[0].url} />
+          <Video videoURL={files[0].url} 
+          videoID ={id}
+          />
           {/* <video controls width="100%">
         <source src={files[0].url} type="video/mp4"/>
        </video> */}
@@ -312,7 +314,7 @@ export default ({
       )}
       {category === "audio" && (
         <Files>
-          <Audio videourl={files[0].url} imgurl={files[1].url} />
+          <Audio audioURL={files[0].url} imgURL={files[1].url} audioID={id}/>
         </Files>
       )}
       {category === "text" && (

@@ -24,13 +24,13 @@ const Button = styled.button`
   left: 33vw;
 `
 
-const Video = ({videourl}) => {
-  const { curTime, duration, playing, setPlaying, setClickedTime } = useVideoPlayer();
+const Video = ({videoURL, videoID}) => {
+  const { curTime, duration, playing, setPlaying, setClickedTime } = useVideoPlayer(videoID);
 
   return (
     <VideoBox onClick={() => setPlaying(!playing)}>
-      <video id="video" width="100%">
-        <source src={videourl} />
+      <video id={videoID} width="100%">
+        <source src={videoURL} />
       </video>
       <ControlBox>
         {playing ? 
