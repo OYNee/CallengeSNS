@@ -38,3 +38,5 @@ yarn.lock
 # next.js build output
 .next
 generated
+.yml
+build/
