@@ -10,6 +10,8 @@ const getSize = size => {
     number = 90;
   } else if (size === "lg") {
     number = 100;
+  } else if (size === "WebProfile") {
+    number = 240;
   }
   return `
         width:${number}px;
@@ -21,9 +23,16 @@ const Container = styled.div`
   background-image:url(${props => props.url});
   background-size:cover;
   border-radius:100%;
+  border: 1px solid ${(props) => props.theme.livingCoral};
   ${props => getSize(props.size)}
   @media only screen and (max-width:${(props) => props.theme.sm}) {
     margin-left:0;
+    width:25vw;
+    max-width:140px;
+    min-width:100px;
+    height:25vw;
+    max-height:140px;
+    min-height:100px;
   }
 `;
 

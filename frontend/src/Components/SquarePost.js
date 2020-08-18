@@ -6,6 +6,7 @@ import { HeartFull, CommentFull } from "./Icons";
 import { Link } from "react-router-dom";
 import Post from "./Post";
 import SquareVideo from"./SquareVideo/SquareVideo"
+import {AudioIcon, VideoIcon, TextIcon, PhotoIcon, } from "./Icons"
 
 const Overlay = styled.div`
   @media only screen and (min-width:${(props) => props.theme.sm}) {
@@ -16,11 +17,26 @@ const Overlay = styled.div`
     justify-content: center;
     align-items: center;
     opacity: 0;
+    position:absolute;
+    top:0;
     transition: opacity 0.3s linear;
     svg {
       fill: white;
     }
   }
+`;
+
+const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus, &:visited, &:link, &:active {
+        text-decoration: none;
+        color:${props => props.color};
+    }
+    &:hover {
+      text-decoration: none;
+      color:white;
+    }
 `;
 
 const Container = styled.div`
@@ -31,6 +47,7 @@ const Container = styled.div`
   cursor: default;
   width:100%
   height:100%
+  position:relative;
   @media only screen and (min-width:${(props) => props.theme.sm}) {
     &:hover {
       ${Overlay} {
@@ -80,6 +97,15 @@ const Button = styled.button`
   margin-left: .75em;
   margin-bottom: 15px
 `
+
+const TextBox = styled.div`
+  text-decoration:none;
+  // color:${props => props.color};
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    font-size: 230px;
+  }
+`
+
 
 function exampleReducer(state, action) {
   switch (action.type) {
@@ -158,7 +184,12 @@ const SquarePost = ({ likeCount, commentCount, file, post, file1,files }) => {
   return (
     <Link to={`/challengepost?${post.id}`}>
     <Container bg={files[1].url}>
-      <h1>음성</h1>
+      <AudioIcon
+        position="absolute"
+        right = "0"
+        width = "40"
+        height = "40"
+        />
         <Overlay>
           <Number>
             <HeartFull />
@@ -176,7 +207,12 @@ const SquarePost = ({ likeCount, commentCount, file, post, file1,files }) => {
     return (
       <Link to={`/challengepost?${post.id}`}>
       <Container bg={file.url}>
-        <h1>이미지</h1>
+        <PhotoIcon 
+        position="absolute"
+        right = "0"
+        width = "40"
+        height = "40"
+        />
         <Overlay>
           <Number>
             <HeartFull />
@@ -197,30 +233,30 @@ const SquarePost = ({ likeCount, commentCount, file, post, file1,files }) => {
     <SquareVideo
     videourl={files[0].url}
     post={post}
-    file={file}>
-    <h1>영상</h1>
-    <Overlay>
-      <Number>
-        <HeartFull />
-        <NumberText>{likeCount}</NumberText>
-      </Number>
-      <Number>
-        <CommentFull />
-        <NumberText>{commentCount}</NumberText>
-      </Number>
-    </Overlay>
+    file={file}
+    likeCount={likeCount}
+    commentCount={commentCount}
+    >
       </SquareVideo>
+
       </Link>
       )
   } else {
+    console.log(post)
     return(
-      <Link to={`/challengepost?${post.id}`}>
-      <Container bg="https://svgsilh.com/svg/2126884.svg"
+      <StyledLink to={`/challengepost?${post.id}`}
+      color={files[1].url}
+      >
+      <Container
         style={{backgroundColor:files[0].url}}>
-      <h1>텍스트</h1>
-      <ListItem as={PostModal} 
-        post={post}
-        file={file}/>
+      <TextIcon 
+        position="absolute"
+        right = "0"
+        width = "40"
+        height = "40"
+        />
+        <TextBox 
+        >{post.textContent[0]}</TextBox>
         <Overlay>
           <Number>
             <HeartFull />
@@ -232,7 +268,7 @@ const SquarePost = ({ likeCount, commentCount, file, post, file1,files }) => {
           </Number>
         </Overlay>
     </Container>
-          </Link>
+          </StyledLink>
     )
   }
 }
