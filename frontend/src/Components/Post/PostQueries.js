@@ -2,8 +2,8 @@ import { gql } from "apollo-boost";
 
 export const FIND_USER = gql`
   query seeUser($username: String!) {
-    seeUser(username: $username){
-      relChallenger{
+    seeUser(username: $username) {
+      relChallenger {
         username
         nickname
         avatar
@@ -12,7 +12,7 @@ export const FIND_USER = gql`
   }
 `;
 export const TOGGLE_LIKE = gql`
-  mutation toggelLike($postId: String!) {
+  mutation toggleLike($postId: String!) {
     toggleLike(postId: $postId)
   }
 `;

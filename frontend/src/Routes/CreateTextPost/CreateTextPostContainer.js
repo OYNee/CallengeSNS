@@ -2,22 +2,28 @@ import React, { useState } from "react";
 import CreateTextPostPresenter from "./CreateTextPostPresenter";
 import useInput from "../../Hooks/useInput";
 import useCaptionInput from "../../Hooks/useCaptionInput";
-
 import { useMutation, useQuery } from "react-apollo-hooks";
 import { ME } from "../../SharedQueries";
 import FormData from "form-data";
-import { FOLLOW, UPLOAD } from "./CreateTextPostQueries";
+import { FOLLOW, UPLOAD, NEXT_CHALLENGER } from "./CreateTextPostQueries";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default ({ cat, pid }) => {
+export default ({ create, setCreate, selHashtags, pid }) => {
   const [color, setColor] = useState("rgba(255, 255, 255, 1)");
   const [fcolor, setFColor] = useState("rgba(0, 0, 0, 1)");
   const [action, setAction] = useState("CreatePost");
-  const [create, setCreate] = useState(false);
   const [relChallenger, setRelChallenger] = useState(``);
   const [tagChallenger, setTagChallenger] = useState(``);
-  const caption = useCaptionInput("");
+
+  let hashtag = "";
+  if (selHashtags) {
+    for (let i = 0; i < selHashtags.length; i++) {
+      hashtag += selHashtags[i].tag_name + " ";
+    }
+  }
+
+  const caption = useCaptionInput(hashtag);
   const textContent = useInput("");
   let bgColor = [];
   var limit = 100;
@@ -40,36 +46,44 @@ export default ({ cat, pid }) => {
     loading = FOLLOWQuery.loading;
   }
 
-  const uploadMutation = useMutation(UPLOAD, {
-    variables: {
-      caption: caption.value,
-      category: "text",
-      rel_challengers: "",
-      pre_challengers: "",
-      next_challengers: "",
-      tag_challengers: "",
-      files: bgColor,
-      textContent: textContent.value,
-    },
-  });
+  const uploadMutation = useMutation(UPLOAD);
+  const nextMutation = useMutation(NEXT_CHALLENGER);
   const onSubmit = async (e) => {
     e.preventDefault();
     if (action === "CreatePost") {
-      if (create) {
-        try {
-          bgColor.push(color);
-          bgColor.push(fcolor);
-          console.log(textContent.value);
+      try {
+        bgColor.push(color);
+        bgColor.push(fcolor);
+        console.log(relChallenger);
+        console.log(tagChallenger);
+        const {
+          data: { uploadChallenge },
+        } = await uploadMutation({
+          variables: {
+            caption: caption.value,
+            category: "text",
+            rel_challengers: relChallenger,
+            tag_challengers: tagChallenger,
+            files: bgColor,
+            textContent: textContent.value,
+          },
+        });
+        if (uploadChallenge.id && pid) {
           const {
-            data: { uploadChallenge },
-          } = await uploadMutation();
-          if (uploadChallenge.id) {
-            window.location.href = "/";
-          }
-        } catch (e) {
-          toast.error("Cant upload", "Try later");
-        } finally {
+            data: { nextChallenge },
+          } = await nextMutation({
+            variables: {
+              id: uploadChallenge.id,
+              pid: pid,
+            },
+          });
+          // window.location.href = "/";
+        } else {
+          // window.location.href = "/";
         }
+      } catch (e) {
+        toast.error("Cant upload", "Try later");
+      } finally {
       }
     } else if (action === "relChallenger") {
     } else if (action === "tagChallenger") {

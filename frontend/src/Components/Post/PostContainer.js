@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import useInput from "../../Hooks/useInput";
 import PostPresenter from "./PostPresenter";
 import { useMutation, useQuery } from "react-apollo-hooks";
-import { TOGGLE_LIKE, ADD_COMMENT,FIND_USER } from "./PostQueries";
+import { TOGGLE_LIKE, ADD_COMMENT, FIND_USER } from "./PostQueries";
 import { toast } from "react-toastify";
 
 const PostContainer = ({
@@ -22,19 +22,29 @@ const PostContainer = ({
   nextPostCount,
   prePosts,
   nextPosts,
+  create,
+  setCreate,
+  selHashtags,
+  setSelHashtags,
+  pid,
+  setPid,
+  cat,
+  setCat,
   textContent,
 }) => {
   const [isLikedS, setIsLiked] = useState(isLiked);
   const [likeCountS, setLikeCount] = useState(likeCount);
   const [currentItem, setCurrentItem] = useState(0);
   const [selfComments, setSelfComments] = useState([]);
-  const {Cuser, fetchMore} = useQuery(FIND_USER, {variables: {username:user.username}});
+  const { Cuser, fetchMore } = useQuery(FIND_USER, {
+    variables: { username: user.username },
+  });
   const comment = useInput("");
   const toggleLikeMutation = useMutation(TOGGLE_LIKE, {
-    variables: { id: user.id }
+    variables: { postId: id },
   });
   const addCommentMutation = useMutation(ADD_COMMENT, {
-    variables: { postId: id, text: comment.value }
+    variables: { postId: id, text: comment.value },
   });
   const slide = () => {
     const totalFiles = files.length;
@@ -59,13 +69,13 @@ const PostContainer = ({
     }
   };
 
-  const onKeyPress = async event => {
+  const onKeyPress = async (event) => {
     const { which } = event;
     if (which === 13) {
       event.preventDefault();
       try {
         const {
-          data: { addComment }
+          data: { addComment },
         } = await addCommentMutation();
         setSelfComments([...selfComments, addComment]);
         comment.setValue("");
@@ -97,7 +107,7 @@ const PostContainer = ({
       category={category}
       id={id}
       hashtags={hashtags}
-      prePostCount ={prePostCount}
+      prePostCount={prePostCount}
       nextPostCount={nextPostCount}
       prePosts={prePosts}
       nextPosts={nextPosts}
@@ -105,6 +115,14 @@ const PostContainer = ({
       // preChallenger={preChallenger}
       // nextChallenger={nextChallenger}
       // tagChallenger={tagChallenger}
+      create={create}
+      setCreate={setCreate}
+      selHashtags={selHashtags}
+      setSelHashtags={setSelHashtags}
+      pid={pid}
+      setPid={setPid}
+      cat={cat}
+      setCat={setCat}
     />
   );
 };
@@ -114,12 +132,12 @@ PostContainer.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.string.isRequired,
     avatar: PropTypes.string,
-    username: PropTypes.string.isRequired
+    username: PropTypes.string.isRequired,
   }).isRequired,
   files: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired
+      url: PropTypes.string.isRequired,
     })
   ).isRequired,
   likeCount: PropTypes.number.isRequired,
@@ -130,8 +148,8 @@ PostContainer.propTypes = {
       text: PropTypes.string.isRequired,
       user: PropTypes.shape({
         id: PropTypes.string.isRequired,
-        username: PropTypes.string.isRequired
-      }).isRequired
+        username: PropTypes.string.isRequired,
+      }).isRequired,
     })
   ).isRequired,
   caption: PropTypes.string.isRequired,
@@ -143,9 +161,9 @@ PostContainer.propTypes = {
         id: PropTypes.string.isRequired,
         username: PropTypes.string.isRequired,
         avatar: PropTypes.string,
-      }).isRequired
+      }).isRequired,
     })
-  )
+  ),
 };
 
 export default PostContainer;

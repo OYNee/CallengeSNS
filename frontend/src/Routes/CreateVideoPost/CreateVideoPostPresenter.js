@@ -76,7 +76,6 @@ export default ({
     onSubmit(e);
   };
   const onUpload = (e) => {
-    setCreate(true);
     console.log(e);
     onSubmit(e);
   };
