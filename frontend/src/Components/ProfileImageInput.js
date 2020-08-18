@@ -8,8 +8,10 @@ import "../Styles/carousel.css";
 //   width: 100%;
 // `;
 const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 25vh;
+  height: 25vh;
+  margin: auto;
+  margin-bottom: 30px;
 `;
 const Blank = styled.div`
   width: 86vw;
@@ -21,28 +23,29 @@ const Blank = styled.div`
   `
 
 const Img = styled.div`
-  width:86vw;
-  height: 86vw;
+  width:100%;
+  height: 100%;
   @media only screen and (min-width:${(props) => props.theme.sm}) {
-    width:760px;
-    height: 760px;
+    // width:200px;
+    // height: 200px;
   }
 `
 
-const ImageInput = () => {
-  const [image, setImage] = useState({ preview: "", raw: "" });
+const ProfileImageInput = ({currentAvatar}) => {
+  const [image, setImage] = useState({ preview: currentAvatar, raw: "" });
 
   const handleChange = (e) => {
     if (e.target.files.length) {
         setImage({
-        preview: e.target.files,
+        preview: URL.createObjectURL(e.target.files[0]),
         raw: e.target.files[0],
       });
     }
   };
-var previews = Object.keys(image.preview).map(key => image.preview[key])
-console.log(previews);
-
+// var previews = Object.keys(image.preview).map(key => image.preview[key])
+console.log(image.preview);
+console.log(1)
+console.log(currentAvatar)
   // const handleUpload = async e => {
   //   e.preventDefault();
   //   const formData = new FormData();
@@ -58,45 +61,42 @@ console.log(previews);
   // };
   return (
     <Wrapper>
-        {image.preview ? (
-          <>
-            <Carousel>  
-              {previews.map((pre, index) => (
-                // <img
-                //   key={index}
-                //   className="demo-item"
-                //   src={URL.createObjectURL(pre)}
-                // />
+      <label htmlFor="photo" style={{
+        height:"100%",
+        width:"100%",
+      }}>
+        {/* {(image.preview || currentAvatar) ? ( */}
+          {/* <> */}
+              {/* {previews.map((pre, index) => ( */}
                 <Img src={image.preview} alt={"dummy"} 
                 style={{
-                  backgroundImage: `url(${URL.createObjectURL(pre)}`,
-                  backgroundSize: "contain",
+                  backgroundImage: `url(${image.preview})`,
+                  backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center",
+                  borderRadius: `100%`,
                 }}/>
-              ))}
-            </Carousel>
+              {/* ))} */}
             
-          </>
-        ) : (
-          <label htmlFor="photo">
-          <Blank>
-            <Frame />
-          </Blank>
-          </label>
-        )}
+          {/* </> */}
+        {/* ) : ( */}
+          {/* <Blank> */}
+            {/* <Frame /> */}
+          {/* </Blank> */}
+        {/* )} */}
       <input
         type="file"
         id="photo"
         accept="image/*"
         style={{ display: "none" }}
         onChange={handleChange}
-        multiple
-      />
+        // multiple
+        />
+        </label>
       {/* <br /> */}
       {/* <button onClick={handleUpload}>Upload</button> */}
     </Wrapper>
   );
 };
 
-export default ImageInput;
+export default ProfileImageInput;

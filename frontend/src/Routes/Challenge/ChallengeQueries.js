@@ -7,6 +7,7 @@ export const CHALLENGE = gql`
       location
       caption
       category
+      textContent
       hashtags {
         id
         tag_name
@@ -32,25 +33,27 @@ export const CHALLENGE = gql`
       }
       createdAt
       nextPostCount
-        prePostCount
-        nextPosts{
-          user{
+      prePostCount
+      nextPosts {
+        user {
           id
           avatar
           username
           isFollowing
           isSelf
-          bio}
+          bio
         }
-        prePosts{
-          user{
+      }
+      prePosts {
+        user {
           id
           avatar
           username
           isFollowing
           isSelf
-          bio}
+          bio
         }
+      }
     }
   }
 `;

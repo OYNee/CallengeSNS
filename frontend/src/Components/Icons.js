@@ -270,12 +270,12 @@ export const TextIcon = () => (
   </svg>
 );
 
-export const DropdownIcon = () => (
+export const DropdownIcon = ({width,height}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="7vw"
-    height="7vw"
-    viewBox="-640 -640 2560 1280"
+    width={width}
+    height={height}
+    viewBox="-640 -320 2560 1920"
   >
     <g transform="translate(0.000000,640.000000) scale(0.100000,-0.100000)">
       <path d="M10 6392 c0 -4 1438 -1445 3195 -3202 l3195 -3194 3195 3194 c1757 1757 3195 3198 3195 3202 0 5 -2875 8 -6390 8 -3515 0 -6390 -3 -6390 -8z" />

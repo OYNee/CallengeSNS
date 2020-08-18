@@ -18,11 +18,16 @@ const LikeText = styled(FatText)`
 
 const Post = styled.div`
   ${(props) => props.theme.whiteBox};
-  width: 100%;
   user-select: none;
   margin: 3px 0;
   a {
     color: inherit;
+  }
+  @media only screen and (max-width: ${(props) => props.theme.sm}) {
+    width: 100%;
+  }
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    width:754.8px;
   }
 `;
 
@@ -74,6 +79,15 @@ const VideoFiles = styled.div`
   flex-shrink: 0;
 `;
 
+const Img = styled.div`
+  width:100%;
+  height: 100%;
+  // @media only screen and (min-width:${(props) => props.theme.sm}) {
+  //   width:760px;
+  //   height: 760px;
+  // }
+`
+
 const ImageFile = styled.div`
   max-width: 100%;
   width: 100%;
@@ -88,16 +102,12 @@ const ImageFile = styled.div`
 `;
 
 const TextFile = styled.div`
-  max-width: 100%;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  background-image: url(${(props) => props.src});
-  background-size: cover;
-  background-position: center;
-  opacity: ${(props) => (props.showing ? 1 : 0)};
-  transition: opacity 0.5s linear;
+  @media only screen and (min-width: ${(props) => props.theme.sm}) {
+    height: 760px;
+  }
+  @media only screen and (max-width: ${(props) => props.theme.sm}) {
+    height: 100vw;
+  }
 `;
 
 const Button = styled.span`
@@ -289,16 +299,21 @@ export default ({
         <Files>
           <Carousel>
             {files.map((pre, index) => (
-              <img key={index} className="demo-item" src={pre.url} />
+              // <img key={index} className="demo-item" src={pre.url} />
+              <Img key={index} alt={"dummy"} 
+              style={{
+                backgroundImage: `url(${pre.url}`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+              }}/>
             ))}
           </Carousel>
         </Files>
       )}
       {category === "video" && (
         <Files>
-          <Video videoURL={files[0].url} 
-          videoID ={id}
-          />
+          <Video videoURL={files[0].url} videoID={id} />
           {/* <video controls width="100%">
         <source src={files[0].url} type="video/mp4"/>
        </video> */}
@@ -314,21 +329,22 @@ export default ({
       )}
       {category === "audio" && (
         <Files>
-          <Audio audioURL={files[0].url} imgURL={files[1].url} audioID={id}/>
+          <Audio audioURL={files[0].url} imgURL={files[1].url} audioID={id} />
         </Files>
       )}
       {category === "text" && (
         <Files>
           {files && (
-            <div
+            <TextFile
               style={{
                 backgroundColor: files[0].url,
                 color: files[1].url,
                 fontSize: "100px",
+                width:"100%"
               }}
             >
               {textContent}
-            </div>
+            </TextFile>
           )}
           {/* {files && files.map((file, index) => {
           if (file.url) {

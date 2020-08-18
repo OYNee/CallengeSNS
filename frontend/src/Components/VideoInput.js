@@ -5,14 +5,22 @@ import {Frame} from "./Icons"
 const Img = styled.iframe`
   width:86vw;
   height: 86vw;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    width:760px;
+    height: 760px;
+  }
 `
 const Wrapper = styled.div`
   width:100%;
   height:100%;
 `
 const Blank = styled.div`
-  width:100%;
-  height:100%;
+  width: 86vw;
+  @media only screen and (max-width:${(props) => props.theme.sm}) {
+  }
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    width:760px;
+  }
 `
 
 const VideoInput = () => {

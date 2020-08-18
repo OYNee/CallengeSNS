@@ -14,32 +14,50 @@ import Audio from "../../Components/Audio/Audio";
 const Wrapper = styled.div`
   padding: 3vw;
   margin: 0 4vw;
-  @media only screen and (max-width: ${(props) => props.theme.sm});
+  @media only screen and (min-width: ${(props) => props.theme.sm}) {
+    margin:0;
+    padding:0;
+  };
 `;
 const Section = styled.div`
   width: 100%;
   margin: 15px auto;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    width: 100%;
+  }
 `;
 
 const Blank = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-
-const Img = styled.img`
   width: 86vw;
+  @media only screen and (max-width:${(props) => props.theme.sm}) {
+  }
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    width:760px;
+  }
+`
+
+const Img = styled.div`
+  width:86vw;
   height: 86vw;
-`;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    width:760px;
+    height: 760px;
+  }
+`
 const PostBox = styled.div`
   width: 86vw;
   background-color: rgba(0, 0, 0, 0);
   margin: 3vw auto;
   border-radius: 10px;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    width: 100%;
 `;
 
 const ContentBox = styled.div`
   width: 86vw;
-  // height: 86vw;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    width: 100%;
+  }
 `;
 
 const CaptionInput = styled.textarea`
@@ -47,10 +65,13 @@ const CaptionInput = styled.textarea`
   border: ${(props) => props.theme.boxBorder};
   border-radius: ${(props) => props.theme.borderRadius};
   width:86vw;
-  height 5vh;
+  height 20vh;
   font-size: 12px;
   padding: 0px 15px;
   resize: none;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    width: 100%;
+  }
 `;
 
 const CompleteButton = styled.button`
@@ -181,7 +202,13 @@ export default ({
             {/* <AudioImageInput /> */}
             <label htmlFor="photo">
               {image.preview ? (
-                <Img src={image.preview} alt={"dummy"} />
+                <Img src={image.preview} alt={"dummy"} 
+                  style={{
+                    backgroundImage: `url(${image.preview}`,
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                  }}/>
               ) : (
                 <Blank>
                   <Frame />

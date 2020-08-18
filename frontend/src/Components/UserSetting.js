@@ -10,6 +10,9 @@ import { DropdownIcon } from "../Components/Icons";
 const Username = styled.span`
   font-size: 5vw;
   display: inline-block;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    font-size:26px;
+  }
 `;
 
 const MyButton = styled.button`
@@ -61,6 +64,9 @@ const DropDownHeader = styled("div")`
 const DropDownListContainer = styled("div")`
   position: absolute;
   top: 100px;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    top: 126px;
+  }
 `;
 
 const DropDownList = styled("ul")`
@@ -114,6 +120,10 @@ const DelAccModal = () => {
         size={size}
         open={open}
         onClose={() => dispatch({ type: "close" })}
+        style= {{
+          height: `auto`,
+          position: `static`,
+        }}
       >
         <Modal.Content>
           <p>정말로 탈퇴하시겠어요?</p>
@@ -148,6 +158,10 @@ const LogoutModal = () => {
         size={size}
         open={open}
         onClose={() => dispatch({ type: "close" })}
+        style= {{
+          height: `auto`,
+          position: `static`,
+        }}
       >
         <Modal.Content>
           <p>로그아웃하시겠어요?</p>
@@ -176,7 +190,10 @@ const DropdownMenu = ({ username }) => {
     <DropDownContainer>
       <DropDownHeader onClick={toggling} className={isOpen ? "dropOpen" : ""}>
         <Username>{username}</Username>
-        <DropdownIcon />
+        <DropdownIcon 
+        width="26"
+        height="26"
+        />
       </DropDownHeader>
       {isOpen && (
         <DropDownListContainer>
