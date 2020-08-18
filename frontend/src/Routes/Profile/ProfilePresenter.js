@@ -8,7 +8,7 @@ import FatText from "../../Components/FatText";
 import FollowButton from "../../Components/FollowButton";
 import SquarePost from "../../Components/SquarePost";
 import Button from "../../Components/Button";
-import ImageInput from "../../Components/ProfileInput";
+import ProfileImageInput from "../../Components/ProfileImageInput";
 
 import { Link } from "react-router-dom";
 import DropdownMenu from "../../Components/UserSetting";
@@ -17,20 +17,21 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 80vh;
   @media only screen and (max-width: ${(props) => props.theme.sm}) {
-    min-height: 100vh;
+
   }
 `;
 
 const UpdateWrapper = styled.div`
-  margin-top: -60px;
-  margin-bottom: 20px;
-  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  width:100%
+  height: 80vh;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    // width:600px;
+  }
 `;
 
 const Header = styled.header`
@@ -57,6 +58,9 @@ const UsernameRow = styled.div`
 const Username = styled.span`
   font-size: 26px;
   display: block;
+  @media only screen and (max-width:${(props) => props.theme.sm}) {
+    font-size: 5vw;
+  }
 `;
 
 const Counts = styled.ul`
@@ -132,19 +136,9 @@ const Box = styled.div`
   border-radius:0px;
   width: 100%;
   @media only screen and (max-width: ${(props) => props.theme.sm}) {
-    max-width: 350px;
-  }
-  @media only screen and (min-width: ${(props) => props.theme.sm}) {
     max-width: 400px;
   }
-  @media only screen and (min-width: ${(props) => props.theme.md}) {
-    max-width: 450px;
-  }
-
-  @media only screen and (min-width: ${(props) => props.theme.lg}) {
-    max-width: 500px;
-  }
-  @media only screen and (min-width: ${(props) => props.theme.xl}) {
+  @media only screen and (min-width: ${(props) => props.theme.sm}) {
     max-width: 600px;
   }
 `;
@@ -152,7 +146,7 @@ const Box = styled.div`
 const Form = styled(Box)`
   padding: 40px;
   padding-bottom: 30px;
-  margin-bottom: 15px;
+  margin: auto 0;
   form {
     width: 100%;
     input {
@@ -190,6 +184,7 @@ export default ({
     const {
       seeUser: { avatar, nickname, bio },
     } = data;
+    console.log(avatar)
     return (
       <UpdateWrapper>
         <Form>
@@ -198,7 +193,7 @@ export default ({
           </Helmet>
           <form onSubmit={onSubmit}>
             {/* <Avatar size="lg" url={avatar}> */}
-            <ImageInput></ImageInput>
+            <ProfileImageInput currentAvatar = {avatar}></ProfileImageInput>
             {/* </Avatar> */}
             <Input placeholder={nickname} {...newNickname} />
             <Input placeholder={bio} {...newBio} />

@@ -25,7 +25,9 @@ const Overlay = styled.div`
 
 const Container = styled.div`
   background-image: url(${props => props.bg});
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
   cursor: default;
   width:100%
   height:100%
