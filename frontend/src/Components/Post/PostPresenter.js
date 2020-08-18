@@ -26,6 +26,9 @@ const Post = styled.div`
   @media only screen and (max-width:${(props) => props.theme.sm}) {
     width: 100%;
   }
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    width:754.8px;
+  }
 `;
 
 const Header = styled.header`
@@ -75,6 +78,15 @@ const VideoFiles = styled.div`
   align-items: stretch;
   flex-shrink: 0;
 `;
+
+const Img = styled.div`
+  width:100%;
+  height: 100%;
+  // @media only screen and (min-width:${(props) => props.theme.sm}) {
+  //   width:760px;
+  //   height: 760px;
+  // }
+`
 
 const ImageFile = styled.div`
   max-width: 100%;
@@ -287,7 +299,14 @@ export default ({
         <Files>
           <Carousel>
             {files.map((pre, index) => (
-              <img key={index} className="demo-item" src={pre.url} />
+              // <img key={index} className="demo-item" src={pre.url} />
+              <Img key={index} alt={"dummy"} 
+              style={{
+                backgroundImage: `url(${pre.url}`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+              }}/>
             ))}
           </Carousel>
         </Files>

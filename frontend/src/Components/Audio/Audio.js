@@ -7,7 +7,7 @@ import styled from "styled-components";
 
 const AudioBox = styled.div`
   width:100%;
-  height:100vw;
+  height:86vw;
   @media only screen and (min-width:${(props) => props.theme.sm}) {
     width:754.8px;
     height:760px;
@@ -33,7 +33,7 @@ const Audio = ({audioURL, imgURL, audioID}) => {
 
   return (
     <AudioBox style={{backgroundImage: `url(${imgURL})`,
-    backgroundSize: `cover`,
+    backgroundSize: `contain`,
     backgroundRepeat: `norepeat`, backgroundPosition: `center`,}} onClick={() => setPlaying(!playing)}>
       <audio id={audioID}>
         <source src={audioURL} />

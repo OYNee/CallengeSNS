@@ -33,25 +33,34 @@ import { Button, Popup } from "semantic-ui-react";
 const Wrapper = styled.div`
   padding: 3vw;
   margin: 0 4vw;
-  @media only screen and (max-width: ${(props) => props.theme.sm});
+  @media only screen and (min-width: ${(props) => props.theme.sm}) {
+    margin:0;
+    padding:0;
+  };
 `;
 const Section = styled.div`
   width: 100%;
   margin: 15px auto;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    width: 100%;
+  }
 `;
-
 const PostBox = styled.div`
   width: 86vw;
   background-color: rgba(0, 0, 0, 0);
   margin: 3vw auto;
   border-radius: 10px;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    width: 100%;
 `;
 
 const ContentBox = styled.div`
   width: 86vw;
-  height: 86vw;
+  height:20vh;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    width: 100%;
+  }
 `;
-
 const CaptionInput = styled.textarea`
   border: 0;
   border: ${(props) => props.theme.boxBorder};
@@ -61,6 +70,9 @@ const CaptionInput = styled.textarea`
   font-size: 12px;
   padding: 0px 15px;
   resize: none;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    width: 100%;
+  }
 `;
 
 const CompleteButton = styled.button`

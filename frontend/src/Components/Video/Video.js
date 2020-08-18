@@ -33,7 +33,7 @@ const VideoContent = styled.video`
   width:100%;
   height:100vw;
   @media only screen and (min-width:${(props) => props.theme.sm}) {
-    height:760px;
+    height:100%;
   }
 `
 

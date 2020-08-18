@@ -4,17 +4,30 @@ import { Frame } from "./Icons";
 import Carousel from "flat-carousel";
 import "../Styles/carousel.css";
 
-const Img = styled.img`
-  width: 100%;
-`;
+// const Img = styled.img`
+//   width: 100%;
+// `;
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
 `;
 const Blank = styled.div`
-  width: 100%;
-  height: 100%;
-`;
+  width: 86vw;
+  @media only screen and (max-width:${(props) => props.theme.sm}) {
+  }
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    width:760px;
+  }
+  `
+
+const Img = styled.div`
+  width:86vw;
+  height: 86vw;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    width:760px;
+    height: 760px;
+  }
+`
 
 const ImageInput = () => {
   const [image, setImage] = useState({ preview: "", raw: "" });
@@ -49,11 +62,18 @@ console.log(previews);
           <>
             <Carousel>  
               {previews.map((pre, index) => (
-                <img
-                  key={index}
-                  className="demo-item"
-                  src={URL.createObjectURL(pre)}
-                />
+                // <img
+                //   key={index}
+                //   className="demo-item"
+                //   src={URL.createObjectURL(pre)}
+                // />
+                <Img src={image.preview} alt={"dummy"} 
+                style={{
+                  backgroundImage: `url(${URL.createObjectURL(pre)}`,
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                }}/>
               ))}
             </Carousel>
             
