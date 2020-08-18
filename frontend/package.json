@@ -19,6 +19,7 @@
     "expo-av": "^8.4.0",
     "flat-carousel": "^0.0.1",
     "graphql": "^14.1.1",
+    "kendo-ui-react-jquery-panelbar": "^1.0.2",
     "moment": "^2.27.0",
     "moment-duration-format": "^2.3.2",
     "open": "^7.1.0",
