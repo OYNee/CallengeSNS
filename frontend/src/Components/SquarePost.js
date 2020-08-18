@@ -91,8 +91,8 @@ function exampleReducer(state, action) {
 }
 
 const ListItem = styled.div`
-  width:200px;
-  height:200px;
+  width:33%;
+  height:33%;
   position:absolute;
   @media only screen and (max-width:${(props) => props.theme.sm}){
     width:32vw;

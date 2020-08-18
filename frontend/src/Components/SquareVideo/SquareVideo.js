@@ -6,12 +6,7 @@ import { Modal } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import Post from "../Post";
 
-const VideoBox = styled.div`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-`
+
 const ControlBox = styled.div`
   width:100%;
   height:100%;
@@ -51,6 +46,19 @@ const ListItem = styled.div`
 const BigBox = styled.div`
   position:relative
 `
+const VideoBox = styled.div`
+  width:100%;
+  position:relative;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+  }
+`
+const VideoContent = styled.video`
+  width:100%;
+  height: -webkit-fill-available;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+  }
+`
+
 
 const PostModal = ({post, file}) => {
   const [state, dispatch] = React.useReducer(exampleReducer, {
@@ -101,13 +109,11 @@ const SquareVideo = ({videourl, post}) => {
   // const { curTime, duration, playing, setPlaying, setClickedTime } = useVideoPlayer();
 
   return (
-    <BigBox>
-    <video id="video" width="100%" height="100%" onClick={() => console.log(1)}>
+    <VideoBox>
+      <VideoContent>
         <source src={videourl} />
-      </video>
-    <VideoBox as={PostModal}
-    post = {post}/>
-      </BigBox>
+      </VideoContent>
+    </VideoBox>
   );
 }
 

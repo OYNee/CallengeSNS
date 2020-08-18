@@ -93,14 +93,14 @@ const Bio = styled.p`
 
 const Posts = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 200px);
-  grid-template-rows: 200px;
-  grid-auto-rows: 200px;
+  grid-template-columns: repeat(3, 250px);
+  grid-template-rows: 250px;
+  grid-auto-rows: 250px;
+  justify-content:space-around;
   @media only screen and (max-width: ${(props) => props.theme.sm}) {
     grid-template-columns: repeat(3, 32vw);
     grid-template-rows: 32vw;
     grid-auto-rows: 32vw;
-    justify-content:space-around;
   }
 `;
 const ELink = styled(Link)`
