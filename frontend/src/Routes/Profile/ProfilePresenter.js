@@ -33,7 +33,6 @@ const UpdateWrapper = styled.div`
   flex-direction: column;
 `;
 
-
 const Header = styled.header`
   display: flex;
   align-items: center;
@@ -100,7 +99,7 @@ const Posts = styled.div`
     grid-template-columns: repeat(3, 32vw);
     grid-template-rows: 32vw;
     grid-auto-rows: 32vw;
-    justify-content:space-around;
+    justify-content: space-around;
   }
 `;
 const ELink = styled(Link)`
@@ -169,7 +168,7 @@ const Form = styled(Box)`
 `;
 
 const EFatText = styled(FatText)`
-line-height:500px;
+  line-height: 500px;
 `;
 
 export default ({
@@ -271,33 +270,37 @@ export default ({
           <NickName text="nickname 없음" />
         )}
         {bio ? <Bio>{bio}</Bio> : <Bio>자기소개 없음</Bio>}
-        <ProfilUpdateBox onClick={() => setAction("update")}>
-          프로필 수정
-        </ProfilUpdateBox>
+        {isSelf ? (
+          <ProfilUpdateBox onClick={() => setAction("update")}>
+            프로필 수정
+          </ProfilUpdateBox>
+        ) : (
+          <></>
+        )}
 
-
-          {posts &&
-            (posts.length === 0 ? (
-              <Wrapper>
+        {posts &&
+          (posts.length === 0 ? (
+            <Wrapper>
               <EFatText text="현재 존재하는 챌린지가 없습니다." />
-              </Wrapper>
-            ) :(
-              <Posts>
+            </Wrapper>
+          ) : (
+            <Posts>
               {posts.map((post) => {
-              return(
-              <SquarePost
-                key={post.id}
-                id={post.id}
-                likeCount={post.likeCount}
-                commentCount={post.comments.length}
-                file={post.files[0]}
-                file1={post.files[1]}
-                files = {post.files}
-                post={post}
-              />
-            )})   }     
-            </Posts>))}
-
+                return (
+                  <SquarePost
+                    key={post.id}
+                    id={post.id}
+                    likeCount={post.likeCount}
+                    commentCount={post.comments.length}
+                    file={post.files[0]}
+                    file1={post.files[1]}
+                    files={post.files}
+                    post={post}
+                  />
+                );
+              })}
+            </Posts>
+          ))}
       </div>
     );
   }
