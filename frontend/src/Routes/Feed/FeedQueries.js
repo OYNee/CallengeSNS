@@ -36,6 +36,7 @@ export const FEED_QUERY = gql`
       nextPostCount
         prePostCount
         nextPosts{
+          id
           user{
           id
           avatar
@@ -45,6 +46,7 @@ export const FEED_QUERY = gql`
           bio}
         }
         prePosts{
+          id
           user{
           id
           avatar

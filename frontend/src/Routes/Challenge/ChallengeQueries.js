@@ -35,6 +35,7 @@ export const CHALLENGE = gql`
       nextPostCount
       prePostCount
       nextPosts {
+        id
         user {
           id
           avatar
@@ -45,6 +46,7 @@ export const CHALLENGE = gql`
         }
       }
       prePosts {
+        id
         user {
           id
           avatar

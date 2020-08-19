@@ -8,7 +8,7 @@ import Avatar from "../Avatar";
 import { HeartFull, HeartEmpty, Comment as CommentIcon, Logo } from "../Icons";
 import Audio from "../Audio/Audio";
 import Video from "../Video/Video";
-import UserCard from "../UserCard";
+import ChallengeUserCard from "../ChallengeUserCard";
 import Carousel from "flat-carousel";
 import "../../Styles/carousel.css";
 import { Header } from 'semantic-ui-react'
@@ -18,8 +18,8 @@ const LikeText = styled(FatText)`
 `;
 
 const CFatText = styled(FatText)`
-line-height:300px;
-align-items: center;
+line-height:100px;
+
 `;
 const Post = styled.div`
   ${(props) => props.theme.whiteBox};
@@ -176,6 +176,10 @@ const CreateButton = styled.button`
 const PostA = styled.a`
 margin : 5px;
 `;
+const SDiv = styled.div`
+margin:15px auto;
+text-align-last: center;
+`;
 function exampleReducer(state, action) {
   switch (action.type) {
     case "close":
@@ -213,20 +217,23 @@ const SeeChallenger = ({
         onClose={() => dispatch({ type: "close" })}
       >
         <Modal.Content>
+
         <Header as='h3' dividing>
             이전 챌린저
           </Header>
           {prePosts.length === 0 ? (
+              <SDiv>
             <CFatText text="이전 챌린저가 없습니다." />
+            </SDiv>
           ) : (
             prePosts.map((post, idx) => (
-              <UserCard
+              <ChallengeUserCard
                 key={idx}
                 username={post.user.username}
                 isFollowing={post.user.isFollowing}
                 url={post.user.avatar}
                 isSelf={post.user.isSelf}
-                id={post.user.id}
+                id={post.id}
                 bio={post.user.bio}
               />
             ))
@@ -235,16 +242,18 @@ const SeeChallenger = ({
             다음 챌린저
           </Header>
           {nextPosts.length === 0 ? (
+            <SDiv>
             <CFatText text="동참한 챌린저가 없습니다." />
+            </SDiv>
           ) : (
             nextPosts.map((post, idx) => (
-              <UserCard
+              <ChallengeUserCard
                 key={idx}
                 username={post.user.username}
                 isFollowing={post.user.isFollowing}
                 url={post.user.avatar}
                 isSelf={post.user.isSelf}
-                id={post.user.id}
+                id={post.id}
                 bio={post.user.bio}
               />
             ))

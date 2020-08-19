@@ -20,51 +20,54 @@ const GET_USER = gql`
       followingCount
       followersCount
       postsCount
-      posts {
+
+    },
+    seePost(username: $username){
+      id
+      location
+      caption
+      category
+      textContent
+      user {
         id
-        location
-        caption
-        category
-        textContent
+        avatar
+        username
+      }
+      files {
+        id
+        url
+      }
+      likeCount
+      isLiked
+      comments {
+        id
+        text
         user {
           id
-          avatar
           username
         }
-        files {
-          id
-          url
+      }
+      createdAt
+      nextPostCount
+      prePostCount
+      nextPosts{
+        user{
+        id
+        avatar
+        username
+        isFollowing
+        isSelf
+        bio
         }
-        likeCount
-        isLiked
-        comments {
-          id
-          text
-          user {
-            id
-            username
-          }
-        }
-        createdAt
-        nextPostCount
-        prePostCount
-        nextPosts{
-          user{
-          id
-          avatar
-          username
-          isFollowing
-          isSelf
-          bio}
-        }
-        prePosts{
-          user{
-          id
-          avatar
-          username
-          isFollowing
-          isSelf
-          bio}
+      }
+      prePosts{
+        user{
+        id
+        avatar
+        username
+        isFollowing
+        isSelf
+        bio
         }
       }
     }
