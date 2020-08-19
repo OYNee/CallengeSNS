@@ -126,8 +126,8 @@ const Meta = styled.div`
 
 const Buttons = styled.div`
 ${Button} {
-  margin-right: 10px;
     &:first-child {
+  margin-right: 10px;
     }
   }
   margin-bottom: 10px;
