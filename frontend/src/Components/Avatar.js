@@ -10,8 +10,19 @@ const getSize = size => {
     number = 90;
   } else if (size === "lg") {
     number = 100;
-  } else if (size === "WebProfile") {
-    number = 240;
+  } else if (size === "Profile") {
+    return `
+          width:240px;
+          height:240px;
+          @media only screen and (max-width:760px) {
+            width:25vw;
+            max-width:140px;
+            min-width:100px;
+            height:25vw;
+            max-height:140px;
+            min-height:100px;
+          }
+          `
   }
   return `
         width:${number}px;
@@ -22,18 +33,11 @@ const getSize = size => {
 const Container = styled.div`
   background-image:url(${props => props.url});
   background-size:cover;
+  background-position:center center;
   border-radius:100%;
   border: 1px solid ${(props) => props.theme.livingCoral};
+  margin-left:0;
   ${props => getSize(props.size)}
-  @media only screen and (max-width:${(props) => props.theme.sm}) {
-    margin-left:0;
-    width:25vw;
-    max-width:140px;
-    min-width:100px;
-    height:25vw;
-    max-height:140px;
-    min-height:100px;
-  }
 `;
 
 const Avatar = ({ size = "sm", url, className }) => (
