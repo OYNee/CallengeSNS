@@ -215,6 +215,10 @@ const SeeChallenger = ({
       <Modal
         size={size}
         open={open}
+        style={{
+          height:`auto`,
+          position:`relative`,
+        }}
         onClose={() => dispatch({ type: "close" })}
       >
         <Modal.Content>

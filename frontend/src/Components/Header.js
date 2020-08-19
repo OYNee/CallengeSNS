@@ -35,7 +35,7 @@ const Wrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  background-color:rgba(255,101,97,0.66);
+  background-color:white;
   // opacity: 0;
   // border-bottom: ${(props) => props.theme.boxBorder};
   border-radius: 0px;
