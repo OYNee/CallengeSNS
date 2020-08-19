@@ -243,7 +243,7 @@ export default ({
         <Header>
           <HeaderColumn>
             <AvatarColumn>
-              <Avatar size="WebProfile" url={avatar} />
+              <Avatar size="Profile" url={avatar} />
             </AvatarColumn>
           </HeaderColumn>
           <HeaderColumn>

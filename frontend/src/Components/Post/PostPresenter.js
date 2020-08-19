@@ -115,8 +115,9 @@ const TextFile = styled.div`
   }
 `;
 
-const Button = styled.span`
+const Button = styled.div`
   cursor: pointer;
+  display:inline-block;
 `;
 
 const Meta = styled.div`
@@ -124,9 +125,9 @@ const Meta = styled.div`
 `;
 
 const Buttons = styled.div`
-  ${Button} {
+${Button} {
+  margin-right: 10px;
     &:first-child {
-      margin-right: 10px;
     }
   }
   margin-bottom: 10px;
