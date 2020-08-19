@@ -101,24 +101,22 @@ const HeaderLink = styled(Link)`
 
 const Hover = styled.div`
   &:hover {
-    fill:${(props) => props.theme.livingCoral}
+    fill: ${(props) => props.theme.livingCoral};
   }
-`
-
+`;
 
 function exampleReducer(state, action) {
   switch (action.type) {
-    case 'CHANGE_ANIMATION':
-      return { ...state, animation: action.animation, visible: !state.visible }
-    case 'CHANGE_DIMMED':
-      return { ...state, dimmed: action.dimmed }
-    case 'CHANGE_DIRECTION':
-      return { ...state, direction: action.direction, visible: false }
+    case "CHANGE_ANIMATION":
+      return { ...state, animation: action.animation, visible: !state.visible };
+    case "CHANGE_DIMMED":
+      return { ...state, dimmed: action.dimmed };
+    case "CHANGE_DIRECTION":
+      return { ...state, direction: action.direction, visible: false };
     default:
-      throw new Error()
+      throw new Error();
   }
-};
-
+}
 
 export default withRouter(() => {
   const { data } = useQuery(ME);
@@ -129,17 +127,13 @@ export default withRouter(() => {
   //   { text: "Text", icon: "k-i-hyperlink-email" },
   // ];
   const [state, dispatch] = React.useReducer(exampleReducer, {
-    animation: 'overlay',
-    direction: 'right',
+    animation: "overlay",
+    direction: "right",
     visible: false,
-  })
+  });
 
-  const { animation, direction, visible } = state
-  const vertical = direction === 'right'
-
-
-
-
+  const { animation, direction, visible } = state;
+  const vertical = direction === "right";
 
   return (
     <Wrapper>
@@ -148,123 +142,110 @@ export default withRouter(() => {
           as={Menu}
           animation={animation}
           direction={direction}
-          icon='labeled'
+          icon="labeled"
           inverted
           vertical
           visible={visible}
-          width='100px'
+          width="100px"
           style={{
-            backgroundColor:`white`,
+            backgroundColor: `white`,
           }}
           onClick={() =>
-            dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
+            dispatch({ type: "CHANGE_ANIMATION", animation: "overlay" })
           }
         >
-          <Menu.Item as='a' href="/createvideopost"
-            style = {{
-              borderBottom:`2px solid #FAFAFA`,
+          <Menu.Item
+            as={Link}
+            to="/createvideopost"
+            style={{
+              borderBottom: `2px solid #FAFAFA`,
             }}
           >
             <Hover>
-            <VideoIcon
-              width="50"
-              height="50"
-              // color="white"
+              <VideoIcon
+                width="50"
+                height="50"
+                // color="white"
               />
-              </Hover>
+            </Hover>
           </Menu.Item>
-          <Menu.Item as='a' href="/createphotopost" 
-            style = {{
-              borderBottom:`2px solid #FAFAFA`,
-            }}>
+          <Menu.Item
+            as={Link}
+            to="/createphotopost"
+            style={{
+              borderBottom: `2px solid #FAFAFA`,
+            }}
+          >
             <Hover>
-            <PhotoIcon 
-              width="50"
-              height="50"
-              // color="white"
+              <PhotoIcon
+                width="50"
+                height="50"
+                // color="white"
               />
-                </Hover>
+            </Hover>
           </Menu.Item>
-          <Menu.Item as='a' href="/createaudiopost" 
-            style = {{
-              borderBottom:`2px solid #FAFAFA`,
-            }}>
+          <Menu.Item
+            as={Link}
+            to="/createaudiopost"
+            style={{
+              borderBottom: `2px solid #FAFAFA`,
+            }}
+          >
             <Hover>
-            <AudioIcon 
-              width="50"
-              height="50"
-              // color="white"
+              <AudioIcon
+                width="50"
+                height="50"
+                // color="white"
               />
-                </Hover>
+            </Hover>
           </Menu.Item>
-          <Menu.Item as='a' href="/createtextpost" 
-            style = {{
-              borderBottom:`2px solid #FAFAFA`,
-            }}>
+          <Menu.Item
+            as={Link}
+            to="/createtextpost"
+            style={{
+              borderBottom: `2px solid #FAFAFA`,
+            }}
+          >
             <Hover>
-
-            <TextIcon 
-              width="50"
-              height="50"
-              // color="white"
+              <TextIcon
+                width="50"
+                height="50"
+                // color="white"
               />
-              </Hover>
+            </Hover>
           </Menu.Item>
         </Sidebar>
-
-
-
-
-
-
-
-
-
-
-
 
         <HeaderWrapper>
           <TextLogoColumn>
             <Link to="/" replace>
-              <TextLogo/>
+              <TextLogo />
             </Link>
           </TextLogoColumn>
           <HeaderColumn>
-              <HeaderLink to="/#" replace>
-                <Logo 
+            {/* <HeaderLink to="/#" replace> */}
+            <Logo
               width="27"
               height="27"
               onClick={() =>
-                dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
+                dispatch({ type: "CHANGE_ANIMATION", animation: "overlay" })
               }
-              />
-              </HeaderLink>
+            />
+            {/* </HeaderLink> */}
 
             <HeaderLink to="/search" replace>
-              <Search 
-              width="27"
-              height="27"
-             />
+              <Search width="27" height="27" />
             </HeaderLink>
             <HeaderLink to="/notifications" replace>
-              <HeartEmpty 
-              width="27"
-              height="27"
-              />
+              <HeartEmpty width="27" height="27" />
             </HeaderLink>
             {!data.me ? (
               <HeaderLink to="/#" replace>
-                <User 
-              width="27"
-              height="27"
-              />
+                <User width="27" height="27" />
               </HeaderLink>
             ) : (
               <HeaderLink to={data.me.username} replace>
-                <User 
-              width="27"
-              height="27"
-              />
+                <User width="27" height="27" />
               </HeaderLink>
             )}
           </HeaderColumn>
