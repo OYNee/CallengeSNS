@@ -11,6 +11,7 @@ import {
   LOCAL_LOG_IN,
   CONFIRM_EMAIL,
   SEE_USER,
+  FIND_USER,
 } from "./AuthQueries";
 import { toast } from "react-toastify";
 
@@ -54,7 +55,7 @@ export default () => {
      
     },
   });
-  const {data, fetchMore} = useQuery(SEE_USER,{
+  const {data, fetchMore} = useQuery(FIND_USER,{
     variables:{
       email: email.value
     }
@@ -75,15 +76,15 @@ export default () => {
             // console.log(token)
             try {
               if(data){
-                console.log("data:"+`${data.seeUser.confirmEmail}`)
-                if(`${data.seeUser.confirmEmail}`){
+                console.log("data:"+`${data.findUser.confirmEmail}`)
+                if(`${data.findUser.confirmEmail}`=="false"){
                   // sendConfirmEmail(email.value, `${data.seeUser.keyForVerify}`)
                   setTimeout(() => setAction("confirmEmail"), 3000);
                   toast.error("Can't confirm email,check again");
                   // throw Error()
                 }else{
                   localLogInMutation({ variables: { token } });
-                  // window.location.reload()
+                  window.location.reload()
                 }
                 
 
