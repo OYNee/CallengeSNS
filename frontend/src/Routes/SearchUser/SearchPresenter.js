@@ -7,7 +7,7 @@ import Input from "../../Components/Input";
 import useInput from "../../Hooks/useInput";
 import { withRouter,Link } from "react-router-dom";
 import InfiniteScroll from 'react-infinite-scroll-component';
-
+import {Icon} from 'semantic-ui-react'
 const Wrapper = styled.div`
   height: 50vh;
 `;
@@ -15,16 +15,16 @@ const SearchInput = styled(Input)`
   background-color: ${(props) => props.theme.bgColor};
   padding: 5px;
   font-size: 14px;
-  border-radius: 3px;
-  height: auto;
+  border-radius: 15px;
+  height: 30px;
   text-align: center;
   width: 70%;
+  margin: 10px auto;
+  display: block;
   &::placeholder {
     opacity: 0.8;
     font-weight: 200;
   }
-  margin: 10px auto;
-  display: block;
 `;
 const Section = styled.div`
   margin-bottom: 50px;
@@ -37,6 +37,11 @@ const Section = styled.div`
 const ELink = styled(Link)`
   color: inherit;
   margin-bottom: 10px;
+`;
+const BackDiv = styled.div`
+max-width:700px;
+margin:15px auto;
+margin-bottom: 5px;
 `;
 export default withRouter(({ searchTerm, loading, data, history, fetchMore,hasMore,setHasMore }) => {
   const search =(searchTerm?useInput(searchTerm):useInput(""));
@@ -102,10 +107,11 @@ export default withRouter(({ searchTerm, loading, data, history, fetchMore,hasMo
             placeholder="Search..."
           />
         </form>
+        <BackDiv>
         <a onClick={onSearchbutton}>
-          <FatText text="< 뒤로 가기"/>
+          <Icon name='angle left' size='large'/>
         </a>
-
+        </BackDiv>
         <Section>
           {data.searchUser.length === 0 ? (
             <FatText text="No Users Found" />
@@ -126,6 +132,7 @@ export default withRouter(({ searchTerm, loading, data, history, fetchMore,hasMo
                 url={user.avatar}
                 isSelf={user.isSelf}
                 id={user.id}
+                nickname={user.nickname}
               />
             ))}
             </InfiniteScroll>

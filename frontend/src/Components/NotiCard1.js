@@ -4,11 +4,7 @@ import PropTypes from "prop-types";
 import Avatar from "./Avatar";
 import FatText from "./FatText";
 import { Link } from "react-router-dom";
-import FollowButton from "./FollowButton";
 
-const CFatText = styled(FatText)`
-  color:#999999;
-`;
 const Card = styled.div`
   ${props => props.theme.whiteBox}
   display:flex;
@@ -18,7 +14,7 @@ const Card = styled.div`
   width:100%;
   max-width: 700px;
   margin:10px auto;
-  justify-content:space-between;
+  justify-content: left;
 `;
 
 const EAvatar = styled(Avatar)`
@@ -35,25 +31,20 @@ const Temp = styled.p`
   margin: 5px 10px;
 `
 
-const UserCard = ({ id, username, isFollowing, url, isSelf,nickname }) => (
+const NotiCard1 = ({ id, username,url,nickname }) => (
   <Card>
     <EAvatar url={url} size={"sm"} />
   
-      <ELink to={`/${username}`}>
-        <FatText text={nickname} />
-        <CFatText text={` (@${username})`}/>
+      <ELink to={`/challengepost?${id}`}>
+        <FatText text={`${nickname}(@${username})님이 회원님을 지목하였습니다.`} />
       </ELink>
-
-    {!isSelf && <FollowButton id={id} isFollowing={isFollowing} />}
   </Card>
 );
 
-UserCard.propTypes = {
+NotiCard1.propTypes = {
   id: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
-  isFollowing: PropTypes.bool.isRequired,
-  url: PropTypes.string.isRequired,
-  isSelf: PropTypes.bool.isRequired
+  url: PropTypes.string.isRequired
 };
 
-export default UserCard;
+export default NotiCard1;

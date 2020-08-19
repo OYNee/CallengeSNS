@@ -22,7 +22,7 @@ type User {
   updatedAt: String
   relChallenger: [Post!]
   preChallenger: [Post!]
-  nextChallenger: [User!]
+  nextChallenger: [Post!]
   tagChallenger: [Post!]
   favCategory: String
   confirmEmail: Boolean

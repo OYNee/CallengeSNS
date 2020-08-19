@@ -42,3 +42,11 @@ export const LOCAL_LOG_IN = gql`
     logUserIn(token: $token) @client
   }
 `;
+export const SEE_USER=gql`
+  query seeUser($email:String!) {
+    seeUser(email: $email){
+      confirmEmail
+      keyForVerify
+    }
+  }
+  `;

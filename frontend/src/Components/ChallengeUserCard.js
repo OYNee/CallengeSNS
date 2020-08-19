@@ -5,50 +5,58 @@ import Avatar from "./Avatar";
 import FatText from "./FatText";
 import { Link } from "react-router-dom";
 import FollowButton from "./FollowButton";
-
+import { Divider, Statistic } from 'semantic-ui-react';
 const CFatText = styled(FatText)`
   color:#999999;
+  font-size: small;
+`;
+const UFatText = styled(FatText)`
+  font-size: medium;
 `;
 const Card = styled.div`
   ${props => props.theme.whiteBox}
   display:flex;
   flex-direction: row;
+  justify-content:space-between;
   align-items: center;
   padding: 10px;
   width:100%;
   max-width: 700px;
   margin:10px auto;
-  justify-content:space-between;
 `;
 
 const EAvatar = styled(Avatar)`
   margin-right: 10px;
-
 `;
 
 const ELink = styled(Link)`
-  color: inherit;
-  margin: 5px 10px;
+color: inherit;
+margin-bottom: 5px;
+text-align: center;
+&:hover {
+  color: ${(props) => props.theme.livingCoral};
+}
 `;
 
 const Temp = styled.p`
   margin: 5px 10px;
 `
 
-const UserCard = ({ id, username, isFollowing, url, isSelf,nickname }) => (
+const ChallengeUserCard  = ({ id, username, isFollowing, url, isSelf,nickname }) => (
   <Card>
     <EAvatar url={url} size={"sm"} />
   
-      <ELink to={`/${username}`}>
-        <FatText text={nickname} />
-        <CFatText text={` (@${username})`}/>
-      </ELink>
+    <ELink to={`/challengepost?${id}`}>
+      <UFatText text={nickname}/>
+      <br/>
+      <CFatText text={`@${username}`}/>
+    </ELink>
 
     {!isSelf && <FollowButton id={id} isFollowing={isFollowing} />}
   </Card>
 );
 
-UserCard.propTypes = {
+ChallengeUserCard .propTypes = {
   id: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   isFollowing: PropTypes.bool.isRequired,
@@ -56,4 +64,4 @@ UserCard.propTypes = {
   isSelf: PropTypes.bool.isRequired
 };
 
-export default UserCard;
+export default ChallengeUserCard ;
