@@ -40,6 +40,7 @@ export const CHALLENGE = gql`
           id
           avatar
           username
+          nickname
           isFollowing
           isSelf
           bio
@@ -51,6 +52,7 @@ export const CHALLENGE = gql`
           id
           avatar
           username
+          nickname
           isFollowing
           isSelf
           bio

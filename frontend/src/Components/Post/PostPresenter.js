@@ -235,6 +235,7 @@ const SeeChallenger = ({
                 isSelf={post.user.isSelf}
                 id={post.id}
                 bio={post.user.bio}
+                nickname={post.user.nickname}
               />
             ))
           )}
@@ -255,6 +256,7 @@ const SeeChallenger = ({
                 isSelf={post.user.isSelf}
                 id={post.id}
                 bio={post.user.bio}
+                nickname={post.user.nickname}
               />
             ))
           )}

@@ -126,6 +126,7 @@ export default withRouter(({ searchTerm, loading, data, history, fetchMore,hasMo
                 url={user.avatar}
                 isSelf={user.isSelf}
                 id={user.id}
+                nickname={user.nickname}
               />
             ))}
             </InfiniteScroll>
