@@ -9,6 +9,7 @@ import { HeartFull, HeartEmpty, Comment as CommentIcon, Logo } from "../Icons";
 import Audio from "../Audio/Audio";
 import Video from "../Video/Video";
 import ChallengeUserCard from "../ChallengeUserCard";
+import UserCard from "../UserCard";
 import Carousel from "flat-carousel";
 import "../../Styles/carousel.css";
 import { Header } from 'semantic-ui-react'
@@ -176,6 +177,7 @@ const CreateButton = styled.button`
 
 const PostA = styled.a`
 margin : 5px;
+margin-left: 0px;
 `;
 const SDiv = styled.div`
 margin:15px auto;
@@ -196,20 +198,17 @@ const SeeChallenger = ({
   prePosts,
   nextPosts,
   nextPostCount,
-  prePostCount,
+  prePostCount
 }) => {
   const [state, dispatch] = React.useReducer(exampleReducer, {
     open: false,
     size: undefined,
   });
   const { open, size } = state;
-
   return (
     <>
       <PostA
-        onClick={() => dispatch({ type: "open", size: "tiny" })}
-        text={` ${nextPostCount + prePostCount} Challege`}
-      >
+        onClick={() => dispatch({ type: "open", size: "tiny" })}>
         <FatText text={`${nextPostCount + prePostCount} Challege`} />
       </PostA>
       <Modal
@@ -273,7 +272,65 @@ const SeeChallenger = ({
     </>
   );
 };
+const SeeLikes = ({
+  likes,
+  likeCount,
+  isLiked
+}) => {
+  const [state, dispatch] = React.useReducer(exampleReducer, {
+    open: false,
+    size: undefined,
+  });
+  const { open, size } = state;
+  console.log(likes);
+  return (
+    <>
+      <PostA
+        onClick={() => dispatch({ type: "open", size: "tiny" })}>
+                  {isLiked ? (
+          <LikeText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
+        ) : (
+          <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
+        )}
+      </PostA>
+      <Modal
+        size={size}
+        open={open}
+        style={{
+          height:`auto`,
+          position:`relative`,
+        }}
+        onClose={() => dispatch({ type: "close" })}
+      >
+        <Modal.Content>
 
+        <Header as='h3' dividing>
+            좋아요
+          </Header>
+          {likes.length === 0 ? (
+              <SDiv>
+            <CFatText text="현재 좋아요가 없습니다." />
+            </SDiv>
+          ) : (
+            likes.map((like, idx) => (
+              <UserCard
+                nickname={like.user.nickname}
+                key={idx}
+                username={like.user.username}
+                isFollowing={like.user.isFollowing}
+                url={like.user.avatar}
+                isSelf={like.user.isSelf}
+              />
+            ))
+          )}
+        </Modal.Content>
+        <Modal.Actions>
+          <Button onClick={() => dispatch({ type: "close" })}>Close</Button>
+        </Modal.Actions>
+      </Modal>
+    </>
+  );
+};
 export default ({
   user: { username, avatar },
   location,
@@ -305,6 +362,7 @@ export default ({
   cat,
   setCat,
   textContent,
+  likes
 }) => {
   function setting() {
     console.log("setting중");
@@ -415,11 +473,14 @@ export default ({
             ></Logo>
           </Button>
         </Buttons>
-        {isLiked ? (
-          <LikeText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
-        ) : (
-          <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
-        )}
+
+        <Button>
+          <SeeLikes
+            likes={likes}
+            likeCount={likeCount}
+            isLiked={isLiked}
+          />
+        </Button>
 
         <Button>
           <SeeChallenger
