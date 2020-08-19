@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Loader from "../../Components/Loader";
-import FatText from "../../Components/FatText";
+import NotiCard from "../../Components/NotiCard";
 import {
   PanelBar,
   PanelBarUtils,
@@ -27,6 +27,7 @@ export default ({ loading, data }) => {
       </Wrapper>
     );
   } else if (data && data.seeUser) {
+
     const cildrens1 = data.seeUser.relChallenger.map((relChallenger, id) => ({
       id: relChallenger.id,
       title: `${relChallenger.user.nickname}(@${relChallenger.user.username})님이 회원님을 지목하였습니다.`,
@@ -49,16 +50,15 @@ export default ({ loading, data }) => {
     ];
     return (
       <Wrapper>
-        <FatText text="공지사항"></FatText>
         <PanelBar expandMode={"multiple"}>
           <PanelBarItem title={"지목 받은 챌린지"} expanded={true}>
             {data.seeUser.relChallenger.map((relChallenger, idx) => (
-              <Link to={`/challengepost?${relChallenger.id}`}>
-                <PanelBarItem
-                  key={relChallenger.id}
-                  title={`  ${relChallenger.user.nickname}(@${relChallenger.user.username})님이 회원님을 지목하였습니다.  `}
-                />
-              </Link>
+              <NotiCard 
+              id={relChallenger.id}
+              nickname={relChallenger.user.nickname}
+              username={relChallenger.user.username}
+              url={relChallenger.user.avatar}/>
+             
             ))}
           </PanelBarItem>
           <PanelBarItem title={"같이 참여한 챌린지"} expanded={true}>

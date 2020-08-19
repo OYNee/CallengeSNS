@@ -9,9 +9,9 @@ import FollowButton from "../../Components/FollowButton";
 import SquarePost from "../../Components/SquarePost";
 import Button from "../../Components/Button";
 import ProfileImageInput from "../../Components/ProfileImageInput";
-
 import { Link } from "react-router-dom";
 import DropdownMenu from "../../Components/UserSetting";
+import { Divider, Statistic } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
   display: flex;
@@ -122,7 +122,9 @@ const Posts = styled.div`
 `;
 const ELink = styled(Link)`
   color: inherit;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+  text-align: center;
+  font-size: x-large;
   &:hover {
     color: ${(props) => props.theme.livingCoral};
   }
@@ -256,19 +258,24 @@ export default ({
               )}
             </UsernameRow>
             <Counts>
-              <Count>
-                <FatText text={String(postsCount)} /> posts
-              </Count>
-              <Count>
-                <ELink to={`/follower?${id}`}>
-                  <FatText text={String(followersCount)} /> followers
-                </ELink>
-              </Count>
-              <Count>
-                <ELink to={`/following?${id}`}>
-                  <FatText text={String(followingCount)} /> following
-                </ELink>
-              </Count>
+            <Statistic.Group size='mini'>
+          <Statistic style={{marginRight: "0px"}}>
+              <Statistic.Value style={{marginBottom: "5px"}}>{postsCount}</Statistic.Value>
+            <Statistic.Label>Challenge</Statistic.Label>
+          </Statistic>
+          <Statistic>
+          <ELink to={`/following?${id}`}>
+            <Statistic.Value >{followingCount}</Statistic.Value>
+           </ELink>
+            <Statistic.Label >following</Statistic.Label>
+          </Statistic>
+          <Statistic>
+          <ELink to={`/follower?${id}`}>
+            <Statistic.Value >{followersCount}</Statistic.Value>
+            </ELink>
+            <Statistic.Label>follower</Statistic.Label>
+          </Statistic>
+        </Statistic.Group>
             </Counts>
           </HeaderColumn>
           {}

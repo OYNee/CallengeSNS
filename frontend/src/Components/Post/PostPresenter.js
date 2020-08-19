@@ -168,6 +168,9 @@ const CreateButton = styled.button`
   height: 10px;
 `;
 
+const PostA = styled.a`
+margin : 5px;
+`;
 function exampleReducer(state, action) {
   switch (action.type) {
     case "close":
@@ -193,12 +196,12 @@ const SeeChallenger = ({
 
   return (
     <>
-      <button
+      <PostA
         onClick={() => dispatch({ type: "open", size: "tiny" })}
         text={` ${nextPostCount + prePostCount} Challege`}
       >
-        {nextPostCount + prePostCount} Challege
-      </button>
+        <FatText text={`${nextPostCount + prePostCount} Challege`} />
+      </PostA>
       <Modal
         size={size}
         open={open}
@@ -370,7 +373,7 @@ export default ({
             />
           </Button>
 
-          <Button>
+          <Button style={{marginLeft: "10px"}}>
             <Logo onClick={() => setting()}
                           width="24"
                           height="24"
