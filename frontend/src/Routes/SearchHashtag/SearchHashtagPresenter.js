@@ -7,6 +7,7 @@ import Input from "../../Components/Input";
 import useInput from "../../Hooks/useInput";
 import { withRouter,Link } from "react-router-dom";
 import InfiniteScroll from 'react-infinite-scroll-component';
+import {Icon} from 'semantic-ui-react'
 
 const Wrapper = styled.div`
   height: 50vh;
@@ -37,6 +38,11 @@ const Section = styled.div`
 const ELink = styled(Link)`
   color: inherit;
   margin-bottom: 10px;
+`;
+const BackDiv = styled.div`
+max-width:700px;
+margin:15px auto;
+margin-bottom: 5px;
 `;
 export default withRouter(({ searchTerm, loading, data, history, fetchMore,hasMore,setHasMore }) => {
   const search =(searchTerm?useInput(searchTerm):useInput(""));
@@ -100,9 +106,11 @@ export default withRouter(({ searchTerm, loading, data, history, fetchMore,hasMo
             placeholder="Search..."
           />
         </form>
-          <button onClick={onSearchbutton}>
-          <FatText text="< 뒤로 가기" />
-          </button>
+        <BackDiv>
+        <a onClick={onSearchbutton}>
+          <Icon name='angle left' size='large'/>
+        </a>
+        </BackDiv>
 
         <Section>
           {data.searchHashtag.length === 0 ? (

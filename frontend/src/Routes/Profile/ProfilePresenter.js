@@ -234,7 +234,7 @@ export default ({
         posts,
       },
     } = data;
-    // console.log(data)
+    console.log(data);
     return (
       <div>
         <Helmet>
@@ -243,7 +243,7 @@ export default ({
         <Header>
           <HeaderColumn>
             <AvatarColumn>
-              <Avatar size="WebProfile" url={avatar} />
+              <Avatar size="Profile" url={avatar} />
             </AvatarColumn>
           </HeaderColumn>
           <HeaderColumn>
@@ -294,14 +294,14 @@ export default ({
           <></>
         )}
 
-        {posts &&
-          (posts.length === 0 ? (
+        {data.seePost &&
+          (data.seePost.length === 0 ? (
             <Wrapper>
               <EFatText text="현재 존재하는 챌린지가 없습니다." />
             </Wrapper>
           ) : (
             <Posts>
-              {posts.map((post) => {
+              {data.seePost.map((post) => {
                 return (
                   <SquarePost
                     key={post.id}

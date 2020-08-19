@@ -74,6 +74,7 @@ export default withRouter(({ nickname, loading, data, history, fetchMore }) => {
                 isSelf={user.isSelf}
                 id={user.id}
                 isFollowing={user.isFollowing}
+                nickname={user.nickname}
               />
             ))}
             </InfiniteScroll>

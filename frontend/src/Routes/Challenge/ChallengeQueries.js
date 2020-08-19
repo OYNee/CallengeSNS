@@ -35,20 +35,24 @@ export const CHALLENGE = gql`
       nextPostCount
       prePostCount
       nextPosts {
+        id
         user {
           id
           avatar
           username
+          nickname
           isFollowing
           isSelf
           bio
         }
       }
       prePosts {
+        id
         user {
           id
           avatar
           username
+          nickname
           isFollowing
           isSelf
           bio

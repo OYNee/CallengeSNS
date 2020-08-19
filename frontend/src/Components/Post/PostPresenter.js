@@ -8,6 +8,7 @@ import Avatar from "../Avatar";
 import { HeartFull, HeartEmpty, Comment as CommentIcon, Logo } from "../Icons";
 import Audio from "../Audio/Audio";
 import Video from "../Video/Video";
+import ChallengeUserCard from "../ChallengeUserCard";
 import UserCard from "../UserCard";
 import Carousel from "flat-carousel";
 import "../../Styles/carousel.css";
@@ -18,8 +19,8 @@ const LikeText = styled(FatText)`
 `;
 
 const CFatText = styled(FatText)`
-line-height:300px;
-align-items: center;
+line-height:100px;
+
 `;
 const Post = styled.div`
   ${(props) => props.theme.whiteBox};
@@ -115,8 +116,9 @@ const TextFile = styled.div`
   }
 `;
 
-const Button = styled.span`
+const Button = styled.div`
   cursor: pointer;
+  display:inline-block;
 `;
 
 const Meta = styled.div`
@@ -124,9 +126,9 @@ const Meta = styled.div`
 `;
 
 const Buttons = styled.div`
-  ${Button} {
+${Button} {
     &:first-child {
-      margin-right: 10px;
+  margin-right: 10px;
     }
   }
   margin-bottom: 10px;
@@ -175,6 +177,11 @@ const CreateButton = styled.button`
 
 const PostA = styled.a`
 margin : 5px;
+margin-left: 0px;
+`;
+const SDiv = styled.div`
+margin:15px auto;
+text-align-last: center;
 `;
 function exampleReducer(state, action) {
   switch (action.type) {
@@ -191,43 +198,48 @@ const SeeChallenger = ({
   prePosts,
   nextPosts,
   nextPostCount,
-  prePostCount,
+  prePostCount
 }) => {
   const [state, dispatch] = React.useReducer(exampleReducer, {
     open: false,
     size: undefined,
   });
   const { open, size } = state;
-
   return (
     <>
       <PostA
-        onClick={() => dispatch({ type: "open", size: "tiny" })}
-        text={` ${nextPostCount + prePostCount} Challege`}
-      >
+        onClick={() => dispatch({ type: "open", size: "tiny" })}>
         <FatText text={`${nextPostCount + prePostCount} Challege`} />
       </PostA>
       <Modal
         size={size}
         open={open}
+        style={{
+          height:`auto`,
+          position:`relative`,
+        }}
         onClose={() => dispatch({ type: "close" })}
       >
         <Modal.Content>
+
         <Header as='h3' dividing>
             이전 챌린저
           </Header>
           {prePosts.length === 0 ? (
+              <SDiv>
             <CFatText text="이전 챌린저가 없습니다." />
+            </SDiv>
           ) : (
             prePosts.map((post, idx) => (
-              <UserCard
+              <ChallengeUserCard
                 key={idx}
                 username={post.user.username}
                 isFollowing={post.user.isFollowing}
                 url={post.user.avatar}
                 isSelf={post.user.isSelf}
-                id={post.user.id}
+                id={post.id}
                 bio={post.user.bio}
+                nickname={post.user.nickname}
               />
             ))
           )}
@@ -235,17 +247,20 @@ const SeeChallenger = ({
             다음 챌린저
           </Header>
           {nextPosts.length === 0 ? (
+            <SDiv>
             <CFatText text="동참한 챌린저가 없습니다." />
+            </SDiv>
           ) : (
             nextPosts.map((post, idx) => (
-              <UserCard
+              <ChallengeUserCard
                 key={idx}
                 username={post.user.username}
                 isFollowing={post.user.isFollowing}
                 url={post.user.avatar}
                 isSelf={post.user.isSelf}
-                id={post.user.id}
+                id={post.id}
                 bio={post.user.bio}
+                nickname={post.user.nickname}
               />
             ))
           )}
@@ -257,7 +272,65 @@ const SeeChallenger = ({
     </>
   );
 };
+const SeeLikes = ({
+  likes,
+  likeCount,
+  isLiked
+}) => {
+  const [state, dispatch] = React.useReducer(exampleReducer, {
+    open: false,
+    size: undefined,
+  });
+  const { open, size } = state;
+  console.log(likes);
+  return (
+    <>
+      <PostA
+        onClick={() => dispatch({ type: "open", size: "tiny" })}>
+                  {isLiked ? (
+          <LikeText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
+        ) : (
+          <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
+        )}
+      </PostA>
+      <Modal
+        size={size}
+        open={open}
+        style={{
+          height:`auto`,
+          position:`relative`,
+        }}
+        onClose={() => dispatch({ type: "close" })}
+      >
+        <Modal.Content>
 
+        <Header as='h3' dividing>
+            좋아요
+          </Header>
+          {likes.length === 0 ? (
+              <SDiv>
+            <CFatText text="현재 좋아요가 없습니다." />
+            </SDiv>
+          ) : (
+            likes.map((like, idx) => (
+              <UserCard
+                nickname={like.user.nickname}
+                key={idx}
+                username={like.user.username}
+                isFollowing={like.user.isFollowing}
+                url={like.user.avatar}
+                isSelf={like.user.isSelf}
+              />
+            ))
+          )}
+        </Modal.Content>
+        <Modal.Actions>
+          <Button onClick={() => dispatch({ type: "close" })}>Close</Button>
+        </Modal.Actions>
+      </Modal>
+    </>
+  );
+};
 export default ({
   user: { username, avatar },
   location,
@@ -289,6 +362,7 @@ export default ({
   cat,
   setCat,
   textContent,
+  likes
 }) => {
   function setting() {
     console.log("setting중");
@@ -350,15 +424,23 @@ export default ({
         <Files>
           {files && (
             <TextFile
-              style={{
-                backgroundColor: files[0].url,
-                color: files[1].url,
-                fontSize: "100px",
-                width:"100%"
-              }}
-            >
+            style={{
+              backgroundColor: files[0].url,
+              color: files[1].url,
+              fontSize: "100px",
+              width:"100%",
+              display: `table`
+            }}
+          >
+            <p
+            style={{
+              verticalAlign: `middle`,
+              display: `table-cell`,
+              textAlign: `center`
+            }}>
               {textContent}
-            </TextFile>
+            </p>
+          </TextFile>
           )}
           {/* {files && files.map((file, index) => {
           if (file.url) {
@@ -391,11 +473,14 @@ export default ({
             ></Logo>
           </Button>
         </Buttons>
-        {isLiked ? (
-          <LikeText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
-        ) : (
-          <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
-        )}
+
+        <Button>
+          <SeeLikes
+            likes={likes}
+            likeCount={likeCount}
+            isLiked={isLiked}
+          />
+        </Button>
 
         <Button>
           <SeeChallenger

@@ -31,6 +31,7 @@ const PostContainer = ({
   cat,
   setCat,
   textContent,
+  likes
 }) => {
   const [isLikedS, setIsLiked] = useState(isLiked);
   const [likeCountS, setLikeCount] = useState(likeCount);
@@ -124,6 +125,7 @@ const PostContainer = ({
       setPid={setPid}
       cat={cat}
       setCat={setCat}
+      likes={likes}
     />
   );
 };
