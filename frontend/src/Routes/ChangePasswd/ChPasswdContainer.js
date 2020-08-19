@@ -26,6 +26,7 @@ export default () => {
           throw Error();
         } else {
           //변경완료 확인창 띄우기
+          // setTimeout(() => setAction("profile"), 3000);
           window.location.href = "/";
         }
       } catch {
