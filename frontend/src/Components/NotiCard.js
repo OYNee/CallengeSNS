@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import Avatar from "./Avatar";
 import FatText from "./FatText";
 import { Link } from "react-router-dom";
-import FollowButton from "./FollowButton";
 
 const Card = styled.div`
   ${props => props.theme.whiteBox}
@@ -32,25 +31,20 @@ const Temp = styled.p`
   margin: 5px 10px;
 `
 
-const UserCard = ({ id, username, isFollowing, url, isSelf,bio }) => (
+const NotiCard = ({ id, username,url,nickname }) => (
   <Card>
     <EAvatar url={url} size={"sm"} />
   
-      <ELink to={`/${username}`}>
-        <FatText text={username} />
+      <ELink to={`/challengepost?${id}`}>
+        <FatText text={`${nickname}(@${username})님이 회원님을 지목하였습니다.`} />
       </ELink>
-      <Temp>{bio}</Temp>
-
-    {!isSelf && <FollowButton id={id} isFollowing={isFollowing} />}
   </Card>
 );
 
-UserCard.propTypes = {
+NotiCard.propTypes = {
   id: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
-  isFollowing: PropTypes.bool.isRequired,
-  url: PropTypes.string.isRequired,
-  isSelf: PropTypes.bool.isRequired
+  url: PropTypes.string.isRequired
 };
 
-export default UserCard;
+export default NotiCard;

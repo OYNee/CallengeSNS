@@ -11,11 +11,16 @@ import Video from "../Video/Video";
 import UserCard from "../UserCard";
 import Carousel from "flat-carousel";
 import "../../Styles/carousel.css";
+import { Header } from 'semantic-ui-react'
 
 const LikeText = styled(FatText)`
   color: ${(props) => props.theme.livingCoral};
 `;
 
+const CFatText = styled(FatText)`
+line-height:300px;
+align-items: center;
+`;
 const Post = styled.div`
   ${(props) => props.theme.whiteBox};
   user-select: none;
@@ -31,7 +36,7 @@ const Post = styled.div`
   }
 `;
 
-const Header = styled.header`
+const Header1 = styled.header`
   padding: 10px 15px;
   display: flex;
   align-items: center;
@@ -208,8 +213,11 @@ const SeeChallenger = ({
         onClose={() => dispatch({ type: "close" })}
       >
         <Modal.Content>
+        <Header as='h3' dividing>
+            이전 챌린저
+          </Header>
           {prePosts.length === 0 ? (
-            <FatText text="이전 챌린저가 없습니다." />
+            <CFatText text="이전 챌린저가 없습니다." />
           ) : (
             prePosts.map((post, idx) => (
               <UserCard
@@ -223,8 +231,11 @@ const SeeChallenger = ({
               />
             ))
           )}
+          <Header as='h3' dividing>
+            다음 챌린저
+          </Header>
           {nextPosts.length === 0 ? (
-            <FatText text="동참한 챌린저가 없습니다." />
+            <CFatText text="동참한 챌린저가 없습니다." />
           ) : (
             nextPosts.map((post, idx) => (
               <UserCard
@@ -289,7 +300,7 @@ export default ({
   }
   return (
     <Post>
-      <Header>
+      <Header1>
         <Avatar size="sm" url={avatar} />
         <UserColumn>
           <Link to={`/${username}`}>
@@ -297,7 +308,7 @@ export default ({
           </Link>
           <Location>{location}</Location>
         </UserColumn>
-      </Header>
+      </Header1>
       {category === "image" && (
         <Files>
           <Carousel>

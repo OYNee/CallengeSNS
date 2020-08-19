@@ -21,7 +21,6 @@ const EAvatar = styled(Avatar)`
 
 const ELink = styled(Link)`
   color: inherit;
-  margin-bottom: 10px;
 `;
 const EFatText = styled(FatText)`
   color:#999999;
