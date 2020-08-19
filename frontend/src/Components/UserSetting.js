@@ -11,7 +11,7 @@ const Username = styled.span`
   font-size: 5vw;
   display: inline-block;
   @media only screen and (min-width:${(props) => props.theme.sm}) {
-    font-size:26px;
+    font-size:40px;
   }
 `;
 

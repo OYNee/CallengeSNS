@@ -145,6 +145,7 @@ export default withRouter(({ searchTerm, loading, data, history}) => {
                 isSelf={user.isSelf}
                 id={user.id}
                 nickname={user.nickname}
+                bio={user.bio}
               />
             ))}
             </UserSection>

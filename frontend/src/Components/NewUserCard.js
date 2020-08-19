@@ -5,6 +5,7 @@ import Avatar from "./Avatar";
 import FatText from "./FatText";
 import { Link } from "react-router-dom";
 import FollowButton from "./FollowButton";
+import { Popup} from 'semantic-ui-react'
 
 const Card = styled.div`
   ${props => props.theme.whiteBox}
@@ -20,7 +21,6 @@ const EAvatar = styled(Avatar)`
 
 const ELink = styled(Link)`
   color: inherit;
-  margin-bottom: 10px;
 `;
 const EFatText = styled(FatText)`
   color:#999999;
@@ -28,17 +28,23 @@ const EFatText = styled(FatText)`
   font-size: 70%;
 `;
 
-const NewUserCard = ({ id, username, isFollowing, url, isSelf, nickname }) => (
-  <Card>
-    <EAvatar url={url} size={"md"} />
-    <ELink to={`/${username}`}>
-    <FatText text={nickname} />
-    </ELink>
-    <ELink to={`/${username}`}>
-    <EFatText text={`@${username}`} />
-    </ELink>
-    {!isSelf && <FollowButton id={id} isFollowing={isFollowing} />}
-  </Card>
+const NewUserCard = ({ id, username, isFollowing, url, isSelf, nickname,bio }) => (
+  <Popup
+  trigger={
+      <Card>
+        <EAvatar url={url} size={"md"} />
+        <ELink to={`/${username}`}>
+        <FatText text={nickname} />
+        </ELink>
+        <ELink to={`/${username}`}>
+        <EFatText text={`@${username}`} />
+        </ELink>
+        {!isSelf && <FollowButton id={id} isFollowing={isFollowing} />}
+      </Card>}
+    >
+      <Popup.Header>한 마디</Popup.Header>
+      <Popup.Content>{bio}</Popup.Content>
+  </Popup>
 );
 
 NewUserCard.propTypes = {

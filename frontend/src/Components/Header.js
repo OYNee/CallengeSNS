@@ -2,13 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
 import {
-  WebHeartEmpty,
-  WebUser,
-  WebLogo,
+  HeartEmpty,
+  User,
+  Logo,
   Home,
   TextLogo,
-  WebSearch,
+  Search,
   MobileTextLogo,
+  VideoIcon,
+  PhotoIcon,
+  AudioIcon,
+  TextIcon,
 } from "./Icons";
 import { useQuery } from "react-apollo-hooks";
 import { ME } from "../SharedQueries";
@@ -31,7 +35,7 @@ const Wrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(205,209,255,0.3);
+  background-color:white;
   // opacity: 0;
   // border-bottom: ${(props) => props.theme.boxBorder};
   border-radius: 0px;
@@ -95,6 +99,27 @@ const HeaderLink = styled(Link)`
   }
 `;
 
+const Hover = styled.div`
+  &:hover {
+    fill:${(props) => props.theme.livingCoral}
+  }
+`
+
+
+function exampleReducer(state, action) {
+  switch (action.type) {
+    case 'CHANGE_ANIMATION':
+      return { ...state, animation: action.animation, visible: !state.visible }
+    case 'CHANGE_DIMMED':
+      return { ...state, dimmed: action.dimmed }
+    case 'CHANGE_DIRECTION':
+      return { ...state, direction: action.direction, visible: false }
+    default:
+      throw new Error()
+  }
+};
+
+
 export default withRouter(() => {
   const { data } = useQuery(ME);
   // const items = [
@@ -103,39 +128,143 @@ export default withRouter(() => {
   //   { text: "Audio", icon: "k-i-calendar" },
   //   { text: "Text", icon: "k-i-hyperlink-email" },
   // ];
+  const [state, dispatch] = React.useReducer(exampleReducer, {
+    animation: 'overlay',
+    direction: 'right',
+    visible: false,
+  })
+
+  const { animation, direction, visible } = state
+  const vertical = direction === 'right'
+
+
+
+
 
   return (
     <Wrapper>
       <Header>
+        <Sidebar
+          as={Menu}
+          animation={animation}
+          direction={direction}
+          icon='labeled'
+          inverted
+          vertical
+          visible={visible}
+          width='100px'
+          style={{
+            backgroundColor:`white`,
+          }}
+          onClick={() =>
+            dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
+          }
+        >
+          <Menu.Item as='a' href="/createvideopost"
+            style = {{
+              borderBottom:`2px solid #FAFAFA`,
+            }}
+          >
+            <Hover>
+            <VideoIcon
+              width="50"
+              height="50"
+              // color="white"
+              />
+              </Hover>
+          </Menu.Item>
+          <Menu.Item as='a' href="/createphotopost" 
+            style = {{
+              borderBottom:`2px solid #FAFAFA`,
+            }}>
+            <Hover>
+            <PhotoIcon 
+              width="50"
+              height="50"
+              // color="white"
+              />
+                </Hover>
+          </Menu.Item>
+          <Menu.Item as='a' href="/createaudiopost" 
+            style = {{
+              borderBottom:`2px solid #FAFAFA`,
+            }}>
+            <Hover>
+            <AudioIcon 
+              width="50"
+              height="50"
+              // color="white"
+              />
+                </Hover>
+          </Menu.Item>
+          <Menu.Item as='a' href="/createtextpost" 
+            style = {{
+              borderBottom:`2px solid #FAFAFA`,
+            }}>
+            <Hover>
+
+            <TextIcon 
+              width="50"
+              height="50"
+              // color="white"
+              />
+              </Hover>
+          </Menu.Item>
+        </Sidebar>
+
+
+
+
+
+
+
+
+
+
+
+
         <HeaderWrapper>
           <TextLogoColumn>
             <Link to="/" replace>
-              <TextLogo />
+              <TextLogo/>
             </Link>
           </TextLogoColumn>
           <HeaderColumn>
-            {!data.me ? (
               <HeaderLink to="/#" replace>
-                <WebLogo />
+                <Logo 
+              width="27"
+              height="27"
+              onClick={() =>
+                dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
+              }
+              />
               </HeaderLink>
-            ) : (
-              <HeaderLink to={`/createtextpost?`} replace>
-                <WebLogo />
-              </HeaderLink>
-            )}
+
             <HeaderLink to="/search" replace>
-              <WebSearch />
+              <Search 
+              width="27"
+              height="27"
+             />
             </HeaderLink>
             <HeaderLink to="/notifications" replace>
-              <WebHeartEmpty />
+              <HeartEmpty 
+              width="27"
+              height="27"
+              />
             </HeaderLink>
             {!data.me ? (
               <HeaderLink to="/#" replace>
-                <WebUser />
+                <User 
+              width="27"
+              height="27"
+              />
               </HeaderLink>
             ) : (
               <HeaderLink to={data.me.username} replace>
-                <WebUser />
+                <User 
+              width="27"
+              height="27"
+              />
               </HeaderLink>
             )}
           </HeaderColumn>

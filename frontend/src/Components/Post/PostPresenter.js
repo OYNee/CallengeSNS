@@ -8,14 +8,19 @@ import Avatar from "../Avatar";
 import { HeartFull, HeartEmpty, Comment as CommentIcon, Logo } from "../Icons";
 import Audio from "../Audio/Audio";
 import Video from "../Video/Video";
-import UserCard from "../UserCard";
+import ChallengeUserCard from "../ChallengeUserCard";
 import Carousel from "flat-carousel";
 import "../../Styles/carousel.css";
+import { Header } from 'semantic-ui-react'
 
 const LikeText = styled(FatText)`
   color: ${(props) => props.theme.livingCoral};
 `;
 
+const CFatText = styled(FatText)`
+line-height:100px;
+
+`;
 const Post = styled.div`
   ${(props) => props.theme.whiteBox};
   user-select: none;
@@ -31,7 +36,7 @@ const Post = styled.div`
   }
 `;
 
-const Header = styled.header`
+const Header1 = styled.header`
   padding: 10px 15px;
   display: flex;
   align-items: center;
@@ -110,8 +115,9 @@ const TextFile = styled.div`
   }
 `;
 
-const Button = styled.span`
+const Button = styled.div`
   cursor: pointer;
+  display:inline-block;
 `;
 
 const Meta = styled.div`
@@ -119,9 +125,9 @@ const Meta = styled.div`
 `;
 
 const Buttons = styled.div`
-  ${Button} {
+${Button} {
     &:first-child {
-      margin-right: 10px;
+  margin-right: 10px;
     }
   }
   margin-bottom: 10px;
@@ -168,6 +174,13 @@ const CreateButton = styled.button`
   height: 10px;
 `;
 
+const PostA = styled.a`
+margin : 5px;
+`;
+const SDiv = styled.div`
+margin:15px auto;
+text-align-last: center;
+`;
 function exampleReducer(state, action) {
   switch (action.type) {
     case "close":
@@ -193,44 +206,59 @@ const SeeChallenger = ({
 
   return (
     <>
-      <button
+      <PostA
         onClick={() => dispatch({ type: "open", size: "tiny" })}
         text={` ${nextPostCount + prePostCount} Challege`}
       >
-        {nextPostCount + prePostCount} Challege
-      </button>
+        <FatText text={`${nextPostCount + prePostCount} Challege`} />
+      </PostA>
       <Modal
         size={size}
         open={open}
+        style={{
+          height:`auto`,
+          position:`relative`,
+        }}
         onClose={() => dispatch({ type: "close" })}
       >
         <Modal.Content>
+
+        <Header as='h3' dividing>
+            이전 챌린저
+          </Header>
           {prePosts.length === 0 ? (
-            <FatText text="이전 챌린저가 없습니다." />
+              <SDiv>
+            <CFatText text="이전 챌린저가 없습니다." />
+            </SDiv>
           ) : (
             prePosts.map((post, idx) => (
-              <UserCard
+              <ChallengeUserCard
                 key={idx}
                 username={post.user.username}
                 isFollowing={post.user.isFollowing}
                 url={post.user.avatar}
                 isSelf={post.user.isSelf}
-                id={post.user.id}
+                id={post.id}
                 bio={post.user.bio}
               />
             ))
           )}
+          <Header as='h3' dividing>
+            다음 챌린저
+          </Header>
           {nextPosts.length === 0 ? (
-            <FatText text="동참한 챌린저가 없습니다." />
+            <SDiv>
+            <CFatText text="동참한 챌린저가 없습니다." />
+            </SDiv>
           ) : (
             nextPosts.map((post, idx) => (
-              <UserCard
+              <ChallengeUserCard
                 key={idx}
                 username={post.user.username}
                 isFollowing={post.user.isFollowing}
                 url={post.user.avatar}
                 isSelf={post.user.isSelf}
-                id={post.user.id}
+                id={post.id}
                 bio={post.user.bio}
               />
             ))
@@ -286,7 +314,7 @@ export default ({
   }
   return (
     <Post>
-      <Header>
+      <Header1>
         <Avatar size="sm" url={avatar} />
         <UserColumn>
           <Link to={`/${username}`}>
@@ -294,7 +322,7 @@ export default ({
           </Link>
           <Location>{location}</Location>
         </UserColumn>
-      </Header>
+      </Header1>
       {category === "image" && (
         <Files>
           <Carousel>
@@ -357,14 +385,24 @@ export default ({
       <Meta>
         <Buttons>
           <Button onClick={toggleLike}>
-            {isLiked ? <HeartFull /> : <HeartEmpty />}
+            {isLiked ? <HeartFull 
+                          width="24"
+                          height="24"/> : <HeartEmpty 
+                          width="24"
+                          height="24"/>}
           </Button>
           <Button>
-            <CommentIcon />
+            <CommentIcon 
+              width="24"
+              height="24"
+            />
           </Button>
 
-          <Button>
-            <Logo onClick={() => setting()}></Logo>
+          <Button style={{marginLeft: "10px"}}>
+            <Logo onClick={() => setting()}
+                          width="24"
+                          height="24"
+            ></Logo>
           </Button>
         </Buttons>
         {isLiked ? (

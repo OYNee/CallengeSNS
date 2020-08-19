@@ -15,16 +15,16 @@ const SearchInput = styled(Input)`
   background-color: ${(props) => props.theme.bgColor};
   padding: 5px;
   font-size: 14px;
-  border-radius: 3px;
-  height: auto;
+  border-radius: 15px;
+  height: 30px;
   text-align: center;
   width: 70%;
+  margin: 10px auto;
+  display: block;
   &::placeholder {
     opacity: 0.8;
     font-weight: 200;
   }
-  margin: 10px auto;
-  display: block;
 `;
 const Section = styled.div`
   margin-bottom: 50px;

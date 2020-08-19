@@ -9,9 +9,9 @@ import FollowButton from "../../Components/FollowButton";
 import SquarePost from "../../Components/SquarePost";
 import Button from "../../Components/Button";
 import ProfileImageInput from "../../Components/ProfileImageInput";
-
 import { Link } from "react-router-dom";
 import DropdownMenu from "../../Components/UserSetting";
+import { Divider, Statistic } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
   display: flex;
@@ -40,9 +40,10 @@ const Header = styled.header`
   justify-content: space-around;
   width: 80%;
   margin: 15px auto;
+  height: 250px;
   @media only screen and (max-width: ${(props) => props.theme.sm}) {
     width: 100%;
-    height: 100px;
+    height: 150px;
   }
 `;
 
@@ -56,7 +57,7 @@ const UsernameRow = styled.div`
 `;
 
 const Username = styled.span`
-  font-size: 26px;
+  font-size: 40px;
   display: block;
   @media only screen and (max-width:${(props) => props.theme.sm}) {
     font-size: 5vw;
@@ -68,30 +69,43 @@ const Counts = styled.ul`
 `;
 
 const Count = styled.li`
-  font-size: 15px;
+  font-size: 4vw;
   margin: 5px
   &:not(:last-child) {
     margin-right: 10px;
+  }
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    font-size :25px;
   }
 `;
 
 const AvatarColumn = styled.div`
   margin: auto
   width:100px
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    width:unset;
+  }
 `;
 
 const NickName = styled(FatText)`
-  font-size: 16px;
+  font-size: 6vw;
   display: block;
   margin-bottom: 5px;
   margin-left: 10vw;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    font-size : 30px;
+  }
 `;
 
 const Bio = styled.p`
-  font-size: 12px;
+  font-size: 4vw;
   display: block;
-  margin-left: 5vw;
-  margin: 10px 0px;
+  margin-left: 8vw;
+  margin-top:3vw;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    font-size : 25px;
+    margin-top: 10px;
+  }
 `;
 
 const Posts = styled.div`
@@ -108,7 +122,9 @@ const Posts = styled.div`
 `;
 const ELink = styled(Link)`
   color: inherit;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+  text-align: center;
+  font-size: x-large;
   &:hover {
     color: ${(props) => props.theme.livingCoral};
   }
@@ -120,7 +136,7 @@ const ProfilUpdateBox = styled.div`
   font-size: 20px;
   border: 1px solid rgba(0,0,0,0.1);
   margin: 10px 1vw;
-  border-radius: 90px;
+  border-radius: 10px;
   background-color:rgba(255,101,97,0.66);
   color:white;
   &:hover {
@@ -218,7 +234,7 @@ export default ({
         posts,
       },
     } = data;
-    // console.log(data)
+    console.log(data);
     return (
       <div>
         <Helmet>
@@ -227,7 +243,7 @@ export default ({
         <Header>
           <HeaderColumn>
             <AvatarColumn>
-              <Avatar size="lg" url={avatar} />
+              <Avatar size="Profile" url={avatar} />
             </AvatarColumn>
           </HeaderColumn>
           <HeaderColumn>
@@ -242,19 +258,24 @@ export default ({
               )}
             </UsernameRow>
             <Counts>
-              <Count>
-                <FatText text={String(postsCount)} /> posts
-              </Count>
-              <Count>
-                <ELink to={`/follower?${id}`}>
-                  <FatText text={String(followersCount)} /> followers
-                </ELink>
-              </Count>
-              <Count>
-                <ELink to={`/following?${id}`}>
-                  <FatText text={String(followingCount)} /> following
-                </ELink>
-              </Count>
+            <Statistic.Group size='mini'>
+          <Statistic style={{marginRight: "0px"}}>
+              <Statistic.Value style={{marginBottom: "5px"}}>{postsCount}</Statistic.Value>
+            <Statistic.Label>Challenge</Statistic.Label>
+          </Statistic>
+          <Statistic>
+          <ELink to={`/following?${id}`}>
+            <Statistic.Value >{followingCount}</Statistic.Value>
+           </ELink>
+            <Statistic.Label >following</Statistic.Label>
+          </Statistic>
+          <Statistic>
+          <ELink to={`/follower?${id}`}>
+            <Statistic.Value >{followersCount}</Statistic.Value>
+            </ELink>
+            <Statistic.Label>follower</Statistic.Label>
+          </Statistic>
+        </Statistic.Group>
             </Counts>
           </HeaderColumn>
           {}
@@ -273,14 +294,14 @@ export default ({
           <></>
         )}
 
-        {posts &&
-          (posts.length === 0 ? (
+        {data.seePost &&
+          (data.seePost.length === 0 ? (
             <Wrapper>
               <EFatText text="현재 존재하는 챌린지가 없습니다." />
             </Wrapper>
           ) : (
             <Posts>
-              {posts.map((post) => {
+              {data.seePost.map((post) => {
                 return (
                   <SquarePost
                     key={post.id}
