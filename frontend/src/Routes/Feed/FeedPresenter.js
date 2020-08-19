@@ -100,6 +100,7 @@ export default withRouter(
                     nextPostCount={post.nextPostCount}
                     nextPosts={post.nextPosts}
                     prePosts={post.prePosts}
+                    likes={post.likes}
                     textContent={post.textContent}
                     create={create}
                     setCreate={setCreate}
