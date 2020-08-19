@@ -424,15 +424,23 @@ export default ({
         <Files>
           {files && (
             <TextFile
-              style={{
-                backgroundColor: files[0].url,
-                color: files[1].url,
-                fontSize: "100px",
-                width:"100%"
-              }}
-            >
+            style={{
+              backgroundColor: files[0].url,
+              color: files[1].url,
+              fontSize: "100px",
+              width:"100%",
+              display: `table`
+            }}
+          >
+            <p
+            style={{
+              verticalAlign: `middle`,
+              display: `table-cell`,
+              textAlign: `center`
+            }}>
               {textContent}
-            </TextFile>
+            </p>
+          </TextFile>
           )}
           {/* {files && files.map((file, index) => {
           if (file.url) {
