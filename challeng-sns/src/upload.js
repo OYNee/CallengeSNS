@@ -20,6 +20,7 @@ const upload = multer({
       cb(null, Date.now().toString());
     },
   }),
+  limits:{fieldSize:1024*1024*20}
 });
 
 export const uploadMiddleware = upload.single("file");
