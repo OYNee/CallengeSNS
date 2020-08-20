@@ -19,6 +19,10 @@ const Wrapper = styled.div`
     min-height: 100vh;
   }
 `;
+const EFatText = styled(FatText)`
+line-height:500px;
+align-items: center;
+`;
 export default withRouter(
   ({
     loading,
@@ -65,7 +69,7 @@ export default withRouter(
       return (
         <Wrapper>
           {data.seeFeed.length === 0 ? (
-            <FatText text="현재 존재하는 챌린지가 없습니다." />
+            <EFatText text="현재 존재하는 챌린지가 없습니다." />
           ) : (
             <InfiniteScroll
               dataLength={data.seeFeed.length}

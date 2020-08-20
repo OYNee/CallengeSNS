@@ -58,6 +58,17 @@ export const CHALLENGE = gql`
           bio
         }
       }
+      likes{
+        user{
+          id
+          avatar
+          username
+          nickname
+          isFollowing
+          isSelf
+          bio
+        }
+      }
     }
   }
 `;

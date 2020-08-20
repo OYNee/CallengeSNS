@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Loader from "../../Components/Loader";
 import NotiCard1 from "../../Components/NotiCard1";
 import NotiCard2 from "../../Components/NotiCard2";
+import FatText from "../../Components/FatText";
 import {
   PanelBar,
   PanelBarUtils,
@@ -19,8 +20,12 @@ const Wrapper = styled.div`
     min-height: 100vh;
   }
 `;
+const EFatText = styled(FatText)`
+line-height:500px;
+align-items: center;
+`;
 
-export default ({ loading, data }) => {
+export default ({ loading, data}) => {
   if (loading === true) {
     return (
       <Wrapper>
@@ -28,13 +33,13 @@ export default ({ loading, data }) => {
       </Wrapper>
     );
   } else if (data && data.seeUser) {
-
-    return (
+   return (
       <Wrapper>
         <PanelBar expandMode={"multiple"} style={{maxWidth:"700px"},{width:"700px"}}>
           <PanelBarItem title={"지목 받은 챌린지"} expanded={true}>
             {data.seeUser.relChallenger.map((relChallenger, idx) => (
               <NotiCard1 
+              key={relChallenger.id}
               id={relChallenger.id}
               nickname={relChallenger.user.nickname}
               username={relChallenger.user.username}
@@ -45,6 +50,7 @@ export default ({ loading, data }) => {
           <PanelBarItem title={"같이 참여한 챌린지"} expanded={true}>
             {data.seeUser.tagChallenger.map((tagChallenger, idx) => (
                <NotiCard2
+               key={tagChallenger.id}
                id={tagChallenger.id}
                nickname={tagChallenger.user.nickname}
                username={tagChallenger.user.username}
@@ -52,6 +58,12 @@ export default ({ loading, data }) => {
             ))}
           </PanelBarItem>
         </PanelBar>
+      </Wrapper>
+    );
+  }else{
+    return (
+      <Wrapper>
+        <EFatText text="알림 불러오기 실패! 새로고침을 눌러 주세요." />
       </Wrapper>
     );
   }

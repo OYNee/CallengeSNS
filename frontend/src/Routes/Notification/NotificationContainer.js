@@ -12,7 +12,7 @@ export default withRouter(() => {
     username = meQuery.data.me.username;
     console.log(username);
   }
-  const { data, loading } = useQuery(USER, {
+  const { data, loading} = useQuery(USER, {
     variables: {
       username,
     },

@@ -314,6 +314,7 @@ const SeeLikes = ({
           ) : (
             likes.map((like, idx) => (
               <UserCard
+              id={like.user.id}
                 nickname={like.user.nickname}
                 key={idx}
                 username={like.user.username}

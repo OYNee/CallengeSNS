@@ -103,7 +103,7 @@ export default ({
     const userOptions = data.followingUser.map((user, idx) => ({
       key: idx,
       value: user.id,
-      text: `(@${user.username})`,
+      text: `${user.nickname}(@${user.username})`,
     }));
     return (
       <Wrapper>
