@@ -8,6 +8,7 @@ import FatText from "../../Components/FatText";
 import FollowButton from "../../Components/FollowButton";
 import SquarePost from "../../Components/SquarePost";
 import Button from "../../Components/Button";
+import ButtonTwo from "../../Components/ButtonTwo";
 import ProfileImageInput from "../../Components/ProfileImageInput";
 import { Link } from "react-router-dom";
 import DropdownMenu from "../../Components/UserSetting";
@@ -20,6 +21,9 @@ const Wrapper = styled.div`
   @media only screen and (max-width: ${(props) => props.theme.sm}) {
 
   }
+`;
+const Button1 = styled(Button)`
+width: 45px;
 `;
 
 const UpdateWrapper = styled.div`
@@ -167,6 +171,7 @@ const Form = styled(Box)`
   padding: 40px;
   padding-bottom: 30px;
   margin: auto 0;
+  text-align: center;
   form {
     width: 100%;
     input {
@@ -211,13 +216,14 @@ export default ({
           <Helmet>
             <title>Update Profile | ChallengeSNS</title>
           </Helmet>
-          <form onSubmit={onSubmit}>
+          <form >
             {/* <Avatar size="lg" url={avatar}> */}
             <ProfileImageInput currentAvatar = {avatar}></ProfileImageInput>
             {/* </Avatar> */}
             <Input placeholder={nickname} {...newNickname} />
             <Input placeholder={bio} {...newBio} />
-            <Button text={"SAVE"} />
+            <ButtonTwo text={"SAVE"} onClick={onSubmit} />
+            <ButtonTwo text={"CANCEL"} onClick={() => setAction("profile")}/>
           </form>
         </Form>
       </UpdateWrapper>
