@@ -48,10 +48,10 @@ export default ({ create, setCreate, selHashtags, pid }) => {
     variables: {
       caption: caption.value,
       category: "image",
-      rel_challengers: relChallenger.value,
+      rel_challengers: relChallenger,
       pre_challengers: "",
       next_challengers: "",
-      tag_challengers: tagChallenger.value,
+      tag_challengers: tagChallenger,
       files: filePath,
     },
   });
