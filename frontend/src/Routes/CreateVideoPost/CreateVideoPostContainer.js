@@ -66,7 +66,7 @@ export default ({ create, setCreate, selHashtags, pid }) => {
       try {
         const {
           data: { location },
-        } = await axios.post("http://localhost:4000/api/upload", formData, {
+        } = await axios.post("http://i3a508.p.ssafy.io:4000/api/upload", formData, {
           headers: {
             "content-type": "multipart/form-data",
           },
