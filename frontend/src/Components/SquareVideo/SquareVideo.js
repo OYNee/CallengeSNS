@@ -159,8 +159,8 @@ const SquareVideo = ({videourl, post, likeCount, commentCount}) => {
               <VideoIcon 
             position="absolute"
             right = "0"
-            width = "40"
-            height = "40"
+            width = "20%"
+            height = "20%"
             />
       <VideoContent>
         <source src={videourl} />

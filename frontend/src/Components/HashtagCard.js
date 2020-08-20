@@ -24,10 +24,10 @@ const ELink = styled(Link)`
 `;
 const Posts = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 230px);
-  grid-template-rows: 230px;
-  grid-auto-rows: 230px;
-  max-width: 700px;
+  grid-template-columns: repeat(3, 200px);
+  grid-template-rows: 200px;
+  grid-auto-rows: 200px;
+  max-width: 610px;
     margin: 15px auto;
   @media only screen and (max-width: ${(props) => props.theme.sm}) {
     grid-template-columns: repeat(3, 32vw);

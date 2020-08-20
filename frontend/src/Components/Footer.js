@@ -60,10 +60,10 @@ const Header = styled.div`
 
 const CloseButton = styled.div`
   background-color:white;
-  width: 20%;
+  width: 100%;
   border: 0px;
   font-size: 1.2rem;
-  padding-top: 14px;
+  padding: 10px;
   text-align: right;
   cursor: defalut;
 `
@@ -113,18 +113,13 @@ export default (defaultValue1,defaultValue2) => {
           <Grid textAlign='center' onClick={() =>
               dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
             }>
-            <Header onClick={() =>
-                  dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
-                }>
-              <h1 onClick={() =>
-                  dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
-                }>New Challenge</h1>
-            </Header>
             <CloseButton onClick={() =>
               dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
-            }> <h1 onClick={() =>
+            }> 
+            <h1 onClick={() =>
               dispatch({ type: 'CHANGE_ANIMATION', animation: 'overlay' })
-            }>X</h1></CloseButton>
+            }>X</h1>
+            </CloseButton>
               <Line/>
             <Grid.Row columns={4}>
               <Grid.Column>
