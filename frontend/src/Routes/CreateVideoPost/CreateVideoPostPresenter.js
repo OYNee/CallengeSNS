@@ -11,14 +11,14 @@ const Wrapper = styled.div`
   padding: 3vw;
   margin: 0 4vw;
   @media only screen and (min-width: ${(props) => props.theme.sm}) {
-    margin:0;
-    padding:0;
-  };
+    margin: 0;
+    padding: 0;
+  }
 `;
 const Section = styled.div`
   width: 100%;
   margin: 15px auto;
-  @media only screen and (min-width:${(props) => props.theme.sm}) {
+  @media only screen and (min-width: ${(props) => props.theme.sm}) {
     width: 100%;
   }
 `;
@@ -34,7 +34,7 @@ const PostBox = styled.div`
 
 const ContentBox = styled.div`
   width: 86vw;
-  @media only screen and (min-width:${(props) => props.theme.sm}) {
+  @media only screen and (min-width: ${(props) => props.theme.sm}) {
     width: 100%;
   }
 `;
@@ -72,6 +72,8 @@ export default ({
   setRelChallenger,
   setTagChallenger,
   cat,
+  progress,
+  setProgress,
 }) => {
   const onSelectRelChallenger = (e, { value }) => {
     e.preventDefault();
@@ -140,7 +142,11 @@ export default ({
                   onChange={onSelectRelChallenger}
                 />
               </Section>
-              <Button onClick={onUpload} text="업로드" />
+              {progress ? (
+                <Button onClick={onUpload} text="업로드 중..." />
+              ) : (
+                <Button onClick={onUpload} text="업로드" />
+              )}
             </>
           )}
         </PostBox>

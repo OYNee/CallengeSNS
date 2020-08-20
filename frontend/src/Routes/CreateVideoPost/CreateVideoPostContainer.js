@@ -12,6 +12,7 @@ export default ({ create, setCreate, selHashtags, pid }) => {
   const [action, setAction] = useState("CreatePost");
   const [relChallenger, setRelChallenger] = useState(``);
   const [tagChallenger, setTagChallenger] = useState(``);
+  const [progress, setProgress] = useState(false);
   let hashtag = "";
   if (selHashtags) {
     for (let i = 0; i < selHashtags.length; i++) {
@@ -57,6 +58,12 @@ export default ({ create, setCreate, selHashtags, pid }) => {
   const nextMutation = useMutation(NEXT_CHALLENGER);
 
   const onSubmit = async (e) => {
+    setProgress(true);
+    if (progress) {
+      console.log("!!", progress);
+
+      return;
+    }
     e.preventDefault();
     if (action === "CreatePost") {
       let formData = new FormData();
@@ -90,7 +97,8 @@ export default ({ create, setCreate, selHashtags, pid }) => {
           window.location.href = "/";
         }
       } catch (e) {
-        toast.error("Cant upload", "Try later");
+        setProgress(false);
+        toast.error("파일을 다시 선택해주세요!");
       } finally {
       }
     } else if (action === "relChallenger") {
@@ -112,6 +120,8 @@ export default ({ create, setCreate, selHashtags, pid }) => {
       caption={caption}
       data={data}
       id={id}
+      progress={progress}
+      setProgress={setProgress}
     />
   );
 };

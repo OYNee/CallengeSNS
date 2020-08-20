@@ -12,15 +12,17 @@ import ChallengeUserCard from "../ChallengeUserCard";
 import UserCard from "../UserCard";
 import Carousel from "flat-carousel";
 import "../../Styles/carousel.css";
-import { Header } from 'semantic-ui-react'
+import { Header } from "semantic-ui-react";
+import { useQuery } from "react-apollo-hooks";
+import { ME } from "../../SharedQueries";
+import DropdownMenu from "../ChallengeOption";
 
 const LikeText = styled(FatText)`
   color: ${(props) => props.theme.livingCoral};
 `;
 
 const CFatText = styled(FatText)`
-line-height:100px;
-
+  line-height: 100px;
 `;
 const Post = styled.div`
   ${(props) => props.theme.whiteBox};
@@ -32,8 +34,8 @@ const Post = styled.div`
   @media only screen and (max-width: ${(props) => props.theme.sm}) {
     width: 100%;
   }
-  @media only screen and (min-width:${(props) => props.theme.sm}) {
-    width:754.8px;
+  @media only screen and (min-width: ${(props) => props.theme.sm}) {
+    width: 754.8px;
   }
 `;
 
@@ -92,7 +94,7 @@ const Img = styled.div`
   //   width:760px;
   //   height: 760px;
   // }
-`
+`;
 
 const ImageFile = styled.div`
   max-width: 100%;
@@ -118,7 +120,7 @@ const TextFile = styled.div`
 
 const Button = styled.div`
   cursor: pointer;
-  display:inline-block;
+  display: inline-block;
 `;
 
 const Meta = styled.div`
@@ -126,9 +128,9 @@ const Meta = styled.div`
 `;
 
 const Buttons = styled.div`
-${Button} {
+  ${Button} {
     &:first-child {
-  margin-right: 10px;
+      margin-right: 10px;
     }
   }
   margin-bottom: 10px;
@@ -180,8 +182,8 @@ margin : 5px;
 margin-left: 0px;
 `;
 const SDiv = styled.div`
-margin:15px auto;
-text-align-last: center;
+  margin: 15px auto;
+  text-align-last: center;
 `;
 function exampleReducer(state, action) {
   switch (action.type) {
@@ -215,19 +217,18 @@ const SeeChallenger = ({
         size={size}
         open={open}
         style={{
-          height:`auto`,
-          position:`relative`,
+          height: `auto`,
+          position: `relative`,
         }}
         onClose={() => dispatch({ type: "close" })}
       >
         <Modal.Content>
-
-        <Header as='h3' dividing>
+          <Header as="h3" dividing>
             이전 챌린저
           </Header>
           {prePosts.length === 0 ? (
-              <SDiv>
-            <CFatText text="이전 챌린저가 없습니다." />
+            <SDiv>
+              <CFatText text="이전 챌린저가 없습니다." />
             </SDiv>
           ) : (
             prePosts.map((post, idx) => (
@@ -243,12 +244,12 @@ const SeeChallenger = ({
               />
             ))
           )}
-          <Header as='h3' dividing>
+          <Header as="h3" dividing>
             다음 챌린저
           </Header>
           {nextPosts.length === 0 ? (
             <SDiv>
-            <CFatText text="동참한 챌린저가 없습니다." />
+              <CFatText text="동참한 챌린저가 없습니다." />
             </SDiv>
           ) : (
             nextPosts.map((post, idx) => (
@@ -373,6 +374,7 @@ export default ({
     setCreate(true);
     console.log("찍혀라", category, id, hashtags);
   }
+  const { data } = useQuery(ME);
   return (
     <Post>
       <Header1>
@@ -383,6 +385,9 @@ export default ({
           </Link>
           <Location>{location}</Location>
         </UserColumn>
+        {username === data.me.username && (
+          <DropdownMenu pid={id} defaultCaption={caption} />
+        )}
       </Header1>
       {category === "image" && (
         <Files>
@@ -459,24 +464,18 @@ export default ({
       <Meta>
         <Buttons>
           <Button onClick={toggleLike}>
-            {isLiked ? <HeartFull 
-                          width="24"
-                          height="24"/> : <HeartEmpty 
-                          width="24"
-                          height="24"/>}
+            {isLiked ? (
+              <HeartFull width="24" height="24" />
+            ) : (
+              <HeartEmpty width="24" height="24" />
+            )}
           </Button>
           <Button>
-            <CommentIcon 
-              width="24"
-              height="24"
-            />
+            <CommentIcon width="24" height="24" />
           </Button>
 
-          <Button style={{marginLeft: "10px"}}>
-            <Logo onClick={() => setting()}
-                          width="24"
-                          height="24"
-            ></Logo>
+          <Button style={{ marginLeft: "10px" }}>
+            <Logo onClick={() => setting()} width="24" height="24"></Logo>
           </Button>
         </Buttons>
 

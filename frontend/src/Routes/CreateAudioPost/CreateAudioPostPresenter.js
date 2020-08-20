@@ -15,35 +15,35 @@ const Wrapper = styled.div`
   padding: 3vw;
   margin: 0 4vw;
   @media only screen and (min-width: ${(props) => props.theme.sm}) {
-    margin:0;
-    padding:0;
-  };
+    margin: 0;
+    padding: 0;
+  }
 `;
 const Section = styled.div`
   width: 100%;
   margin: 15px auto;
-  @media only screen and (min-width:${(props) => props.theme.sm}) {
+  @media only screen and (min-width: ${(props) => props.theme.sm}) {
     width: 100%;
   }
 `;
 
 const Blank = styled.div`
   width: 86vw;
-  @media only screen and (max-width:${(props) => props.theme.sm}) {
+  @media only screen and (max-width: ${(props) => props.theme.sm}) {
   }
-  @media only screen and (min-width:${(props) => props.theme.sm}) {
-    width:760px;
+  @media only screen and (min-width: ${(props) => props.theme.sm}) {
+    width: 760px;
   }
-`
+`;
 
 const Img = styled.div`
-  width:86vw;
+  width: 86vw;
   height: 86vw;
-  @media only screen and (min-width:${(props) => props.theme.sm}) {
-    width:760px;
+  @media only screen and (min-width: ${(props) => props.theme.sm}) {
+    width: 760px;
     height: 760px;
   }
-`
+`;
 const PostBox = styled.div`
   width: 86vw;
   background-color: rgba(0, 0, 0, 0);
@@ -55,7 +55,7 @@ const PostBox = styled.div`
 
 const ContentBox = styled.div`
   width: 86vw;
-  @media only screen and (min-width:${(props) => props.theme.sm}) {
+  @media only screen and (min-width: ${(props) => props.theme.sm}) {
     width: 100%;
   }
 `;
@@ -136,6 +136,8 @@ export default ({
   data,
   setRelChallenger,
   setTagChallenger,
+  progress,
+  setProgress,
 }) => {
   const onSelectRelChallenger = (e, { value }) => {
     e.preventDefault();
@@ -202,13 +204,16 @@ export default ({
             {/* <AudioImageInput /> */}
             <label htmlFor="photo">
               {image.preview ? (
-                <Img src={image.preview} alt={"dummy"} 
+                <Img
+                  src={image.preview}
+                  alt={"dummy"}
                   style={{
                     backgroundImage: `url(${image.preview}`,
                     backgroundSize: "contain",
                     backgroundRepeat: "no-repeat",
                     backgroundPosition: "center",
-                  }}/>
+                  }}
+                />
               ) : (
                 <Blank>
                   <Frame />
@@ -264,7 +269,11 @@ export default ({
               onChange={onSelectRelChallenger}
             />
           </Section>
-          <Button onClick={onUpload} text="업로드" />
+          {progress ? (
+            <Button onClick={onUpload} text="업로드 중..." />
+          ) : (
+            <Button onClick={onUpload} text="업로드" />
+          )}
         </PostBox>
       </Wrapper>
     );
