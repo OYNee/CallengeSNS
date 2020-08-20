@@ -45,8 +45,8 @@ export default ({ create, setCreate, selHashtags, pid }) => {
     variables: {
       caption: caption.value,
       category: "audio",
-      rel_challengers: relChallenger.value,
-      tag_challengers: tagChallenger.value,
+      rel_challengers: relChallenger,
+      tag_challengers: tagChallenger,
       files: filePath,
     },
   });
