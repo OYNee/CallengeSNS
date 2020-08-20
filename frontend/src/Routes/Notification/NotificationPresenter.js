@@ -54,7 +54,5 @@ export default ({ loading, data }) => {
         </PanelBar>
       </Wrapper>
     );
-  } else {
-    window.location.reload();
   }
 };

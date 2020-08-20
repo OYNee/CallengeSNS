@@ -48,10 +48,10 @@ export default ({ create, setCreate, selHashtags, pid }) => {
     variables: {
       caption: caption.value,
       category: "image",
-      rel_challengers: relChallenger.value,
+      rel_challengers: relChallenger,
       pre_challengers: "",
       next_challengers: "",
-      tag_challengers: tagChallenger.value,
+      tag_challengers: tagChallenger,
       files: filePath,
     },
   });
@@ -76,7 +76,7 @@ export default ({ create, setCreate, selHashtags, pid }) => {
 
           const {
             data: { location },
-          } = await axios.post("http://localhost:4000/api/upload", formData, {
+          } = await axios.post("http://i3a508.p.ssafy.io:4000/api/upload", formData, {
             headers: {
               "content-type": "multipart/form-data",
             },
