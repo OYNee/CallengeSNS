@@ -8,6 +8,7 @@ import FatText from "../../Components/FatText";
 import FollowButton from "../../Components/FollowButton";
 import SquarePost from "../../Components/SquarePost";
 import Button from "../../Components/Button";
+import ButtonTwo from "../../Components/ButtonTwo";
 import ProfileImageInput from "../../Components/ProfileImageInput";
 import { Link } from "react-router-dom";
 import DropdownMenu from "../../Components/UserSetting";
@@ -20,6 +21,9 @@ const Wrapper = styled.div`
   @media only screen and (max-width: ${(props) => props.theme.sm}) {
 
   }
+`;
+const Button1 = styled(Button)`
+width: 45px;
 `;
 
 const UpdateWrapper = styled.div`
@@ -39,16 +43,17 @@ const Header = styled.header`
   align-items: center;
   justify-content: space-around;
   width: 80%;
-  margin: 15px auto;
-  height: 250px;
+  margin: 10px auto;
   @media only screen and (max-width: ${(props) => props.theme.sm}) {
     width: 100%;
-    height: 150px;
   }
 `;
 
 const HeaderColumn = styled.div`
-  width: 50%;
+  width: 30%;
+`;
+const HeaderColumn1 = styled.div`
+  width: 70%;
 `;
 
 const UsernameRow = styled.div`
@@ -57,10 +62,11 @@ const UsernameRow = styled.div`
 `;
 
 const Username = styled.span`
-  font-size: 40px;
+  font-size: 30px;
   display: block;
   @media only screen and (max-width:${(props) => props.theme.sm}) {
     font-size: 5vw;
+    margin-left: 10px;
   }
 `;
 
@@ -92,32 +98,37 @@ const AvatarColumn = styled.div`
 `;
 
 const NickName = styled(FatText)`
-  font-size: 6vw;
+  font-size: 4vw;
   display: block;
   margin-bottom: 5px;
   margin-left: 10vw;
   @media only screen and (min-width:${(props) => props.theme.sm}) {
-    font-size : 30px;
+    font-size : 20px;
   }
 `;
 
 const Bio = styled.p`
-  font-size: 4vw;
+  font-size: 3vw;
   display: block;
   margin-left: 8vw;
   margin-top:3vw;
   @media only screen and (min-width:${(props) => props.theme.sm}) {
-    font-size : 25px;
+    font-size : 16px;
     margin-top: 10px;
   }
 `;
 
 const Posts = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 250px);
-  grid-template-rows: 250px;
-  grid-auto-rows: 250px;
+  margin: 0 auto;
+  grid-template-columns: repeat(3, 195px);
+  grid-template-rows: 195px;
+  grid-auto-rows: 195px;
   justify-content:space-around;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    width: 470px;
+    grid-gap: 3px;
+  }
   @media only screen and (max-width: ${(props) => props.theme.sm}) {
     grid-template-columns: repeat(3, 32vw);
     grid-template-rows: 32vw;
@@ -139,10 +150,13 @@ const ProfilUpdateBox = styled.div`
   padding: 10px;
   font-size: 20px;
   border: 1px solid rgba(0,0,0,0.1);
-  margin: 10px 1vw;
+  margin: 1vw auto;
   border-radius: 10px;
   background-color:rgba(255,101,97,0.66);
   color:white;
+  @media only screen and (min-width:${(props) => props.theme.sm}) {
+    width: 80%;
+  }
   &:hover {
     background-color:rgba(255,101,97);
     opacity: 0.88;
@@ -151,6 +165,19 @@ const ProfilUpdateBox = styled.div`
     zoom: 1;
 
 `;
+
+const MyLabel = styled.div`
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  font-size: 1em;
+  font-weight: 700;
+  color: rgba(0,0,0,.87);
+  text-transform: uppercase;
+  text-align: center;
+  @media only screen and (max-width:${(props) => props.theme.sm}) {
+    font-size: 3vw;
+  }
+`
+
 const Box = styled.div`
   ${(props) => props.theme.whiteBox}
   border-radius:0px;
@@ -167,6 +194,7 @@ const Form = styled(Box)`
   padding: 40px;
   padding-bottom: 30px;
   margin: auto 0;
+  text-align: center;
   form {
     width: 100%;
     input {
@@ -211,13 +239,14 @@ export default ({
           <Helmet>
             <title>Update Profile | ChallengeSNS</title>
           </Helmet>
-          <form onSubmit={onSubmit}>
+          <form >
             {/* <Avatar size="lg" url={avatar}> */}
             <ProfileImageInput currentAvatar = {avatar}></ProfileImageInput>
             {/* </Avatar> */}
             <Input placeholder={nickname} {...newNickname} />
             <Input placeholder={bio} {...newBio} />
-            <Button text={"SAVE"} />
+            <ButtonTwo text={"SAVE"} onClick={onSubmit} />
+            <ButtonTwo text={"CANCEL"} onClick={() => setAction("profile")}/>
           </form>
         </Form>
       </UpdateWrapper>
@@ -249,7 +278,7 @@ export default ({
               <Avatar size="Profile" url={avatar} />
             </AvatarColumn>
           </HeaderColumn>
-          <HeaderColumn>
+          <HeaderColumn1>
             <UsernameRow>
               {isSelf ? (
                 <DropdownMenu username={username} />
@@ -262,25 +291,25 @@ export default ({
             </UsernameRow>
             <Counts>
             <Statistic.Group size='mini'>
-          <Statistic style={{marginRight: "0px"}}>
+          <Statistic style={{margin: "auto" , marginRight: "0px"}}>
               <Statistic.Value style={{marginBottom: "5px"}}>{postsCount}</Statistic.Value>
-            <Statistic.Label>Challenge</Statistic.Label>
+            <MyLabel>Challenge</MyLabel>
           </Statistic>
-          <Statistic>
+          <Statistic style={{margin: "auto" ,}}>
           <ELink to={`/following?${id}`}>
             <Statistic.Value >{followingCount}</Statistic.Value>
            </ELink>
-            <Statistic.Label >following</Statistic.Label>
+            <MyLabel >following</MyLabel>
           </Statistic>
-          <Statistic>
+          <Statistic style={{margin: "auto" , marginLeft: "0px"}}>
           <ELink to={`/follower?${id}`}>
             <Statistic.Value >{followersCount}</Statistic.Value>
             </ELink>
-            <Statistic.Label>follower</Statistic.Label>
+            <MyLabel>follower</MyLabel>
           </Statistic>
         </Statistic.Group>
             </Counts>
-          </HeaderColumn>
+          </HeaderColumn1>
           {}
         </Header>
         {nickname ? (

@@ -129,11 +129,11 @@ export const Setting = () => (
   </svg>
 );
 
-export const TextLogo = () => (
+export const TextLogo = ({width, height}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="300"
-    height="78"
+    width={width}
+    height={height}
     viewBox="0 -30 900 400"
   >
     <g transform="translate(0.000000,395.000000) scale(0.100000,-0.100000)">

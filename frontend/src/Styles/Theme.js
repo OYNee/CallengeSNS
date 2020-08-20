@@ -17,7 +17,7 @@ export default {
              border-radius:${BORDER_RADIUS};
              background-color:white;
             `,
-  sm: "760px",
+  sm: "600px",
   md: "768px",
   lg: "992px",
   xl: "1200px",

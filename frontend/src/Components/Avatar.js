@@ -12,8 +12,8 @@ const getSize = size => {
     number = 100;
   } else if (size === "Profile") {
     return `
-          width:240px;
-          height:240px;
+          width:150px;
+          height:150px;
           @media only screen and (max-width:760px) {
             width:25vw;
             max-width:140px;
@@ -36,12 +36,12 @@ const Container = styled.div`
   background-position:center center;
   border-radius:100%;
   border: 1px solid ${(props) => props.theme.livingCoral};
-  margin-left:0;
+  margin: ${props => props.margin};
   ${props => getSize(props.size)}
 `;
 
-const Avatar = ({ size = "sm", url, className }) => (
-  <Container className={className} size={size} url={url} />
+const Avatar = ({ size = "sm", url, className, margin="auto" }) => (
+  <Container className={className} size={size} url={url} margin={margin} />
 );
 
 Avatar.propTypes = {

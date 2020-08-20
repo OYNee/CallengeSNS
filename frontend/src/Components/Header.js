@@ -68,8 +68,8 @@ const HeaderWrapper = styled.div`
 const HeaderColumn = styled.div`
   width: 33%;
   text-align: center;
-  padding-top: 25px;
   min-width: 400px;
+  margin:auto;
   &:first-child {
     margin-right: auto;
     text-align: left;
@@ -219,7 +219,7 @@ export default withRouter(() => {
         <HeaderWrapper>
           <TextLogoColumn>
             <Link to="/" replace>
-              <TextLogo />
+              <TextLogo width="200" height="50"/>
             </Link>
           </TextLogoColumn>
           <HeaderColumn>

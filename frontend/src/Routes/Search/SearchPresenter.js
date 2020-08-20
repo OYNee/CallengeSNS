@@ -46,7 +46,7 @@ const UserSection = styled.div`
   margin-bottom: 50px;
   display: grid;
   justify-content:space-around;
-  grid-template-columns: repeat(4, 160px);
+  grid-template-columns: repeat(4, 150px);
   grid-template-rows: 220px;
   grid-auto-rows: 220px;
   max-width:700px;

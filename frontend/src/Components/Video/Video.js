@@ -8,10 +8,11 @@ import styled from "styled-components";
 const VideoBox = styled.div`
   width:100%;
   height:100vw;
+  max-height: 400px;
   position:relative;
   @media only screen and (min-width:${(props) => props.theme.sm}) {
-    width:754.8px;
-    height:760px;
+    width:400px;
+    height:400px;
   }
 `
 const ControlBox = styled.div`
@@ -32,6 +33,7 @@ const Button = styled.button`
 const VideoContent = styled.video`
   width:100%;
   height:100vw;
+  max-height: 400px;
   @media only screen and (min-width:${(props) => props.theme.sm}) {
     height:100%;
   }
