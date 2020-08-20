@@ -23,6 +23,7 @@ const Card = styled.div`
 
 const EAvatar = styled(Avatar)`
   margin-right: 10px;
+  margin-left:10px;
 
 `;
 
@@ -45,6 +46,7 @@ const UserCard = ({ id, username, isFollowing, url, isSelf,nickname }) => (
       </ELink>
 
     {!isSelf && <FollowButton id={id} isFollowing={isFollowing} />}
+    {isSelf && <Temp />}
   </Card>
 );
 

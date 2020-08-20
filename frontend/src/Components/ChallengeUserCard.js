@@ -27,6 +27,7 @@ const Card = styled.div`
 
 const EAvatar = styled(Avatar)`
   margin-right: 10px;
+  margin-left: 10px;
 `;
 
 const ELink = styled(Link)`

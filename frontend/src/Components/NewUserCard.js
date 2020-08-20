@@ -28,6 +28,11 @@ const EFatText = styled(FatText)`
   font-size: 70%;
 `;
 
+const Temp = styled.div`
+height :20px;
+margin-bottom:30px;
+`
+
 const NewUserCard = ({ id, username, isFollowing, url, isSelf, nickname,bio }) => (
   <Popup
   trigger={
@@ -40,6 +45,7 @@ const NewUserCard = ({ id, username, isFollowing, url, isSelf, nickname,bio }) =
         <EFatText text={`@${username}`} />
         </ELink>
         {!isSelf && <FollowButton id={id} isFollowing={isFollowing} />}
+        {isSelf && <Temp />}
       </Card>}
     >
       <Popup.Header>한 마디</Popup.Header>
