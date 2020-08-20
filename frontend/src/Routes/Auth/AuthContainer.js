@@ -24,7 +24,12 @@ export default () => {
   const secret = useInput("");
   const email = useInput("");
   const keyForVerify = useInput("");
-
+  const [nickMessage, setNickMessage] =useState("");
+  const [emailMessage, setEmailMessage] =useState("");
+  const [pwdMessage, setPwdMessage] =useState("");
+  const [pwdCMessage, setPwdCMessage] =useState("");
+  const [userMessage, setUserMessage] =useState("");
+  const [sumButton, setSumButton] =useState(true);
   const logIn = useMutation(LOG_IN, {
     variables: { email: email.value, passwd: passwd.value },
   });
@@ -225,6 +230,18 @@ export default () => {
       secret={secret}
       keyForVerify={keyForVerify}
       onSubmit={onSubmit}
+      nickMessage={nickMessage} 
+      setNickMessage={setNickMessage}
+      emailMessage={emailMessage} 
+      setEmailMessage={setEmailMessage}
+      pwdMessage={pwdMessage} 
+      setPwdMessage={setPwdMessage}
+      pwdCMessage={pwdCMessage} 
+      setPwdCMessage={setPwdCMessage}
+      userMessage={userMessage} 
+      setUserMessage={setUserMessage}
+      sumButton={sumButton} 
+      setSumButton={setSumButton}
     />
   );
 };

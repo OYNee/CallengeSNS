@@ -18,8 +18,8 @@ const Container = styled.button`
   }
 `;
 
-const Button = ({ text, onClick }) => (
-  <Container onClick={onClick}>{text}</Container>
+const Button = ({ text, onClick, Disabled }) => (
+  <Container onClick={onClick} disabled={Disabled}>{text}</Container>
 );
 
 Button.propTypes = {
