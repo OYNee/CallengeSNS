@@ -34,14 +34,14 @@ const Wrapper = styled.div`
   padding: 3vw;
   margin: 0 4vw;
   @media only screen and (min-width: ${(props) => props.theme.sm}) {
-    margin:0;
-    padding:0;
-  };
+    margin: 0;
+    padding: 0;
+  }
 `;
 const Section = styled.div`
   width: 100%;
   margin: 15px auto;
-  @media only screen and (min-width:${(props) => props.theme.sm}) {
+  @media only screen and (min-width: ${(props) => props.theme.sm}) {
     width: 100%;
   }
 `;
@@ -56,8 +56,8 @@ const PostBox = styled.div`
 
 const ContentBox = styled.div`
   width: 86vw;
-  height:20vh;
-  @media only screen and (min-width:${(props) => props.theme.sm}) {
+  height: 20vh;
+  @media only screen and (min-width: ${(props) => props.theme.sm}) {
     width: 100%;
   }
 `;
@@ -91,7 +91,7 @@ const TextInput = styled.textarea`
   padding: 0px 15px;
   // color:${(props) => props.fcolor}
   resize: none;
-`
+`;
 
 export default ({
   action,
@@ -112,6 +112,8 @@ export default ({
   setColor,
   fcolor,
   setFColor,
+  progress,
+  setProgress,
 }) => {
   const onSelectRelChallenger = (e, { value }) => {
     e.preventDefault();
@@ -165,7 +167,7 @@ export default ({
                     placeholder="Text Challenge"
                     {...textContent}
                     style={{ color: fcolor }}
-                    />
+                  />
                   {/* <textarea
                     style={
                       ({ color: fcolor },
@@ -228,7 +230,11 @@ export default ({
                   onChange={onSelectRelChallenger}
                 />
               </Section>
-              <Btn onClick={onUpload} text="업로드" />
+              {progress ? (
+                <Btn onClick={onUpload} text="업로드 중..." />
+              ) : (
+                <Btn onClick={onUpload} text="업로드" />
+              )}
             </>
           )}
         </PostBox>
