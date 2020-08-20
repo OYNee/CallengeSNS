@@ -160,7 +160,7 @@ export const MobileTextLogo = () => (
   </svg>
 );
 
-export const VideoIcon = ({position, right, width, height, color }) => (
+export const VideoIcon = ({position, right, top, width, height, color }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -169,6 +169,7 @@ export const VideoIcon = ({position, right, width, height, color }) => (
     style= {{
       position:`${position}`,
       right:`${right}`,
+      top:`${top}`,
     }}
     
   >
@@ -178,7 +179,7 @@ export const VideoIcon = ({position, right, width, height, color }) => (
   </svg>
 );
 
-export const PhotoIcon = ({position, right, width, height, color }) => {
+export const PhotoIcon = ({position, right, top, width, height, color }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -188,6 +189,7 @@ export const PhotoIcon = ({position, right, width, height, color }) => {
       style= {{
         position:`${position}`,
         right:`${right}`,
+        top:`${top}`,
       }}
     >
       <g transform="translate(0.000000,984.000000) scale(0.100000,-0.100000)" fill={color}>
@@ -199,7 +201,7 @@ export const PhotoIcon = ({position, right, width, height, color }) => {
 };
 
 
-export const AudioIcon = ({position, right, width, height, color }) => (
+export const AudioIcon = ({position, right, top, width, height, color }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -208,6 +210,7 @@ export const AudioIcon = ({position, right, width, height, color }) => (
     style= {{
       position:`${position}`,
       right:`${right}`,
+      top:`${top}`,
     }}
   >
     <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)" fill={color}>
@@ -217,7 +220,7 @@ export const AudioIcon = ({position, right, width, height, color }) => (
   </svg>
 );
 
-export const TextIcon = ({position, right, width, height, color }) => (
+export const TextIcon = ({position, right, top, width, height, color }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -226,6 +229,7 @@ export const TextIcon = ({position, right, width, height, color }) => (
     style= {{
       position:`${position}`,
       right:`${right}`,
+      top:`${top}`,
     }}
   >
     <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)" fill={color}>
