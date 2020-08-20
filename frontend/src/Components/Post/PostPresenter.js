@@ -5,7 +5,7 @@ import { Modal } from "semantic-ui-react";
 import TextareaAutosize from "react-autosize-textarea";
 import FatText from "../FatText";
 import Avatar from "../Avatar";
-import { HeartFull, HeartEmpty, Comment as CommentIcon, Logo } from "../Icons";
+import { HeartFull, HeartEmpty, Comment as CommentIcon, Logo, VideoIcon, AudioIcon, TextIcon, PhotoIcon } from "../Icons";
 import Audio from "../Audio/Audio";
 import Video from "../Video/Video";
 import ChallengeUserCard from "../ChallengeUserCard";
@@ -395,9 +395,11 @@ export default ({
                 backgroundSize: "contain",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
+                width: "300px",
               }}/>
             ))}
           </Carousel>
+          <PhotoIcon position="absolute" width="10%" height="10%" top="20px" right="20px"/>
         </Files>
       )}
       {category === "video" && (
@@ -414,11 +416,13 @@ export default ({
           } else {
               return (<VideoFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
             }})} */}
+            <VideoIcon position="absolute" width="10%" height="10%" top="20px" right="20px"/>
         </Files>
       )}
       {category === "audio" && (
         <Files>
           <Audio audioURL={files[0].url} imgURL={files[1].url} audioID={id} />
+          <AudioIcon position="absolute" width="10%" height="10%" top="20px" right="20px"/>
         </Files>
       )}
       {category === "text" && (
@@ -449,6 +453,7 @@ export default ({
           } else {
               return (<TextFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
             }})} */}
+            <TextIcon position="absolute" width="10%" height="10%" top="20px" right="20px"/>
         </Files>
       )}
       <Meta>
