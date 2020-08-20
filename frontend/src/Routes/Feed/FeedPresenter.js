@@ -78,7 +78,11 @@ export default withRouter(
               style={{
                 overflow:"none",
                 maxWidth:"400px",
+<<<<<<< HEAD
                 width:"100vw"
+=======
+                width:"100vw",
+>>>>>>> 8df3fd734f0810e243c0e262c8439ecdc7f8824c
               }}
               loader={
                 <Wrapper>
