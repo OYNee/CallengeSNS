@@ -77,7 +77,7 @@ export default withRouter(
               hasMore={hasMore}
               style={{
                 overflow:"none",
-                // width:"600px",
+                maxWidth:"400px",
               }}
               loader={
                 <Wrapper>

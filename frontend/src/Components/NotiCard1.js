@@ -12,7 +12,7 @@ const Card = styled.div`
   align-items: center;
   padding: 10px;
   width:100%;
-  max-width: 700px;
+  max-width: 600px;
   margin:10px auto;
   justify-content: left;
 `;

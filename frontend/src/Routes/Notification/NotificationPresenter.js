@@ -15,10 +15,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 80vh;
-  @media only screen and (max-width: ${(props) => props.theme.sm}) {
-    min-height: 100vh;
-  }
 `;
 const EFatText = styled(FatText)`
 line-height:500px;
@@ -35,7 +31,7 @@ export default ({ loading, data}) => {
   } else if (data && data.seeUser) {
    return (
       <Wrapper>
-        <PanelBar expandMode={"multiple"} style={{maxWidth:"700px"},{width:"700px"}}>
+        <PanelBar expandMode={"multiple"} style={{maxWidth:"600px"},{width:"95%"}}>
           <PanelBarItem title={"지목 받은 챌린지"} expanded={true}>
             {data.seeUser.relChallenger.map((relChallenger, idx) => (
               <NotiCard1 

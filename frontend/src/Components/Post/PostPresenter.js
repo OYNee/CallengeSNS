@@ -44,7 +44,7 @@ const Post = styled.div`
     width: 100%;
   }
   @media only screen and (min-width: ${(props) => props.theme.sm}) {
-    width: 754.8px;
+    width: 400px;
   }
 `;
 
@@ -120,10 +120,11 @@ const ImageFile = styled.div`
 
 const TextFile = styled.div`
   @media only screen and (min-width: ${(props) => props.theme.sm}) {
-    height: 760px;
+    height: 400px;
   }
   @media only screen and (max-width: ${(props) => props.theme.sm}) {
     height: 100vw;
+    max-height: 400px;
   }
 `;
 
@@ -385,7 +386,7 @@ export default ({
   return (
     <Post>
       <Header1>
-        <Avatar size="sm" url={avatar} />
+        <Avatar size="sm" url={avatar} margin="0" />
         <UserColumn>
           <Link to={`/${username}`}>
             <FatText text={username} />
@@ -462,24 +463,23 @@ export default ({
         <Files>
           {files && (
             <TextFile
-              style={{
-                backgroundColor: files[0].url,
-                color: files[1].url,
-                fontSize: "100px",
-                width: "100%",
-                display: `table`,
-              }}
-            >
-              <p
-                style={{
-                  verticalAlign: `middle`,
-                  display: `table-cell`,
-                  textAlign: `center`,
-                }}
-              >
-                {textContent}
-              </p>
-            </TextFile>
+            style={{
+              backgroundColor: files[0].url,
+              color: files[1].url,
+              fontSize: "30px",
+              width:"100%",
+              display: `table`
+            }}
+          >
+            <p
+            style={{
+              verticalAlign: `middle`,
+              display: `table-cell`,
+              textAlign: `center`
+            }}>
+              {textContent}
+            </p>
+          </TextFile>
           )}
           {/* {files && files.map((file, index) => {
           if (file.url) {

@@ -99,10 +99,14 @@ const Button = styled.button`
 `
 
 const TextBox = styled.div`
+  height: 100%;
+  text-align: center;
   text-decoration:none;
   // color:${props => props.color};
+  font-size:31vw;
   @media only screen and (min-width:${(props) => props.theme.sm}) {
-    font-size: 230px;
+    font-size: 146px;
+    line-height: 200px;
   }
 `
 
@@ -187,8 +191,8 @@ const SquarePost = ({ likeCount, commentCount, file, post, file1,files }) => {
       <AudioIcon
         position="absolute"
         right = "0"
-        width = "40"
-        height = "40"
+        width = "20%"
+        height = "20%"
         />
         <Overlay>
           <Number>
@@ -210,8 +214,8 @@ const SquarePost = ({ likeCount, commentCount, file, post, file1,files }) => {
         <PhotoIcon 
         position="absolute"
         right = "0"
-        width = "40"
-        height = "40"
+        width = "20%"
+        height = "20%"
         />
         <Overlay>
           <Number>
@@ -252,8 +256,8 @@ const SquarePost = ({ likeCount, commentCount, file, post, file1,files }) => {
       <TextIcon 
         position="absolute"
         right = "0"
-        width = "40"
-        height = "40"
+        width = "20%"
+        height = "20%"
         />
         <TextBox 
         >{post.textContent[0]}</TextBox>
