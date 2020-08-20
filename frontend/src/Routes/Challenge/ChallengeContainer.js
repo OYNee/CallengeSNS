@@ -15,6 +15,7 @@ export default withRouter(({ location: { search } }) => {
   const [selHashtags, setSelHashtags] = useState("");
   const [pid, setPid] = useState("");
   const [cat, setCat] = useState("");
+  const isDetail = true;
 
   return (
     <ChallengePresenter
@@ -28,6 +29,7 @@ export default withRouter(({ location: { search } }) => {
       setPid={setPid}
       cat={cat}
       setCat={setCat}
+      isDetail={isDetail}
     />
   );
 });

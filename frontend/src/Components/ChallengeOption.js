@@ -6,6 +6,34 @@ import { gql } from "apollo-boost";
 import { useMutation } from "react-apollo-hooks";
 import useInput from "../Hooks/useInput";
 
+const MyButton = styled.button`
+  cursor: pointer;
+  display: inline-block;
+  border: none;
+  vertical-align: baseline;
+  color: rgba(0, 0, 0, 0.6);
+  padding: 0.78571429em 1.5em 0.78571429em;
+  text-transform: none;
+  text-shadow: none;
+  font-weight: 700;
+  line-height: 1em;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 0.28571429rem;
+  box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34, 36, 38, 0.15) inset;
+  -webkit-tap-highlight-color: transparent;
+  margin-left: 0.75em;
+  margin-bottom: 15px;
+`;
+
+const MyYesButton = styled(MyButton)`
+  background-color: ${(props) => props.theme.livingCoral};
+  color: white;
+`;
+
+const MyNoButton = styled(MyButton)`
+  background-color: rgba(205, 209, 255, 1);
+`;
 const CaptionInput = styled.textarea`
   border: 0;
   border: ${(props) => props.theme.boxBorder};
@@ -76,21 +104,24 @@ const ModiModal = () => {
       <Dropdown.Item onClick={() => dispatch({ type: "open", size: "tiny" })}>
         수정하기
       </Dropdown.Item>
-
       <Modal
         size={size}
         open={open}
         onClose={() => dispatch({ type: "close" })}
+        style={{
+          height: `auto`,
+          position: `static`,
+        }}
       >
         <Modal.Header>캡션 수정</Modal.Header>
         <Modal.Content>
           <CaptionInput placeholder="한마디 부탁해요!" {...caption} />
         </Modal.Content>
         <Modal.Actions>
-          <Button negative onClick={() => dispatch({ type: "close" })}>
+          <MyNoButton negative onClick={() => dispatch({ type: "close" })}>
             CANCEL
-          </Button>
-          <Button
+          </MyNoButton>
+          <MyYesButton
             positive
             onClick={async (e) => {
               try {
@@ -104,7 +135,7 @@ const ModiModal = () => {
                 });
                 if (editChallenge) {
                   console.log("OK");
-                  window.location.reload = "/";
+                  window.location.href = "/";
                 } else {
                   console.log("FAIL");
                 }
@@ -112,7 +143,7 @@ const ModiModal = () => {
             }}
           >
             SAVE
-          </Button>
+          </MyYesButton>
         </Modal.Actions>
       </Modal>
     </>
@@ -138,14 +169,18 @@ const DelModal = () => {
         size={size}
         open={open}
         onClose={() => dispatch({ type: "close" })}
+        style={{
+          height: `auto`,
+          position: `static`,
+        }}
       >
         <Modal.Header>챌린지를 삭제할까요?</Modal.Header>
 
         <Modal.Actions>
-          <Button negative onClick={() => dispatch({ type: "close" })}>
+          <MyNoButton negative onClick={() => dispatch({ type: "close" })}>
             No
-          </Button>
-          <Button
+          </MyNoButton>
+          <MyYesButton
             positive
             onClick={async (e) => {
               try {
@@ -158,7 +193,7 @@ const DelModal = () => {
                 });
                 if (deleteChallenge) {
                   console.log("OK");
-                  window.location.reload = "/";
+                  window.location.href = "/";
                 } else {
                   console.log("FAIL");
                 }
@@ -166,7 +201,7 @@ const DelModal = () => {
             }}
           >
             Yes
-          </Button>
+          </MyYesButton>
         </Modal.Actions>
       </Modal>
     </>
