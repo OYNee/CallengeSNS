@@ -14,6 +14,7 @@ import "../../Styles/carousel.css";
 import { Header } from "semantic-ui-react";
 import { useQuery } from "react-apollo-hooks";
 import { ME } from "../../SharedQueries";
+import DropdownMenu from "../ChallengeOption";
 
 const LikeText = styled(FatText)`
   color: ${(props) => props.theme.livingCoral};
@@ -324,13 +325,7 @@ export default ({
           <Location>{location}</Location>
         </UserColumn>
         {username === data.me.username && (
-          <div style={{ marginLeft: "85%" }}>
-            <span
-              class="k-icon 
-            k-i-more-horizontal k-icon-32"
-              style={({ color: "#FF6F61" }, { fontSize: "32px" })}
-            ></span>
-          </div>
+          <DropdownMenu pid={id} defaultCaption={caption} />
         )}
       </Header1>
       {category === "image" && (
