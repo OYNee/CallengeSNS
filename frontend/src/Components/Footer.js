@@ -195,7 +195,7 @@ export default (defaultValue1,defaultValue2) => {
           height="24"/>
         </ListItem>
         <ListItem>
-          <Link to="/temp">
+          <Link to="/notifications">
             <HeartEmpty onClick={()=>setNow("notification")} now={now} 
               width="24"
               height="24"
