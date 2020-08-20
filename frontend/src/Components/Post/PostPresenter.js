@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Modal } from "semantic-ui-react";
 import TextareaAutosize from "react-autosize-textarea";
 import FatText from "../FatText";
 import Avatar from "../Avatar";
-import { HeartFull, HeartEmpty, Comment as CommentIcon, Logo, VideoIcon, AudioIcon, TextIcon, PhotoIcon } from "../Icons";
+import {
+  HeartFull,
+  HeartEmpty,
+  Comment as CommentIcon,
+  Logo,
+  VideoIcon,
+  AudioIcon,
+  TextIcon,
+  PhotoIcon,
+} from "../Icons";
 import Audio from "../Audio/Audio";
 import Video from "../Video/Video";
 import ChallengeUserCard from "../ChallengeUserCard";
@@ -179,8 +188,8 @@ const CreateButton = styled.button`
 `;
 
 const PostA = styled.a`
-margin : 5px;
-margin-left: 0px;
+  margin: 5px;
+  margin-left: 0px;
 `;
 const SDiv = styled.div`
   margin: 15px auto;
@@ -201,7 +210,7 @@ const SeeChallenger = ({
   prePosts,
   nextPosts,
   nextPostCount,
-  prePostCount
+  prePostCount,
 }) => {
   const [state, dispatch] = React.useReducer(exampleReducer, {
     open: false,
@@ -210,8 +219,7 @@ const SeeChallenger = ({
   const { open, size } = state;
   return (
     <>
-      <PostA
-        onClick={() => dispatch({ type: "open", size: "tiny" })}>
+      <PostA onClick={() => dispatch({ type: "open", size: "tiny" })}>
         <FatText text={`${nextPostCount + prePostCount} Challege`} />
       </PostA>
       <Modal
@@ -274,11 +282,7 @@ const SeeChallenger = ({
     </>
   );
 };
-const SeeLikes = ({
-  likes,
-  likeCount,
-  isLiked
-}) => {
+const SeeLikes = ({ likes, likeCount, isLiked }) => {
   const [state, dispatch] = React.useReducer(exampleReducer, {
     open: false,
     size: undefined,
@@ -287,9 +291,8 @@ const SeeLikes = ({
   console.log(likes);
   return (
     <>
-      <PostA
-        onClick={() => dispatch({ type: "open", size: "tiny" })}>
-                  {isLiked ? (
+      <PostA onClick={() => dispatch({ type: "open", size: "tiny" })}>
+        {isLiked ? (
           <LikeText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
         ) : (
           <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
@@ -299,24 +302,23 @@ const SeeLikes = ({
         size={size}
         open={open}
         style={{
-          height:`auto`,
-          position:`relative`,
+          height: `auto`,
+          position: `relative`,
         }}
         onClose={() => dispatch({ type: "close" })}
       >
         <Modal.Content>
-
-        <Header as='h3' dividing>
+          <Header as="h3" dividing>
             좋아요
           </Header>
           {likes.length === 0 ? (
-              <SDiv>
-            <CFatText text="현재 좋아요가 없습니다." />
+            <SDiv>
+              <CFatText text="현재 좋아요가 없습니다." />
             </SDiv>
           ) : (
             likes.map((like, idx) => (
               <UserCard
-              id={like.user.id}
+                id={like.user.id}
                 nickname={like.user.nickname}
                 key={idx}
                 username={like.user.username}
@@ -365,8 +367,12 @@ export default ({
   cat,
   setCat,
   textContent,
-  likes
+  likes,
+  isDetail,
 }) => {
+  const [curCaption, setCurCaption] = useState("");
+  const [curId, setCurId] = useState("");
+
   function setting() {
     console.log("setting중");
     setCat(category);
@@ -375,6 +381,7 @@ export default ({
     setCreate(true);
     console.log("찍혀라", category, id, hashtags);
   }
+
   const { data } = useQuery(ME);
   return (
     <Post>
@@ -386,8 +393,8 @@ export default ({
           </Link>
           <Location>{location}</Location>
         </UserColumn>
-        {username === data.me.username && (
-          <DropdownMenu pid={id} defaultCaption={caption} />
+        {username === data.me.username && isDetail && (
+          <DropdownMenu pid={id} defaultCaption={caption}></DropdownMenu>
         )}
       </Header1>
       {category === "image" && (
@@ -395,17 +402,26 @@ export default ({
           <Carousel>
             {files.map((pre, index) => (
               // <img key={index} className="demo-item" src={pre.url} />
-              <Img key={index} alt={"dummy"} 
-              style={{
-                backgroundImage: `url(${pre.url}`,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
-                width: "300px",
-              }}/>
+              <Img
+                key={index}
+                alt={"dummy"}
+                style={{
+                  backgroundImage: `url(${pre.url}`,
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                  width: "300px",
+                }}
+              />
             ))}
           </Carousel>
-          <PhotoIcon position="absolute" width="10%" height="10%" top="20px" right="20px"/>
+          <PhotoIcon
+            position="absolute"
+            width="10%"
+            height="10%"
+            top="20px"
+            right="20px"
+          />
         </Files>
       )}
       {category === "video" && (
@@ -422,13 +438,25 @@ export default ({
           } else {
               return (<VideoFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
             }})} */}
-            <VideoIcon position="absolute" width="10%" height="10%" top="20px" right="20px"/>
+          <VideoIcon
+            position="absolute"
+            width="10%"
+            height="10%"
+            top="20px"
+            right="20px"
+          />
         </Files>
       )}
       {category === "audio" && (
         <Files>
           <Audio audioURL={files[0].url} imgURL={files[1].url} audioID={id} />
-          <AudioIcon position="absolute" width="10%" height="10%" top="20px" right="20px"/>
+          <AudioIcon
+            position="absolute"
+            width="10%"
+            height="10%"
+            top="20px"
+            right="20px"
+          />
         </Files>
       )}
       {category === "text" && (
@@ -459,7 +487,13 @@ export default ({
           } else {
               return (<TextFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
             }})} */}
-            <TextIcon position="absolute" width="10%" height="10%" top="20px" right="20px"/>
+          <TextIcon
+            position="absolute"
+            width="10%"
+            height="10%"
+            top="20px"
+            right="20px"
+          />
         </Files>
       )}
       <Meta>
@@ -481,11 +515,7 @@ export default ({
         </Buttons>
 
         <Button>
-          <SeeLikes
-            likes={likes}
-            likeCount={likeCount}
-            isLiked={isLiked}
-          />
+          <SeeLikes likes={likes} likeCount={likeCount} isLiked={isLiked} />
         </Button>
 
         <Button>

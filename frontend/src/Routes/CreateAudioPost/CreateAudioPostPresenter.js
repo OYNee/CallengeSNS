@@ -10,7 +10,7 @@ import Loader from "../../Components/Loader";
 import { Modal } from "semantic-ui-react";
 import { Frame } from "../../Components/Icons";
 import Audio from "../../Components/Audio/Audio";
-
+import ButtonTwo from "../../Components/ButtonTwo";
 const Wrapper = styled.div`
   padding: 3vw;
   margin: 0 4vw;
@@ -158,6 +158,7 @@ export default ({
   const onUpload = (e) => {
     onSubmit(e);
   };
+  const moveHref = () => { document.location.href = "/" };
   const [audio, setAudio] = useState({ preview: "", raw: "" });
 
   const audioHandleChange = (e) => {
@@ -272,7 +273,10 @@ export default ({
           {progress ? (
             <Button onClick={onUpload} text="업로드 중..." />
           ) : (
-            <Button onClick={onUpload} text="업로드" />
+            <div style={{textAlign: "center"}}>
+            <ButtonTwo onClick={onUpload} text="업로드" />
+            <ButtonTwo onClick={moveHref}  text="취소" />
+            </div>
           )}
         </PostBox>
       </Wrapper>

@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
 // import TextInput from "../../Components/TextInput";
-import Btn from "../../Components/Button";
+import BTN from "../../Components/Button";
 import { Dropdown } from "semantic-ui-react";
 import Loader from "../../Components/Loader";
+import ButtonTwo from "../../Components/ButtonTwo";
 import {
   MaskedTextBox,
   NumericTextBox,
@@ -29,6 +30,9 @@ import "@progress/kendo-react-buttons";
 import "@progress/kendo-react-labels";
 
 import { Button, Popup } from "semantic-ui-react";
+const Btn = styled(BTN)`
+margin-bottom: 10px;
+`;
 
 const Wrapper = styled.div`
   padding: 3vw;
@@ -125,6 +129,7 @@ export default ({
     setTagChallenger(value);
     console.log(tagChallenger);
   };
+  const moveHref = () => { document.location.href = "/" };
 
   const onUpload = (e) => {
     console.log(e);
@@ -231,10 +236,14 @@ export default ({
                 />
               </Section>
               {progress ? (
-                <Btn onClick={onUpload} text="업로드 중..." />
+                <BTN onClick={onUpload} text="업로드 중..." />
               ) : (
-                <Btn onClick={onUpload} text="업로드" />
+                <div style={{textAlign: "center"}}>
+                <ButtonTwo onClick={onUpload} text="업로드" />
+                <ButtonTwo onClick={moveHref}  text="취소" />
+                </div>
               )}
+
             </>
           )}
         </PostBox>

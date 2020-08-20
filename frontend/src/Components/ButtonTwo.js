@@ -3,7 +3,8 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 const Container = styled.button`
-  width: 100%;
+  width: 45%;
+  margin-left: 5px;
   // max-width:60px;
   border: 0;
   border-radius: ${(props) => props.theme.borderRadius};

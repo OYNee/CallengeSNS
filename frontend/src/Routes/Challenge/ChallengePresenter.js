@@ -30,6 +30,7 @@ export default withRouter(
     setPid,
     cat,
     setCat,
+    isDetail,
   }) => {
     if (loading === true) {
       return (
@@ -71,6 +72,7 @@ export default withRouter(
                 setCat={setCat}
                 textContent={post.textContent}
                 likes={post.likes}
+                isDetail={isDetail}
               />
             ))
           )}

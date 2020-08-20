@@ -5,6 +5,7 @@ import ImageInput from "../../Components/ImageInput";
 import Button from "../../Components/Button";
 import { Dropdown } from "semantic-ui-react";
 import Loader from "../../Components/Loader";
+import ButtonTwo from "../../Components/ButtonTwo";
 
 const Wrapper = styled.div`
   padding: 3vw;
@@ -97,6 +98,8 @@ export default ({
   const delImage = (e) => {
     console.log("제거");
   };
+  const moveHref = () => { document.location.href = "/" };
+  
   if (loading === true) {
     return (
       <Wrapper>
@@ -150,7 +153,10 @@ export default ({
               {progress ? (
                 <Button onClick={onUpload} text="업로드 중..." />
               ) : (
-                <Button onClick={onUpload} text="업로드" />
+                <div style={{textAlign: "center"}}>
+                <ButtonTwo onClick={onUpload} text="업로드" />
+                <ButtonTwo onClick={moveHref}  text="취소" />
+                </div>
               )}
             </>
           )}
