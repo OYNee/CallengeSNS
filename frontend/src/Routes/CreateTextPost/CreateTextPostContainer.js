@@ -15,6 +15,7 @@ export default ({ create, setCreate, selHashtags, pid }) => {
   const [action, setAction] = useState("CreatePost");
   const [relChallenger, setRelChallenger] = useState(``);
   const [tagChallenger, setTagChallenger] = useState(``);
+  const [progress, setProgress] = useState(false);
 
   let hashtag = "";
   if (selHashtags) {
@@ -49,6 +50,12 @@ export default ({ create, setCreate, selHashtags, pid }) => {
   const uploadMutation = useMutation(UPLOAD);
   const nextMutation = useMutation(NEXT_CHALLENGER);
   const onSubmit = async (e) => {
+    setProgress(true);
+    if (progress) {
+      console.log("!!", progress);
+
+      return;
+    }
     e.preventDefault();
     if (action === "CreatePost") {
       try {
@@ -82,6 +89,7 @@ export default ({ create, setCreate, selHashtags, pid }) => {
           window.location.href = "/";
         }
       } catch (e) {
+        setProgress(false);
         toast.error("Cant upload", "Try later");
       } finally {
       }
@@ -89,7 +97,7 @@ export default ({ create, setCreate, selHashtags, pid }) => {
     } else if (action === "tagChallenger") {
     }
   };
-  console.log(fcolor)
+  console.log(fcolor);
   return (
     <CreateTextPostPresenter
       setColor={setColor}
@@ -110,6 +118,8 @@ export default ({ create, setCreate, selHashtags, pid }) => {
       data={data}
       caption={caption}
       id={id}
+      progress={progress}
+      setProgress={setProgress}
     />
   );
 };

@@ -1,26 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Modal } from "semantic-ui-react";
 import TextareaAutosize from "react-autosize-textarea";
 import FatText from "../FatText";
 import Avatar from "../Avatar";
-import { HeartFull, HeartEmpty, Comment as CommentIcon, Logo, VideoIcon, AudioIcon, TextIcon, PhotoIcon } from "../Icons";
+import {
+  HeartFull,
+  HeartEmpty,
+  Comment as CommentIcon,
+  Logo,
+  VideoIcon,
+  AudioIcon,
+  TextIcon,
+  PhotoIcon,
+} from "../Icons";
 import Audio from "../Audio/Audio";
 import Video from "../Video/Video";
 import ChallengeUserCard from "../ChallengeUserCard";
 import UserCard from "../UserCard";
 import Carousel from "flat-carousel";
 import "../../Styles/carousel.css";
-import { Header } from 'semantic-ui-react'
+import { Header } from "semantic-ui-react";
+import { useQuery } from "react-apollo-hooks";
+import { ME } from "../../SharedQueries";
+import DropdownMenu from "../ChallengeOption";
 
 const LikeText = styled(FatText)`
   color: ${(props) => props.theme.livingCoral};
 `;
 
 const CFatText = styled(FatText)`
-line-height:100px;
-
+  line-height: 100px;
 `;
 const Post = styled.div`
   ${(props) => props.theme.whiteBox};
@@ -32,8 +43,8 @@ const Post = styled.div`
   @media only screen and (max-width: ${(props) => props.theme.sm}) {
     width: 100%;
   }
-  @media only screen and (min-width:${(props) => props.theme.sm}) {
-    width:754.8px;
+  @media only screen and (min-width: ${(props) => props.theme.sm}) {
+    width: 754.8px;
   }
 `;
 
@@ -92,7 +103,7 @@ const Img = styled.div`
   //   width:760px;
   //   height: 760px;
   // }
-`
+`;
 
 const ImageFile = styled.div`
   max-width: 100%;
@@ -118,7 +129,7 @@ const TextFile = styled.div`
 
 const Button = styled.div`
   cursor: pointer;
-  display:inline-block;
+  display: inline-block;
 `;
 
 const Meta = styled.div`
@@ -126,9 +137,9 @@ const Meta = styled.div`
 `;
 
 const Buttons = styled.div`
-${Button} {
+  ${Button} {
     &:first-child {
-  margin-right: 10px;
+      margin-right: 10px;
     }
   }
   margin-bottom: 10px;
@@ -176,12 +187,12 @@ const CreateButton = styled.button`
 `;
 
 const PostA = styled.a`
-margin : 5px;
-margin-left: 0px;
+  margin: 5px;
+  margin-left: 0px;
 `;
 const SDiv = styled.div`
-margin:15px auto;
-text-align-last: center;
+  margin: 15px auto;
+  text-align-last: center;
 `;
 function exampleReducer(state, action) {
   switch (action.type) {
@@ -198,7 +209,7 @@ const SeeChallenger = ({
   prePosts,
   nextPosts,
   nextPostCount,
-  prePostCount
+  prePostCount,
 }) => {
   const [state, dispatch] = React.useReducer(exampleReducer, {
     open: false,
@@ -207,27 +218,25 @@ const SeeChallenger = ({
   const { open, size } = state;
   return (
     <>
-      <PostA
-        onClick={() => dispatch({ type: "open", size: "tiny" })}>
+      <PostA onClick={() => dispatch({ type: "open", size: "tiny" })}>
         <FatText text={`${nextPostCount + prePostCount} Challege`} />
       </PostA>
       <Modal
         size={size}
         open={open}
         style={{
-          height:`auto`,
-          position:`relative`,
+          height: `auto`,
+          position: `relative`,
         }}
         onClose={() => dispatch({ type: "close" })}
       >
         <Modal.Content>
-
-        <Header as='h3' dividing>
+          <Header as="h3" dividing>
             이전 챌린저
           </Header>
           {prePosts.length === 0 ? (
-              <SDiv>
-            <CFatText text="이전 챌린저가 없습니다." />
+            <SDiv>
+              <CFatText text="이전 챌린저가 없습니다." />
             </SDiv>
           ) : (
             prePosts.map((post, idx) => (
@@ -243,12 +252,12 @@ const SeeChallenger = ({
               />
             ))
           )}
-          <Header as='h3' dividing>
+          <Header as="h3" dividing>
             다음 챌린저
           </Header>
           {nextPosts.length === 0 ? (
             <SDiv>
-            <CFatText text="동참한 챌린저가 없습니다." />
+              <CFatText text="동참한 챌린저가 없습니다." />
             </SDiv>
           ) : (
             nextPosts.map((post, idx) => (
@@ -272,11 +281,7 @@ const SeeChallenger = ({
     </>
   );
 };
-const SeeLikes = ({
-  likes,
-  likeCount,
-  isLiked
-}) => {
+const SeeLikes = ({ likes, likeCount, isLiked }) => {
   const [state, dispatch] = React.useReducer(exampleReducer, {
     open: false,
     size: undefined,
@@ -285,9 +290,8 @@ const SeeLikes = ({
   console.log(likes);
   return (
     <>
-      <PostA
-        onClick={() => dispatch({ type: "open", size: "tiny" })}>
-                  {isLiked ? (
+      <PostA onClick={() => dispatch({ type: "open", size: "tiny" })}>
+        {isLiked ? (
           <LikeText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
         ) : (
           <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
@@ -297,24 +301,23 @@ const SeeLikes = ({
         size={size}
         open={open}
         style={{
-          height:`auto`,
-          position:`relative`,
+          height: `auto`,
+          position: `relative`,
         }}
         onClose={() => dispatch({ type: "close" })}
       >
         <Modal.Content>
-
-        <Header as='h3' dividing>
+          <Header as="h3" dividing>
             좋아요
           </Header>
           {likes.length === 0 ? (
-              <SDiv>
-            <CFatText text="현재 좋아요가 없습니다." />
+            <SDiv>
+              <CFatText text="현재 좋아요가 없습니다." />
             </SDiv>
           ) : (
             likes.map((like, idx) => (
               <UserCard
-              id={like.user.id}
+                id={like.user.id}
                 nickname={like.user.nickname}
                 key={idx}
                 username={like.user.username}
@@ -363,8 +366,12 @@ export default ({
   cat,
   setCat,
   textContent,
-  likes
+  likes,
+  isDetail,
 }) => {
+  const [curCaption, setCurCaption] = useState("");
+  const [curId, setCurId] = useState("");
+
   function setting() {
     console.log("setting중");
     setCat(category);
@@ -373,6 +380,8 @@ export default ({
     setCreate(true);
     console.log("찍혀라", category, id, hashtags);
   }
+
+  const { data } = useQuery(ME);
   return (
     <Post>
       <Header1>
@@ -383,23 +392,35 @@ export default ({
           </Link>
           <Location>{location}</Location>
         </UserColumn>
+        {username === data.me.username && isDetail && (
+          <DropdownMenu pid={id} defaultCaption={caption}></DropdownMenu>
+        )}
       </Header1>
       {category === "image" && (
         <Files>
           <Carousel>
             {files.map((pre, index) => (
               // <img key={index} className="demo-item" src={pre.url} />
-              <Img key={index} alt={"dummy"} 
-              style={{
-                backgroundImage: `url(${pre.url}`,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
-                width: "300px",
-              }}/>
+              <Img
+                key={index}
+                alt={"dummy"}
+                style={{
+                  backgroundImage: `url(${pre.url}`,
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                  width: "300px",
+                }}
+              />
             ))}
           </Carousel>
-          <PhotoIcon position="absolute" width="10%" height="10%" top="20px" right="20px"/>
+          <PhotoIcon
+            position="absolute"
+            width="10%"
+            height="10%"
+            top="20px"
+            right="20px"
+          />
         </Files>
       )}
       {category === "video" && (
@@ -416,36 +437,49 @@ export default ({
           } else {
               return (<VideoFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
             }})} */}
-            <VideoIcon position="absolute" width="10%" height="10%" top="20px" right="20px"/>
+          <VideoIcon
+            position="absolute"
+            width="10%"
+            height="10%"
+            top="20px"
+            right="20px"
+          />
         </Files>
       )}
       {category === "audio" && (
         <Files>
           <Audio audioURL={files[0].url} imgURL={files[1].url} audioID={id} />
-          <AudioIcon position="absolute" width="10%" height="10%" top="20px" right="20px"/>
+          <AudioIcon
+            position="absolute"
+            width="10%"
+            height="10%"
+            top="20px"
+            right="20px"
+          />
         </Files>
       )}
       {category === "text" && (
         <Files>
           {files && (
             <TextFile
-            style={{
-              backgroundColor: files[0].url,
-              color: files[1].url,
-              fontSize: "100px",
-              width:"100%",
-              display: `table`
-            }}
-          >
-            <p
-            style={{
-              verticalAlign: `middle`,
-              display: `table-cell`,
-              textAlign: `center`
-            }}>
-              {textContent}
-            </p>
-          </TextFile>
+              style={{
+                backgroundColor: files[0].url,
+                color: files[1].url,
+                fontSize: "100px",
+                width: "100%",
+                display: `table`,
+              }}
+            >
+              <p
+                style={{
+                  verticalAlign: `middle`,
+                  display: `table-cell`,
+                  textAlign: `center`,
+                }}
+              >
+                {textContent}
+              </p>
+            </TextFile>
           )}
           {/* {files && files.map((file, index) => {
           if (file.url) {
@@ -453,39 +487,35 @@ export default ({
           } else {
               return (<TextFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
             }})} */}
-            <TextIcon position="absolute" width="10%" height="10%" top="20px" right="20px"/>
+          <TextIcon
+            position="absolute"
+            width="10%"
+            height="10%"
+            top="20px"
+            right="20px"
+          />
         </Files>
       )}
       <Meta>
         <Buttons>
           <Button onClick={toggleLike}>
-            {isLiked ? <HeartFull 
-                          width="24"
-                          height="24"/> : <HeartEmpty 
-                          width="24"
-                          height="24"/>}
+            {isLiked ? (
+              <HeartFull width="24" height="24" />
+            ) : (
+              <HeartEmpty width="24" height="24" />
+            )}
           </Button>
           <Button>
-            <CommentIcon 
-              width="24"
-              height="24"
-            />
+            <CommentIcon width="24" height="24" />
           </Button>
 
-          <Button style={{marginLeft: "10px"}}>
-            <Logo onClick={() => setting()}
-                          width="24"
-                          height="24"
-            ></Logo>
+          <Button style={{ marginLeft: "10px" }}>
+            <Logo onClick={() => setting()} width="24" height="24"></Logo>
           </Button>
         </Buttons>
 
         <Button>
-          <SeeLikes
-            likes={likes}
-            likeCount={likeCount}
-            isLiked={isLiked}
-          />
+          <SeeLikes likes={likes} likeCount={likeCount} isLiked={isLiked} />
         </Button>
 
         <Button>

@@ -10,6 +10,7 @@ import Theme from "../Styles/Theme";
 import Routes from "./Routes";
 import Footer from "./Footer";
 import Header from "./Header";
+import "@progress/kendo-theme-default/dist/all.css";
 
 const QUERY = gql`
   {

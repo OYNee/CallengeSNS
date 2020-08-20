@@ -1,13 +1,3 @@
-enum ACTIONS {
-  EDIT
-  DELETE
-}
-
 type Mutation {
-  editChallenge(
-    id: String!
-    caption: String
-    category: String
-    action: ACTIONS!
-  ): Post!
+  editChallenge(id: String!, caption: String): Post!
 }

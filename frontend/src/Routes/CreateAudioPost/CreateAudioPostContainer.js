@@ -12,6 +12,7 @@ export default ({ create, setCreate, selHashtags, pid }) => {
   const [action, setAction] = useState("CreatePost");
   const [relChallenger, setRelChallenger] = useState(``);
   const [tagChallenger, setTagChallenger] = useState(``);
+  const [progress, setProgress] = useState(false);
   let hashtag = "";
   if (selHashtags) {
     for (let i = 0; i < selHashtags.length; i++) {
@@ -53,6 +54,12 @@ export default ({ create, setCreate, selHashtags, pid }) => {
   const nextMutation = useMutation(NEXT_CHALLENGER);
 
   const onSubmit = async (e) => {
+    setProgress(true);
+    if (progress) {
+      console.log("!!", progress);
+
+      return;
+    }
     e.preventDefault();
     if (action === "CreatePost") {
       let photoFile = document.getElementById("photo");
@@ -73,11 +80,15 @@ export default ({ create, setCreate, selHashtags, pid }) => {
 
           const {
             data: { location },
-          } = await axios.post("http://i3a508.p.ssafy.io:4000/api/upload", formData, {
-            headers: {
-              "content-type": "multipart/form-data",
-            },
-          });
+          } = await axios.post(
+            "http://i3a508.p.ssafy.io:4000/api/upload",
+            formData,
+            {
+              headers: {
+                "content-type": "multipart/form-data",
+              },
+            }
+          );
           console.log("두번", location);
           filePath.push(location);
         } // end for
@@ -101,6 +112,7 @@ export default ({ create, setCreate, selHashtags, pid }) => {
           window.location.href = "/";
         }
       } catch (e) {
+        setProgress(false);
         toast.error("Cant upload", "Try later");
       } finally {
       }
@@ -123,6 +135,8 @@ export default ({ create, setCreate, selHashtags, pid }) => {
       caption={caption}
       data={data}
       id={id}
+      progress={progress}
+      setProgress={setProgress}
     />
   );
 };

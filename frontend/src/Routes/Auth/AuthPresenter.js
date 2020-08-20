@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Input from "../../Components/Input";
 import Button from "../../Components/Button";
 import LogoImage from "../../Styles/Images/tempLogo.png";
-import { Form } from 'semantic-ui-react'
+import {isEmail, isLength, isAlphanumeric} from "validator";
 
 const LogoBox = styled.img`
   width: 100%;
@@ -70,7 +70,7 @@ const Form1 = styled(Box)`
   }
 `;
 
-export default ({
+export default (({
   action,
   nickname,
   email,
@@ -80,13 +80,26 @@ export default ({
   setAction,
   onSubmit,
   keyForVerify,
-}) => (
-  <Wrapper>
-    <Form1>
-      <LogoBox src={LogoImage}></LogoBox>
-      {action === "logIn" && (
-        <>
-          <Helmet>
+  nickMessage, 
+  setNickMessage,
+  emailMessage, 
+  setEmailMessage,
+  pwdMessage, 
+  setPwdMessage,
+  pwdCMessage, 
+  setPwdCMessage,
+  userMessage, 
+  setUserMessage,
+  sumButton, 
+  setSumButton
+}) => {
+  if(action == "logIn")
+  {
+    return (
+      <Wrapper>
+      <Form1>
+        <LogoBox src={LogoImage}></LogoBox>
+        <Helmet>
             <title>Log In | ChallengeSNS</title>
           </Helmet>
           <form onSubmit={onSubmit}>
@@ -94,76 +107,8 @@ export default ({
             <Input placeholder={"Password"} {...passwd} type="password" />
             <Button text={"Log in"} />
           </form>
-        </>
-      )}
-      {action === "signUp" && (
-        <>
-          <Helmet>
-            <title>Sign Up | ChallengeSNS</title>
-          </Helmet>
-          <form onSubmit={onSubmit}>
-            <Input placeholder={"Nickname"} {...nickname} />
-            <Input placeholder={"Email"} {...email} type="email" />
-            <Input placeholder={"Password"} {...passwd} type="Password" />
-            <label htmlFor="confirmPasswordInput"></label>
-            <Input
-              placeholder={"passwdCheck"}
-              {...passwdCheck}
-              type="Password"
-            />
-            <Input placeholder={"Username"} {...username} />
-            <Button text={"Sign up"} />
-          </form>
-        </>
-      )}
-      {action === "findPasswd" && (
-        <>
-          <Helmet>
-            <title>Find Password | ChallengeSNS</title>
-          </Helmet>
-          <form onSubmit={onSubmit}>
-            <Input placeholder={"Email"} {...email} type="email" />
-            <Button text={"Find"} />
-          </form>
-        </>
-      )}
-      {action === "confirm" && (
-        <>
-          <Helmet>
-            <title>Confirm Secret | ChallengeSNS</title>
-          </Helmet>
-          <form onSubmit={onSubmit}>
-            <Input
-              placeholder="your new password"
-              required
-              {...passwd}
-              type="Password"
-            />
-            <Button text={"Confirm"} />
-          </form>
-        </>
-      )}
-      
-      {action === "confirmEmail" && (
-        <>
-          <Helmet>
-            <title>Confirm Email | ChallengeSNS</title>
-          </Helmet>
-          <form onSubmit={onSubmit}>
-            <Input
-              placeholder="write your code"
-              required
-              {...keyForVerify}
-              type="Password"
-            />
-            <Button text={"Confirm"} />
-          </form>
-        </>
-      )}
-    </Form1>
-
-    {action !== "confirm" && (
-      <StateChanger>
+        </Form1>
+        <StateChanger>
         {action === "logIn" ? (
           <>
             Don't have an account?{" "}
@@ -180,6 +125,205 @@ export default ({
           </>
         )}
       </StateChanger>
-    )}
-  </Wrapper>
-);
+        </Wrapper>
+    );
+  }else if(action == "signUp" ){
+    if(isLength(nickname.value,{min:2,max:10})){
+      setNickMessage("");
+  
+    }else{
+      setNickMessage("닉네임은 2 글자 이상 10 글자 이하입니다.");}
+
+    if(isEmail(email.value))
+    {
+      setEmailMessage("");
+    }else{
+      setEmailMessage("이메일 형식이 아닙니다.");
+    }
+    if(isLength(username.value,{min:2,max:10})&&isAlphanumeric(username.value)){
+      setUserMessage("");
+  
+    }else{
+      setUserMessage("아이디는 2 글자 이상 10 글자 이하이고, 영어와 숫자로 이루어져야 합니다.");}
+    
+    if(isLength(passwd.value,{min:8,max:13})){
+      setPwdMessage("");
+  
+    }else{
+      setPwdMessage("비밀번호는 8 자리 이상 13 자리 이하입니다.");}
+      if(passwd.value==passwdCheck.value){
+        setPwdCMessage("");
+    
+      }else{
+        setPwdCMessage("비밀번호가 일치하지 않습니다.");
+      }
+      if(nickMessage==""&&emailMessage==""&&pwdMessage==""&&pwdCMessage==""&&userMessage=="")
+      {
+        console.log(`가능`);
+        setSumButton(false);
+      }else
+      {
+        console.log(`불가능`);
+        setSumButton(true);
+      }
+    const onNick = (e) => {
+      nickname.setValue(e.target.value);};
+    const onEmail = (e) => {
+        email.setValue(e.target.value);};
+    const onPwd = (e) => {
+        passwd.setValue(e.target.value);};
+    const onPwdC = (e) => {
+        passwdCheck.setValue(e.target.value);};
+    const onUsername= (e) => {
+        username.setValue(e.target.value);};
+
+    return(
+      <Wrapper>
+      <Form1>
+        <LogoBox src={LogoImage}></LogoBox>
+        <Helmet>
+            <title>Sign Up | ChallengeSNS</title>
+          </Helmet>
+          <form onSubmit={onSubmit}>
+            <Input placeholder={"Nickname"} {...nickname} onChange={onNick}/>
+            <div style={{ color: "red", fontSize: "12px" }}>
+              {nickMessage}
+            </div>
+            <Input placeholder={"Email"} {...email} type="email"onChange={onEmail} />
+            <div style={{ color: "red", fontSize: "12px" }}>
+              {emailMessage}
+            </div>
+            <Input placeholder={"Password"} {...passwd} type="Password" onChange={onPwd} />
+            <div style={{ color: "red", fontSize: "12px" }}>
+              {pwdMessage}
+            </div>
+            <label htmlFor="confirmPasswordInput"></label>
+            <Input
+              placeholder={"passwdCheck"}
+              {...passwdCheck}
+              type="Password"
+              onChange={onPwdC}
+            />
+            <div style={{ color: "red", fontSize: "12px" }}>
+              {pwdCMessage}
+            </div>
+            <Input placeholder={"ID"} {...username} onChange={onUsername} />
+            <div style={{ color: "red", fontSize: "12px" }}>
+              {userMessage}
+            </div>
+            <Button text={"Sign up"} Disabled={sumButton} />
+          </form>
+          </Form1>
+          <StateChanger>
+        {action === "logIn" ? (
+          <>
+            Don't have an account?{" "}
+            <Link onClick={() => setAction("signUp")}>Sign up</Link>
+            <br />
+            <br />
+            Did you forget your password?{" "}
+            <Link onClick={() => setAction("findPasswd")}>Find password</Link>
+          </>
+        ) : (
+          <>
+            Have an account?{" "}
+            <Link onClick={() => setAction("logIn")}>Log in</Link>
+          </>
+        )}
+      </StateChanger>
+          </Wrapper>
+    );
+  }else if(action == "findPasswd"){
+    return(
+      <Wrapper>
+      <Form1>
+        <LogoBox src={LogoImage}></LogoBox>
+        <Helmet>
+            <title>Find Password | ChallengeSNS</title>
+          </Helmet>
+          <form onSubmit={onSubmit}>
+            <Input placeholder={"Email"} {...email} type="email" />
+            <Button text={"Find"} />
+          </form>
+          </Form1>
+          <StateChanger>
+        {action === "logIn" ? (
+          <>
+            Don't have an account?{" "}
+            <Link onClick={() => setAction("signUp")}>Sign up</Link>
+            <br />
+            <br />
+            Did you forget your password?{" "}
+            <Link onClick={() => setAction("findPasswd")}>Find password</Link>
+          </>
+        ) : (
+          <>
+            Have an account?{" "}
+            <Link onClick={() => setAction("logIn")}>Log in</Link>
+          </>
+        )}
+      </StateChanger>
+          </Wrapper>
+    );
+  }else if(action == "confirm")
+  {
+    return(
+      <Wrapper>
+      <Form1>
+        <LogoBox src={LogoImage}></LogoBox>
+        <Helmet>
+            <title>Confirm Secret | ChallengeSNS</title>
+          </Helmet>
+          <form onSubmit={onSubmit}>
+            <Input
+              placeholder="your new password"
+              required
+              {...passwd}
+              type="Password"
+            />
+            <Button text={"Confirm"} />
+          </form>
+          </Form1>
+          </Wrapper>
+    );
+  }else if(action == "confirmEmail")
+  {
+    return(
+      <Wrapper>
+      <Form1>
+        <LogoBox src={LogoImage}></LogoBox>
+        <Helmet>
+            <title>Confirm Email | ChallengeSNS</title>
+          </Helmet>
+          <form onSubmit={onSubmit}>
+            <Input
+              placeholder="write your code"
+              required
+              {...keyForVerify}
+              type="Password"
+            />
+            <Button text={"Confirm"} />
+          </form>
+          </Form1>
+          <StateChanger>
+        {action === "logIn" ? (
+          <>
+            Don't have an account?{" "}
+            <Link onClick={() => setAction("signUp")}>Sign up</Link>
+            <br />
+            <br />
+            Did you forget your password?{" "}
+            <Link onClick={() => setAction("findPasswd")}>Find password</Link>
+          </>
+        ) : (
+          <>
+            Have an account?{" "}
+            <Link onClick={() => setAction("logIn")}>Log in</Link>
+          </>
+        )}
+      </StateChanger>
+          </Wrapper>
+    );
+  }
+
+});
