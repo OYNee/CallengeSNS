@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Input from "../../Components/Input";
 import Button from "../../Components/Button";
 import LogoImage from "../../Styles/Images/tempLogo.png";
+import { Form } from 'semantic-ui-react'
 
 const LogoBox = styled.img`
   width: 100%;
@@ -51,7 +52,7 @@ const Link = styled.span`
   cursor: pointer;
 `;
 
-const Form = styled(Box)`
+const Form1 = styled(Box)`
   padding: 40px;
   padding-bottom: 30px;
   margin-bottom: 15px;
@@ -81,7 +82,7 @@ export default ({
   keyForVerify,
 }) => (
   <Wrapper>
-    <Form>
+    <Form1>
       <LogoBox src={LogoImage}></LogoBox>
       {action === "logIn" && (
         <>
@@ -159,7 +160,7 @@ export default ({
           </form>
         </>
       )}
-    </Form>
+    </Form1>
 
     {action !== "confirm" && (
       <StateChanger>

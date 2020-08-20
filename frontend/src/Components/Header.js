@@ -224,6 +224,11 @@ export default withRouter(() => {
           </TextLogoColumn>
           <HeaderColumn>
             {/* <HeaderLink to="/#" replace> */}
+            <div               style = {{
+                marginRight:"30px",
+                display:"inline-block"
+              }}>
+
             <Logo
               width="27"
               height="27"
@@ -231,10 +236,14 @@ export default withRouter(() => {
                 dispatch({ type: "CHANGE_ANIMATION", animation: "overlay" })
               }
             />
+              </div>
             {/* </HeaderLink> */}
 
             <HeaderLink to="/search" replace>
-              <Search width="27" height="27" />
+              <Search width="27" height="27" 
+                            style = {{
+                              marginLeft:"30px",
+                            }}/>
             </HeaderLink>
             <HeaderLink to="/notifications" replace>
               <HeartEmpty width="27" height="27" />

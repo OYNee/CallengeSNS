@@ -5,10 +5,11 @@ import { Modal } from "semantic-ui-react";
 import TextareaAutosize from "react-autosize-textarea";
 import FatText from "../FatText";
 import Avatar from "../Avatar";
-import { HeartFull, HeartEmpty, Comment as CommentIcon, Logo } from "../Icons";
+import { HeartFull, HeartEmpty, Comment as CommentIcon, Logo, VideoIcon, AudioIcon, TextIcon, PhotoIcon } from "../Icons";
 import Audio from "../Audio/Audio";
 import Video from "../Video/Video";
 import ChallengeUserCard from "../ChallengeUserCard";
+import UserCard from "../UserCard";
 import Carousel from "flat-carousel";
 import "../../Styles/carousel.css";
 import { Header } from "semantic-ui-react";
@@ -177,7 +178,8 @@ const CreateButton = styled.button`
 `;
 
 const PostA = styled.a`
-  margin: 5px;
+margin : 5px;
+margin-left: 0px;
 `;
 const SDiv = styled.div`
   margin: 15px auto;
@@ -198,20 +200,17 @@ const SeeChallenger = ({
   prePosts,
   nextPosts,
   nextPostCount,
-  prePostCount,
+  prePostCount
 }) => {
   const [state, dispatch] = React.useReducer(exampleReducer, {
     open: false,
     size: undefined,
   });
   const { open, size } = state;
-
   return (
     <>
       <PostA
-        onClick={() => dispatch({ type: "open", size: "tiny" })}
-        text={` ${nextPostCount + prePostCount} Challege`}
-      >
+        onClick={() => dispatch({ type: "open", size: "tiny" })}>
         <FatText text={`${nextPostCount + prePostCount} Challege`} />
       </PostA>
       <Modal
@@ -241,6 +240,7 @@ const SeeChallenger = ({
                 isSelf={post.user.isSelf}
                 id={post.id}
                 bio={post.user.bio}
+                nickname={post.user.nickname}
               />
             ))
           )}
@@ -261,6 +261,7 @@ const SeeChallenger = ({
                 isSelf={post.user.isSelf}
                 id={post.id}
                 bio={post.user.bio}
+                nickname={post.user.nickname}
               />
             ))
           )}
@@ -272,7 +273,66 @@ const SeeChallenger = ({
     </>
   );
 };
+const SeeLikes = ({
+  likes,
+  likeCount,
+  isLiked
+}) => {
+  const [state, dispatch] = React.useReducer(exampleReducer, {
+    open: false,
+    size: undefined,
+  });
+  const { open, size } = state;
+  console.log(likes);
+  return (
+    <>
+      <PostA
+        onClick={() => dispatch({ type: "open", size: "tiny" })}>
+                  {isLiked ? (
+          <LikeText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
+        ) : (
+          <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
+        )}
+      </PostA>
+      <Modal
+        size={size}
+        open={open}
+        style={{
+          height:`auto`,
+          position:`relative`,
+        }}
+        onClose={() => dispatch({ type: "close" })}
+      >
+        <Modal.Content>
 
+        <Header as='h3' dividing>
+            좋아요
+          </Header>
+          {likes.length === 0 ? (
+              <SDiv>
+            <CFatText text="현재 좋아요가 없습니다." />
+            </SDiv>
+          ) : (
+            likes.map((like, idx) => (
+              <UserCard
+              id={like.user.id}
+                nickname={like.user.nickname}
+                key={idx}
+                username={like.user.username}
+                isFollowing={like.user.isFollowing}
+                url={like.user.avatar}
+                isSelf={like.user.isSelf}
+              />
+            ))
+          )}
+        </Modal.Content>
+        <Modal.Actions>
+          <Button onClick={() => dispatch({ type: "close" })}>Close</Button>
+        </Modal.Actions>
+      </Modal>
+    </>
+  );
+};
 export default ({
   user: { username, avatar },
   location,
@@ -304,6 +364,7 @@ export default ({
   cat,
   setCat,
   textContent,
+  likes
 }) => {
   function setting() {
     console.log("setting중");
@@ -333,18 +394,17 @@ export default ({
           <Carousel>
             {files.map((pre, index) => (
               // <img key={index} className="demo-item" src={pre.url} />
-              <Img
-                key={index}
-                alt={"dummy"}
-                style={{
-                  backgroundImage: `url(${pre.url}`,
-                  backgroundSize: "contain",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "center",
-                }}
-              />
+              <Img key={index} alt={"dummy"} 
+              style={{
+                backgroundImage: `url(${pre.url}`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+                width: "300px",
+              }}/>
             ))}
           </Carousel>
+          <PhotoIcon position="absolute" width="10%" height="10%" top="20px" right="20px"/>
         </Files>
       )}
       {category === "video" && (
@@ -361,26 +421,36 @@ export default ({
           } else {
               return (<VideoFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
             }})} */}
+            <VideoIcon position="absolute" width="10%" height="10%" top="20px" right="20px"/>
         </Files>
       )}
       {category === "audio" && (
         <Files>
           <Audio audioURL={files[0].url} imgURL={files[1].url} audioID={id} />
+          <AudioIcon position="absolute" width="10%" height="10%" top="20px" right="20px"/>
         </Files>
       )}
       {category === "text" && (
         <Files>
           {files && (
             <TextFile
-              style={{
-                backgroundColor: files[0].url,
-                color: files[1].url,
-                fontSize: "100px",
-                width: "100%",
-              }}
-            >
+            style={{
+              backgroundColor: files[0].url,
+              color: files[1].url,
+              fontSize: "100px",
+              width:"100%",
+              display: `table`
+            }}
+          >
+            <p
+            style={{
+              verticalAlign: `middle`,
+              display: `table-cell`,
+              textAlign: `center`
+            }}>
               {textContent}
-            </TextFile>
+            </p>
+          </TextFile>
           )}
           {/* {files && files.map((file, index) => {
           if (file.url) {
@@ -388,6 +458,7 @@ export default ({
           } else {
               return (<TextFile key={file.id} src={"https://cdn.pixabay.com/photo/2012/04/16/12/53/ghost-35852_960_720.png"} showing={index === currentItem} />)
             }})} */}
+            <TextIcon position="absolute" width="10%" height="10%" top="20px" right="20px"/>
         </Files>
       )}
       <Meta>
@@ -407,11 +478,14 @@ export default ({
             <Logo onClick={() => setting()} width="24" height="24"></Logo>
           </Button>
         </Buttons>
-        {isLiked ? (
-          <LikeText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
-        ) : (
-          <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
-        )}
+
+        <Button>
+          <SeeLikes
+            likes={likes}
+            likeCount={likeCount}
+            isLiked={isLiked}
+          />
+        </Button>
 
         <Button>
           <SeeChallenger

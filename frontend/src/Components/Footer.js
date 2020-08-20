@@ -130,14 +130,20 @@ export default (defaultValue1,defaultValue2) => {
               <Grid.Column>
                   <Link to="/createvideopost">
                 <Hover>
-                    <VideoIcon />
+                    <VideoIcon 
+                      width = "40"
+                      height = "40"
+                    />
                 </Hover>
                   </Link>
               </Grid.Column>
               <Grid.Column>
                   <Link to="/createphotopost">
                 <Hover>
-                    <PhotoIcon  />              
+                    <PhotoIcon  
+                      width = "40"
+                      height = "40"
+                    />              
                 </Hover>
                   </Link>
               </Grid.Column>
@@ -154,7 +160,10 @@ export default (defaultValue1,defaultValue2) => {
               <Grid.Column>
                 <Link to="/createtextpost">
                   <Hover>
-                    <TextIcon />
+                    <TextIcon 
+                      width = "40"
+                      height = "40"
+                    />
                   </Hover>
                 </Link>
               </Grid.Column>
@@ -186,7 +195,7 @@ export default (defaultValue1,defaultValue2) => {
           height="24"/>
         </ListItem>
         <ListItem>
-          <Link to="/temp">
+          <Link to="/notifications">
             <HeartEmpty onClick={()=>setNow("notification")} now={now} 
               width="24"
               height="24"

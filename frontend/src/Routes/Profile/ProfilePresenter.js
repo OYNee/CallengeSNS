@@ -66,6 +66,10 @@ const Username = styled.span`
 
 const Counts = styled.ul`
   margin: 15px 0px;
+  @media only screen and (max-width:${(props) => props.theme.sm}) {
+    font-size: 5px;
+  }
+
 `;
 
 const Count = styled.li`
@@ -234,7 +238,6 @@ export default ({
         posts,
       },
     } = data;
-    console.log(data);
     return (
       <div>
         <Helmet>

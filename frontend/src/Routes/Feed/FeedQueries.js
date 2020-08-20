@@ -41,6 +41,7 @@ export const FEED_QUERY = gql`
           id
           avatar
           username
+          nickname
           isFollowing
           isSelf
           bio}
@@ -51,9 +52,22 @@ export const FEED_QUERY = gql`
           id
           avatar
           username
+          nickname
           isFollowing
           isSelf
-          bio}
+          bio
+          }
+        }
+        likes{
+          user{
+            id
+            avatar
+            username
+            nickname
+            isFollowing
+            isSelf
+            bio
+          }
         }
     }
   }

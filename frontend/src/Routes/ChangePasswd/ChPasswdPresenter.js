@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import Input from "../../Components/Input";
 import Button from "../../Components/Button";
+import { Form } from 'semantic-ui-react';
 
 const Wrapper = styled.div`
   min-height: 80vh;
@@ -19,7 +20,7 @@ const Box = styled.div`
   max-width: 350px;
 `;
 
-const Form = styled(Box)`
+const Form1 = styled(Box)`
   padding: 40px;
   padding-bottom: 30px;
   margin-bottom: 15px;
@@ -39,7 +40,7 @@ const Form = styled(Box)`
 
 export default ({ passwd, passwdCheck, newPasswd, onSubmit }) => (
   <Wrapper>
-    <Form>
+    <Form1>
       {
         <>
           <Helmet>
@@ -62,6 +63,6 @@ export default ({ passwd, passwdCheck, newPasswd, onSubmit }) => (
           </form>
         </>
       }
-    </Form>
+    </Form1>
   </Wrapper>
 );

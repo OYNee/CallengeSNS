@@ -70,6 +70,7 @@ export default withRouter(
                 cat={cat}
                 setCat={setCat}
                 textContent={post.textContent}
+                likes={post.likes}
               />
             ))
           )}

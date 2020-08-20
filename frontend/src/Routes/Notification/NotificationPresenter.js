@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import Loader from "../../Components/Loader";
-import NotiCard from "../../Components/NotiCard";
+import NotiCard1 from "../../Components/NotiCard1";
+import NotiCard2 from "../../Components/NotiCard2";
+import FatText from "../../Components/FatText";
 import {
   PanelBar,
   PanelBarUtils,
@@ -18,8 +20,12 @@ const Wrapper = styled.div`
     min-height: 100vh;
   }
 `;
+const EFatText = styled(FatText)`
+line-height:500px;
+align-items: center;
+`;
 
-export default ({ loading, data }) => {
+export default ({ loading, data}) => {
   if (loading === true) {
     return (
       <Wrapper>
@@ -27,33 +33,13 @@ export default ({ loading, data }) => {
       </Wrapper>
     );
   } else if (data && data.seeUser) {
-
-    const cildrens1 = data.seeUser.relChallenger.map((relChallenger, id) => ({
-      id: relChallenger.id,
-      title: `${relChallenger.user.nickname}(@${relChallenger.user.username})님이 회원님을 지목하였습니다.`,
-    }));
-    const cildrens2 = data.seeUser.tagChallenger.map((tagChallenger, id) => ({
-      id: tagChallenger.id,
-      title: `${tagChallenger.user.nickname}(@${tagChallenger.user.username})님이 회원님을 피드에 태그하였습니다.`,
-    }));
-    const items = [
-      {
-        id: 1,
-        title: "지목 받은 챌린지",
-        children: cildrens1,
-      },
-      {
-        id: 5,
-        title: "같이 참여한 챌린지",
-        children: cildrens2,
-      },
-    ];
-    return (
+   return (
       <Wrapper>
-        <PanelBar expandMode={"multiple"}>
+        <PanelBar expandMode={"multiple"} style={{maxWidth:"700px"},{width:"700px"}}>
           <PanelBarItem title={"지목 받은 챌린지"} expanded={true}>
             {data.seeUser.relChallenger.map((relChallenger, idx) => (
-              <NotiCard 
+              <NotiCard1 
+              key={relChallenger.id}
               id={relChallenger.id}
               nickname={relChallenger.user.nickname}
               username={relChallenger.user.username}
@@ -63,18 +49,22 @@ export default ({ loading, data }) => {
           </PanelBarItem>
           <PanelBarItem title={"같이 참여한 챌린지"} expanded={true}>
             {data.seeUser.tagChallenger.map((tagChallenger, idx) => (
-              <Link to={`/challengepost?${tagChallenger.id}`}>
-                <PanelBarItem
-                  key={tagChallenger.id}
-                  title={`  ${tagChallenger.user.nickname}(@${tagChallenger.user.username})님이 회원님을 피드에 태그하였습니다.  `}
-                />
-              </Link>
+               <NotiCard2
+               key={tagChallenger.id}
+               id={tagChallenger.id}
+               nickname={tagChallenger.user.nickname}
+               username={tagChallenger.user.username}
+               url={tagChallenger.user.avatar}/>
             ))}
           </PanelBarItem>
         </PanelBar>
       </Wrapper>
     );
-  } else {
-    window.location.reload();
+  }else{
+    return (
+      <Wrapper>
+        <EFatText text="알림 불러오기 실패! 새로고침을 눌러 주세요." />
+      </Wrapper>
+    );
   }
 };

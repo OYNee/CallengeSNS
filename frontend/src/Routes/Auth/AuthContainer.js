@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import AuthPresenter from "./AuthPresenter";
 import useInput from "../../Hooks/useInput";
-import { useMutation } from "react-apollo-hooks";
+import { useMutation, useQuery } from "react-apollo-hooks";
+// import { sendConfirmEmail } from "../../utils";
 import {
   LOG_IN,
   FIND_PASSWD,
@@ -9,6 +10,8 @@ import {
   CONFIRM_SECRET,
   LOCAL_LOG_IN,
   CONFIRM_EMAIL,
+  SEE_USER,
+  FIND_USER,
 } from "./AuthQueries";
 import { toast } from "react-toastify";
 
@@ -52,6 +55,11 @@ export default () => {
      
     },
   });
+  const {data, fetchMore} = useQuery(FIND_USER,{
+    variables:{
+      email: email.value
+    }
+  })
   const localLogInMutation = useMutation(LOCAL_LOG_IN);
 
   const onSubmit = async (e) => {
@@ -63,8 +71,28 @@ export default () => {
             data: { login: token },
           } = await logIn();
           if (token !== "" && token !== undefined) {
-            localLogInMutation({ variables: { token } });
-            window.location.reload();
+            // toast.success("Check your inbox for changing your password");
+            // setTimeout(() => setAction("checkEmail"), 3000);
+            // console.log(token)
+            try {
+              if(data){
+                console.log("data:"+`${data.findUser.confirmEmail}`)
+                if(`${data.findUser.confirmEmail}`=="false"){
+                  // sendConfirmEmail(email.value, `${data.seeUser.keyForVerify}`)
+                  setTimeout(() => setAction("confirmEmail"), 3000);
+                  toast.error("Can't confirm email,check again");
+                  // throw Error()
+                }else{
+                  localLogInMutation({ variables: { token } });
+                  window.location.reload()
+                }
+                
+
+              }
+            } catch {
+              toast.error("Can't confirm email,check again");
+              
+          }        
           } else {
             throw Error();
           }
@@ -84,7 +112,7 @@ export default () => {
         username.value !== ""
       ) {
         try {
-          const {data,
+          const {
             data: { createAccount },
           } = await createAccountMutation();
           console.log(email.value)
@@ -160,6 +188,28 @@ export default () => {
           toast.error("Can't confirm email,check again");
         }
       }
+    } else if(action==="checkEmail"){
+    //   if(email.value !==""){
+    //     try {
+    //       const{
+    //         data: {
+    //           seeUser: confirm
+    //         }
+    //       }=await seeUserQuery();
+    //       if(confirm){
+    //         localLogInMutation({variables:{email: email.value, passwd: passwd.value}});
+    //         window.location.reload()
+    //       }else{
+    //         throw Error()
+    //       }
+          
+    //     } catch {
+    //       toast.error("Can't confirm email,check again");
+          
+    //   }
+
+    // }
+
     }
   };
 
