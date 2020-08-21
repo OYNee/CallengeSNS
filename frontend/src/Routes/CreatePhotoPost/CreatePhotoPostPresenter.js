@@ -29,7 +29,7 @@ const PostBox = styled.div`
   margin: 3vw auto;
   border-radius: 10px;
   @media only screen and (min-width:${(props) => props.theme.sm}) {
-    width: 100%;
+    width: 600px;
 `;
 
 const ContentBox = styled.div`
@@ -123,9 +123,7 @@ export default ({
               <ContentBox id="contentBox">
                 <ImageInput></ImageInput>
               </ContentBox>
-              <h1>한마디 부탁해요!</h1>
               <CaptionInput placeholder="한마디 부탁해요!" {...caption} />
-              <h1>누구와 함께?</h1>
               <Section>
                 <Dropdown
                   placeholder="누구와 함께 했나요?"

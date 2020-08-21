@@ -16,7 +16,7 @@ const Blank = styled.div`
   @media only screen and (max-width:${(props) => props.theme.sm}) {
   }
   @media only screen and (min-width:${(props) => props.theme.sm}) {
-    width:760px;
+    width:600px;
   }
   `
 
@@ -24,8 +24,8 @@ const Img = styled.div`
   width:86vw;
   height: 86vw;
   @media only screen and (min-width:${(props) => props.theme.sm}) {
-    width:760px;
-    height: 760px;
+    width:600px;
+    height: 600px;
   }
 `
 

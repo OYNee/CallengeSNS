@@ -98,7 +98,7 @@ export default ({ create, setCreate, selHashtags, pid }) => {
         }
       } catch (e) {
         setProgress(false);
-        toast.error("파일을 다시 선택해주세요!");
+        toast.error("정말 올리실건가요? 흑역사가 될수도 있습니다. 결심하셨다면 다시 선택을 해주세요.");
       } finally {
       }
     } else if (action === "relChallenger") {

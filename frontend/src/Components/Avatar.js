@@ -14,7 +14,7 @@ const getSize = size => {
     return `
           width:150px;
           height:150px;
-          @media only screen and (max-width:760px) {
+          @media only screen and (max-width:600px) {
             width:25vw;
             max-width:140px;
             min-width:100px;
