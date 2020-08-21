@@ -236,7 +236,6 @@ export default ({
               onChange={audioHandleChange}
             />
           </ContentBox>
-          <h1>한마디 부탁해요!</h1>
           <CaptionInput placeholder="한마디 부탁해요!" {...caption} />
 
           <Section>
