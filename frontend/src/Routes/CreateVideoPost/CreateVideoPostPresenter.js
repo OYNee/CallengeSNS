@@ -30,7 +30,7 @@ const PostBox = styled.div`
   margin: 3vw auto;
   border-radius: 10px;
   @media only screen and (min-width:${(props) => props.theme.sm}) {
-    width: 100%;
+    width: 600px;
 `;
 
 const ContentBox = styled.div`

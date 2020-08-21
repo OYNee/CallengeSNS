@@ -9,8 +9,8 @@ const AudioBox = styled.div`
   width:100%;
   height:86vw;
   @media only screen and (min-width:${(props) => props.theme.sm}) {
-    width:400px;
-    height:400px;
+    width:600px;
+    height:600px;
   }
 `
 const ControlBox = styled.div`

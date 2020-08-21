@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   padding: 3vw;
   margin: 0 4vw;
   @media only screen and (min-width: ${(props) => props.theme.sm}) {
-    margin: 0;
+    margin: auto;
     padding: 0;
   }
 `;
@@ -32,7 +32,7 @@ const Blank = styled.div`
   @media only screen and (max-width: ${(props) => props.theme.sm}) {
   }
   @media only screen and (min-width: ${(props) => props.theme.sm}) {
-    width: 760px;
+    width: 600px;
   }
 `;
 
@@ -40,8 +40,8 @@ const Img = styled.div`
   width: 86vw;
   height: 86vw;
   @media only screen and (min-width: ${(props) => props.theme.sm}) {
-    width: 760px;
-    height: 760px;
+    width: 600px;
+    height: 600px;
   }
 `;
 const PostBox = styled.div`
@@ -235,13 +235,6 @@ export default ({
               accept="audio/*"
               onChange={audioHandleChange}
             />
-            {audio.preview && image.preview && (
-              <ListItem
-                as={PostModal}
-                videourl={audio.preview}
-                imgurl={image.preview}
-              />
-            )}
           </ContentBox>
           <h1>한마디 부탁해요!</h1>
           <CaptionInput placeholder="한마디 부탁해요!" {...caption} />
