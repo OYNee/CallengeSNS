@@ -220,7 +220,7 @@ const SeeChallenger = ({
   return (
     <>
       <PostA onClick={() => dispatch({ type: "open", size: "tiny" })}>
-        <FatText text={`${nextPostCount + prePostCount} Challege`} />
+        <FatText text={`${nextPostCount + prePostCount} Challenge`} />
       </PostA>
       <Modal
         size={size}

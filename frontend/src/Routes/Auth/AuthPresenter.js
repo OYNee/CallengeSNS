@@ -5,6 +5,7 @@ import Input from "../../Components/Input";
 import Button from "../../Components/Button";
 import LogoImage from "../../Styles/Images/tempLogo.png";
 import {isEmail, isLength, isAlphanumeric} from "validator";
+import {Logo} from "../../Components/Icons";
 
 const LogoBox = styled.img`
   width: 100%;
@@ -69,6 +70,11 @@ const Form1 = styled(Box)`
     }
   }
 `;
+const LogoDiv = styled.div`
+text-align: center;
+margin-bottom: 30px;
+fill: #FF6F61;
+`;
 
 export default (({
   action,
@@ -98,7 +104,9 @@ export default (({
     return (
       <Wrapper>
       <Form1>
-        <LogoBox src={LogoImage}></LogoBox>
+        <LogoDiv>
+      <Logo width="200" height="200"/>
+      </LogoDiv>
         <Helmet>
             <title>Log In | ChallengeSNS</title>
           </Helmet>
@@ -180,7 +188,9 @@ export default (({
     return(
       <Wrapper>
       <Form1>
-        <LogoBox src={LogoImage}></LogoBox>
+      <LogoDiv>
+      <Logo width="200" height="200"/>
+      </LogoDiv>
         <Helmet>
             <title>Sign Up | ChallengeSNS</title>
           </Helmet>
@@ -237,7 +247,9 @@ export default (({
     return(
       <Wrapper>
       <Form1>
-        <LogoBox src={LogoImage}></LogoBox>
+      <LogoDiv>
+      <Logo width="200" height="200"/>
+      </LogoDiv>
         <Helmet>
             <title>Find Password | ChallengeSNS</title>
           </Helmet>
@@ -270,7 +282,9 @@ export default (({
     return(
       <Wrapper>
       <Form1>
-        <LogoBox src={LogoImage}></LogoBox>
+      <LogoDiv>
+      <Logo width="200" height="200"/>
+      </LogoDiv>
         <Helmet>
             <title>Confirm Secret | ChallengeSNS</title>
           </Helmet>
@@ -291,7 +305,9 @@ export default (({
     return(
       <Wrapper>
       <Form1>
-        <LogoBox src={LogoImage}></LogoBox>
+      <LogoDiv>
+      <Logo width="200" height="200"/>
+      </LogoDiv>
         <Helmet>
             <title>Confirm Email | ChallengeSNS</title>
           </Helmet>
