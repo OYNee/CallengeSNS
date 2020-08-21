@@ -116,7 +116,6 @@ export default ({
             <h1>"video"</h1>
             <CaptionInput
               placeholder="video"/>
-            <h1>누구와 함께?</h1>
             <Section>
               <Dropdown
                 placeholder="video"
@@ -160,7 +159,6 @@ export default ({
             <h1>"audio"</h1>
             <CaptionInput
               placeholder="audio"/>
-            <h1>누구와 함께?</h1>
             <Section>
               <Dropdown
                 placeholder="audio"
@@ -214,7 +212,6 @@ export default ({
           <h1>한마디 남기기</h1>
             <CaptionInput
               placeholder="image image"/>
-            <h1>누구와 함께?</h1>
             <Section>
               <Dropdown
                 placeholder="text"
@@ -255,10 +252,8 @@ export default ({
             <ContentBox>
               <ImageInput></ImageInput>
             </ContentBox>
-            <h1>"text text text text text text vtext text vtext text "</h1>
             <CaptionInput
               placeholder="text text text text text text vtext text vtext text"/>
-            <h1>누구와 함께?</h1>
             <Section>
               <Dropdown
                 placeholder="text text text text text text vtext text vtext text"
@@ -325,7 +320,6 @@ export default ({
 //       <h1>{category} {category}</h1>
 //       <CaptionInput
 //         placeholder={category}/>
-//       <h1>누구와 함께?</h1>
 //       <Section>
 //         <Dropdown
 //           placeholder={category}

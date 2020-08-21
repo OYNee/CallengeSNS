@@ -288,7 +288,6 @@ const SeeLikes = ({ likes, likeCount, isLiked }) => {
     size: undefined,
   });
   const { open, size } = state;
-  console.log(likes);
   return (
     <>
       <PostA onClick={() => dispatch({ type: "open", size: "tiny" })}>
@@ -374,12 +373,10 @@ export default ({
   const [curId, setCurId] = useState("");
 
   function setting() {
-    console.log("setting중");
     setCat(category);
     setPid(id);
     setSelHashtags(hashtags);
     setCreate(true);
-    console.log("찍혀라", category, id, hashtags);
   }
 
   const { data } = useQuery(ME);
@@ -505,7 +502,7 @@ export default ({
               <HeartEmpty width="24" height="24" />
             )}
           </Button>
-          <Button>
+          <Button onClick={() => console.log("서프라이즈~~~")}>
             <CommentIcon width="24" height="24" />
           </Button>
 
