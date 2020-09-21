@@ -10,47 +10,21 @@
 
 #### Back-end
 
-- SpringBoot 2.2.8 RELEASE
-
-- Spring Data JPA
-
-- Spring Web MVC
-
 - Node.js
-
-- Django
+- prisma
+- graphql
 
   
 
 #### Front-end
 
-- React-native
+- react
+- apollo
 
-## UI 참고 자료
+## 디자인 프레임워크 & 컴포넌트 자료
 
-https://github.com/anpigon/rn_instagram_clone
-
-
-
+https://react.semantic-ui.com/
+https://www.telerik.com/kendo-react-ui/
 
 
-## User Stories(Backend)
 
-- [x] Log in
-- [x] Like / Unlike a challenge
-- [x] Comment on a challenge
-- [x] Search by user
-- [x] Search by location
-- [x] Follow / Unfollow User
-- [x] See user profile
-- [x] See my profile
-- [x] See the full challenge
-- [x] Edit my profile
-- [ ] Create account
-- [x] Upload a challenge
-- [x] Edit the challenge(Delete)
-- [ ] See the feed
-- [ ] See Direct Message Rooms
-- [ ] See One DM Rooms
-- [ ] Send DM
-- [ ] Receive Message(RealTime)
