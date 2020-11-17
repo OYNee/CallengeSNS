@@ -1,5 +1,10 @@
 # SNS Project
 
+
+## 시연 영상
+
+[![SSAFY_3기_팰린저_UCC](http://img.youtube.com/vi/OSvEWRkmBHs/0.jpg)](https://youtu.be/OSvEWRkmBHs)
+
 ## 작업환경
 
 > commit 규칙 
